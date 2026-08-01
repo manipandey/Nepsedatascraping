@@ -9,5 +9,6 @@ __pycache__/
 .DS_Store
 
 # Scraped data files (generated at runtime)
-data/nepse_today.json
-data/nepse_today.csv
+# We track them so Vercel has initial data on deployment
+!data/nepse_today.json
+!data/nepse_today.csv
