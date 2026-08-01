@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEPSE Stock Market Terminal</title>
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="An interactive, high-performance financial terminal for Nepal Stock Exchange (NEPSE) today's share prices. Inspect, search, filter, and analyze stock data with advanced indicators.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <span class="logo-icon">📈</span>
+                <span class="logo-text">NEPSE<span class="highlight">Terminal</span></span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <span class="nav-icon">📊</span> Market Today
+                </a>
+                <a href="data/nepse_today.json" target="_blank" class="nav-item">
+                    <span class="nav-icon">📁</span> View JSON Raw
+                </a>
+                <a href="data/nepse_today.csv" target="_blank" class="nav-item">
+                    <span class="nav-icon">📋</span> View CSV Raw
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="scraper-status">
+                    <div class="status-indicator online"></div>
+                    <div>
+                        <p class="status-title">System Status</p>
+                        <p class="status-desc">Local Server Ready</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="main-header">
+                <div class="header-title-container">
+                    <h1 class="header-title">Market Dashboard</h1>
+                    <div class="header-metadata">
+                        <span class="meta-badge date-badge" id="tradeDateBadge">
+                            <span class="badge-label">Trading Date:</span>
+                            <span class="badge-value" id="tradeDate">Loading...</span>
+                        </span>
+                        <span class="meta-badge status-badge" id="marketStatusBadge">
+                            <span class="badge-dot"></span>
+                            <span class="badge-text" id="marketStatus">Offline</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary refresh-btn" id="refreshBtn">
+                        <span class="btn-icon">🔄</span> Re-Scrape Data
+                    </button>
+                </div>
+            </header>
+
+            <!-- Market Overview Summary Cards -->
+            <section class="summary-grid">
+                <!-- Card 1: Turnover -->
+                <div class="summary-card">
+                    <div class="card-icon turnover-icon">💸</div>
+                    <div class="card-info">
+                        <p class="card-label">Total Turnover</p>
+                        <h2 class="card-value" id="summaryTurnover">NPR 0.00</h2>
+                    </div>
+                </div>
+
+                <!-- Card 2: Volume -->
+                <div class="summary-card">
+                    <div class="card-icon volume-icon">📊</div>
+                    <div class="card-info">
+                        <p class="card-label">Total Shares Volume</p>
+                        <h2 class="card-value" id="summaryVolume">0</h2>
+                    </div>
+                </div>
+
+                <!-- Card 3: Transactions -->
+                <div class="summary-card">
+                    <div class="card-icon trans-icon">🤝</div>
+                    <div class="card-info">
+                        <p class="card-label">Total Transactions</p>
+                        <h2 class="card-value" id="summaryTransactions">0</h2>
+                    </div>
+                </div>
+
+                <!-- Card 4: Market Breadth -->
+                <div class="summary-card breadth-card">
+                    <div class="card-info width-100">
+                        <p class="card-label">Market Breadth (Advancers vs Decliners)</p>
+                        <div class="breadth-stats">
+                            <span class="stat-green" id="breadthAdvancers">0 ▲</span>
+                            <span class="stat-gray" id="breadthUnchanged">0 =</span>
+                            <span class="stat-red" id="breadthDecliners">0 ▼</span>
+                        </div>
+                        <div class="breadth-bar-container">
+                            <div class="breadth-bar green" id="barAdvancers" style="width: 33.3%"></div>
+                            <div class="breadth-bar gray" id="barUnchanged" style="width: 33.3%"></div>
+                            <div class="breadth-bar red" id="barDecliners" style="width: 33.3%"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stock Terminal Control Panel -->
+            <section class="control-panel">
+                <div class="search-bar-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="stockSearch" placeholder="Search by Symbol (e.g. ADBL, NTC)..." autocomplete="off">
+                    <button class="clear-search" id="clearSearch" style="display: none;">&times;</button>
+                </div>
+                <div class="export-actions">
+                    <a href="data/nepse_today.csv" download class="btn btn-outline">
+                        <span class="btn-icon">📥</span> Export CSV
+                    </a>
+                    <a href="data/nepse_today.json" download class="btn btn-outline">
+                        <span class="btn-icon">📁</span> Export JSON
+                    </a>
+                </div>
+            </section>
+
+            <!-- Filters Navigation Tabs -->
+            <section class="filters-container">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">All Securities</button>
+                    <button class="filter-tab" data-filter="gainers">Top Gainers ▲</button>
+                    <button class="filter-tab" data-filter="losers">Top Losers ▼</button>
+                    <button class="filter-tab" data-filter="turnover">Turnover Leaders</button>
+                    <button class="filter-tab" data-filter="volume">Volume Leaders</button>
+                    <button class="filter-tab" data-filter="breakouts">52-Wk High Breakouts</button>
+                </div>
+                <div class="results-count" id="resultsCount">Showing 0 of 0 securities</div>
+            </section>
+
+            <!-- Stocks Main Interactive Data Table -->
+            <section class="table-card table-scroller">
+                <table class="terminal-table" id="stocksTable">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-sort="symbol">Symbol <span class="sort-indicator"></span></th>
+                            <th class="sortable text-right" data-sort="open">Open <span class="sort-indicator"></span></th>
+                            <th class="sortable text-right" data-sort="high">High <span class="sort-indicator"></span></th>
+                            <th class="sortable text-right" data-sort="low">Low <span class="sort-indicator"></span></th>
+                            <th class="sortable text-right" data-sort="close">Close <span class="sort-indicator"></span></th>
+                            <th class="sortable text-right" data-sort="prev_close">Prev. Close <span class="sort-indicator"></span></th>
+                            <th class="sortable text-right" data-sort="diff">Change <span class="sort-indicator"></span></th>
+                            <th class="sortable text-right" data-sort="diff_percent">% Change <span class="sort-indicator"></span></th>
+                            <th class="sortable text-right" data-sort="volume">Volume <span class="sort-indicator"></span></th>
+                            <th class="sortable text-right" data-sort="turnover">Turnover <span class="sort-indicator"></span></th>
+                            <th class="sortable text-right" data-sort="transactions">Trades <span class="sort-indicator"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="stocksTableBody">
+                        <tr>
+                            <td colspan="11" class="text-center loading-placeholder">
+                                <div class="spinner"></div>
+                                Loading stock terminal data...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <!-- Stock Detail Modal Dialog -->
+    <dialog id="stockDetailDialog" closedby="any" aria-labelledby="dialogTitle">
+        <div class="dialog-content">
+            <header class="dialog-header">
+                <div class="dialog-title-group">
+                    <h2 class="dialog-title" id="dialogTitle">Stock Details</h2>
+                    <span class="dialog-badge" id="detailSymbol">ABCD</span>
+                </div>
+                <button class="dialog-close-btn" id="closeDialogBtn" aria-label="Close dialog">&times;</button>
+            </header>
+            
+            <div class="dialog-body">
+                <!-- Price and Change Row -->
+                <div class="detail-price-section">
+                    <div class="detail-price-primary">
+                        <span class="price-label">Last Close / LTP</span>
+                        <span class="price-value" id="detailClose">NPR 0.00</span>
+                    </div>
+                    <div class="detail-price-change" id="detailPriceChangeContainer">
+                        <span class="change-value" id="detailDiff">0.00</span>
+                        <span class="change-pct" id="detailDiffPercent">(0.00%)</span>
+                    </div>
+                </div>
+
+                <!-- 52 Week Range Visualization Card -->
+                <div class="detail-card range-card">
+                    <h3 class="card-section-title">52-Week Price Range</h3>
+                    <div class="range-stats">
+                        <div class="range-bound low">
+                            <span class="bound-label">52W Low</span>
+                            <span class="bound-value" id="detail52Low">0.00</span>
+                        </div>
+                        <div class="range-bound high">
+                            <span class="bound-label">52W High</span>
+                            <span class="bound-value" id="detail52High">0.00</span>
+                        </div>
+                    </div>
+                    <div class="range-bar-track">
+                        <div class="range-bar-indicator" id="detailRangeIndicator" style="left: 50%"></div>
+                    </div>
+                    <p class="range-current-desc" id="detailRangeDesc">Current price is in the middle of 52-week range.</p>
+                </div>
+
+                <!-- Essential Metrics Grid -->
+                <div class="metrics-subgrid">
+                    <div class="metric-item">
+                        <span class="metric-name">Open Price</span>
+                        <span class="metric-val" id="detailOpen">0.00</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-name">Day High</span>
+                        <span class="metric-val" id="detailHigh">0.00</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-name">Day Low</span>
+                        <span class="metric-val" id="detailLow">0.00</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-name">Previous Close</span>
+                        <span class="metric-val" id="detailPrevClose">0.00</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-name">Volume Traded</span>
+                        <span class="metric-val" id="detailVolume">0</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-name">Turnover Value</span>
+                        <span class="metric-val" id="detailTurnover">NPR 0.00</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-name">Total Trades</span>
+                        <span class="metric-val" id="detailTrades">0</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-name">Stock Confidence</span>
+                        <span class="metric-val" id="detailConfidence">0.00</span>
+                    </div>
+                </div>
+
+                <!-- Pivot Points Calculations (PP, Support & Resistance) -->
+                <div class="detail-card pivots-card">
+                    <h3 class="card-section-title">Day Trading Pivot Points (Standard)</h3>
+                    <p class="card-section-desc">Calculated pivot levels based on current high, low, and close prices.</p>
+                    <div class="pivots-grid">
+                        <div class="pivot-row resistance">
+                            <span class="pivot-label">Resistance 2 (R2)</span>
+                            <span class="pivot-value monospace" id="pivotR2">0.00</span>
+                        </div>
+                        <div class="pivot-row resistance">
+                            <span class="pivot-label">Resistance 1 (R1)</span>
+                            <span class="pivot-value monospace" id="pivotR1">0.00</span>
+                        </div>
+                        <div class="pivot-row central">
+                            <span class="pivot-label">Central Pivot (PP)</span>
+                            <span class="pivot-value monospace" id="pivotPP">0.00</span>
+                        </div>
+                        <div class="pivot-row support">
+                            <span class="pivot-label">Support 1 (S1)</span>
+                            <span class="pivot-value monospace" id="pivotS1">0.00</span>
+                        </div>
+                        <div class="pivot-row support">
+                            <span class="pivot-label">Support 2 (S2)</span>
+                            <span class="pivot-value monospace" id="pivotS2">0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="dialog-footer">
+                <button class="btn btn-secondary close-dialog-btn-footer" id="closeDialogBtnFooter">Dismiss Terminal Panel</button>
+            </footer>
+        </div>
+    </dialog>
+
+    <!-- Main Application Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>

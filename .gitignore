@@ -1,0 +1,13 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+
+# macOS files
+.DS_Store
+
+# Scraped data files (generated at runtime)
+data/nepse_today.json
+data/nepse_today.csv
