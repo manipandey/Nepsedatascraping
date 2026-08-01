@@ -379,6 +379,12 @@ function openDetailModal(symbol) {
 
 // Refresh button trigger (calls custom backend API built in run.py)
 elements.refreshBtn.addEventListener("click", async () => {
+    const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    if (!isLocal) {
+        alert("🔒 Live On-Demand Scraping is disabled in the cloud version to prevent rate limiting.\n\nThis dashboard is automatically updated every trading day at 3:15 PM NST via GitHub Actions.\n\nTo run live on-demand scrapes, clone this repository and run locally using:\npython3 run.py");
+        return;
+    }
+
     if (elements.refreshBtn.classList.contains("loading")) return;
     
     elements.refreshBtn.classList.add("loading");
