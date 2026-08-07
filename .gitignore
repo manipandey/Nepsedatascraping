@@ -8,6 +8,14 @@ __pycache__/
 # macOS files
 .DS_Store
 
+# Backup and recovery files
+*.bak
+*.recovered
+history_dump/
+
+# Nested repos / folders
+Nepsedatascraping/
+
 # Scraped data files (generated at runtime)
 # We track them so Vercel has initial data on deployment
 !data/nepse_today.json

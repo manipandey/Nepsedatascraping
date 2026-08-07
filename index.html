@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEPSE Stock Market Terminal</title>
+    <title>NEPSE & SystemXLite Terminal | Stock Market & Trade Journal</title>
     <!-- Meta tags for SEO -->
-    <meta name="description" content="An interactive, high-performance financial terminal for Nepal Stock Exchange (NEPSE) today's share prices. Inspect, search, filter, and analyze stock data with advanced indicators.">
+    <meta name="description" content="A premium financial terminal for Nepal Stock Exchange (NEPSE) with live sub-indices, all script prices, interactive portfolio tracker, and trading journal.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,22 +22,57 @@
                 <span class="logo-text">NEPSE<span class="highlight">Terminal</span></span>
             </div>
             <nav class="sidebar-nav">
-                <a href="#" class="nav-item active">
+                <!-- Group 1: Market Analytics -->
+                <div class="nav-section-title">MARKET ANALYTICS</div>
+                <a href="#" class="nav-item active" data-view="dashboard" id="navDashboard">
                     <span class="nav-icon">📊</span> Market Today
                 </a>
-                <a href="data/nepse_today.json" target="_blank" class="nav-item">
-                    <span class="nav-icon">📁</span> View JSON Raw
+                <a href="#" class="nav-item" data-view="heatbubble" id="navHeatbubble">
+                    <span class="nav-icon">🫧</span> Heat Bubble Map
                 </a>
-                <a href="data/nepse_today.csv" target="_blank" class="nav-item">
-                    <span class="nav-icon">📋</span> View CSV Raw
+                <a href="#" class="nav-item" data-view="dalal" id="navDalal">
+                    <span class="nav-icon">🔥</span> Dalal Signals
+                </a>
+                <a href="#" class="nav-item" data-view="strategy" id="navStrategy" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; border-left: 3px solid #818cf8; font-weight: 700;">
+                    <span class="nav-icon">🎯</span> Strategy Signals
+                </a>
+
+                <!-- Group 2: Portfolio & Trading -->
+                <div class="nav-section-title" style="margin-top: 1.25rem;">PORTFOLIO & TRADING</div>
+                <a href="#" class="nav-item" data-view="portfolio" id="navPortfolio">
+                    <span class="nav-icon">💼</span> Portfolio Tracker
+                </a>
+                <a href="#" class="nav-item" data-view="journal" id="navJournal">
+                    <span class="nav-icon">📓</span> Trade Journal
+                </a>
+                <a href="#" class="nav-item" data-view="watchlist" id="navWatchlist">
+                    <span class="nav-icon">⭐</span> Watchlist & Alerts
+                </a>
+
+                <!-- Group 3: Deep Research -->
+                <div class="nav-section-title" style="margin-top: 1.25rem;">DEEP RESEARCH</div>
+                <a href="#" class="nav-item" data-view="floorsheet" id="navFloorsheet">
+                    <span class="nav-icon">🔍</span> Floorsheet Analysis
+                </a>
+                <a href="#" class="nav-item" data-view="lockin" id="navLockin">
+                    <span class="nav-icon">🔒</span> Lock-in Expiry
+                </a>
+
+                <!-- Group 4: Raw Exports -->
+                <div class="nav-section-title" style="margin-top: 1.25rem;">DATA EXPORTS</div>
+                <a href="data/systemx_scraped.json" target="_blank" class="nav-item" style="padding: 0.45rem 0.75rem; font-size: 0.83rem;">
+                    <span class="nav-icon">📁</span> SystemX JSON
+                </a>
+                <a href="data/systemx_today.csv" target="_blank" class="nav-item" style="padding: 0.45rem 0.75rem; font-size: 0.83rem;">
+                    <span class="nav-icon">📋</span> Live Prices CSV
                 </a>
             </nav>
             <div class="sidebar-footer">
                 <div class="scraper-status">
                     <div class="status-indicator online"></div>
                     <div>
-                        <p class="status-title">System Status</p>
-                        <p class="status-desc">Local Server Ready</p>
+                        <p class="status-title">SystemXLite Live</p>
+                        <p class="status-desc" id="lastUpdatedTime">Updated Just Now</p>
                     </div>
                 </div>
             </div>
@@ -46,134 +81,1071 @@
         <!-- Main Content Area -->
         <main class="main-content">
             <!-- Top Header -->
-            <header class="main-header">
-                <div class="header-title-container">
-                    <h1 class="header-title">Market Dashboard</h1>
-                    <div class="header-metadata">
-                        <span class="meta-badge date-badge" id="tradeDateBadge">
-                            <span class="badge-label">Trading Date:</span>
-                            <span class="badge-value" id="tradeDate">Loading...</span>
+            <header class="main-header" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 28px; background: var(--bg-app); border-bottom: 1px solid var(--border-color);">
+                <div class="header-title-container" style="min-width: 220px;">
+                    <h1 class="header-title" id="pageTitle" style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Market Overview</h1>
+                    <div class="header-metadata" style="display: flex; align-items: center; gap: 10px; margin-top: 4px;">
+                        <span class="meta-badge date-badge" style="font-size: 0.76rem; background: var(--bg-card); border: 1px solid var(--border-color); padding: 2px 8px; border-radius: 6px;">
+                            <span class="badge-label" style="color: var(--text-muted);">Date:</span>
+                            <span class="badge-value" id="tradeDate" style="color: var(--text-primary); font-weight: 600;">Loading...</span>
                         </span>
-                        <span class="meta-badge status-badge" id="marketStatusBadge">
-                            <span class="badge-dot"></span>
-                            <span class="badge-text" id="marketStatus">Offline</span>
+                        <span class="meta-badge status-badge" id="marketStatusBadge" style="font-size: 0.76rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 2px 8px; border-radius: 6px; color: #10b981;">
+                            <span class="badge-dot" style="display: inline-block; width: 6px; height: 6px; background: #10b981; border-radius: 50%; margin-right: 4px;"></span>
+                            <span class="badge-text" id="marketStatus">SystemXLite Online</span>
                         </span>
                     </div>
                 </div>
-                <div class="header-actions">
-                    <button class="btn btn-primary refresh-btn" id="refreshBtn">
-                        <span class="btn-icon">🔄</span> Re-Scrape Data
+
+                <!-- Global Quick Ticker Search -->
+                <div class="header-search-box" style="position: relative; flex: 1; max-width: 420px;">
+                    <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); opacity: 0.6; font-size: 0.88rem;">🔍</span>
+                    <input type="text" id="globalQuickSearch" class="search-input" placeholder="Search scrip symbol or company name (Press '/' to focus)..." style="width: 100%; padding-left: 36px; padding-right: 42px; height: 38px; font-size: 0.84rem; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px;">
+                    <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 0.72rem; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-muted); padding: 1px 6px; border-radius: 4px; font-family: monospace;">/</span>
+                </div>
+
+                <div class="header-actions" style="display: flex; align-items: center; gap: 10px;">
+                    <button class="btn btn-secondary" id="btnOpenPositionCalc" style="height: 38px; padding: 0 14px; font-size: 0.84rem; font-weight: 600; border-radius: 8px; background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.35);">
+                        <span class="btn-icon">🧮</span> Position Risk Calc
+                    </button>
+                    <button class="btn btn-primary refresh-btn" id="refreshBtn" style="height: 38px; padding: 0 16px; font-size: 0.85rem; font-weight: 600; border-radius: 8px;">
+                        <span class="btn-icon">🔄</span> Sync SystemXLite
                     </button>
                 </div>
             </header>
 
-            <!-- Market Overview Summary Cards -->
-            <section class="summary-grid">
-                <!-- Card 1: Turnover -->
-                <div class="summary-card">
-                    <div class="card-icon turnover-icon">💸</div>
-                    <div class="card-info">
-                        <p class="card-label">Total Turnover</p>
-                        <h2 class="card-value" id="summaryTurnover">NPR 0.00</h2>
-                    </div>
-                </div>
-
-                <!-- Card 2: Volume -->
-                <div class="summary-card">
-                    <div class="card-icon volume-icon">📊</div>
-                    <div class="card-info">
-                        <p class="card-label">Total Shares Volume</p>
-                        <h2 class="card-value" id="summaryVolume">0</h2>
-                    </div>
-                </div>
-
-                <!-- Card 3: Transactions -->
-                <div class="summary-card">
-                    <div class="card-icon trans-icon">🤝</div>
-                    <div class="card-info">
-                        <p class="card-label">Total Transactions</p>
-                        <h2 class="card-value" id="summaryTransactions">0</h2>
-                    </div>
-                </div>
-
-                <!-- Card 4: Market Breadth -->
-                <div class="summary-card breadth-card">
-                    <div class="card-info width-100">
-                        <p class="card-label">Market Breadth (Advancers vs Decliners)</p>
-                        <div class="breadth-stats">
-                            <span class="stat-green" id="breadthAdvancers">0 ▲</span>
-                            <span class="stat-gray" id="breadthUnchanged">0 =</span>
-                            <span class="stat-red" id="breadthDecliners">0 ▼</span>
-                        </div>
-                        <div class="breadth-bar-container">
-                            <div class="breadth-bar green" id="barAdvancers" style="width: 33.3%"></div>
-                            <div class="breadth-bar gray" id="barUnchanged" style="width: 33.3%"></div>
-                            <div class="breadth-bar red" id="barDecliners" style="width: 33.3%"></div>
+            <!-- VIEW 1: MARKET OVERVIEW & ALL SCRIPS -->
+            <div id="dashboardView" class="view-section">
+                <!-- Market Summary Cards -->
+                <section class="summary-grid">
+                    <div class="summary-card">
+                        <div class="card-icon turnover-icon">💸</div>
+                        <div class="card-info">
+                            <p class="card-label">Total Market Turnover</p>
+                            <h2 class="card-value" id="summaryTurnover">NPR 0.00</h2>
                         </div>
                     </div>
-                </div>
-            </section>
 
-            <!-- Stock Terminal Control Panel -->
-            <section class="control-panel">
-                <div class="search-bar-container">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" id="stockSearch" placeholder="Search by Symbol (e.g. ADBL, NTC)..." autocomplete="off">
-                    <button class="clear-search" id="clearSearch" style="display: none;">&times;</button>
-                </div>
-                <div class="export-actions">
-                    <a href="data/nepse_today.csv" download class="btn btn-outline">
-                        <span class="btn-icon">📥</span> Export CSV
-                    </a>
-                    <a href="data/nepse_today.json" download class="btn btn-outline">
-                        <span class="btn-icon">📁</span> Export JSON
-                    </a>
-                </div>
-            </section>
+                    <div class="summary-card">
+                        <div class="card-icon volume-icon">📊</div>
+                        <div class="card-info">
+                            <p class="card-label">Total Traded Volume</p>
+                            <h2 class="card-value" id="summaryVolume">0</h2>
+                        </div>
+                    </div>
 
-            <!-- Filters Navigation Tabs -->
-            <section class="filters-container">
-                <div class="filter-tabs">
-                    <button class="filter-tab active" data-filter="all">All Securities</button>
-                    <button class="filter-tab" data-filter="gainers">Top Gainers ▲</button>
-                    <button class="filter-tab" data-filter="losers">Top Losers ▼</button>
-                    <button class="filter-tab" data-filter="turnover">Turnover Leaders</button>
-                    <button class="filter-tab" data-filter="volume">Volume Leaders</button>
-                    <button class="filter-tab" data-filter="breakouts">52-Wk High Breakouts</button>
-                </div>
-                <div class="results-count" id="resultsCount">Showing 0 of 0 securities</div>
-            </section>
+                    <div class="summary-card">
+                        <div class="card-icon trans-icon">🏢</div>
+                        <div class="card-info">
+                            <p class="card-label">Traded Securities</p>
+                            <h2 class="card-value" id="summaryTradedSecurities">0</h2>
+                        </div>
+                    </div>
 
-            <!-- Stocks Main Interactive Data Table -->
-            <section class="table-card table-scroller">
-                <table class="terminal-table" id="stocksTable">
-                    <thead>
-                        <tr>
-                            <th class="sortable" data-sort="symbol">Symbol <span class="sort-indicator"></span></th>
-                            <th class="sortable text-right" data-sort="open">Open <span class="sort-indicator"></span></th>
-                            <th class="sortable text-right" data-sort="high">High <span class="sort-indicator"></span></th>
-                            <th class="sortable text-right" data-sort="low">Low <span class="sort-indicator"></span></th>
-                            <th class="sortable text-right" data-sort="close">Close <span class="sort-indicator"></span></th>
-                            <th class="sortable text-right" data-sort="prev_close">Prev. Close <span class="sort-indicator"></span></th>
-                            <th class="sortable text-right" data-sort="diff">Change <span class="sort-indicator"></span></th>
-                            <th class="sortable text-right" data-sort="diff_percent">% Change <span class="sort-indicator"></span></th>
-                            <th class="sortable text-right" data-sort="volume">Volume <span class="sort-indicator"></span></th>
-                            <th class="sortable text-right" data-sort="turnover">Turnover <span class="sort-indicator"></span></th>
-                            <th class="sortable text-right" data-sort="transactions">Trades <span class="sort-indicator"></span></th>
-                        </tr>
-                    </thead>
-                    <tbody id="stocksTableBody">
-                        <tr>
-                            <td colspan="11" class="text-center loading-placeholder">
-                                <div class="spinner"></div>
-                                Loading stock terminal data...
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+                    <div class="summary-card breadth-card">
+                        <div class="card-info width-100">
+                            <p class="card-label">Market Breadth (Advancers vs Decliners)</p>
+                            <div class="breadth-stats">
+                                <span class="stat-green" id="breadthAdvancers">0 ▲</span>
+                                <span class="stat-gray" id="breadthUnchanged">0 =</span>
+                                <span class="stat-red" id="breadthDecliners">0 ▼</span>
+                            </div>
+                            <div class="breadth-bar-container">
+                                <div class="breadth-bar green" id="barAdvancers" style="width: 33.3%"></div>
+                                <div class="breadth-bar gray" id="barUnchanged" style="width: 33.3%"></div>
+                                <div class="breadth-bar red" id="barDecliners" style="width: 33.3%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sub-Indices Grid Panel -->
+                <section class="indices-panel" style="margin-bottom: 24px;">
+                    <div class="flex-between" style="margin-bottom: 12px;">
+                        <h3 class="section-title">NEPSE Sub-Indices</h3>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">Click any index to filter securities</span>
+                    </div>
+                    <div id="indicesGrid" class="indices-grid">
+                        <div class="loading">Loading sub-indices...</div>
+                    </div>
+                </section>
+
+                <!-- Control Bar -->
+                <section class="control-panel">
+                    <div class="search-bar-container">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="stockSearch" placeholder="Search by Symbol or Name (e.g. ADBL, NICA, NTC)..." autocomplete="off">
+                        <button class="clear-search" id="clearSearch" style="display: none;">&times;</button>
+                    </div>
+                    <div class="export-actions" style="display: flex; gap: 8px;">
+                        <select id="sectorFilterSelect" class="btn btn-outline" style="background: var(--bg-card); color: var(--text-primary);">
+                            <option value="all">All Sectors</option>
+                        </select>
+                        <a href="data/systemx_today.csv" download class="btn btn-outline">
+                            <span class="btn-icon">📥</span> CSV
+                        </a>
+                        <a href="data/systemx_scraped.json" download class="btn btn-outline">
+                            <span class="btn-icon">📁</span> JSON
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Technical Scanner & Filter Tabs -->
+                <section class="filters-container">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="all">All Scrips</button>
+                        <button class="filter-tab" data-filter="ema_fractal_sweep" style="background: rgba(99, 102, 241, 0.18); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.4); font-weight: 700;">🎯 EMA 20>50>100 + Fractal Sweep</button>
+                        <button class="filter-tab" data-filter="goldencross">🌟 Golden Cross (20>50 SMA)</button>
+                        <button class="filter-tab" data-filter="rsi_oversold">🟢 RSI Oversold (< 35)</button>
+                        <button class="filter-tab" data-filter="rsi_overbought">🔴 RSI Overbought (> 70)</button>
+                        <button class="filter-tab" data-filter="vol_surge">💥 Volume Surge (2x+)</button>
+                        <button class="filter-tab" data-filter="breakouts">🔥 52-Wk Breakout</button>
+                        <button class="filter-tab" data-filter="below20sma">Below 20 SMA 📉</button>
+                        <button class="filter-tab" data-filter="above20sma">Above 20 SMA 📈</button>
+                        <button class="filter-tab" data-filter="gainers">Top Gainers ▲</button>
+                        <button class="filter-tab" data-filter="losers">Top Losers ▼</button>
+                    </div>
+                    <div class="results-count" id="resultsCount">Showing 0 securities</div>
+                </section>
+
+                <!-- All Scrips Data Table -->
+                <section class="table-card table-scroller">
+                    <table class="terminal-table" id="stocksTable">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-sort="symbol">Symbol <span class="sort-indicator"></span></th>
+                                <th class="sortable" data-sort="sector">Sector <span class="sort-indicator"></span></th>
+                                <th class="sortable text-right" data-sort="ltp">LTP (NPR) <span class="sort-indicator"></span></th>
+                                <th class="sortable text-right" data-sort="diff">% Change <span class="sort-indicator"></span></th>
+                                <th class="sortable text-right" data-sort="rsi14">RSI (14) <span class="sort-indicator"></span></th>
+                                <th class="sortable text-right" data-sort="sma20">20 SMA <span class="sort-indicator"></span></th>
+                                <th class="sortable text-right" data-sort="sma50">50 SMA <span class="sort-indicator"></span></th>
+                                <th class="sortable text-right" data-sort="volume">Volume <span class="sort-indicator"></span></th>
+                                <th class="sortable text-right" data-sort="turnover">Turnover <span class="sort-indicator"></span></th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stocksTableBody">
+                            <tr>
+                                <td colspan="13" class="text-center loading-placeholder">
+                                    <div class="spinner"></div>
+                                    Loading live scrip prices...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Table Pagination Footer Bar -->
+                    <div class="table-pagination-footer" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; background: var(--bg-card); border-top: 1px solid var(--border-color); border-radius: 0 0 12px 12px; flex-wrap: wrap; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.83rem; color: var(--text-secondary);">
+                            <span>Show</span>
+                            <select id="rowsPerPageSelect" class="search-input" style="padding: 4px 8px; font-size: 0.83rem; border-radius: 6px; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary);">
+                                <option value="25" selected>25 rows</option>
+                                <option value="50">50 rows</option>
+                                <option value="100">100 rows</option>
+                                <option value="all">All Market (300+)</option>
+                            </select>
+                            <span id="entriesInfo" style="color: var(--text-muted);">entries per page</span>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <button class="btn btn-secondary" id="prevPageBtn" style="padding: 5px 14px; font-size: 0.82rem; border-radius: 6px;">◀ Prev</button>
+                            <span id="pageInfo" style="font-size: 0.83rem; font-weight: 600; color: var(--text-primary); min-width: 100px; text-align: center;">Page 1 of 1</span>
+                            <button class="btn btn-secondary" id="nextPageBtn" style="padding: 5px 14px; font-size: 0.82rem; border-radius: 6px;">Next ▶</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- VIEW: DEDICATED FRACTAL SWEEP STRATEGY SIGNALS -->
+            <div id="strategyView" class="view-section hidden">
+                <!-- Strategy Banner & Rule Explainer -->
+                <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.18) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 14px; padding: 22px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                            <span style="font-size: 1.5rem; background: rgba(99, 102, 241, 0.25); padding: 6px 12px; border-radius: 8px; color: #818cf8;">🎯</span>
+                            <h2 style="font-size: 1.3rem; font-weight: 800; color: #ffffff; margin: 0;">EMA Ribbon (20 > 50 > 100) + Fractal Sweep Strategy</h2>
+                        </div>
+                        <p style="font-size: 0.86rem; color: #cbd5e1; margin: 0; max-width: 780px; line-height: 1.5;">
+                            <strong>Strategy Rule:</strong> Bullish bias confirmed when <strong>EMA 20 > EMA 50 > EMA 100</strong>. Scans for NEPSE scrips that swept below their recent <strong>Williams Fractal Low</strong> to capture liquidity, followed by a <strong>Bullish Reversal Candle</strong>.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-primary" id="btnOpenPositionCalcStrategy" style="height: 40px; padding: 0 16px; font-weight: 700;">
+                            <span class="btn-icon">🧮</span> Risk Sizing Calc
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Strategy Metrics Grid -->
+                <section class="summary-grid" style="margin-bottom: 24px;">
+                    <div class="summary-card" style="background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(99, 102, 241, 0.3);">
+                        <div class="card-icon" style="background: rgba(99, 102, 241, 0.25); color: #818cf8;">🎯</div>
+                        <div class="card-info">
+                            <p class="card-label">Active Strategy Signals</p>
+                            <h2 class="card-value" id="strategyMatchCount" style="color: #818cf8;">0 Scrips</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Liquidity Swept + Bullish Reversal</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">📈</div>
+                        <div class="card-info">
+                            <p class="card-label">EMA Bullish Aligned (20>50>100)</p>
+                            <h2 class="card-value" id="strategyUptrendCount">0 Scrips</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Macro Uptrend Confirmation</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">🛡️</div>
+                        <div class="card-info">
+                            <p class="card-label">Target Risk:Reward Ratio</p>
+                            <h2 class="card-value" style="color: #f59e0b;">1 : 2.5+</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">SL below Fractal Low Sweep</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dedicated Strategy Signals Table -->
+                <section class="table-card table-scroller">
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--border-color);">
+                        <h3 class="section-title" style="margin: 0;">Matching Strategy Securities</h3>
+                        <span id="strategyTableCount" style="font-size: 0.82rem; color: var(--text-muted);">Showing 0 matching signals</span>
+                    </div>
+                    <table class="terminal-table" id="strategyTable">
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Sector</th>
+                                <th class="text-right">LTP (NPR)</th>
+                                <th class="text-right">% Change</th>
+                                <th class="text-right">EMA 20</th>
+                                <th class="text-right">EMA 50</th>
+                                <th class="text-right">EMA 100</th>
+                                <th class="text-right">Fractal Low (NPR)</th>
+                                <th class="text-center">Signal Status</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="strategyTableBody">
+                            <tr><td colspan="10" class="text-center loading-placeholder">Analyzing NEPSE securities for EMA + Fractal Sweep strategy...</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+
+            <!-- VIEW 2: PORTFOLIO TRACKER -->
+            <div id="portfolioView" class="view-section hidden">
+                <section class="summary-grid" style="margin-bottom: 24px;">
+                    <div class="summary-card" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(79, 70, 229, 0.15) 100%); border: 1px solid rgba(99, 102, 241, 0.3);">
+                        <div class="card-icon" style="background: rgba(99, 102, 241, 0.2); color: #818cf8;">💼</div>
+                        <div class="card-info">
+                            <p class="card-label">Current Net Worth</p>
+                            <h2 class="card-value" id="portCurrentValue">NPR 0.00</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Invested: <span id="portTotalInvested" style="color: var(--text-primary); font-weight: 600;">NPR 0.00</span></p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon" id="portPlIcon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">📈</div>
+                        <div class="card-info">
+                            <p class="card-label">Unrealized P&L</p>
+                            <h2 class="card-value" id="portTotalPL">NPR 0.00</h2>
+                            <p style="font-size: 0.8rem; margin-top: 4px;" id="portTotalPLPct">0.00%</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">📊</div>
+                        <div class="card-info">
+                            <p class="card-label">Total Scrips Held</p>
+                            <h2 class="card-value" id="portHoldingsCount">0</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Total Shares: <span id="portTotalShares">0</span></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Portfolio Header & Sub-Tabs Switcher -->
+                <div class="flex-between" style="margin-bottom: 16px; align-items: center; flex-wrap: wrap; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                        <h3 class="section-title" style="margin-bottom: 0;">Portfolio Journal</h3>
+                        <div class="filter-tabs" style="margin-bottom: 0;">
+                            <button class="filter-tab active" id="tabActiveHoldings" data-port-tab="active">
+                                💼 Active Positions (<span id="activeHoldingsCount">0</span>)
+                            </button>
+                            <button class="filter-tab" id="tabRealizedHistory" data-port-tab="realized">
+                                📜 Realized Trades (<span id="realizedTradesCount">0</span>)
+                            </button>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-primary" id="btnOpenAddHolding">
+                            <span class="btn-icon">➕</span> Add Position
+                        </button>
+                        <button class="btn btn-outline" id="btnExportPortfolio">
+                            <span class="btn-icon">💾</span> Backup JSON
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Container 1: Active Holdings Table -->
+                <div id="activeHoldingsContainer">
+                    <section class="table-card table-scroller">
+                        <table class="terminal-table">
+                            <thead>
+                                <tr>
+                                    <th>Symbol / Setup</th>
+                                    <th class="text-right">Shares</th>
+                                    <th class="text-right">Entry Price</th>
+                                    <th class="text-right">LTP & Current Value</th>
+                                    <th class="text-right">Unrealized P&L</th>
+                                    <th class="text-right">Target & Stop Loss</th>
+                                    <th>Visual Progress towards TP / SL</th>
+                                    <th>Trade Rationale / Reason</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="portfolioTableBody">
+                                <tr><td colspan="9" class="text-center loading-placeholder">No holdings logged yet. Click "Add Position" to start tracking!</td></tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+
+                <!-- Container 2: Realized Trades History Table (Switched Side-by-Side) -->
+                <div id="realizedHistoryContainer" class="hidden">
+                    <section class="table-card table-scroller">
+                        <table class="terminal-table">
+                            <thead>
+                                <tr>
+                                    <th>Close Date</th>
+                                    <th>Symbol</th>
+                                    <th>Type</th>
+                                    <th>Setup</th>
+                                    <th class="text-right">Qty</th>
+                                    <th class="text-right">Entry</th>
+                                    <th class="text-right">Exit Price</th>
+                                    <th class="text-right">Realized P&L</th>
+                                    <th>Notes / Lessons Learned</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="portfolioRealizedTableBody">
+                                <tr><td colspan="10" class="text-center loading-placeholder">No completed/realized trades logged yet. Click "Close & Log" on any active holding to record a realized trade!</td></tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+
+
+
+
+            <!-- VIEW 3: TRADING JOURNAL -->
+            <div id="journalView" class="view-section hidden">
+                <section class="summary-grid" style="margin-bottom: 24px;">
+                    <div class="summary-card">
+                        <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">🎯</div>
+                        <div class="card-info">
+                            <p class="card-label">Win Rate</p>
+                            <h2 class="card-value" id="journalWinRate">0.0%</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;"><span id="journalWins" style="color: var(--color-up);">0 Wins</span> / <span id="journalLosses" style="color: var(--color-down);">0 Losses</span></p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">💰</div>
+                        <div class="card-info">
+                            <p class="card-label">Net Realized Profit</p>
+                            <h2 class="card-value" id="journalNetProfit">NPR 0.00</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Total Trades: <span id="journalTotalTrades">0</span></p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">⚡</div>
+                        <div class="card-info">
+                            <p class="card-label">Avg Risk-Reward (R:R)</p>
+                            <h2 class="card-value" id="journalAvgRR">1 : 0.0</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Profit Factor: <span id="journalProfitFactor">0.0</span></p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="flex-between" style="margin-bottom: 16px;">
+                    <h3 class="section-title">Trading Journal Logs</h3>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-primary" id="btnOpenLogTrade">
+                            <span class="btn-icon">✍️</span> Log Trade
+                        </button>
+                        <button class="btn btn-outline" id="btnExportJournal">
+                            <span class="btn-icon">💾</span> Backup JSON
+                        </button>
+                    </div>
+                </div>
+
+                <section class="table-card table-scroller">
+                    <table class="terminal-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Symbol</th>
+                                <th>Type</th>
+                                <th>Setup / Strategy</th>
+                                <th class="text-right">Qty</th>
+                                <th class="text-right">Entry</th>
+                                <th class="text-right">Exit / Target</th>
+                                <th class="text-right">Stop Loss</th>
+                                <th class="text-right">P&L (NPR)</th>
+                                <th>Notes / Takeaways</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="journalTableBody">
+                            <tr><td colspan="11" class="text-center loading-placeholder">No trades logged in your journal yet. Click "Log Trade" to record your setup!</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+
+            <!-- VIEW 4: DALAL STREET SIGNALS -->
+            <div id="dalalView" class="view-section hidden">
+                <!-- Info Banner & Metric Ribbon -->
+                <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.16) 0%, rgba(16, 185, 129, 0.1) 50%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 14px; padding: 22px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                            <span style="font-size: 1.5rem; background: rgba(99, 102, 241, 0.25); padding: 6px 12px; border-radius: 8px; color: #818cf8;">🔥</span>
+                            <h2 style="font-size: 1.3rem; font-weight: 800; color: #ffffff; margin: 0;">Smart Money Radar & Dalal Street Intelligence</h2>
+                        </div>
+                        <p style="font-size: 0.86rem; color: #cbd5e1; margin: 0; max-width: 780px; line-height: 1.5;">
+                            Real-time tracking of <strong>Institutional Buying ("Time For Ride")</strong> vs <strong>Institutional Dumping ("Topi Time Warnings")</strong>, last 15-minute price/volume momentum spikes, and retail order flow.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-secondary" id="btnRefreshDalalSignals" style="height: 40px; padding: 0 16px; font-weight: 700;">
+                            <span class="btn-icon">🔄</span> Refresh Signals
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Summary Cards Grid -->
+                <section class="summary-grid" style="margin-bottom: 24px;">
+                    <div class="summary-card" style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3);">
+                        <div class="card-icon" style="background: rgba(16, 185, 129, 0.25); color: #10b981;">🚀</div>
+                        <div class="card-info">
+                            <p class="card-label">Time For Ride (Buy Signals)</p>
+                            <h2 class="card-value" id="dalalBuyCount" style="color: #10b981;">0 Scrips</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Institutional Accumulation</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card" style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3);">
+                        <div class="card-icon" style="background: rgba(239, 68, 68, 0.25); color: #ef4444;">🎩</div>
+                        <div class="card-info">
+                            <p class="card-label">Topi Time (Sell Warnings)</p>
+                            <h2 class="card-value" id="dalalSellCount" style="color: #ef4444;">0 Scrips</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Institutional Dumping</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card" style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3);">
+                        <div class="card-icon" style="background: rgba(245, 158, 11, 0.25); color: #f59e0b;">⚡</div>
+                        <div class="card-info">
+                            <p class="card-label">15-Min Power Spike Movers</p>
+                            <h2 class="card-value" id="dalalMoversCount" style="color: #f59e0b;">0 Scrips</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Final 15-Min Market Spikes</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card" style="background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(99, 102, 241, 0.3);">
+                        <div class="card-icon" style="background: rgba(99, 102, 241, 0.25); color: #818cf8;">🏆</div>
+                        <div class="card-info">
+                            <p class="card-label">Retail Magnet Sector</p>
+                            <h2 class="card-value" id="dalalPopularSector" style="color: #818cf8; font-size: 1.15rem;">Hydro Power</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Highest Retail Liquidity</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Signal Sub-Navigation Tabs -->
+                <section class="filters-container" style="margin-bottom: 24px;">
+                    <div class="filter-tabs" id="dalalFilterTabs">
+                        <button class="filter-tab active" data-dalal-tab="all">All Dalal Signals</button>
+                        <button class="filter-tab" data-dalal-tab="accumulation" style="color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 700;">🚀 Time For Ride (Buy)</button>
+                        <button class="filter-tab" data-dalal-tab="distribution" style="color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); font-weight: 700;">🎩 Topi Time (Sell Warnings)</button>
+                        <button class="filter-tab" data-dalal-tab="movers" style="color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); font-weight: 700;">⚡ 15-Min Power Movers</button>
+                        <button class="filter-tab" data-dalal-tab="popular">📊 Retail Buy/Sell Interest</button>
+                        <button class="filter-tab" data-dalal-tab="leaders">🏆 Market Leaders</button>
+                    </div>
+                </section>
+
+                <!-- Signal Cards Grid & Panels Container -->
+                <div id="dalalContentArea">
+                    <!-- Dynamic Dalal Signal Cards Grid -->
+                    <div class="summary-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 24px;">
+                        <!-- Bullish Accumulation Card Panel -->
+                        <div class="summary-card" style="display: block; padding: 22px; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.25);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(16, 185, 129, 0.2); padding-bottom: 10px;">
+                                <h3 class="section-title" style="color: #10b981; font-size: 1.05rem; margin: 0;">🚀 Time for Ride (Institutional Buying)</h3>
+                                <span style="background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.75rem; padding: 3px 10px; border-radius: 6px; font-weight: 700;">BUY ACCUMULATION</span>
+                            </div>
+                            <div id="jasoosAccumulationContainer">
+                                Loading accumulation signals...
+                            </div>
+                        </div>
+
+                        <!-- Bearish Distribution Card Panel -->
+                        <div class="summary-card" style="display: block; padding: 22px; background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.25);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(239, 68, 68, 0.2); padding-bottom: 10px;">
+                                <h3 class="section-title" style="color: #ef4444; font-size: 1.05rem; margin: 0;">🎩 Topi Time (Institutional Distribution)</h3>
+                                <span style="background: rgba(239, 68, 68, 0.2); color: #ef4444; font-size: 0.75rem; padding: 3px 10px; border-radius: 6px; font-weight: 700;">SELL WARNINGS</span>
+                            </div>
+                            <div id="jasoosDistributionContainer">
+                                Loading distribution warnings...
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Last Minute Power Movers & Market Leaders -->
+                    <div class="summary-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 24px;">
+                        <div class="summary-card" style="display: block; padding: 22px; background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.25);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(245, 158, 11, 0.2); padding-bottom: 10px;">
+                                <h3 class="section-title" style="color: #f59e0b; font-size: 1.05rem; margin: 0;">⚡ 15-Min Power Spike Movers</h3>
+                                <span style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; font-size: 0.75rem; padding: 3px 10px; border-radius: 6px; font-weight: 700;">LATE MOMENTUM</span>
+                            </div>
+                            <div id="moversContainer">
+                                Loading last minute market movers...
+                            </div>
+                        </div>
+
+                        <div class="summary-card" style="display: block; padding: 22px; background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.25);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(99, 102, 241, 0.2); padding-bottom: 10px;">
+                                <h3 class="section-title" style="color: #818cf8; font-size: 1.05rem; margin: 0;">📊 Retail Interest & Sector Flow</h3>
+                                <span style="background: rgba(99, 102, 241, 0.2); color: #818cf8; font-size: 0.75rem; padding: 3px 10px; border-radius: 6px; font-weight: 700;">RETAIL MAGNETS</span>
+                            </div>
+                            <div id="popularContainer">
+                                Loading retail popular scrips...
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dedicated Leaderboards Section -->
+                    <div class="table-card table-scroller">
+                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--border-color);">
+                            <h3 class="section-title" style="margin: 0;">🏆 Market Leaderboards & Top Performers</h3>
+                            <span style="font-size: 0.82rem; color: var(--text-muted);">Real-Time Session Rankings</span>
+                        </div>
+                        <div id="leadersContainer" style="padding: 20px;">
+                            Loading market leaders...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 5: LOCK-IN PERIOD EXPIRY TRACKER -->
+            <div id="lockinView" class="view-section hidden">
+                <!-- Info & Warning Banner -->
+                <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(239, 68, 68, 0.08)); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: flex-start; gap: 14px;">
+                        <span style="font-size: 1.5rem;">🔒</span>
+                        <div>
+                            <h4 style="color: #fbbf24; font-size: 0.95rem; font-weight: 700; margin-bottom: 3px;">Promoter & Institutional Lock-in Expiry Radar</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.83rem; margin: 0;">Track upcoming promoter and mutual fund lock-in expiration dates across NEPSE companies to anticipate supply unlock events and protect portfolio positions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Risk Metric Cards -->
+                <section class="summary-grid" style="margin-bottom: 20px;">
+                    <div class="summary-card" style="padding: 16px;">
+                        <div class="card-icon" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">🚨</div>
+                        <div class="card-info">
+                            <p class="card-label">Urgent (< 7 Days)</p>
+                            <h2 class="card-value text-down" id="lockinNext7">0</h2>
+                            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Critical unlock window</p>
+                        </div>
+                    </div>
+                    <div class="summary-card" style="padding: 16px;">
+                        <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">⏳</div>
+                        <div class="card-info">
+                            <p class="card-label">Near-Term (8 - 30 Days)</p>
+                            <h2 class="card-value" style="color: #f59e0b;" id="lockinNext30">0</h2>
+                            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">High supply risk watch</p>
+                        </div>
+                    </div>
+                    <div class="summary-card" style="padding: 16px;">
+                        <div class="card-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">📅</div>
+                        <div class="card-info">
+                            <p class="card-label">Medium-Term (31 - 90 Days)</p>
+                            <h2 class="card-value" id="lockinNext90">0</h2>
+                            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Upcoming unlock window</p>
+                        </div>
+                    </div>
+                    <div class="summary-card" style="padding: 16px;">
+                        <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">🔓</div>
+                        <div class="card-info">
+                            <p class="card-label">Already Unlocked</p>
+                            <h2 class="card-value text-muted" id="lockinUnlocked">0</h2>
+                            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Active market supply</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Filter Controls & Search -->
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+                    <div class="filter-tabs" style="margin-bottom: 0;">
+                        <button class="filter-tab active" data-lockin-filter="upcoming" id="filterLockinUpcoming">🔒 All Upcoming</button>
+                        <button class="filter-tab" data-lockin-filter="7">🚨 Next 7 Days</button>
+                        <button class="filter-tab" data-lockin-filter="30">⚠️ Next 30 Days</button>
+                        <button class="filter-tab" data-lockin-filter="promoter">👔 Promoters (3Y)</button>
+                        <button class="filter-tab" data-lockin-filter="mf">🏛️ Mutual Funds (6M)</button>
+                        <button class="filter-tab" data-lockin-filter="unlocked">🔓 Already Unlocked</button>
+                        <button class="filter-tab" data-lockin-filter="all">All Records</button>
+                    </div>
+                    <input type="text" id="lockinSearch" class="search-input" placeholder="🔍 Search scrip or company..." style="width: 220px; height: 36px; font-size: 0.83rem;">
+                </div>
+
+                <!-- Lock-in Data Table -->
+                <section class="table-card table-scroller">
+                    <table class="terminal-table" id="lockinTable">
+                        <thead>
+                            <tr>
+                                <th>Scrip Symbol & Company</th>
+                                <th>Lock Quota Category</th>
+                                <th class="text-right">Unlock Date</th>
+                                <th class="text-center">Countdown</th>
+                                <th class="text-center">Supply Risk Status</th>
+                                <th class="text-right">LTP (NPR)</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lockinTableBody">
+                            <tr><td colspan="7" class="text-center loading-placeholder">Loading lock-in expiry schedule...</td></tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Lock-in Table Pagination Footer -->
+                    <div class="table-pagination-footer" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; background: var(--bg-card); border-top: 1px solid var(--border-color); border-radius: 0 0 12px 12px; flex-wrap: wrap; gap: 10px;">
+                        <div style="font-size: 0.83rem; color: var(--text-muted);" id="lockinCountInfo">
+                            Showing records
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <button class="btn btn-secondary" id="prevLockinPageBtn" style="padding: 4px 12px; font-size: 0.82rem; border-radius: 6px;">◀ Prev</button>
+                            <span id="lockinPageInfo" style="font-size: 0.83rem; font-weight: 600; color: var(--text-primary); min-width: 90px; text-align: center;">Page 1 of 1</span>
+                            <button class="btn btn-secondary" id="nextLockinPageBtn" style="padding: 4px 12px; font-size: 0.82rem; border-radius: 6px;">Next ▶</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- VIEW 6: FLOORSHEET ANALYSIS (SCRIP-WISE & BROKER-WISE) -->
+            <div id="floorsheetView" class="view-section hidden">
+                <!-- Info Banner -->
+                <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(16, 185, 129, 0.08)); border: 1px solid rgba(99, 102, 241, 0.35); border-radius: 12px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: flex-start; gap: 14px;">
+                        <span style="font-size: 1.5rem;">🔍</span>
+                        <div>
+                            <h4 style="color: #818cf8; font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;">Institutional Floorsheet Intelligence</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0;">Analyze script-by-script broker accumulation, net buying/selling flows, or inspect specific broker activities (e.g. Broker #58, #45, #34) across NEPSE transactions.</p>
+                        </div>
+                    </div>
+
+                    <!-- Sub-Tab Navigation -->
+                    <div style="display: flex; gap: 8px;">
+                        <button class="filter-tab active" id="tabFloorsheetScrip">📊 Scrip-Wise Analysis</button>
+                        <button class="filter-tab" id="tabFloorsheetBroker">🏦 Broker-Wise Analysis</button>
+                    </div>
+                </div>
+
+                <!-- SECTION 1: SCRIP-WISE FLOORSHEET ANALYSIS -->
+                <div id="floorsheetScripSection">
+                    <!-- Control Bar -->
+                    <div class="flex-between" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <label style="font-size: 0.88rem; font-weight: 600; color: var(--text-secondary);">Select Scrip / Ticker:</label>
+                            <select id="floorsheetScripSelect" class="search-input" style="width: 280px;">
+                                <option value="ADBL">ADBL - Agriculture Development Bank</option>
+                            </select>
+                            <button class="btn btn-primary" id="btnFetchScripFloorsheet">
+                                <span class="btn-icon">🔍</span> Analyze Scrip Floorsheet
+                            </button>
+                        </div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted);" id="floorsheetScripStatus">
+                            Select a ticker to load transaction analysis.
+                        </div>
+                    </div>
+
+                    <!-- Scrip Analysis Grid Summary -->
+                    <section class="summary-grid" style="margin-bottom: 24px;">
+                        <div class="summary-card">
+                            <div class="card-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">📊</div>
+                            <div class="card-info">
+                                <p class="card-label">Total Traded Volume</p>
+                                <h2 class="card-value" id="floorsheetScripTotalVol">0</h2>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;" id="floorsheetScripTurnover">NPR 0.00</p>
+                            </div>
+                        </div>
+
+                        <div class="summary-card">
+                            <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">💵</div>
+                            <div class="card-info">
+                                <p class="card-label">Weighted Average Price</p>
+                                <h2 class="card-value text-up" id="floorsheetScripAvgPrice">NPR 0.00</h2>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Effective transaction rate</p>
+                            </div>
+                        </div>
+
+                        <div class="summary-card">
+                            <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">🏢</div>
+                            <div class="card-info">
+                                <p class="card-label">Active Brokers</p>
+                                <h2 class="card-value" style="color: #f59e0b;" id="floorsheetScripBrokersCount">0</h2>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;" id="floorsheetScripTxnCount">0 Transactions</p>
+                            </div>
+                        </div>
+
+                        <div class="summary-card">
+                            <div class="card-icon" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">🎯</div>
+                            <div class="card-info">
+                                <p class="card-label">Top Accumulator Broker</p>
+                                <h2 class="card-value text-accent" id="floorsheetScripTopBroker">#--</h2>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;" id="floorsheetScripTopBrokerVol">0 shares</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Top Accumulators vs Top Sellers Grid -->
+                    <div class="summary-grid" style="margin-bottom: 28px; grid-template-columns: repeat(2, 1fr);">
+                        <!-- Top Buyer Brokers -->
+                        <div class="summary-card" style="display: block; padding: 20px;">
+                            <h4 style="color: var(--color-up); font-size: 0.95rem; font-weight: 700; margin-bottom: 14px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                🟢 Top Buyer Brokers (Net Accumulation)
+                            </h4>
+                            <div id="floorsheetScripBuyersContainer">
+                                <p style="color: var(--text-muted); font-size: 0.85rem;">Click "Analyze Scrip Floorsheet" to view buyer brokers.</p>
+                            </div>
+                        </div>
+
+                        <!-- Top Seller Brokers -->
+                        <div class="summary-card" style="display: block; padding: 20px;">
+                            <h4 style="color: var(--color-down); font-size: 0.95rem; font-weight: 700; margin-bottom: 14px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                🔴 Top Seller Brokers (Net Distribution)
+                            </h4>
+                            <div id="floorsheetScripSellersContainer">
+                                <p style="color: var(--text-muted); font-size: 0.85rem;">Click "Analyze Scrip Floorsheet" to view seller brokers.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scrip Transaction Log Table -->
+                    <section class="table-card table-scroller">
+                        <div class="flex-between" style="padding: 14px 20px; border-bottom: 1px solid var(--border-color);">
+                            <h4 class="section-title" style="font-size: 0.95rem;">📜 Transaction Log Table</h4>
+                            <span style="font-size: 0.8rem; color: var(--text-muted);" id="floorsheetScripTableCount">Showing 0 transactions</span>
+                        </div>
+                        <table class="terminal-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Symbol</th>
+                                    <th class="text-center">Buyer Broker</th>
+                                    <th class="text-center">Seller Broker</th>
+                                    <th class="text-right">Quantity</th>
+                                    <th class="text-right">Rate (NPR)</th>
+                                    <th class="text-right">Amount (NPR)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="floorsheetScripTableBody">
+                                <tr><td colspan="7" class="text-center loading-placeholder">Select a ticker and click "Analyze Scrip Floorsheet" to load transactions.</td></tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+
+                <!-- SECTION 2: BROKER-WISE FLOORSHEET ANALYSIS -->
+                <div id="floorsheetBrokerSection" class="hidden">
+                    <!-- Control Bar -->
+                    <div class="flex-between" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <label style="font-size: 0.88rem; font-weight: 600; color: var(--text-secondary);">Select Broker:</label>
+                            <select id="floorsheetBrokerSelect" class="search-input" style="width: 260px;">
+                                <option value="58">Broker #58 - Naasa Securities</option>
+                                <option value="45">Broker #45 - Imperial Securities</option>
+                                <option value="34">Broker #34 - Vision Securities</option>
+                                <option value="49">Broker #49 - Online Securities</option>
+                                <option value="57">Broker #57 - Aryatara Securities</option>
+                                <option value="38">Broker #38 - Dipshikha Securities</option>
+                                <option value="28">Broker #28 - Shree Krishna Securities</option>
+                                <option value="14">Broker #14 - Nepal Stock House</option>
+                                <option value="39">Broker #39 - Sumeru Securities</option>
+                                <option value="59">Broker #59 - Dynamic Money Manager</option>
+                            </select>
+                            <input type="text" id="floorsheetCustomBrokerInput" class="search-input" placeholder="Or enter Broker #" style="width: 130px;">
+                            <button class="btn btn-primary" id="btnFetchBrokerFloorsheet">
+                                <span class="btn-icon">🏦</span> Analyze Broker Flow
+                            </button>
+                        </div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted);" id="floorsheetBrokerStatus">
+                            Select a broker to inspect trading volume breakdown.
+                        </div>
+                    </div>
+
+                    <!-- Broker Summary Cards -->
+                    <section class="summary-grid" style="margin-bottom: 24px;">
+                        <div class="summary-card">
+                            <div class="card-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">💳</div>
+                            <div class="card-info">
+                                <p class="card-label">Broker Total Turnover</p>
+                                <h2 class="card-value" id="floorsheetBrokerTurnover">NPR 0.00</h2>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;" id="floorsheetBrokerTxnCount">0 total trades</p>
+                            </div>
+                        </div>
+
+                        <div class="summary-card">
+                            <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">🛒</div>
+                            <div class="card-info">
+                                <p class="card-label">Total Buy Volume</p>
+                                <h2 class="card-value text-up" id="floorsheetBrokerBuyVol">0</h2>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;" id="floorsheetBrokerBuyAmount">NPR 0.00</p>
+                            </div>
+                        </div>
+
+                        <div class="summary-card">
+                            <div class="card-icon" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">🏷️</div>
+                            <div class="card-info">
+                                <p class="card-label">Total Sell Volume</p>
+                                <h2 class="card-value text-down" id="floorsheetBrokerSellVol">0</h2>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;" id="floorsheetBrokerSellAmount">NPR 0.00</p>
+                            </div>
+                        </div>
+
+                        <div class="summary-card">
+                            <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">⚖️</div>
+                            <div class="card-info">
+                                <p class="card-label">Net Broker Position</p>
+                                <h2 class="card-value" id="floorsheetBrokerNetFlow">0</h2>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;" id="floorsheetBrokerNetLabel">Net accumulation</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Top Stocks Bought vs Top Stocks Sold by Broker -->
+                    <div class="summary-grid" style="margin-bottom: 28px; grid-template-columns: repeat(2, 1fr);">
+                        <!-- Top Stocks Bought -->
+                        <div class="summary-card" style="display: block; padding: 20px;">
+                            <h4 style="color: var(--color-up); font-size: 0.95rem; font-weight: 700; margin-bottom: 14px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                🟢 Top Stocks Accumulated by this Broker
+                            </h4>
+                            <div id="floorsheetBrokerTopBoughtContainer">
+                                <p style="color: var(--text-muted); font-size: 0.85rem;">Click "Analyze Broker Flow" to view top bought stocks.</p>
+                            </div>
+                        </div>
+
+                        <!-- Top Stocks Sold -->
+                        <div class="summary-card" style="display: block; padding: 20px;">
+                            <h4 style="color: var(--color-down); font-size: 0.95rem; font-weight: 700; margin-bottom: 14px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                🔴 Top Stocks Dumped by this Broker
+                            </h4>
+                            <div id="floorsheetBrokerTopSoldContainer">
+                                <p style="color: var(--text-muted); font-size: 0.85rem;">Click "Analyze Broker Flow" to view top sold stocks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 8: STANDARD SECTOR TREEMAP HEAT MAP -->
+            <div id="heatbubbleView" class="view-section hidden">
+                <!-- Info Banner & Filter Bar -->
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(99, 102, 241, 0.08)); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 1.5rem;">🗺️</span>
+                        <div>
+                            <h4 style="color: #10b981; font-size: 1rem; font-weight: 700; margin-bottom: 2px;">NEPSE Standard Stock Heat Map</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.83rem; margin: 0;">Tile size corresponds to <strong>Traded Turnover / Volume</strong> and colors represent <strong>% Price Gain (Green) vs Loss (Red)</strong> grouped by sector.</p>
+                        </div>
+                    </div>
+
+                    <!-- Filter Controls & Size Selector -->
+                    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 6px; font-size: 0.83rem; color: var(--text-secondary);">
+                            <label for="heatmapSizeMode">Size By:</label>
+                            <select id="heatmapSizeMode" class="search-input" style="padding: 6px 10px; font-size: 0.83rem; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px;">
+                                <option value="turnover">Turnover (NPR)</option>
+                                <option value="volume">Traded Volume</option>
+                            </select>
+                        </div>
+
+                        <select id="bubbleSectorSelect" class="search-input" style="padding: 6px 12px; font-size: 0.83rem; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px;">
+                            <option value="all">🌐 All Sectors</option>
+                            <option value="Banking">Banking</option>
+                            <option value="Development Bank">Development Bank</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Hotels And Tourism">Hotels & Tourism</option>
+                            <option value="HydroPower">HydroPower</option>
+                            <option value="Investment">Investment</option>
+                            <option value="Life Insurance">Life Insurance</option>
+                            <option value="Manu. & Pro.">Manufacturing & Processing</option>
+                            <option value="Microfinance">Microfinance</option>
+                            <option value="Mutual Fund">Mutual Fund</option>
+                            <option value="Non Life Insurance">Non Life Insurance</option>
+                            <option value="Others">Others</option>
+                            <option value="Trading">Trading</option>
+                        </select>
+
+                        <div class="filter-tabs" style="margin-bottom: 0;">
+                            <button class="filter-tab active" data-bubble-filter="all" id="filterBubbleAll">🌐 All Market</button>
+                            <button class="filter-tab" data-bubble-filter="top50" id="filterBubbleTop50">🔥 Top 50 Leaders</button>
+                            <button class="filter-tab" data-bubble-filter="gainers">🟢 Gainers</button>
+                            <button class="filter-tab" data-bubble-filter="decliners">🔴 Decliners</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Heat Map Treemap Container -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px; min-height: 580px; display: flex; flex-direction: column; justify-content: space-between; position: relative;">
+                    <div id="heatbubbleContainer" style="width: 100%; min-height: 520px; position: relative; overflow: hidden; border-radius: 8px;">
+                        <p style="color: var(--text-muted); padding: 20px;">Generating NEPSE Sector Heat Map...</p>
+                    </div>
+
+                    <!-- Finviz Style Legend Footer -->
+                    <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 12px; flex-wrap: wrap; gap: 10px; font-size: 0.82rem;">
+                        <div style="display: flex; align-items: center; gap: 4px;">
+                            <span style="background: #059669; color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: 700;">+5%</span>
+                            <span style="background: #10b981; color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: 700;">+3%</span>
+                            <span style="background: #047857; color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: 700;">+1%</span>
+                            <span style="background: #374151; color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: 700;">0%</span>
+                            <span style="background: #b91c1c; color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: 700;">-1%</span>
+                            <span style="background: #dc2626; color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: 700;">-3%</span>
+                            <span style="background: #991b1b; color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: 700;">-5%</span>
+                        </div>
+                        <div style="color: var(--text-muted); font-size: 0.8rem;">
+                            <span>* Tile area is indicative of traded volume/turnover. Hover for LTP, Change & Volume details.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 7: WATCHLIST & REAL-TIME PRICE ALERTS -->
+            <div id="watchlistView" class="view-section hidden">
+                <!-- Info Banner -->
+                <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(99, 102, 241, 0.08)); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 12px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: flex-start; gap: 14px;">
+                        <span style="font-size: 1.5rem;">⭐</span>
+                        <div>
+                            <h4 style="color: #f59e0b; font-size: 0.95rem; font-weight: 700; margin-bottom: 4px;">Real-Time Watchlist & Price Alerts Engine</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 0;">Set high target breakouts or low stop alerts. The 30-second live price tick continuously checks your watch targets and triggers instant visual & sound alerts when prices hit your levels!</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="btnOpenAddWatchlistModal">
+                        <span class="btn-icon">➕</span> Add Watchlist Alert
+                    </button>
+                </div>
+
+                <!-- Summary Grid -->
+                <section class="summary-grid" style="margin-bottom: 24px;">
+                    <div class="summary-card">
+                        <div class="card-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">⭐</div>
+                        <div class="card-info">
+                            <p class="card-label">Total Watched Scrips</p>
+                            <h2 class="card-value" id="watchlistTotalCount">0</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Active watchlist items</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">🔔</div>
+                        <div class="card-info">
+                            <p class="card-label">Triggered Alerts</p>
+                            <h2 class="card-value text-down" id="watchlistTriggeredCount">0</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Price levels breached</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">📈</div>
+                        <div class="card-info">
+                            <p class="card-label">Bullish High Targets</p>
+                            <h2 class="card-value text-up" id="watchlistHighTargetsCount">0</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Breakout monitors</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">📉</div>
+                        <div class="card-info">
+                            <p class="card-label">Bearish Low Targets</p>
+                            <h2 class="card-value" style="color: #f59e0b;" id="watchlistLowTargetsCount">0</h2>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Support monitors</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Watchlist Table Card -->
+                <section class="table-card table-scroller">
+                    <table class="terminal-table">
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Company Name</th>
+                                <th class="text-right">Live LTP</th>
+                                <th class="text-right">Day Change</th>
+                                <th class="text-right">High Alert Target</th>
+                                <th class="text-right">Low Alert Target</th>
+                                <th class="text-center">Alert Status</th>
+                                <th>Notes / Trigger Reason</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="watchlistTableBody">
+                            <tr><td colspan="9" class="text-center loading-placeholder">Your watchlist is empty. Click "Add Watchlist Alert" to start monitoring price targets!</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+
         </main>
     </div>
+
+    <!-- Add Watchlist Alert Modal Dialog -->
+    <dialog id="addWatchlistDialog" closedby="any" aria-labelledby="addWatchlistTitle">
+        <div class="dialog-content" style="max-width: 500px;">
+            <header class="dialog-header">
+                <h2 class="dialog-title" id="addWatchlistTitle">⭐ Add Watchlist Price Alert</h2>
+                <button class="dialog-close-btn" id="closeAddWatchlistBtn">&times;</button>
+            </header>
+            <form id="addWatchlistForm" style="padding: 20px 24px;">
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label for="watchSymbol" style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">Select Ticker / Scrip:</label>
+                    <select id="watchSymbol" class="search-input" style="width: 100%;" required>
+                        <option value="">-- Select Scrip (329+ NEPSE Tickers) --</option>
+                    </select>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
+                    <div class="form-group">
+                        <label for="watchHighTarget" style="display: block; font-size: 0.85rem; font-weight: 600; color: #10b981; margin-bottom: 6px;">🟢 High Alert Target (NPR):</label>
+                        <input type="number" step="0.1" id="watchHighTarget" class="search-input" style="width: 100%;" placeholder="e.g. 350.00">
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">Alert if LTP &gt;= High</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="watchLowTarget" style="display: block; font-size: 0.85rem; font-weight: 600; color: #ef4444; margin-bottom: 6px;">🔴 Low Alert Target (NPR):</label>
+                        <input type="number" step="0.1" id="watchLowTarget" class="search-input" style="width: 100%;" placeholder="e.g. 280.00">
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">Alert if LTP &lt;= Low</span>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="watchNotes" style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px;">Alert Notes / Reason:</label>
+                    <textarea id="watchNotes" class="search-input" style="width: 100%; height: 70px; resize: vertical;" placeholder="e.g. Breakout target or key support level..."></textarea>
+                </div>
+
+                <div class="flex-end" style="gap: 10px;">
+                    <button type="button" class="btn btn-outline" id="btnCancelAddWatchlist">Cancel</button>
+                    <button type="submit" class="btn btn-primary">⭐ Save Price Alert</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
 
     <!-- Stock Detail Modal Dialog -->
     <dialog id="stockDetailDialog" closedby="any" aria-labelledby="dialogTitle">
@@ -190,7 +1162,7 @@
                 <!-- Price and Change Row -->
                 <div class="detail-price-section">
                     <div class="detail-price-primary">
-                        <span class="price-label">Last Close / LTP</span>
+                        <span class="price-label">LTP / Current Price</span>
                         <span class="price-value" id="detailClose">NPR 0.00</span>
                     </div>
                     <div class="detail-price-change" id="detailPriceChangeContainer">
@@ -215,7 +1187,7 @@
                     <div class="range-bar-track">
                         <div class="range-bar-indicator" id="detailRangeIndicator" style="left: 50%"></div>
                     </div>
-                    <p class="range-current-desc" id="detailRangeDesc">Current price is in the middle of 52-week range.</p>
+                    <p class="range-current-desc" id="detailRangeDesc">Current price relative to 52-week boundaries.</p>
                 </div>
 
                 <!-- Essential Metrics Grid -->
@@ -245,19 +1217,26 @@
                         <span class="metric-val" id="detailTurnover">NPR 0.00</span>
                     </div>
                     <div class="metric-item">
-                        <span class="metric-name">Total Trades</span>
-                        <span class="metric-val" id="detailTrades">0</span>
+                        <span class="metric-name">RSI (14-Period)</span>
+                        <span class="metric-val" id="detailRSI14">-</span>
                     </div>
                     <div class="metric-item">
-                        <span class="metric-name">Stock Confidence</span>
-                        <span class="metric-val" id="detailConfidence">0.00</span>
+                        <span class="metric-name">20-Day SMA (20 SMA)</span>
+                        <span class="metric-val" id="detail20SMA">0.00</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-name">50-Day SMA (50 SMA)</span>
+                        <span class="metric-val" id="detail50SMA">0.00</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-name">Technical Signal</span>
+                        <span class="metric-val" id="detail20SMATrend">-</span>
                     </div>
                 </div>
 
-                <!-- Pivot Points Calculations (PP, Support & Resistance) -->
+                <!-- Day Trading Pivot Points -->
                 <div class="detail-card pivots-card">
-                    <h3 class="card-section-title">Day Trading Pivot Points (Standard)</h3>
-                    <p class="card-section-desc">Calculated pivot levels based on current high, low, and close prices.</p>
+                    <h3 class="card-section-title">Day Trading Pivot Points</h3>
                     <div class="pivots-grid">
                         <div class="pivot-row resistance">
                             <span class="pivot-label">Resistance 2 (R2)</span>
@@ -283,13 +1262,269 @@
                 </div>
             </div>
             
-            <footer class="dialog-footer">
-                <button class="btn btn-secondary close-dialog-btn-footer" id="closeDialogBtnFooter">Dismiss Terminal Panel</button>
+            <footer class="dialog-footer" style="display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap;">
+                <button class="btn btn-secondary" id="btnQuickCalcPosition" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.35); font-weight: 600;">🧮 Position Risk Calc</button>
+                <button class="btn btn-primary" id="btnQuickAddHolding">➕ Add to Portfolio</button>
+                <button class="btn btn-primary" id="btnQuickLogTrade">✍️ Log in Journal</button>
+                <button class="btn btn-secondary close-dialog-btn-footer" id="closeDialogBtnFooter">Close</button>
             </footer>
         </div>
     </dialog>
 
+    <!-- Modal: Add / Edit Holding -->
+    <dialog id="holdingDialog" closedby="any">
+        <div class="dialog-content" style="max-width: 480px;">
+            <header class="dialog-header">
+                <h2 class="dialog-title" id="holdingDialogTitle">Add / Log Portfolio Holding</h2>
+                <button class="dialog-close-btn" id="closeHoldingDialogBtn">&times;</button>
+            </header>
+            <form id="holdingForm" class="dialog-body" style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                        <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Symbol / Ticker</label>
+                        <select id="holdingSymbol" class="search-input" required style="width: 100%;">
+                            <option value="">-- Select Ticker --</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Quantity / Shares</label>
+                        <input type="number" id="holdingQty" class="search-input" placeholder="e.g. 100" min="1" required style="width: 100%;">
+                    </div>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Average Entry Price (NPR)</label>
+                    <input type="number" id="holdingBuyPrice" class="search-input" placeholder="e.g. 350.50" step="0.01" min="0.01" required style="width: 100%;">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                        <label style="font-size: 0.85rem; color: var(--color-up); display: block; margin-bottom: 4px;">🎯 Take Profit (TP)</label>
+                        <input type="number" id="holdingTP" class="search-input" placeholder="e.g. 400.00 (Optional)" step="0.01" style="width: 100%;">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.85rem; color: var(--color-down); display: block; margin-bottom: 4px;">🛡️ Stop Loss (SL)</label>
+                        <input type="number" id="holdingSL" class="search-input" placeholder="e.g. 320.00 (Optional)" step="0.01" style="width: 100%;">
+                    </div>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Strategy / Setup Tag</label>
+                    <select id="holdingSetup" class="search-input" style="width: 100%;">
+                        <option value="Breakout">Breakout</option>
+                        <option value="Trend Following">Trend Following</option>
+                        <option value="Dip Buy">Dip Buy / Support</option>
+                        <option value="Swing Trade">Swing Trade</option>
+                        <option value="Intraday">Intraday</option>
+                        <option value="Fundamental Value">Fundamental Value</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Reason for Trade & Rationale</label>
+                    <textarea id="holdingNotes" class="search-input" placeholder="Why are you taking this trade? E.g. Strong volume breakout on daily chart..." style="width: 100%; height: 60px; resize: vertical;"></textarea>
+                </div>
+
+                <footer class="dialog-footer" style="padding-top: 12px;">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Save Portfolio Position</button>
+                </footer>
+            </form>
+        </div>
+    </dialog>
+
+
+    <!-- Modal: Log Trade Journal Entry -->
+    <dialog id="logTradeDialog" closedby="any">
+        <div class="dialog-content" style="max-width: 480px;">
+            <header class="dialog-header">
+                <h2 class="dialog-title">Log Trade Journal Entry</h2>
+                <button class="dialog-close-btn" id="closeLogTradeDialogBtn">&times;</button>
+            </header>
+            <form id="logTradeForm" class="dialog-body" style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                        <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Symbol / Ticker</label>
+                        <select id="tradeSymbol" class="search-input" required style="width: 100%;">
+                            <option value="">-- Select Ticker --</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Action</label>
+                        <select id="tradeType" class="search-input" style="width: 100%;">
+                            <option value="BUY">BUY</option>
+                            <option value="SELL">SELL</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                        <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Quantity</label>
+                        <input type="number" id="tradeQty" class="search-input" placeholder="100" min="1" required style="width: 100%;">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Entry Price (NPR)</label>
+                        <input type="number" id="tradeEntryPrice" class="search-input" placeholder="320.00" step="0.01" required style="width: 100%;">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                        <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Target Price / Exit</label>
+                        <input type="number" id="tradeTP" class="search-input" placeholder="360.00" step="0.01" style="width: 100%;">
+                    </div>
+                    <div>
+                        <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Stop Loss Price</label>
+                        <input type="number" id="tradeSL" class="search-input" placeholder="300.00" step="0.01" style="width: 100%;">
+                    </div>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Strategy / Setup Tag</label>
+                    <select id="tradeSetup" class="search-input" style="width: 100%;">
+                        <option value="Breakout">Breakout</option>
+                        <option value="Trend Following">Trend Following</option>
+                        <option value="Dip Buy">Dip Buy / Support</option>
+                        <option value="Swing Trade">Swing Trade</option>
+                        <option value="Intraday">Intraday</option>
+                        <option value="Fundamental Value">Fundamental Value</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Date</label>
+                    <input type="date" id="tradeDateInput" class="search-input" style="width: 100%;" required>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Trade Reason & Takeaways</label>
+                    <textarea id="tradeNotes" class="search-input" placeholder="Why did you take this trade? What did you learn?" style="width: 100%; height: 60px; resize: vertical;"></textarea>
+                </div>
+
+                <footer class="dialog-footer" style="padding-top: 8px;">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Save Trade Log</button>
+                </footer>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Position Size & Risk Management Calculator Dialog -->
+    <dialog id="positionSizeDialog" class="modal-dialog" style="max-width: 720px; width: 94%;">
+        <div class="modal-content" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; padding: 24px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 14px; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="font-size: 1.5rem; background: rgba(99, 102, 241, 0.15); padding: 8px 12px; border-radius: 10px; color: #818cf8;">🧮</span>
+                    <div>
+                        <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin: 0;">Position Size & Risk Calculator</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-secondary); margin: 2px 0 0 0;">Automatic position sizing based on your capital and risk management rules.</p>
+                    </div>
+                </div>
+                <button id="closePositionCalcBtn" class="close-btn" style="background: transparent; border: none; font-size: 1.4rem; color: var(--text-muted); cursor: pointer;">✕</button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1.05fr; gap: 18px;">
+                <!-- Left Column: Inputs -->
+                <div style="background: var(--bg-app); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px;">
+                    <h4 style="font-size: 0.85rem; font-weight: 700; color: #818cf8; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">1. Capital & Risk Parameters</h4>
+                    
+                    <div style="margin-bottom: 12px;">
+                        <label style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Total Account Capital (NPR)</label>
+                        <input type="number" id="calcAccountCapital" class="search-input" value="1000000" step="10000" style="width: 100%; font-family: monospace; font-weight: 700; font-size: 0.9rem;">
+                    </div>
+
+                    <div style="margin-bottom: 14px;">
+                        <label style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Max Risk Per Trade (%)</label>
+                        <div style="display: flex; gap: 6px; align-items: center;">
+                            <input type="number" id="calcMaxRiskPct" class="search-input" value="1.0" step="0.25" min="0.1" max="20" style="width: 85px; font-family: monospace; font-weight: 700; text-align: center;">
+                            <button class="btn btn-secondary calc-risk-pill" data-risk="0.5" style="padding: 3px 8px; font-size: 0.75rem;">0.5%</button>
+                            <button class="btn btn-secondary calc-risk-pill" data-risk="1.0" style="padding: 3px 8px; font-size: 0.75rem;">1.0%</button>
+                            <button class="btn btn-secondary calc-risk-pill" data-risk="2.0" style="padding: 3px 8px; font-size: 0.75rem;">2.0%</button>
+                        </div>
+                    </div>
+
+                    <h4 style="font-size: 0.85rem; font-weight: 700; color: #818cf8; margin-top: 14px; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">2. Trade Price Levels</h4>
+
+                    <div style="margin-bottom: 12px;">
+                        <label style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Scrip Symbol (Auto-fills LTP)</label>
+                        <select id="calcSymbolSelect" class="search-input" style="width: 100%;">
+                            <option value="">-- Custom Stock --</option>
+                        </select>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+                        <div>
+                            <label style="font-size: 0.78rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Entry / LTP (NPR)</label>
+                            <input type="number" id="calcEntryPrice" class="search-input" value="500.00" step="0.5" style="width: 100%; font-family: monospace;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; color: #ef4444; display: block; margin-bottom: 4px;">Stop Loss (NPR)</label>
+                            <input type="number" id="calcStopLossPrice" class="search-input" value="460.00" step="0.5" style="width: 100%; font-family: monospace; border-color: rgba(239, 68, 68, 0.4);">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label style="font-size: 0.78rem; color: #10b981; display: block; margin-bottom: 4px;">Take Profit Target (NPR)</label>
+                        <input type="number" id="calcTakeProfitPrice" class="search-input" value="600.00" step="0.5" style="width: 100%; font-family: monospace; border-color: rgba(16, 185, 129, 0.4);">
+                    </div>
+                </div>
+
+                <!-- Right Column: Automatic Calculations & Results -->
+                <div style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9)); border: 1px solid var(--border-color); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-bottom: 14px;">
+                            <h4 style="font-size: 0.85rem; font-weight: 700; color: #34d399; margin: 0;">Recommended Position Size</h4>
+                            <span id="calcRiskBadge" style="font-size: 0.72rem; background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); padding: 2px 8px; border-radius: 4px; font-weight: 700;">VALID SETUP</span>
+                        </div>
+
+                        <!-- Main Highlight Metric -->
+                        <div style="background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 10px; padding: 14px; text-align: center; margin-bottom: 14px;">
+                            <span style="font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 4px;">SUGGESTED BUY QUANTITY</span>
+                            <h2 id="calcSuggestedShares" style="font-size: 1.9rem; font-weight: 800; color: #818cf8; font-family: 'Outfit', sans-serif; margin: 0;">250 Shares</h2>
+                            <p id="calcPositionValue" style="font-size: 0.81rem; color: var(--text-secondary); margin-top: 4px;">Position Value: <strong>NPR 125,000.00</strong> (12.50% Capital)</p>
+                        </div>
+
+                        <!-- Metric Grid -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.78rem; color: var(--text-secondary);">
+                            <div style="background: rgba(255,255,255,0.03); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="color: var(--text-muted); display: block; font-size: 0.72rem;">Risk Per Share</span>
+                                <strong id="calcRiskPerShare" style="color: #ef4444; font-size: 0.86rem; font-family: monospace;">NPR 40.00 (8.0%)</strong>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="color: var(--text-muted); display: block; font-size: 0.72rem;">Max Allowed Risk</span>
+                                <strong id="calcMaxLossNPR" style="color: #ef4444; font-size: 0.86rem; font-family: monospace;">NPR 10,000.00</strong>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="color: var(--text-muted); display: block; font-size: 0.72rem;">Reward : Risk Ratio</span>
+                                <strong id="calcRewardRiskRatio" style="color: #34d399; font-size: 0.86rem; font-family: monospace;">2.50 : 1</strong>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                                <span style="color: var(--text-muted); display: block; font-size: 0.72rem;">Expected Profit @ TP</span>
+                                <strong id="calcExpectedProfit" style="color: #34d399; font-size: 0.86rem; font-family: monospace;">NPR 25,000.00</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Direct Execute Action -->
+                    <button id="calcBtnExecutePortfolio" class="btn btn-primary" style="width: 100%; height: 40px; margin-top: 14px; font-weight: 700; font-size: 0.86rem; border-radius: 8px;">
+                        <span class="btn-icon">💼</span> Add Position to Portfolio
+                    </button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
     <!-- Main Application Scripts -->
-    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="app.js?v=20000"></script>
+
+
+
+
+
+
+
+
+
 </body>
 </html>
