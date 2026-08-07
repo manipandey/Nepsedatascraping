@@ -5,8 +5,9 @@ __pycache__/
 *.pyd
 .ipynb_checkpoints/
 
-# macOS files
-.DS_Store
+# macOS / iCloud duplicate files
+*.DS_Store
+* 2.*
 
 # Backup and recovery files
 *.bak

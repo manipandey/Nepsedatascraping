@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEPSE & SystemXLite Terminal | Stock Market & Trade Journal</title>
+    <title>NEPSE Terminal | Stock Market & Trade Journal</title>
     <!-- Meta tags for SEO -->
     <meta name="description" content="A premium financial terminal for Nepal Stock Exchange (NEPSE) with live sub-indices, all script prices, interactive portfolio tracker, and trading journal.">
     <!-- Google Fonts -->
@@ -60,10 +60,10 @@
 
                 <!-- Group 4: Raw Exports -->
                 <div class="nav-section-title" style="margin-top: 1.25rem;">DATA EXPORTS</div>
-                <a href="data/systemx_scraped.json" target="_blank" class="nav-item" style="padding: 0.45rem 0.75rem; font-size: 0.83rem;">
-                    <span class="nav-icon">📁</span> SystemX JSON
+                <a href="data/nepse_today.json" target="_blank" class="nav-item" style="padding: 0.45rem 0.75rem; font-size: 0.83rem;">
+                    <span class="nav-icon">📁</span> NEPSE JSON
                 </a>
-                <a href="data/systemx_today.csv" target="_blank" class="nav-item" style="padding: 0.45rem 0.75rem; font-size: 0.83rem;">
+                <a href="data/nepse_today.csv" target="_blank" class="nav-item" style="padding: 0.45rem 0.75rem; font-size: 0.83rem;">
                     <span class="nav-icon">📋</span> Live Prices CSV
                 </a>
             </nav>
@@ -71,7 +71,7 @@
                 <div class="scraper-status">
                     <div class="status-indicator online"></div>
                     <div>
-                        <p class="status-title">SystemXLite Live</p>
+                        <p class="status-title">NEPSE Live</p>
                         <p class="status-desc" id="lastUpdatedTime">Updated Just Now</p>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                         </span>
                         <span class="meta-badge status-badge" id="marketStatusBadge" style="font-size: 0.76rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 2px 8px; border-radius: 6px; color: #10b981;">
                             <span class="badge-dot" style="display: inline-block; width: 6px; height: 6px; background: #10b981; border-radius: 50%; margin-right: 4px;"></span>
-                            <span class="badge-text" id="marketStatus">SystemXLite Online</span>
+                            <span class="badge-text" id="marketStatus">NEPSE Online</span>
                         </span>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                         <span class="btn-icon">🧮</span> Position Risk Calc
                     </button>
                     <button class="btn btn-primary refresh-btn" id="refreshBtn" style="height: 38px; padding: 0 16px; font-size: 0.85rem; font-weight: 600; border-radius: 8px;">
-                        <span class="btn-icon">🔄</span> Sync SystemXLite
+                        <span class="btn-icon">🔄</span> Sync Live Data
                     </button>
                 </div>
             </header>
@@ -180,10 +180,10 @@
                         <select id="sectorFilterSelect" class="btn btn-outline" style="background: var(--bg-card); color: var(--text-primary);">
                             <option value="all">All Sectors</option>
                         </select>
-                        <a href="data/systemx_today.csv" download class="btn btn-outline">
+                        <a href="data/nepse_today.csv" download class="btn btn-outline">
                             <span class="btn-icon">📥</span> CSV
                         </a>
-                        <a href="data/systemx_scraped.json" download class="btn btn-outline">
+                        <a href="data/nepse_today.json" download class="btn btn-outline">
                             <span class="btn-icon">📁</span> JSON
                         </a>
                     </div>

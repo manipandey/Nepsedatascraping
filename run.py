@@ -8,7 +8,6 @@ import socketserver
 import threading
 import scrape
 from scrape import scrape_nepse
-from scrape_systemx import SystemXLiteScraper
 
 PORT = 8085
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
@@ -350,16 +349,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path == "/api/scrape" or self.path.startswith("/api/scrape?"):
             print("\n[Server] Live re-scrape requested from dashboard client...")
-            sx = SystemXLiteScraper()
-            success = sx.scrape_all()
-            if not success:
-                print("[Server] SystemXLite scrape failed. Falling back to ShareSansar...")
-                success = scrape_nepse()
+            success = scrape_nepse()
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.send_header("Cache-Control", "no-store, no-cache, must-revalidate")
             self.end_headers()
-            response_data = {"success": success, "source": "SystemXLite"}
+            response_data = {"success": success, "source": "ShareSansar Live"}
             self.wfile.write(json.dumps(response_data).encode("utf-8"))
             print("[Server] Re-scrape execution completed, sent response to client.\n")
         elif self.path.startswith("/api/history"):
@@ -595,32 +590,27 @@ def start_server(ready_event):
             raise e
 
 def background_autoscrape():
-    """Background daemon thread that continuously scrapes live prices, sub-indices, turnover & signals every 30 seconds."""
+    """Background daemon thread that continuously scrapes live NEPSE prices every 30 seconds."""
     time.sleep(30)
-    sx = SystemXLiteScraper()
     while True:
         try:
-            print(f"\n[AutoScraper 30s] [{time.strftime('%H:%M:%S')}] Scraping live turnover, sub-indices & price updates...")
-            sx.scrape_all()
+            print(f"\n[AutoScraper 30s] [{time.strftime('%H:%M:%S')}] Scraping live NEPSE prices...")
+            scrape_nepse()
         except Exception as e:
             print(f"[AutoScraper 30s] Error during auto-scrape: {e}")
         time.sleep(30)
 
 def main():
     print("=" * 60)
-    print("      NEPSE & SYSTEMXLITE SCRAPER & TERMINAL DASHBOARD         ")
+    print("      NEPSE STOCK MARKET SCRAPER & TERMINAL DASHBOARD         ")
     print("=" * 60)
     
-    # 1. Scrape latest NEPSE data from SystemXLite
-    print("\n[1/3] Fetching latest NEPSE share prices & signals from SystemXLite...")
-    sx = SystemXLiteScraper()
-    success = sx.scrape_all()
-    if not success:
-        print("\n[Warning] SystemXLite scraping failed. Trying ShareSansar fallback...")
-        success = scrape_nepse()
+    # 1. Scrape latest NEPSE data synchronously
+    print("\n[1/3] Fetching latest NEPSE share prices...")
+    success = scrape_nepse()
 
     if not success:
-        print("\n[Warning] All scraping methods failed or completed with errors.")
+        print("\n[Warning] Scraping failed or completed with errors.")
         print("Starting server anyway to display cached data if available...\n")
     else:
         print("\n[2/3] Scraping completed successfully! Data saved to data/ directory.")
@@ -651,7 +641,7 @@ def main():
         while True:
             time.sleep(1)
     except KeyboardInterrupt:
-        print("\nExiting. Thank you for using NEPSE & SystemXLite Scraper!")
+        print("\nExiting. Thank you for using NEPSE Stock Scraper!")
 
 
 

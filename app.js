@@ -227,12 +227,11 @@ function initEventListeners() {
     if (refreshBtn) {
         refreshBtn.addEventListener("click", async () => {
             refreshBtn.disabled = true;
-            refreshBtn.innerHTML = `<span class="btn-icon">🔄</span> Scraping SystemXLite...`;
+            refreshBtn.innerHTML = `<span class="btn-icon">🔄</span> Syncing NEPSE Data...`;
             try {
                 const res = await fetch("/api/scrape");
                 const json = await res.json();
                 if (json.success) {
-                    alert("SystemXLite scrape completed successfully!");
                     await fetchData();
                 } else {
                     alert("Re-scrape complete with warning.");
@@ -242,7 +241,7 @@ function initEventListeners() {
                 alert("Error triggering re-scrape.");
             } finally {
                 refreshBtn.disabled = false;
-                refreshBtn.innerHTML = `<span class="btn-icon">🔄</span> Sync SystemXLite`;
+                refreshBtn.innerHTML = `<span class="btn-icon">🔄</span> Sync Live Data`;
             }
         });
     }
@@ -692,7 +691,7 @@ function renderIndicesGrid() {
     if (!grid) return;
 
     if (!indicesData || indicesData.length === 0) {
-        grid.innerHTML = `<div class="loading">No sub-indices data available. Sync SystemXLite!</div>`;
+        grid.innerHTML = `<div class="loading">No sub-indices data available. Click "Sync Live Data" to refresh.</div>`;
         return;
     }
 
@@ -1706,7 +1705,7 @@ function renderLockinView() {
     const rawData = (systemxData.lock_in_periods || []);
     const tbody = document.getElementById("lockinTableBody");
     if (!rawData.length) {
-        if (tbody) tbody.innerHTML = `<tr><td colspan="7" class="text-center loading-placeholder">No lock-in data available. Click "Sync SystemXLite" to refresh.</td></tr>`;
+        if (tbody) tbody.innerHTML = `<tr><td colspan="7" class="text-center loading-placeholder">No lock-in data available. Click "Sync Live Data" to refresh.</td></tr>`;
         return;
     }
 
