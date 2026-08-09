@@ -21,3 +21,4 @@ Nepsedatascraping/
 # We track them so Vercel has initial data on deployment
 !data/nepse_today.json
 !data/nepse_today.csv
+.vercel
