@@ -3757,20 +3757,7 @@ function applyFundamentalFiltersAndRender() {
 // Theme Engine: Light Mode (Green & Cream) / Dark Mode
 // ==========================================
 function initThemeEngine() {
-    const savedTheme = localStorage.getItem("nepse_theme_v1") || "light";
-    applyTheme(savedTheme);
-
-    const toggleBtn = document.getElementById("btnThemeToggle");
-    const toggleBtnLanding = document.getElementById("btnThemeToggleLanding");
-    const toggleHandler = () => {
-        const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
-        const newTheme = currentTheme === "light" ? "dark" : "light";
-        applyTheme(newTheme);
-        localStorage.setItem("nepse_theme_v1", newTheme);
-    };
-
-    if (toggleBtn) toggleBtn.addEventListener("click", toggleHandler);
-    if (toggleBtnLanding) toggleBtnLanding.addEventListener("click", toggleHandler);
+    applyTheme("light");
 }
 
 function applyTheme(theme) {

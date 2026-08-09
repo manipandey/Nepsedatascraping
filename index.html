@@ -24,9 +24,6 @@
             <nav class="sidebar-nav">
                 <!-- Group 1: Market Analytics -->
                 <div class="nav-section-title">MARKET ANALYTICS</div>
-                <a href="#" class="nav-item active" data-view="landing" id="navLanding" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; font-weight: 700; border-left: 3px solid #6366f1;">
-                    <span class="nav-icon">🚀</span> Platform Overview
-                </a>
                 <a href="#" class="nav-item" data-view="dashboard" id="navDashboard">
                     <span class="nav-icon">📊</span> Market Today
                 </a>
@@ -143,9 +140,6 @@
                     <button class="btn btn-secondary" id="btnOpen360Intel" style="height: 38px; padding: 0 14px; font-size: 0.84rem; font-weight: 600; border-radius: 8px; background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35);">
                         <span class="btn-icon">📊</span> 360° Stock Intel
                     </button>
-                    <button class="btn btn-outline" id="btnThemeToggle" style="height: 38px; padding: 0 14px; font-size: 0.84rem; font-weight: 600; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary);">
-                        <span id="themeToggleIcon">☀️</span> <span id="themeToggleText">Light Mode</span>
-                    </button>
                     <button class="btn btn-secondary" id="btnOpenPositionCalc" style="height: 38px; padding: 0 14px; font-size: 0.84rem; font-weight: 600; border-radius: 8px; background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.35);">
                         <span class="btn-icon">🧮</span> Position Risk Calc
                     </button>
@@ -168,7 +162,6 @@
 
                         <!-- Actions -->
                         <div class="landing-header-actions">
-                            <button class="landing-action-btn" id="btnThemeToggleLanding" title="Toggle Theme">🌙</button>
                             <button class="landing-action-btn" onclick="switchView('bankRates'); return false;" title="Settings">⚙️</button>
                             <button class="btn-sync-landing" id="btnSyncLanding" onclick="triggerLandingSync()">
                                 <span>🔄</span> Sync Live Data
