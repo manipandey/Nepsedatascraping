@@ -15,7 +15,7 @@
       "dest": "/data/bank_rates.json"
     },
     {
-      "src": "/api/macro-indicators",
+      "src": "/api/nrb-indicators",
       "dest": "/data/nrb_indicators.json"
     },
     {

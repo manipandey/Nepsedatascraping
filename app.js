@@ -3675,7 +3675,7 @@ function applyFundamentalFiltersAndRender() {
 // Theme Engine: Light Mode (Green & Cream) / Dark Mode
 // ==========================================
 function initThemeEngine() {
-    const savedTheme = localStorage.getItem("nepse_theme_v1") || "dark";
+    const savedTheme = localStorage.getItem("nepse_theme_v1") || "light";
     applyTheme(savedTheme);
 
     const toggleBtn = document.getElementById("btnThemeToggle");
