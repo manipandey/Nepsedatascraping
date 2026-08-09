@@ -303,11 +303,9 @@ function switchView(viewTarget) {
     const isLoggedIn = localStorage.getItem("nepse_logged_in") === "true";
     
     if (restrictedViews.includes(viewTarget) && !isLoggedIn) {
-        localStorage.setItem("nepse_logged_in", "true");
-        localStorage.setItem("nepse_user_email", "guest@nepse.com");
-        localStorage.setItem("nepse_user_role", "Verified Trader");
-        updateUserProfileUI();
-        showToast("Welcome! Auto-authenticated guest session.", "success");
+        pendingViewTarget = viewTarget;
+        switchView("login");
+        return;
     }
 
     // Handle Fullscreen Landing Page Layout Toggling
@@ -4554,6 +4552,28 @@ async function handleMockLogin(event) {
     localStorage.setItem("nepse_logged_in", "true");
     localStorage.setItem("nepse_user_email", email);
     localStorage.setItem("nepse_user_role", roleText);
+    localStorage.setItem("nepse_portfolio_username", email);
+
+    // Sync username field and trigger remote portfolio fetch
+    const userField = document.getElementById("portfolioUsername");
+    if (userField) {
+        userField.value = email;
+    }
+    if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable()) {
+        try {
+            const syncRes = await syncFromSupabase(email, portfolioHoldings, tradeJournal);
+            if (syncRes) {
+                portfolioHoldings = syncRes.holdings;
+                tradeJournal = syncRes.journal;
+                localStorage.setItem(PORTFOLIO_STORAGE_KEY, JSON.stringify(portfolioHoldings));
+                localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(tradeJournal));
+                renderPortfolioView();
+                renderJournalView();
+            }
+        } catch (e) {
+            console.log("Supabase fetch failed on login sync:", e);
+        }
+    }
 
     // Hide login form container, show success checkmark
     const formContainer = document.getElementById("loginFormContainer");
