@@ -1,0 +1,95 @@
+{
+  "indicators": [
+    {
+      "title": "Standing Liquidity Facility",
+      "value": "5.75%",
+      "date": "Based on Eleventh month data of 2025/26"
+    },
+    {
+      "title": "Total no. of Financial Institutions",
+      "value": "145",
+      "date": "Based on Eleventh month data of 2025/26"
+    },
+    {
+      "title": "Licensed BFIs",
+      "value": "106",
+      "date": "Based on Eleventh month data of 2025/26"
+    },
+    {
+      "title": "Total Branches of BFIs",
+      "value": "11,344",
+      "date": "Based on Eleventh month data of 2025/26"
+    },
+    {
+      "title": "Weighted Average Deposit Rate ('A' class banks)",
+      "value": "3.29%",
+      "date": "Based on Eleventh month data of 2025/26"
+    },
+    {
+      "title": "Weighted Average Interest rate on Credit ('A' class banks)",
+      "value": "6.64%",
+      "date": "Based on Eleventh month data of 2025/26"
+    },
+    {
+      "title": "Weighted Average Interbank Rate('A' class banks)",
+      "value": "2.73%",
+      "date": "Based on Eleventh month data of 2025/26"
+    },
+    {
+      "title": "National Consumer Price Inflation",
+      "value": "5.22%",
+      "date": "Based on Eleventh month data of 2025/26"
+    },
+    {
+      "title": "Food and Beverage Inflation",
+      "value": "4.95%",
+      "date": "Based on Eleventh month data of 2025/26"
+    },
+    {
+      "title": "Non Food Inflation",
+      "value": "5.37%",
+      "date": "Based on Eleventh month data of 2025/26"
+    },
+    {
+      "title": "Broad Money Growth",
+      "value": "14.2%",
+      "date": "Based on Eleventh month data of 2025/26"
+    },
+    {
+      "title": "Private Sector Credit Growth",
+      "value": "6.4%",
+      "date": "Based on Eleventh month data of 2025/26"
+    },
+    {
+      "title": "Remittance Inflow (Rs in Billion)",
+      "value": "2,121",
+      "date": "Based on Eleventh month data of 2025/26"
+    },
+    {
+      "title": "Balance of Payment Surplus (Rs in billion)",
+      "value": "926",
+      "date": "Based on Eleventh month data of 2025/26"
+    },
+    {
+      "title": "Worker's Remittance in Percent of GDP",
+      "value": "28.2%",
+      "date": "2024/25"
+    },
+    {
+      "title": "Annual Average National Consumer Price Inflation",
+      "value": "4.06%",
+      "date": "2024/25"
+    },
+    {
+      "title": "Annual Average Food and Beverage Inflation",
+      "value": "4.69%",
+      "date": "2024/25"
+    },
+    {
+      "title": "Annual Average Non-Food and Services Inflation",
+      "value": "3.71%",
+      "date": "2024/25"
+    }
+  ],
+  "last_updated": "2026-08-09 10:16:36"
+}

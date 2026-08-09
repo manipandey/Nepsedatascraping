@@ -1,0 +1,55 @@
+{
+  "version": 2,
+  "name": "nepse-terminal",
+  "builds": [
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/live",
+      "dest": "/data/nepse_today.json"
+    },
+    {
+      "src": "/api/fundamentals",
+      "dest": "/data/nepse_fundamentals_live.json"
+    },
+    {
+      "src": "/api/bank-rates",
+      "dest": "/data/bank_rates.json"
+    },
+    {
+      "src": "/api/macro-indicators",
+      "dest": "/data/nrb_indicators.json"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/data/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-Requested-With, Content-Type, Authorization"
+        }
+      ]
+    }
+  ]
+}

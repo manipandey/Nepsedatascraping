@@ -24,7 +24,10 @@
             <nav class="sidebar-nav">
                 <!-- Group 1: Market Analytics -->
                 <div class="nav-section-title">MARKET ANALYTICS</div>
-                <a href="#" class="nav-item active" data-view="dashboard" id="navDashboard">
+                <a href="#" class="nav-item active" data-view="landing" id="navLanding" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; font-weight: 700; border-left: 3px solid #6366f1;">
+                    <span class="nav-icon">🚀</span> Platform Overview
+                </a>
+                <a href="#" class="nav-item" data-view="dashboard" id="navDashboard">
                     <span class="nav-icon">📊</span> Market Today
                 </a>
                 <a href="#" class="nav-item" data-view="heatbubble" id="navHeatbubble">
@@ -35,6 +38,9 @@
                 </a>
                 <a href="#" class="nav-item" data-view="strategy" id="navStrategy" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; border-left: 3px solid #818cf8; font-weight: 700;">
                     <span class="nav-icon">🎯</span> Strategy Signals
+                </a>
+                <a href="#" class="nav-item" data-view="curatedCollections" id="navCuratedCollections">
+                    <span class="nav-icon">⭐</span> Curated Collections
                 </a>
 
                 <!-- Group 2: Portfolio & Trading -->
@@ -49,12 +55,30 @@
                     <span class="nav-icon">⭐</span> Watchlist & Alerts
                 </a>
 
+                <!-- Group: Banking & Margin -->
+                <div class="nav-section-title" style="margin-top: 1.25rem;">BANKING & MARGIN</div>
+                <a href="#" class="nav-item" data-view="bankRates" id="navBankRates">
+                    <span class="nav-icon">🏦</span> Bank Rates & NRB Macro
+                </a>
+
                 <!-- Group 3: Deep Research -->
                 <div class="nav-section-title" style="margin-top: 1.25rem;">DEEP RESEARCH</div>
+                <a href="#" class="nav-item" data-view="companyIntel" id="navCompanyIntel">
+                    <span class="nav-icon">📊</span> Company 360° Intelligence
+                </a>
+                <a href="#" class="nav-item" data-view="calendar" id="navCalendar">
+                    <span class="nav-icon">📅</span> Earnings & Corporate Calendar
+                </a>
+                <a href="#" class="nav-item" data-view="fundamental" id="navFundamental">
+                    <span class="nav-icon">🏢</span> Fundamental Screener & Insights
+                </a>
+                <a href="#" class="nav-item" data-view="patterns" id="navPatterns">
+                    <span class="nav-icon">📐</span> Pattern & S/R Scanner
+                </a>
                 <a href="#" class="nav-item" data-view="floorsheet" id="navFloorsheet">
                     <span class="nav-icon">🔍</span> Floorsheet Analysis
                 </a>
-                <a href="#" class="nav-item" data-view="lockin" id="navLockin">
+                <a href="#" class="nav-item" data-view="lockin">
                     <span class="nav-icon">🔒</span> Lock-in Expiry
                 </a>
 
@@ -74,6 +98,18 @@
                         <p class="status-title">NEPSE Live</p>
                         <p class="status-desc" id="lastUpdatedTime">Updated Just Now</p>
                     </div>
+                </div>
+                
+                <!-- Premium Profile Section -->
+                <div id="sidebarUserProfile" style="display: none; margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 1rem; align-items: center; justify-content: space-between; gap: 8px;">
+                    <div style="display: flex; align-items: center; gap: 8px; overflow: hidden;">
+                        <div class="avatar" id="sidebarAvatar" style="width: 32px; height: 32px; border-radius: 50%; background: var(--color-accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0;">M</div>
+                        <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            <p id="sidebarUsername" style="font-size: 0.8rem; font-weight: 600; margin: 0; color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">manipandey</p>
+                            <p id="sidebarUserRole" style="font-size: 0.7rem; color: var(--text-muted); margin: 0;">Verified Trader</p>
+                        </div>
+                    </div>
+                    <button id="btnSignOut" title="Sign Out" style="background: none; border: none; color: var(--color-down); cursor: pointer; font-size: 1.1rem; padding: 4px; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease;">🚪</button>
                 </div>
             </div>
         </aside>
@@ -104,6 +140,12 @@
                 </div>
 
                 <div class="header-actions" style="display: flex; align-items: center; gap: 10px;">
+                    <button class="btn btn-secondary" id="btnOpen360Intel" style="height: 38px; padding: 0 14px; font-size: 0.84rem; font-weight: 600; border-radius: 8px; background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35);">
+                        <span class="btn-icon">📊</span> 360° Stock Intel
+                    </button>
+                    <button class="btn btn-outline" id="btnThemeToggle" style="height: 38px; padding: 0 14px; font-size: 0.84rem; font-weight: 600; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary);">
+                        <span id="themeToggleIcon">☀️</span> <span id="themeToggleText">Light Mode</span>
+                    </button>
                     <button class="btn btn-secondary" id="btnOpenPositionCalc" style="height: 38px; padding: 0 14px; font-size: 0.84rem; font-weight: 600; border-radius: 8px; background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.35);">
                         <span class="btn-icon">🧮</span> Position Risk Calc
                     </button>
@@ -113,8 +155,467 @@
                 </div>
             </header>
 
+            <!-- VIEW 0: FUTURISTIC LIGHT THEME LANDING PAGE & PLATFORM OVERVIEW -->
+            <div id="landingView" class="view-section">
+                <div class="landing-view-container">
+                    
+                    <!-- 1. Header Navbar -->
+                    <header class="landing-header">
+                        <a href="#" onclick="switchView('dashboard'); return false;" class="logo-container-landing">
+                            <span style="font-size: 1.5rem; display: flex; align-items: center; justify-content: center;">📊</span>
+                            <span>NEPSE<span class="highlight">Terminal</span></span>
+                        </a>
+
+                        <!-- Actions -->
+                        <div class="landing-header-actions">
+                            <button class="landing-action-btn" id="btnThemeToggleLanding" title="Toggle Theme">🌙</button>
+                            <button class="landing-action-btn" onclick="switchView('bankRates'); return false;" title="Settings">⚙️</button>
+                            <button class="btn-sync-landing" id="btnSyncLanding" onclick="triggerLandingSync()">
+                                <span>🔄</span> Sync Live Data
+                            </button>
+                        </div>
+                    </header>
+
+                    <!-- 2. Hero Section -->
+                    <section class="new-hero-section">
+                        <div class="hero-pill">
+                            <span class="hero-pill-dot"></span>
+                            <span>NEPSE Live Data Integrated</span>
+                        </div>
+                        <h1 class="hero-main-title">
+                            Master the NEPSE with <span>Analytical Precision</span>.
+                        </h1>
+                        <p class="hero-main-subtitle">
+                            Customized stock journaling, real-time analytics, and risk management for the modern Nepali investor. Transform your trading data into actionable insights.
+                        </p>
+                        <div class="hero-cta-buttons">
+                            <button class="btn-cta-primary" onclick="switchView('portfolio'); return false;">Start Journaling for Free</button>
+                            <button class="btn-cta-secondary" onclick="showToast('Demo video is loading...', 'info'); return false;">
+                                <span style="font-size: 1.1rem;">▶</span> Watch Demo
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- 3. Market Overview Widget Container -->
+                    <section class="landing-widget-container">
+                        <div class="landing-widget">
+                            <div class="widget-header">
+                                <div class="widget-title">
+                                    <span>📊</span> Market Overview
+                                </div>
+                                <div class="widget-status">
+                                    <span class="widget-status-dot"></span>
+                                    <span>Live updates: Connected</span>
+                                </div>
+                            </div>
+                            <div class="widget-grid">
+                                <!-- Card 1: NEPSE Index -->
+                                <div class="widget-card">
+                                    <div>
+                                        <p class="widget-card-title">NEPSE Index</p>
+                                        <h3 class="widget-card-value" id="landingNepseValue">2,145.67</h3>
+                                        <span class="widget-card-change" id="landingNepseChange">+ 12.45 (0.58%)</span>
+                                    </div>
+                                    <svg class="sparkline-svg" viewBox="0 0 200 40" preserveAspectRatio="none">
+                                        <path id="landingSparkline" d="M 0 35 Q 25 32, 50 30 T 100 22 T 150 15 T 200 8" fill="none" stroke="var(--color-up)" stroke-width="2.5" stroke-linecap="round"></path>
+                                    </svg>
+                                </div>
+
+                                <!-- Card 2: Top Gainers -->
+                                <div class="widget-card" style="height: auto; justify-content: flex-start; gap: 12px;">
+                                    <p class="widget-card-title">Top Gainers</p>
+                                    <div id="landingGainersList" style="display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 8px;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; padding: 4px 0; border-bottom: 1px dashed var(--border-color);">
+                                            <span style="font-weight: 700;">NABIL</span>
+                                            <span style="font-weight: 700; color: var(--color-up);">+4.2%</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; padding: 4px 0; border-bottom: 1px dashed var(--border-color);">
+                                            <span style="font-weight: 700;">CIT</span>
+                                            <span style="font-weight: 700; color: var(--color-up);">+3.8%</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; padding: 4px 0;">
+                                            <span style="font-weight: 700;">SHIVM</span>
+                                            <span style="font-weight: 700; color: var(--color-up);">+2.1%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 3: Market Sentiment -->
+                                <div class="widget-card" style="height: auto; align-items: center; justify-content: center; padding: 16px;">
+                                    <div class="sentiment-chart-container">
+                                        <svg class="donut-svg" width="120" height="120" viewBox="0 0 42 42">
+                                            <circle class="donut-ring" cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--border-color)" stroke-width="4"></circle>
+                                            <circle class="donut-segment" id="landingSentimentCircle" cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--color-up)" stroke-width="4" stroke-dasharray="65 35" stroke-dashoffset="0" stroke-linecap="round"></circle>
+                                        </svg>
+                                        <div class="donut-text">
+                                            <span class="donut-text-val" id="landingSentimentValue">65%</span>
+                                            <span class="donut-text-lbl" id="landingSentimentLabel">Bullish</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 4. Features Section Title Block -->
+                    <div class="features-section-title-block" id="features-anchor">
+                        <h2 class="features-section-title">Engineered for the Analytical Investor</h2>
+                        <p class="features-section-subtitle">
+                            Stop relying on spreadsheets. NEPSE Terminal brings institutional-grade analytics to your personal portfolio.
+                        </p>
+                    </div>
+
+                    <!-- 5. Features Grid (Top 3 Cards) -->
+                    <div class="new-features-grid">
+                        <!-- Card 1: Customized Journaling -->
+                        <div class="new-feature-card" onclick="switchView('portfolio')">
+                            <div class="feature-card-header">
+                                <div class="feature-icon-badge">📓</div>
+                                <span class="feature-access-badge" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: var(--color-warning);">Signup Required</span>
+                            </div>
+                            <h3 class="feature-card-title">Customized Journaling</h3>
+                            <p class="feature-card-description">
+                                Sync trades directly from your broker. Set custom SL and TP alerts to maintain your discipline. Create your account to unlock professional journaling tools.
+                            </p>
+                        </div>
+
+                        <!-- Card 2: Heat Bubble Maps -->
+                        <div class="new-feature-card" onclick="switchView('heatbubble')">
+                            <div class="feature-card-header">
+                                <div class="feature-icon-badge">🫧</div>
+                                <span class="feature-access-badge">Free Access</span>
+                            </div>
+                            <h3 class="feature-card-title">Heat Bubble Maps</h3>
+                            <p class="feature-card-description">
+                                Visualize market liquidity and momentum at a glance. Spot sector rotations and volume anomalies before they hit the traditional scanners.
+                            </p>
+                        </div>
+
+                        <!-- Card 3: Risk Analytics -->
+                        <div class="new-feature-card" onclick="switchView('strategy')">
+                            <div class="feature-card-header">
+                                <div class="feature-icon-badge">🛡️</div>
+                                <span class="feature-access-badge">Free Access</span>
+                            </div>
+                            <h3 class="feature-card-title">Risk Analytics</h3>
+                            <p class="feature-card-description">
+                                Advanced position size calculators and risk-of-ruin models. Ensure your portfolio exposure aligns with your strict risk parameters.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Features Grid (Bottom 2 Cards) -->
+                    <div class="new-features-grid-bottom">
+                        <!-- Card 4: Banking & Margin Lending -->
+                        <div class="new-feature-card" onclick="switchView('bankRates')">
+                            <div class="feature-card-header">
+                                <div class="feature-icon-badge">🏛️</div>
+                                <span class="feature-access-badge">Free Access</span>
+                            </div>
+                            <h3 class="feature-card-title">Banking & Margin Lending</h3>
+                            <p class="feature-card-description">
+                                Compare live commercial bank interest rates in Nepal and calculate share margin loan limits according to NRB regulations.
+                            </p>
+                        </div>
+
+                        <!-- Card 5: Position Size & Risk -->
+                        <div class="new-feature-card" onclick="switchView('strategy')">
+                            <div class="feature-card-header">
+                                <div class="feature-icon-badge">🧮</div>
+                                <span class="feature-access-badge">Free Access</span>
+                            </div>
+                            <h3 class="feature-card-title">Position Size & Risk</h3>
+                            <p class="feature-card-description">
+                                Automatic position sizing based on your capital and risk management rules. Plan your trades with mathematical precision.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 6. Partners -->
+                    <section class="partners-section">
+                        <div class="partners-title">Trusted by Active Traders Across Top Brokers</div>
+                        <div class="partners-grid">
+                            <span class="partner-logo">Broker A</span>
+                            <span class="partner-logo">Broker B</span>
+                            <span class="partner-logo">Investment Co.</span>
+                            <span class="partner-logo">Capital Markets</span>
+                        </div>
+                    </section>
+
+                    <!-- 7. Footer -->
+                    <footer class="new-footer">
+                        <div class="footer-top">
+                            <div class="footer-logo">NEPSE Terminal</div>
+                            <div class="footer-links">
+                                <a href="#" class="footer-link" onclick="showToast('Privacy Policy is placeholder.', 'info'); return false;">Privacy Policy</a>
+                                <a href="#" class="footer-link" onclick="showToast('Terms of Service is placeholder.', 'info'); return false;">Terms of Service</a>
+                                <a href="#" class="footer-link" onclick="showToast('API access is restricted to corporate partners.', 'info'); return false;">API Documentation</a>
+                                <a href="#" class="footer-link" onclick="showToast('Support is available for registered users.', 'info'); return false;">Support</a>
+                            </div>
+                        </div>
+                        <div class="footer-bottom">
+                            <span>© 2026 NEPSE Terminal. All rights reserved.</span>
+                            <span>NEPSE Green and Analytical Precision.</span>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+
+            <!-- VIEW: MOCK LOGIN GATE -->
+            <div id="loginView" class="view-section hidden">
+                <div class="login-view-container">
+                    <div class="login-card" id="loginCard">
+                        <div class="login-header-block">
+                            <div class="login-icon-badge">🔒</div>
+                            <h2 class="login-card-title">Access Premium Tools</h2>
+                            <p class="login-card-subtitle">Sign in to unlock the Portfolio Tracker & Trade Journaling System.</p>
+                        </div>
+                        
+                        <div id="loginFormContainer">
+                            <form id="nepseLoginForm" onsubmit="handleMockLogin(event)">
+                                <div class="login-form-group">
+                                    <label for="loginEmail">Email Address</label>
+                                    <input type="email" id="loginEmail" placeholder="trader@nepseterminal.com" required value="manipandey384@gmail.com">
+                                </div>
+                                <div class="login-form-group">
+                                    <label for="loginPassword">Access Code / Password</label>
+                                    <input type="password" id="loginPassword" placeholder="••••••••" required value="M@n1P@ndey">
+                                </div>
+                                <div class="login-form-group">
+                                    <label for="loginAccountType">Trading Role</label>
+                                    <select id="loginAccountType">
+                                        <option value="retail">Retail Swing Trader</option>
+                                        <option value="institutional">Institutional Analyst (Pro)</option>
+                                        <option value="portfolio_manager">Wealth Portfolio Manager</option>
+                                    </select>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px; margin: 15px 0; font-size: 0.85rem; color: var(--text-secondary);">
+                                    <input type="checkbox" id="loginRemember" checked style="accent-color: var(--color-accent); cursor: pointer;">
+                                    <label for="loginRemember" style="cursor: pointer; user-select: none;">Keep me signed in on this device</label>
+                                </div>
+                                <button type="submit" class="login-btn-primary" id="btnLoginSubmit">
+                                    <span>🔐 Authenticate & Unlock</span>
+                                </button>
+                            </form>
+                            <p style="text-align: center; font-size: 0.76rem; color: var(--text-muted); margin-top: 20px;">
+                                💡 <strong>Mock Auth:</strong> You can sign in using any mock email and password.
+                            </p>
+                        </div>
+                        
+                        <!-- Success Animation Container -->
+                        <div id="loginSuccessContainer" style="display: none;">
+                            <div class="success-checkmark-wrapper">
+                                <div class="success-checkmark-circle">✓</div>
+                                <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--color-up); margin: 16px 0 6px; text-align: center;">Access Granted</h3>
+                                <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; text-align: center;" id="loginSuccessMsg">Synchronizing portfolio profile...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: BANK RATES & SHARE MARGIN LOAN CALCULATOR -->
+            <div id="bankRatesView" class="view-section hidden">
+                <!-- Header Card -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                        <div>
+                            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; color: var(--text-primary); margin: 0 0 4px;">🏦 Banking Rates & Margin Lending Suite</h2>
+                            <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Compare live commercial bank interest rates in Nepal and calculate share margin loan limits according to Nepal Rastra Bank regulations.</p>
+                        </div>
+                        <div id="bankRatesLastUpdated" style="font-size: 0.8rem; color: var(--color-accent); font-weight: 600; padding: 6px 12px; border-radius: 20px; background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2);">
+                            Last Updated: Just Now
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Layout Grid: Tables on Left, Calculator on Right -->
+                <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; align-items: start;">
+                    
+                    <!-- Left: Bank Rates Board -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
+                            <!-- Tabs Selector -->
+                            <div style="display: flex; gap: 8px; background: var(--bg-app); border: 1px solid var(--border-color); padding: 4px; border-radius: 10px;">
+                                <button id="tabFD" onclick="toggleBankRatesTab('fd')" style="border: none; padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s ease; background: var(--color-accent); color: #fff;">Fixed Deposits</button>
+                                <button id="tabSavings" onclick="toggleBankRatesTab('savings')" style="border: none; padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s ease; background: transparent; color: var(--text-secondary);">Savings Accounts</button>
+                            </div>
+                            
+                            <!-- Search Field -->
+                            <div style="position: relative; max-width: 250px; width: 100%;">
+                                <input type="text" id="searchBankInput" oninput="filterBankRatesTable()" placeholder="🔍 Filter bank..." style="width: 100%; padding: 8px 12px 8px 32px; font-size: 0.83rem; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-app); color: var(--text-primary); transition: border-color 0.2s ease;">
+                                <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 0.8rem; color: var(--text-muted); pointer-events: none;">🔍</span>
+                            </div>
+                        </div>
+
+                        <!-- Scrollable Table -->
+                        <div style="overflow-x: auto; max-height: 520px; overflow-y: auto; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.84rem; text-align: left;" id="bankRatesTable">
+                                <thead style="background: var(--bg-app); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 5;">
+                                    <tr>
+                                        <th style="padding: 12px 16px; color: var(--text-muted); font-weight: 700;">Bank / Scheme</th>
+                                        <th style="padding: 12px 16px; color: var(--text-muted); font-weight: 700; text-align: right;">Interest Rate</th>
+                                        <th style="padding: 12px 16px; color: var(--text-muted); font-weight: 700;">Term / Payment</th>
+                                        <th style="padding: 12px 16px; color: var(--text-muted); font-weight: 700;">Special Benefits</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bankRatesTableBody">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Right: Share Margin Loan Calculator -->
+                    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 20px;">
+                        <div>
+                            <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: var(--text-primary); margin: 0 0 4px;">📈 Share Margin Loan Calculator</h3>
+                            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">Simulate margin requirements and margin call trigger thresholds.</p>
+                        </div>
+
+                        <form id="marginCalcForm" onsubmit="event.preventDefault(); calculateMarginLoan();" style="display: flex; flex-direction: column; gap: 16px;">
+                            <!-- Stock Symbol Dropdown -->
+                            <div class="sim-input-group-landing" style="display: flex; flex-direction: column; gap: 6px;">
+                                <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary);">Select NEPSE Symbol</label>
+                                <select id="marginSymbolSelect" onchange="handleMarginSymbolChange()" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-app); color: var(--text-primary); font-size: 0.85rem; outline: none; cursor: pointer;">
+                                    <option value="">-- Choose Stock --</option>
+                                    <!-- Populated dynamically via JS -->
+                                </select>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                                <!-- Stock LTP -->
+                                <div class="sim-input-group-landing" style="display: flex; flex-direction: column; gap: 6px;">
+                                    <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary);">Current Price (LTP)</label>
+                                    <input type="number" id="marginLTP" step="0.1" value="0.0" oninput="calculateMarginLoan()" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-app); color: var(--text-primary); font-size: 0.85rem; outline: none;">
+                                </div>
+                                <!-- 180-Day Average -->
+                                <div class="sim-input-group-landing" style="display: flex; flex-direction: column; gap: 6px;">
+                                    <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary);">180-Day Avg Price</label>
+                                    <input type="number" id="marginAvgPrice" step="0.1" value="0.0" oninput="calculateMarginLoan()" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-app); color: var(--text-primary); font-size: 0.85rem; outline: none;">
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                                <!-- Quantity -->
+                                <div class="sim-input-group-landing" style="display: flex; flex-direction: column; gap: 6px;">
+                                    <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary);">Share Quantity</label>
+                                    <input type="number" id="marginQuantity" value="1000" oninput="calculateMarginLoan()" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-app); color: var(--text-primary); font-size: 0.85rem; outline: none;">
+                                </div>
+                                <!-- LTV Ratio -->
+                                <div class="sim-input-group-landing" style="display: flex; flex-direction: column; gap: 6px;">
+                                    <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary);">Loan-to-Value LTV (%)</label>
+                                    <input type="number" id="marginLTVPct" value="70" max="70" min="10" oninput="calculateMarginLoan()" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-app); color: var(--text-primary); font-size: 0.85rem; outline: none;">
+                                </div>
+                            </div>
+
+                            <!-- Target Loan Input -->
+                            <div class="sim-input-group-landing" style="display: flex; flex-direction: column; gap: 6px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary);">Desired Loan Amount (NPR)</label>
+                                    <button type="button" onclick="setMarginMaxLoan()" style="background: none; border: none; color: var(--color-accent); font-size: 0.76rem; font-weight: 700; cursor: pointer; padding: 0;">Use Max Loan</button>
+                                </div>
+                                <input type="number" id="marginLoanAmount" value="200000" oninput="calculateMarginLoan()" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-app); color: var(--text-primary); font-size: 0.85rem; outline: none;">
+                            </div>
+                        </form>
+
+                        <!-- Calculator Results Card -->
+                        <div style="border-top: 1px solid var(--border-color); padding-top: 16px; display: flex; flex-direction: column; gap: 12px;">
+                            <!-- Outputs -->
+                            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.82rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 0;">
+                                    <span style="color: var(--text-muted);">Asset Valuation (NRB Rule):</span>
+                                    <span style="font-family: var(--font-mono); font-weight: 700; color: var(--text-primary);" id="valMarginAssetValuation">NPR 0.00</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 0;">
+                                    <span style="color: var(--text-muted);">Max Loan Eligibility:</span>
+                                    <span style="font-family: var(--font-mono); font-weight: 700; color: var(--color-up);" id="valMarginMaxLoan">NPR 0.00</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px;">
+                                    <span style="color: var(--text-muted);">Effective LTV Ratio:</span>
+                                    <span style="font-family: var(--font-mono); font-weight: 700; color: var(--text-primary);" id="valMarginEffectiveLTV">0.00%</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0;">
+                                    <span style="color: var(--text-muted); font-weight: 700;">Margin Call Price:</span>
+                                    <span style="font-family: var(--font-mono); font-weight: 800; color: var(--color-down); font-size: 0.95rem;" id="valMarginCallPrice">NPR 0.00</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 0;">
+                                    <span style="color: var(--text-muted);">Required Drop to Trigger:</span>
+                                    <span style="font-family: var(--font-mono); font-weight: 700; color: var(--color-down);" id="valMarginDropPct">0.00%</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 8px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); margin-top: 6px;" id="marginStatusContainer">
+                                    <span style="font-weight: 700;" id="marginStatusTitle">🛡️ Margin Status</span>
+                                    <span style="font-family: var(--font-heading); font-weight: 800; color: #34d399;" id="marginStatusValue">SAFE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Bottom Section: NRB Macroeconomic Indicators -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; margin-top: 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 20px;">
+                    <div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin: 0 0 4px;">📊 Nepal Central Bank (NRB) Macroeconomic Board</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">Key economic health metrics scraped directly from the official Nepal Rastra Bank portal. Critical for evaluating market liquidity and interest rate trajectories.</p>
+                    </div>
+                    
+                    <div id="nrbMacroGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
+                        <!-- Macro cards populated dynamically via JS -->
+                        <div style="text-align: center; padding: 30px; grid-column: 1 / -1; color: var(--text-muted);">
+                            <span class="loader-spinner"></span> Loading NRB Macro Statistics...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- VIEW 1: MARKET OVERVIEW & ALL SCRIPS -->
-            <div id="dashboardView" class="view-section">
+            <div id="dashboardView" class="view-section hidden">
+                <!-- DASHBOARD HERO BANNER -->
+                <section class="dashboard-hero-banner" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(11, 15, 25, 0.98)); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 16px; padding: 22px 28px; margin-bottom: 24px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 24px; align-items: center; position: relative; overflow: hidden;">
+                    <div style="position: absolute; right: -50px; top: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0,0,0,0) 70%); pointer-events: none;"></div>
+                    
+                    <!-- 1. NEPSE Primary Index Hero Block -->
+                    <div style="display: flex; align-items: center; gap: 20px; border-right: 1px solid rgba(255, 255, 255, 0.08); padding-right: 20px;">
+                        <div style="width: 52px; height: 52px; border-radius: 14px; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.35); display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
+                            📈
+                        </div>
+                        <div>
+                            <span style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; display: block; text-transform: uppercase;">NEPSE INDEX</span>
+                            <div style="display: flex; align-items: baseline; gap: 12px; margin-top: 2px;">
+                                <h1 style="font-size: 2.3rem; font-weight: 900; font-family: var(--font-mono); color: #ffffff; margin: 0; letter-spacing: -0.5px;" id="heroNepseValue">2,650.09</h1>
+                                <span id="heroNepseChange" style="font-size: 1.15rem; font-weight: 800; font-family: var(--font-mono); color: #ef4444; background: rgba(239, 68, 68, 0.15); padding: 4px 10px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.3);">▼ -0.15%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Market Sentiment Hero Block -->
+                    <div style="display: flex; align-items: center; gap: 18px; border-right: 1px solid rgba(255, 255, 255, 0.08); padding-right: 20px;">
+                        <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); display: flex; align-items: center; justify-content: center; font-size: 1.6rem;" id="heroSentimentIcon">
+                            📉
+                        </div>
+                        <div>
+                            <span style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; display: block; text-transform: uppercase;">MARKET SENTIMENT</span>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-top: 4px;">
+                                <h2 style="font-size: 1.5rem; font-weight: 900; color: #ef4444; margin: 0;" id="heroSentimentText">BEARISH</h2>
+                                <span style="font-size: 0.75rem; background: rgba(239, 68, 68, 0.2); color: #ef4444; padding: 2px 8px; border-radius: 12px; font-weight: 700; border: 1px solid rgba(239, 68, 68, 0.4);" id="heroSentimentSub">65% Sellers</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Executive Pulse Quick Stats -->
+                    <div>
+                        <span style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; display: block; text-transform: uppercase; margin-bottom: 8px;">EXECUTIVE MARKET PULSE</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.84rem;">
+                            <span style="color: var(--text-secondary);">Advancers vs Decliners</span>
+                            <span style="font-family: var(--font-mono); font-weight: 700;" id="heroBreadthRatio">111 / 205 Scrips</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.84rem; margin-top: 4px;">
+                            <span style="color: var(--text-secondary);">Live Turnover</span>
+                            <span style="font-family: var(--font-mono); font-weight: 700; color: #38bdf8;" id="heroTurnoverVal">NPR 0.00</span>
+                        </div>
+                    </div>
+                </section>
                 <!-- Market Summary Cards -->
                 <section class="summary-grid">
                     <div class="summary-card">
@@ -158,6 +659,91 @@
                     </div>
                 </section>
 
+                <!-- AI MARKET SUMMARY & SECTOR ROTATION & MONEY FLOW GRID -->
+                <section style="display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 16px; margin-bottom: 24px;" class="market-intelligence-grid">
+                    <!-- 1. AI Market Summary Banner -->
+                    <div class="shadow-card" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(168, 85, 247, 0.35); border-radius: 12px; padding: 18px 20px; position: relative;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span style="font-size: 1.2rem;">🤖</span>
+                                <h3 style="font-size: 0.95rem; font-weight: 700; color: #c084fc; margin: 0;">AI Market Summary</h3>
+                            </div>
+                            <span id="aiSentimentBadge" class="badge badge-ai" style="font-weight: 800;">BEARISH</span>
+                        </div>
+
+                        <div id="aiSummaryContent" style="display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem; color: var(--text-secondary); line-height: 1.45;">
+                            <div style="display: flex; align-items: flex-start; gap: 8px;">
+                                <span style="color: var(--color-accent); font-weight: 700;">•</span>
+                                <span id="aiSummaryDragText">Banking dragged the market today while Manufacturing gained strength.</span>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 8px;">
+                                <span style="color: var(--color-accent); font-weight: 700;">•</span>
+                                <span id="aiSummaryBreadthText">Market breadth remained negative (111 vs 205).</span>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 8px;">
+                                <span style="color: var(--color-accent); font-weight: 700;">•</span>
+                                <span id="aiSummarySentimentText">Overall sentiment: <strong>Bearish</strong>.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Sector Rotation Radar Card -->
+                    <div class="shadow-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px 20px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                            <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin: 0;">🔄 Sector Rotation</h3>
+                            <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">TODAY / YESTERDAY</span>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <!-- Moving Up -->
+                            <div>
+                                <span style="font-size: 0.72rem; color: #10b981; font-weight: 700; display: block; margin-bottom: 6px;">⬆ GAINING MOMENTUM</span>
+                                <div id="rotationGainingList" style="display: flex; flex-direction: column; gap: 4px;">
+                                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">⬆ Manufacturing</span>
+                                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">⬆ Hydropower</span>
+                                </div>
+                            </div>
+                            <!-- Moving Down -->
+                            <div>
+                                <span style="font-size: 0.72rem; color: #ef4444; font-weight: 700; display: block; margin-bottom: 6px;">⬇ LAGGING SECTORS</span>
+                                <div id="rotationLaggingList" style="display: flex; flex-direction: column; gap: 4px;">
+                                    <span class="badge" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">⬇ Banking</span>
+                                    <span class="badge" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">⬇ Finance</span>
+                                    <span class="badge" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">⬇ Insurance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Money Flow Inflow/Outflow Tracker Card -->
+                    <div class="shadow-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px 20px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                            <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin: 0;">💸 Money Flow</h3>
+                            <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">CAPITAL INFLOW / OUTFLOW</span>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <!-- Money Entering -->
+                            <div>
+                                <span style="font-size: 0.72rem; color: #34d399; font-weight: 700; display: block; margin-bottom: 6px;">MONEY ENTERING</span>
+                                <div id="moneyEnteringList" style="display: flex; flex-direction: column; gap: 4px;">
+                                    <span class="badge" style="background: rgba(52, 211, 153, 0.12); color: #34d399;">Hydro</span>
+                                    <span class="badge" style="background: rgba(52, 211, 153, 0.12); color: #34d399;">Manufacturing</span>
+                                </div>
+                            </div>
+                            <!-- Money Leaving -->
+                            <div>
+                                <span style="font-size: 0.72rem; color: #f87171; font-weight: 700; display: block; margin-bottom: 6px;">MONEY LEAVING</span>
+                                <div id="moneyLeavingList" style="display: flex; flex-direction: column; gap: 4px;">
+                                    <span class="badge" style="background: rgba(248, 113, 113, 0.12); color: #f87171;">Banking</span>
+                                    <span class="badge" style="background: rgba(248, 113, 113, 0.12); color: #f87171;">Life Insurance</span>
+                                    <span class="badge" style="background: rgba(248, 113, 113, 0.12); color: #f87171;">Finance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Sub-Indices Grid Panel -->
                 <section class="indices-panel" style="margin-bottom: 24px;">
                     <div class="flex-between" style="margin-bottom: 12px;">
@@ -169,7 +755,82 @@
                     </div>
                 </section>
 
-                <!-- Control Bar -->
+                <!-- SMART STAR RATING COLLECTIONS BAR -->
+                <section class="smart-collections-bar" style="margin-bottom: 24px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                        <h3 class="section-title" style="margin: 0; font-size: 1.05rem;">⭐ Curated Scrip Collections & Ratings</h3>
+                        <span style="font-size: 0.78rem; color: var(--text-muted);">Click any collection card to filter matching stocks</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px;">
+                        <!-- 1. Best Swing Stocks -->
+                        <div class="summary-card smart-collection-card" data-smart-collection="swing" style="cursor: pointer; padding: 16px 18px; border: 1px solid rgba(99, 102, 241, 0.3); transition: all 0.2s ease;">
+                            <div class="card-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; font-size: 1.4rem; width: 42px; height: 42px;">🎯</div>
+                            <div class="card-info" style="flex: 1;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span class="card-label" style="font-weight: 700; color: var(--text-primary);">Best Swing Stocks</span>
+                                    <span style="color: #f59e0b; font-size: 0.85rem; font-weight: 800;">★★★★☆</span>
+                                </div>
+                                <h3 class="card-value" id="smartCountSwing" style="font-size: 1.15rem; margin-top: 2px;">0</h3>
+                                <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">EMA Momentum & Beta</p>
+                            </div>
+                        </div>
+
+                        <!-- 2. Best Dividend Stocks -->
+                        <div class="summary-card smart-collection-card" data-smart-collection="dividend" style="cursor: pointer; padding: 16px 18px; border: 1px solid rgba(16, 185, 129, 0.3); transition: all 0.2s ease;">
+                            <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981; font-size: 1.4rem; width: 42px; height: 42px;">💰</div>
+                            <div class="card-info" style="flex: 1;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span class="card-label" style="font-weight: 700; color: var(--text-primary);">Best Dividend</span>
+                                    <span style="color: #f59e0b; font-size: 0.85rem; font-weight: 800;">★★★★☆</span>
+                                </div>
+                                <h3 class="card-value" id="smartCountDividend" style="font-size: 1.15rem; margin-top: 2px; color: #10b981;">0</h3>
+                                <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">High Yield & Low P/E</p>
+                            </div>
+                        </div>
+
+                        <!-- 3. Breakout Stocks -->
+                        <div class="summary-card smart-collection-card" data-smart-collection="breakout" style="cursor: pointer; padding: 16px 18px; border: 1px solid rgba(245, 158, 11, 0.3); transition: all 0.2s ease;">
+                            <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; font-size: 1.4rem; width: 42px; height: 42px;">⚡</div>
+                            <div class="card-info" style="flex: 1;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span class="card-label" style="font-weight: 700; color: var(--text-primary);">Breakout Stocks</span>
+                                    <span style="color: #f59e0b; font-size: 0.85rem; font-weight: 800;">★★★★★</span>
+                                </div>
+                                <h3 class="card-value" id="smartCountBreakout" style="font-size: 1.15rem; margin-top: 2px; color: #f59e0b;">0</h3>
+                                <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">52-Wk High & 2x Vol</p>
+                            </div>
+                        </div>
+
+                        <!-- 4. High Volume -->
+                        <div class="summary-card smart-collection-card" data-smart-collection="highvol" style="cursor: pointer; padding: 16px 18px; border: 1px solid rgba(168, 85, 247, 0.3); transition: all 0.2s ease;">
+                            <div class="card-icon" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; font-size: 1.4rem; width: 42px; height: 42px;">📊</div>
+                            <div class="card-info" style="flex: 1;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span class="card-label" style="font-weight: 700; color: var(--text-primary);">High Volume</span>
+                                    <span style="color: #f59e0b; font-size: 0.85rem; font-weight: 800;">★★★★★</span>
+                                </div>
+                                <h3 class="card-value" id="smartCountHighVol" style="font-size: 1.15rem; margin-top: 2px; color: #c084fc;">0</h3>
+                                <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">Vol Surge > 2.5x SMA</p>
+                            </div>
+                        </div>
+
+                        <!-- 5. Oversold Reversal -->
+                        <div class="summary-card smart-collection-card" data-smart-collection="oversold" style="cursor: pointer; padding: 16px 18px; border: 1px solid rgba(239, 68, 68, 0.3); transition: all 0.2s ease;">
+                            <div class="card-icon" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; font-size: 1.4rem; width: 42px; height: 42px;">📉</div>
+                            <div class="card-info" style="flex: 1;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span class="card-label" style="font-weight: 700; color: var(--text-primary);">Oversold Reversal</span>
+                                    <span style="color: #f59e0b; font-size: 0.85rem; font-weight: 800;">★★★★☆</span>
+                                </div>
+                                <h3 class="card-value" id="smartCountOversold" style="font-size: 1.15rem; margin-top: 2px; color: #ef4444;">0</h3>
+                                <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">RSI < 38 Support Sweep</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Control Panel -->
                 <section class="control-panel">
                     <div class="search-bar-container">
                         <span class="search-icon">🔍</span>
@@ -639,6 +1300,607 @@
                             Loading market leaders...
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- VIEW 13: UNIFIED CORPORATE EARNINGS & EVENTS CALENDAR -->
+            <div id="calendarView" class="view-section hidden">
+                <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.1)); border: 1px solid rgba(99, 102, 241, 0.35); border-radius: 12px; padding: 18px 22px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 1.8rem;">📅</span>
+                        <div>
+                            <h3 style="color: #818cf8; font-size: 1.1rem; font-weight: 800; margin: 0 0 4px 0;">Unified Corporate Earnings & Events Calendar</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.84rem; margin: 0;">One place tracking all upcoming Dividends, AGMs, Book Closure dates, Right Share issues, FPOs, IPOs, Share Lock-in Expiries, and Quarterly Earnings.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Cards Grid -->
+                <section class="summary-grid" style="margin-bottom: 20px;">
+                    <div class="summary-card" style="padding: 16px;">
+                        <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">💰</div>
+                        <div class="card-info">
+                            <p class="card-label">Upcoming Dividends</p>
+                            <h2 class="card-value" id="calCountDividends" style="color: #10b981;">0</h2>
+                        </div>
+                    </div>
+                    <div class="summary-card" style="padding: 16px;">
+                        <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">🏛️</div>
+                        <div class="card-info">
+                            <p class="card-label">AGMs & Book Closes</p>
+                            <h2 class="card-value" id="calCountAGMs" style="color: #f59e0b;">0</h2>
+                        </div>
+                    </div>
+                    <div class="summary-card" style="padding: 16px;">
+                        <div class="card-icon" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;">📊</div>
+                        <div class="card-info">
+                            <p class="card-label">Quarterly Earnings Reports</p>
+                            <h2 class="card-value" id="calCountEarnings" style="color: #c084fc;">0</h2>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Category Filter Chips -->
+                <section class="filters-container" style="margin-bottom: 20px;">
+                    <div class="filter-tabs" id="calendarFilterTabs">
+                        <button class="filter-tab active" data-cal-filter="all">All Events (<span id="countCalAll">0</span>)</button>
+                        <button class="filter-tab" data-cal-filter="Dividend" style="color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">💰 Dividend (<span id="countCalDividend">0</span>)</button>
+                        <button class="filter-tab" data-cal-filter="AGM" style="color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3);">🏛️ AGM (<span id="countCalAGM">0</span>)</button>
+                        <button class="filter-tab" data-cal-filter="Book Close" style="color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">📖 Book Close (<span id="countCalBookClose">0</span>)</button>
+                        <button class="filter-tab" data-cal-filter="Rights" style="color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.3);">📈 Rights (<span id="countCalRights">0</span>)</button>
+                        <button class="filter-tab" data-cal-filter="IPO" style="color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3);">🚀 FPO / IPO (<span id="countCalIPO">0</span>)</button>
+                        <button class="filter-tab" data-cal-filter="Lock-in" style="color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3);">🔒 Lock-in Expiry (<span id="countCalLockin">0</span>)</button>
+                        <button class="filter-tab" data-cal-filter="Earnings" style="color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.3);">📊 Earnings (<span id="countCalEarnings">0</span>)</button>
+                    </div>
+                </section>
+
+                <!-- Controls Bar -->
+                <section class="controls-bar" style="display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 18px; flex-wrap: wrap;">
+                    <div class="search-input-wrapper" style="position: relative; flex: 1; max-width: 380px;">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="calendarSearchInput" placeholder="Filter corporate events by symbol or name..." style="width: 100%; padding-left: 36px; height: 38px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); font-size: 0.84rem;">
+                    </div>
+                    <div style="font-size: 0.82rem; color: var(--text-muted);">
+                        Showing <strong id="calendarCountDisplay" style="color: var(--text-primary);">0</strong> corporate events
+                    </div>
+                </section>
+
+                <!-- Events Table -->
+                <div class="table-container shadow-card">
+                    <table class="data-table" id="calendarDataTable">
+                        <thead>
+                            <tr>
+                                <th>Event Date</th>
+                                <th>Category</th>
+                                <th>Company & Sector</th>
+                                <th class="text-right">LTP (NPR)</th>
+                                <th>Corporate Action Details</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calendarTableBody">
+                            <tr><td colspan="7" class="text-center loading-placeholder">Loading corporate calendar events...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <!-- VIEW 15: DEDICATED CURATED SCRIP COLLECTIONS VIEW -->
+            <div id="curatedCollectionsView" class="view-section hidden">
+                <!-- Header Banner -->
+                <div class="card" style="padding: 20px 24px; margin-bottom: 20px; background: linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(16,185,129,0.08) 100%); border: 1px solid rgba(99,102,241,0.25); border-radius: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                                <span style="font-size: 1.8rem;" id="curatedActiveIcon">🎯</span>
+                                <h2 style="font-size: 1.5rem; font-weight: 800; margin: 0; color: var(--text-primary);" id="curatedActiveTitle">Best Swing Stocks Collection</h2>
+                                <span class="badge" id="curatedActiveBadge" style="background: rgba(99,102,241,0.2); color: #818cf8; border: 1px solid rgba(99,102,241,0.4); font-weight: 700; font-size: 0.85rem; padding: 4px 10px; border-radius: 20px;">
+                                    110 Matching Scrips
+                                </span>
+                            </div>
+                            <p style="margin: 0; font-size: 0.88rem; color: var(--text-secondary);" id="curatedActiveDesc">
+                                Filtered technical momentum stocks with strong EMA alignment, positive daily drift, and solid RSI structure for 1-5 day swing trades.
+                            </p>
+                        </div>
+                        <button class="btn btn-outline" onclick="switchView('dashboard')" style="font-size: 0.84rem; height: 36px; padding: 0 14px;">
+                            ← Back to Overview
+                        </button>
+                    </div>
+
+                    <!-- Collection Selector Tabs -->
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 14px;" id="curatedCollectionTabs">
+                        <button class="filter-tab active" data-curated="swing" style="display: flex; align-items: center; gap: 6px; font-weight: 700;">
+                            🎯 Best Swing (<span id="tabCountSwing">110</span>)
+                        </button>
+                        <button class="filter-tab" data-curated="dividend" style="display: flex; align-items: center; gap: 6px; font-weight: 700;">
+                            💰 Best Dividend (<span id="tabCountDividend">175</span>)
+                        </button>
+                        <button class="filter-tab" data-curated="breakout" style="display: flex; align-items: center; gap: 6px; font-weight: 700;">
+                            ⚡ Breakout (<span id="tabCountBreakout">47</span>)
+                        </button>
+                        <button class="filter-tab" data-curated="highvol" style="display: flex; align-items: center; gap: 6px; font-weight: 700;">
+                            📊 High Volume (<span id="tabCountHighVol">125</span>)
+                        </button>
+                        <button class="filter-tab" data-curated="oversold" style="display: flex; align-items: center; gap: 6px; font-weight: 700;">
+                            📉 Oversold Reversal (<span id="tabCountOversold">219</span>)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Screener Table Card -->
+                <div class="card" style="padding: 20px; border-radius: 16px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+                        <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin: 0;">
+                            Matching Scrips Screener List
+                        </h3>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <input type="text" id="curatedSearchInput" placeholder="Filter collection by ticker or sector..." class="search-input" style="width: 260px; height: 36px; font-size: 0.82rem;">
+                        </div>
+                    </div>
+
+                    <!-- Scrips Table -->
+                    <div class="table-container shadow-card">
+                        <table class="stocks-table">
+                            <thead>
+                                <tr>
+                                    <th>Symbol</th>
+                                    <th>Company Name</th>
+                                    <th>Sector</th>
+                                    <th class="text-right">LTP (NPR)</th>
+                                    <th class="text-right">Today's Change %</th>
+                                    <th class="text-right">RSI (14)</th>
+                                    <th class="text-right">Volume</th>
+                                    <th class="text-center">Technical Signal</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="curatedTableBody">
+                                <tr><td colspan="9" class="text-center loading-placeholder">Loading collection scrips...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 14: DEDICATED 360° COMPANY INTELLIGENCE PAGE -->
+            <div id="companyIntelView" class="view-section hidden">
+                <!-- Page Top Action & Navigation Header -->
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <button class="btn btn-outline" id="btnBackToDashboard" style="height: 36px; padding: 0 12px; font-size: 0.82rem;">
+                            ← Back to Dashboard
+                        </button>
+                        <h2 style="font-size: 1.3rem; font-weight: 800; color: var(--text-primary); margin: 0;" id="intelHeaderTitle">Company 360° Intelligence</h2>
+                    </div>
+
+                    <!-- Ticker Quick Switcher -->
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">Quick Switch Scrip:</span>
+                        <select id="intelSymbolSelect" class="search-input" style="height: 36px; padding: 0 12px; font-size: 0.84rem; font-weight: 700; font-family: monospace;">
+                            <option value="SHIVM">SHIVM - Shivam Cements Ltd.</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 0. Traffic Light Summary Hero Banner -->
+                <div class="intel-hero-banner" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95)); border: 1px solid rgba(99, 102, 241, 0.35); border-radius: 14px; padding: 22px; margin-bottom: 22px; color: #ffffff; box-shadow: 0 8px 24px rgba(0,0,0,0.2);">
+                    <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px;">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+                                <h1 style="font-size: 1.8rem; font-weight: 800; font-family: 'Outfit', sans-serif; margin: 0; color: #ffffff;" id="intelSymbol">SHIVM</h1>
+                                <span style="background: rgba(99, 102, 241, 0.25); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.4); padding: 3px 10px; border-radius: 6px; font-size: 0.78rem; font-weight: 700;" id="intelSector">Manufacturing & Processing</span>
+                            </div>
+                            <p style="font-size: 0.92rem; color: #cbd5e1; margin: 0;" id="intelCompanyName">Shivam Cements Ltd.</p>
+                        </div>
+
+                        <!-- Price & Change Box -->
+                        <div style="text-align: right;">
+                            <div style="font-size: 0.76rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Current Price (LTP)</div>
+                            <div style="font-size: 1.9rem; font-weight: 800; font-family: monospace; color: #34d399; margin: 2px 0;" id="intelLTP">NPR 615.00</div>
+                            <div id="intelChange" style="font-size: 0.85rem; font-weight: 700; color: #34d399;">▲ +12.50 (+2.08%)</div>
+                        </div>
+                    </div>
+
+                    <!-- Traffic Light Summary Grid -->
+                    <div style="margin-bottom: 12px;">
+                        <span style="font-size: 0.76rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; display: block; margin-bottom: 10px;">🚦 Traffic Light Summary</span>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px;" id="trafficLightGrid">
+                            <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 8px 12px; border-radius: 8px;">
+                                <span style="font-size: 0.72rem; color: #94a3b8; display: block;">Fundamentals</span>
+                                <strong style="color: #34d399; font-size: 0.88rem;">🟢 Strong</strong>
+                            </div>
+                            <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 8px 12px; border-radius: 8px;">
+                                <span style="font-size: 0.72rem; color: #94a3b8; display: block;">Technicals</span>
+                                <strong style="color: #34d399; font-size: 0.88rem;">🟢 Bullish</strong>
+                            </div>
+                            <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); padding: 8px 12px; border-radius: 8px;">
+                                <span style="font-size: 0.72rem; color: #94a3b8; display: block;">Valuation</span>
+                                <strong style="color: #fbbf24; font-size: 0.88rem;">🟡 Fairly Valued</strong>
+                            </div>
+                            <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 8px 12px; border-radius: 8px;">
+                                <span style="font-size: 0.72rem; color: #94a3b8; display: block;">Growth</span>
+                                <strong style="color: #34d399; font-size: 0.88rem;">🟢 Strong Growth</strong>
+                            </div>
+                            <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); padding: 8px 12px; border-radius: 8px;">
+                                <span style="font-size: 0.72rem; color: #94a3b8; display: block;">Risk</span>
+                                <strong style="color: #fbbf24; font-size: 0.88rem;">🟠 Moderate (Lock-in)</strong>
+                            </div>
+                            <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 8px 12px; border-radius: 8px;">
+                                <span style="font-size: 0.72rem; color: #94a3b8; display: block;">Dividend</span>
+                                <strong style="color: #34d399; font-size: 0.88rem;">🟢 Attractive</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 20 Sections Main Container Grid -->
+                <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                    
+                    <!-- Row 1: AI Stock Score & Executive Insight -->
+                    <div style="display: grid; grid-template-columns: 340px 1fr; gap: 18px;">
+                        <!-- Section 8: AI Stock Score -->
+                        <div class="table-card shadow-card" style="padding: 20px; text-align: center;">
+                            <h3 class="section-title" style="font-size: 0.95rem; margin-bottom: 12px;">⭐⭐⭐⭐⭐ AI Stock Score</h3>
+                            <div style="width: 110px; height: 110px; border-radius: 50%; background: rgba(99, 102, 241, 0.15); border: 4px solid #818cf8; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 16px auto;">
+                                <span style="font-size: 2.1rem; font-weight: 800; color: #818cf8; line-height: 1;" id="intelScoreMain">87</span>
+                                <span style="font-size: 0.7rem; color: var(--text-muted);">/ 100</span>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.78rem;" id="intelSubScoresGrid">
+                                <div style="background: var(--bg-primary); padding: 6px; border-radius: 6px;">Fundamentals: <strong style="color:#10b981;">92</strong></div>
+                                <div style="background: var(--bg-primary); padding: 6px; border-radius: 6px;">Technicals: <strong style="color:#38bdf8;">84</strong></div>
+                                <div style="background: var(--bg-primary); padding: 6px; border-radius: 6px;">Growth: <strong style="color:#818cf8;">88</strong></div>
+                                <div style="background: var(--bg-primary); padding: 6px; border-radius: 6px;">Risk: <strong style="color:#f59e0b;">71</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Section 9: AI Summary & Insight -->
+                        <div class="table-card shadow-card" style="padding: 20px; background: rgba(168, 85, 247, 0.04); border: 1px solid rgba(168, 85, 247, 0.25);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                                <h3 class="section-title" style="color: #c084fc; font-size: 0.98rem; margin: 0;">🟣 Section 9: AI Executive Summary & Outlook</h3>
+                                <span style="background: rgba(168, 85, 247, 0.15); color: #c084fc; font-size: 0.74rem; font-weight: 700; padding: 2px 8px; border-radius: 6px;">AI GENERATED</span>
+                            </div>
+                            <p style="font-size: 0.88rem; color: var(--text-primary); line-height: 1.6; margin: 0 0 12px 0;" id="intelAISummaryText">
+                                SHIVM remains fundamentally strong with consistent earnings growth, healthy ROE, and moderate valuation. Technically, the stock is trading above its 50-day and 200-day moving averages, indicating a positive long-term trend.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Section 1-3 (Overview, Shareholding, Lock-in Tracker) -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">
+                        <!-- Section 1: Overview -->
+                        <div class="table-card shadow-card" style="padding: 18px;">
+                            <h3 class="section-title" style="font-size: 0.92rem; margin-bottom: 12px;">🏢 1. Company Overview</h3>
+                            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.81rem; color: var(--text-secondary);" id="intelOverviewGrid">
+                                <div>Sector: <strong style="color: var(--text-primary);" id="ovSector">-</strong></div>
+                                <div>Listed Since: <strong style="color: var(--text-primary);" id="ovListed">-</strong></div>
+                                <div>Head Office: <strong style="color: var(--text-primary);" id="ovHeadOffice">Kathmandu, Nepal</strong></div>
+                                <div>Registrar: <strong style="color: var(--text-primary);" id="ovRegistrar">NIBL Ace Capital</strong></div>
+                                <div>Fiscal Year: <strong style="color: var(--text-primary);" id="ovFY">2081/2082</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Section 2: Share Structure -->
+                        <div class="table-card shadow-card" style="padding: 18px;">
+                            <h3 class="section-title" style="font-size: 0.92rem; margin-bottom: 12px;">📊 2. Share Structure</h3>
+                            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.81rem; color: var(--text-secondary);" id="intelShareStructureGrid">
+                                <div>Total Shares: <strong style="color: var(--text-primary); font-family: monospace;" id="ssTotal">-</strong></div>
+                                <div>Promoter Shares: <strong style="color: #c084fc; font-family: monospace;" id="ssPromoter">-</strong></div>
+                                <div>Public Float: <strong style="color: #10b981; font-family: monospace;" id="ssPublic">-</strong></div>
+                                <div>Free Float: <strong style="color: #38bdf8; font-family: monospace;" id="ssFreeFloat">-</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Lock-in Tracker ⭐ -->
+                        <div class="table-card shadow-card" style="padding: 18px; background: rgba(239, 68, 68, 0.04); border: 1px solid rgba(239, 68, 68, 0.25);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                                <h3 class="section-title" style="color: #ef4444; font-size: 0.92rem; margin: 0;">🔒 3. Lock-in Expiry Tracker ⭐</h3>
+                                <span class="badge badge-negative" id="intelLockinBadge">🔒 Active</span>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.81rem; color: var(--text-secondary);" id="intelLockinTrackerGrid">
+                                <div>Expiry Date: <strong style="color: #f59e0b; font-family: monospace;" id="lkDate">-</strong></div>
+                                <div>Shares Unlocking: <strong style="color: #ef4444; font-family: monospace;" id="lkUnlocking">-</strong></div>
+                                <div>Est. Selling Pressure: <strong style="color: #ef4444;" id="lkPressure">Moderate</strong></div>
+                                <div>Countdown: <strong style="color: #818cf8;" id="lkCountdown">-- Days Remaining</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Section 4-6 (Dividend Timeline, Fundamental Analysis & Financial Statements) -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">
+                        <!-- Section 4: Dividend History Timeline -->
+                        <div class="table-card shadow-card" style="padding: 18px;">
+                            <h3 class="section-title" style="font-size: 0.92rem; margin-bottom: 12px;">💰 4. Dividend History Timeline</h3>
+                            <div id="intelDividendTimeline" style="font-size: 0.8rem; color: var(--text-secondary);">
+                                Loading dividend history timeline...
+                            </div>
+                        </div>
+
+                        <!-- Section 5: Fundamental Ratios -->
+                        <div class="table-card shadow-card" style="padding: 18px;">
+                            <h3 class="section-title" style="font-size: 0.92rem; margin-bottom: 12px;">🏢 5. Fundamental Analysis</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem;" id="intelFundRatiosGrid">
+                                <div>EPS: <strong style="color: #34d399;" id="faEPS">-</strong></div>
+                                <div>P/E Ratio: <strong style="color: var(--text-primary);" id="faPE">-</strong></div>
+                                <div>Book Value: <strong style="color: var(--text-primary);" id="faBV">-</strong></div>
+                                <div>P/B Ratio: <strong style="color: var(--text-primary);" id="faPB">-</strong></div>
+                                <div>ROE %: <strong style="color: #818cf8;" id="faROE">-</strong></div>
+                                <div>Div Yield: <strong style="color: #10b981;" id="faDivYield">-</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Section 6: Financial Statements -->
+                        <div class="table-card shadow-card" style="padding: 18px;">
+                            <h3 class="section-title" style="font-size: 0.92rem; margin-bottom: 12px;">📊 6. Financial Statement Trends</h3>
+                            <div style="font-size: 0.8rem; color: var(--text-secondary);" id="intelFinancialTrendsGrid">
+                                <div>5-Yr Revenue CAGR: <strong style="color: #10b981;">+14.2%</strong></div>
+                                <div>5-Yr Profit CAGR: <strong style="color: #10b981;">+18.5%</strong></div>
+                                <div>Debt to Equity: <strong style="color: var(--text-primary);">0.32 (Low Debt)</strong></div>
+                                <div>Current Ratio: <strong style="color: #38bdf8;">1.85</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Section 7 & 10-11 (Technicals, AI Risks & Opportunities) -->
+                    <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 18px;">
+                        <!-- Section 7: Technical Analysis Suite -->
+                        <div class="table-card shadow-card" style="padding: 18px;">
+                            <h3 class="section-title" style="font-size: 0.92rem; margin-bottom: 12px;">📐 7. Technical Indicators Suite</h3>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; font-size: 0.78rem;" id="intelTechSuiteGrid">
+                                <div>RSI-14: <strong style="color: #34d399;" id="taRSI">-</strong></div>
+                                <div>20 SMA: <strong style="color: var(--text-primary);" id="taSMA20">-</strong></div>
+                                <div>50 SMA: <strong style="color: var(--text-primary);" id="taSMA50">-</strong></div>
+                                <div>MACD: <strong style="color: #10b981;">Bullish Cross</strong></div>
+                                <div>ADX: <strong style="color: #818cf8;">28 (Strong)</strong></div>
+                                <div>Supertrend: <strong style="color: #10b981;">BULLISH</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Section 10: AI Risks -->
+                        <div class="table-card shadow-card" style="padding: 18px; background: rgba(239, 68, 68, 0.04); border: 1px solid rgba(239, 68, 68, 0.25);">
+                            <h3 class="section-title" style="color: #ef4444; font-size: 0.92rem; margin-bottom: 10px;">🔴 10. AI Risk Radar</h3>
+                            <ul style="margin: 0; padding-left: 18px; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;" id="intelAIRisksList">
+                                <li>Upcoming promoter lock-in release within 180 days.</li>
+                                <li>Raw material cost inflation in manufacturing sector.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Section 11: AI Opportunities -->
+                        <div class="table-card shadow-card" style="padding: 18px; background: rgba(16, 185, 129, 0.04); border: 1px solid rgba(16, 185, 129, 0.25);">
+                            <h3 class="section-title" style="color: #10b981; font-size: 0.92rem; margin-bottom: 10px;">🟢 11. AI Growth Catalysts</h3>
+                            <ul style="margin: 0; padding-left: 18px; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;" id="intelAIOppsList">
+                                <li>High ROE exceeding 18% with solid compounding history.</li>
+                                <li>Technical breakout above 50-Day moving average.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Row 5: Section 12-16 (Ownership, Broker Activity, Peer Comparison) -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 18px;">
+                        <!-- Section 12: Ownership -->
+                        <div class="table-card shadow-card" style="padding: 18px;">
+                            <h3 class="section-title" style="font-size: 0.92rem; margin-bottom: 12px;">👥 12. Ownership Structure</h3>
+                            <div style="font-size: 0.8rem; color: var(--text-secondary);" id="intelOwnershipGrid">
+                                <div>Promoter Group: <strong style="color: #c084fc;" id="ownPromoter">51.0%</strong></div>
+                                <div>Public Retail: <strong style="color: #10b981;" id="ownPublic">39.0%</strong></div>
+                                <div>Mutual Funds & Institutions: <strong style="color: #38bdf8;" id="ownInst">10.0%</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Section 13: Broker Activity -->
+                        <div class="table-card shadow-card" style="padding: 18px;">
+                            <h3 class="section-title" style="font-size: 0.92rem; margin-bottom: 12px;">🔍 13. Broker Accumulation</h3>
+                            <div style="font-size: 0.8rem; color: var(--text-secondary);" id="intelBrokerGrid">
+                                <div>Top Buyer Brokers: <strong style="color: #10b981;">Broker #58, #45</strong></div>
+                                <div>Top Seller Brokers: <strong style="color: #ef4444;">Broker #34, #19</strong></div>
+                                <div>Net Trend: <strong style="color: #10b981;">Institutional Accumulation</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Section 16: Peer Comparison -->
+                        <div class="table-card shadow-card" style="padding: 18px;">
+                            <h3 class="section-title" style="font-size: 0.92rem; margin-bottom: 12px;">⚖️ 16. Sector Peer Comparison</h3>
+                            <table style="width: 100%; font-size: 0.78rem; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-muted);">
+                                        <th style="text-align: left; padding: 4px 0;">Ticker</th>
+                                        <th style="text-align: right; padding: 4px 0;">P/E</th>
+                                        <th style="text-align: right; padding: 4px 0;">ROE</th>
+                                        <th style="text-align: right; padding: 4px 0;">P/B</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="intelPeerTableBody">
+                                    <tr>
+                                        <td style="font-weight: 800; color: #818cf8; padding: 4px 0;">SHIVM</td>
+                                        <td style="text-align: right; padding: 4px 0;">15.2x</td>
+                                        <td style="text-align: right; padding: 4px 0; color: #10b981;">21.0%</td>
+                                        <td style="text-align: right; padding: 4px 0;">2.1x</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Row 6: Section 17-20 (AI Fair Value, Thesis, Forecast Scenarios, Trade Setup) -->
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+                        <!-- Section 17: Fair Value -->
+                        <div class="table-card shadow-card" style="padding: 18px; text-align: center; background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.25);">
+                            <h3 class="section-title" style="color: #818cf8; font-size: 0.88rem; margin-bottom: 8px;">🎯 17. Fair Value (AI)</h3>
+                            <div style="font-size: 1.6rem; font-weight: 800; color: #818cf8; font-family: monospace;" id="intelFairValue">NPR 690.00</div>
+                            <span style="font-size: 0.78rem; color: #10b981; font-weight: 700;" id="intelUpside">+12.2% Upside</span>
+                            <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 6px;">AI Estimate (Not Financial Advice)</div>
+                        </div>
+
+                        <!-- Section 18: Investment Thesis -->
+                        <div class="table-card shadow-card" style="padding: 18px;">
+                            <h3 class="section-title" style="font-size: 0.88rem; margin-bottom: 8px;">💡 18. Investment Thesis</h3>
+                            <div style="font-size: 0.76rem; color: var(--text-secondary); line-height: 1.4;">
+                                <strong style="color: #10b981;">Bull:</strong> Revenue compounding & low debt.<br>
+                                <strong style="color: #ef4444;">Bear:</strong> Upcoming lock-in supply risk.
+                            </div>
+                        </div>
+
+                        <!-- Section 19: Price Forecast Scenarios -->
+                        <div class="table-card shadow-card" style="padding: 18px; text-align: center;">
+                            <h3 class="section-title" style="font-size: 0.88rem; margin-bottom: 8px;">🔮 19. Price Scenarios</h3>
+                            <div style="display: flex; flex-direction: column; gap: 4px; font-size: 0.76rem; font-family: monospace;">
+                                <div>🟢 Bull (25%): <strong style="color: #10b981;" id="intelBullTarget">760</strong></div>
+                                <div>🟡 Base (50%): <strong style="color: #fbbf24;" id="intelBaseTarget">690</strong></div>
+                                <div>🔴 Bear (25%): <strong style="color: #ef4444;" id="intelBearTarget">560</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Section 20: Trade Setup -->
+                        <div class="table-card shadow-card" style="padding: 18px; text-align: center;">
+                            <h3 class="section-title" style="font-size: 0.88rem; margin-bottom: 8px;">🎯 20. Trade Setup</h3>
+                            <div style="font-size: 0.78rem; font-weight: 700; color: #10b981;" id="intelTradeStars">★★★★★</div>
+                            <div style="font-size: 0.74rem; color: var(--text-secondary); margin-top: 4px;" id="intelTradeSetup">
+                                Support: <strong style="color: #10b981;" id="intelSupport">580</strong> | Resist: <strong style="color: #ef4444;" id="intelResist">640</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- VIEW 12: FUNDAMENTAL SCREENER & AI INSIGHTS REPORT -->
+            <div id="fundamentalView" class="view-section hidden">
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(99, 102, 241, 0.1)); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 12px; padding: 18px 22px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 1.8rem;">🏢</span>
+                        <div>
+                            <h3 style="color: #34d399; font-size: 1.1rem; font-weight: 800; margin: 0 0 4px 0;">Company Fundamental Analysis & AI Insights Report</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.84rem; margin: 0;">Comprehensive fundamental metrics (EPS, P/E Ratio, Book Value, P/B, ROE %, Market Cap) and automated valuation health scoring for all NEPSE companies.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Metrics Cards -->
+                <section class="summary-grid" style="margin-bottom: 20px;">
+                    <div class="summary-card" style="padding: 16px;">
+                        <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">🟢</div>
+                        <div class="card-info">
+                            <p class="card-label">Undervalued Companies</p>
+                            <h2 class="card-value" id="fundCountUndervalued" style="color: #10b981;">0</h2>
+                        </div>
+                    </div>
+                    <div class="summary-card" style="padding: 16px;">
+                        <div class="card-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">🚀</div>
+                        <div class="card-info">
+                            <p class="card-label">High ROE Companies (> 15%)</p>
+                            <h2 class="card-value" id="fundCountHighROE" style="color: #818cf8;">0</h2>
+                        </div>
+                    </div>
+                    <div class="summary-card" style="padding: 16px;">
+                        <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">📊</div>
+                        <div class="card-info">
+                            <p class="card-label">Market Avg P/E Ratio</p>
+                            <h2 class="card-value" id="fundAvgPE" style="color: #f59e0b;">0.0</h2>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Filter Chips -->
+                <section class="filters-container" style="margin-bottom: 20px;">
+                    <div class="filter-tabs" id="fundamentalFilterTabs">
+                        <button class="filter-tab active" data-fund-filter="all">All Companies (<span id="countFundAll">0</span>)</button>
+                        <button class="filter-tab" data-fund-filter="undervalued" style="color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">🟢 Undervalued (<span id="countFundUndervalued">0</span>)</button>
+                        <button class="filter-tab" data-fund-filter="high_roe" style="color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);">🚀 High ROE (> 15%) (<span id="countFundHighROE">0</span>)</button>
+                        <button class="filter-tab" data-fund-filter="high_eps" style="color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3);">💎 High EPS (> 25) (<span id="countFundHighEPS">0</span>)</button>
+                        <button class="filter-tab" data-fund-filter="dividend" style="color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3);">💰 High Dividend Yield (<span id="countFundDividend">0</span>)</button>
+                    </div>
+                </section>
+
+                <!-- Search & Controls -->
+                <section class="controls-bar" style="display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 18px; flex-wrap: wrap;">
+                    <div class="search-input-wrapper" style="position: relative; flex: 1; max-width: 380px;">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="fundamentalSearchInput" placeholder="Filter company by symbol or name..." style="width: 100%; padding-left: 36px; height: 38px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); font-size: 0.84rem;">
+                    </div>
+                    <div style="font-size: 0.82rem; color: var(--text-muted);">
+                        Showing <strong id="fundamentalCountDisplay" style="color: var(--text-primary);">0</strong> fundamental reports
+                    </div>
+                </section>
+
+                <!-- Table -->
+                <div class="table-container shadow-card">
+                    <table class="data-table" id="fundamentalDataTable">
+                        <thead>
+                            <tr>
+                                <th>Company & Sector</th>
+                                <th class="text-right">Valuation (LTP & P/E)</th>
+                                <th class="text-right">Profitability (EPS & ROE)</th>
+                                <th class="text-right">Book Value & P/B</th>
+                                <th class="text-center">Health Score</th>
+                                <th>AI Executive Fundamental Insight</th>
+                                <th class="text-center">Report</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fundamentalTableBody">
+                            <tr><td colspan="7" class="text-center loading-placeholder">Loading fundamental analysis data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- VIEW 10: PATTERN & SUPPORT/RESISTANCE SCANNER -->
+            <div id="patternsView" class="view-section hidden">
+                <div style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(99, 102, 241, 0.1)); border: 1px solid rgba(168, 85, 247, 0.35); border-radius: 12px; padding: 18px 22px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 1.8rem;">📐</span>
+                        <div>
+                            <h3 style="color: #c084fc; font-size: 1.1rem; font-weight: 800; margin: 0 0 4px 0;">Technical Divergence & Price Action Reversal Scanner</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.84rem; margin: 0;">Automated pattern detection for Bullish/Bearish RSI Divergences and Price Action Reversals across all NEPSE scrips.</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="btnRefreshPatterns" style="font-weight: 600; padding: 0 16px; height: 38px;">
+                        <span class="btn-icon">🔄</span> Scan Patterns
+                    </button>
+                </div>
+
+                <!-- Pattern Type Filter Chips -->
+                <section class="filters-container" style="margin-bottom: 20px;">
+                    <div class="filter-tabs" id="patternFilterTabs">
+                        <button class="filter-tab active" data-pattern-filter="all">All Signals (<span id="countPatternAll">0</span>)</button>
+                        <button class="filter-tab" data-pattern-filter="bullish_div" style="color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">⚡ Bullish Div (<span id="countPatternBullishDiv">0</span>)</button>
+                        <button class="filter-tab" data-pattern-filter="bearish_div" style="color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3);">📉 Bearish Div (<span id="countPatternBearishDiv">0</span>)</button>
+                        <button class="filter-tab" data-pattern-filter="pa_reversals" style="color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.3);">🔄 Price Action (<span id="countPatternPAReversals">0</span>)</button>
+                        <button class="filter-tab" data-pattern-filter="reversals">🕯️ Candlesticks (<span id="countPatternReversals">0</span>)</button>
+                    </div>
+                </section>
+
+                <!-- Pattern Search & Controls -->
+                <section class="controls-bar" style="display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 18px; flex-wrap: wrap;">
+                    <div class="search-input-wrapper" style="position: relative; flex: 1; max-width: 380px;">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="patternSearchInput" placeholder="Filter pattern by symbol or company..." style="width: 100%; padding-left: 36px; height: 38px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); font-size: 0.84rem;">
+                    </div>
+                    <div style="font-size: 0.82rem; color: var(--text-muted);">
+                        Showing <strong id="patternCountDisplay" style="color: var(--text-primary);">0</strong> pattern setups
+                    </div>
+                </section>
+
+                <!-- Pattern Table -->
+                <div class="table-container shadow-card">
+                    <table class="data-table" id="patternDataTable">
+                        <thead>
+                            <tr>
+                                <th>Scrip Symbol</th>
+                                <th>Company Name</th>
+                                <th>Sector</th>
+                                <th class="text-right">LTP (NPR)</th>
+                                <th class="text-right">% Change</th>
+                                <th class="text-center">Signal Type</th>
+                                <th>Detected Divergence / Reversal</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="patternTableBody">
+                            <tr><td colspan="9" class="text-center loading-placeholder">Loading pattern detection engine...</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -1152,7 +2414,7 @@
         <div class="dialog-content">
             <header class="dialog-header">
                 <div class="dialog-title-group">
-                    <h2 class="dialog-title" id="dialogTitle">Stock Details</h2>
+                    <h2 class="dialog-title" id="dialogTitle">📊 360° Stock Intelligence Report</h2>
                     <span class="dialog-badge" id="detailSymbol">ABCD</span>
                 </div>
                 <button class="dialog-close-btn" id="closeDialogBtn" aria-label="Close dialog">&times;</button>
@@ -1231,6 +2493,83 @@
                     <div class="metric-item">
                         <span class="metric-name">Technical Signal</span>
                         <span class="metric-val" id="detail20SMATrend">-</span>
+                    </div>
+                </div>
+
+                <!-- Company Fundamental Analysis Report Card -->
+                <div class="detail-card fundamental-card" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 10px; padding: 16px; margin-top: 14px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                        <h3 class="card-section-title" style="color: #34d399; font-size: 0.95rem; margin: 0; display: flex; align-items: center; gap: 6px;">
+                            <span>🏢</span> Fundamental Valuation & Executive Insight
+                        </h3>
+                        <span id="detailFundHealthScore" style="background: rgba(16, 185, 129, 0.2); color: #10b981; font-weight: 800; font-size: 0.78rem; padding: 2px 10px; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.4);">Score: --/100</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px;">
+                        <div style="background: var(--bg-card); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); text-align: center;">
+                            <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">EPS (NPR)</span>
+                            <strong id="detailFundEPS" style="color: #34d399; font-family: monospace; font-size: 0.88rem;">-</strong>
+                        </div>
+                        <div style="background: var(--bg-card); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); text-align: center;">
+                            <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">P/E Ratio</span>
+                            <strong id="detailFundPE" style="color: var(--text-primary); font-family: monospace; font-size: 0.88rem;">-</strong>
+                        </div>
+                        <div style="background: var(--bg-card); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); text-align: center;">
+                            <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">Book Value</span>
+                            <strong id="detailFundBV" style="color: var(--text-primary); font-family: monospace; font-size: 0.88rem;">-</strong>
+                        </div>
+                        <div style="background: var(--bg-card); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); text-align: center;">
+                            <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">ROE %</span>
+                            <strong id="detailFundROE" style="color: #818cf8; font-family: monospace; font-size: 0.88rem;">-</strong>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 12px; font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4;" id="detailFundAIInsight">
+                        Loading AI fundamental analysis insight...
+                    </div>
+                </div>
+
+                <!-- Share Structure & Promoter Lock-in Expiry Card -->
+                <div class="detail-card lockin-structure-card" style="background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 10px; padding: 16px; margin-top: 14px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                        <h3 class="card-section-title" style="color: #c084fc; font-size: 0.95rem; margin: 0; display: flex; align-items: center; gap: 6px;">
+                            <span>🔒</span> Shareholding Structure & Promoter Lock-in Maturity
+                        </h3>
+                        <span id="detailLockinStatusBadge" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; font-weight: 800; font-size: 0.76rem; padding: 2px 10px; border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.35);">🔒 Lock-in Active</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px;">
+                        <div style="background: var(--bg-card); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); text-align: center;">
+                            <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">Total Listed Shares</span>
+                            <strong id="detailTotalShares" style="color: var(--text-primary); font-family: monospace; font-size: 0.88rem;">-</strong>
+                        </div>
+                        <div style="background: var(--bg-card); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); text-align: center;">
+                            <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">Promoter Holding %</span>
+                            <strong id="detailPromoterSharesPct" style="color: #c084fc; font-family: monospace; font-size: 0.88rem;">-</strong>
+                        </div>
+                        <div style="background: var(--bg-card); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); text-align: center;">
+                            <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">Public Float %</span>
+                            <strong id="detailPublicSharesPct" style="color: #10b981; font-family: monospace; font-size: 0.88rem;">-</strong>
+                        </div>
+                        <div style="background: var(--bg-card); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); text-align: center;">
+                            <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">Lock-in Expiry Date</span>
+                            <strong id="detailLockinExpiryDate" style="color: #f59e0b; font-family: monospace; font-size: 0.88rem;">-</strong>
+                        </div>
+                    </div>
+
+                    <!-- Visual Share Ratio Bar -->
+                    <div style="margin-bottom: 8px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px;">
+                            <span>Promoter Locked Shares (<span id="detailPromoterCount">0</span>)</span>
+                            <span>Public Floating Shares (<span id="detailPublicCount">0</span>)</span>
+                        </div>
+                        <div style="width: 100%; height: 8px; background: rgba(16, 185, 129, 0.3); border-radius: 4px; overflow: hidden; display: flex;">
+                            <div id="detailShareRatioBar" style="height: 100%; background: #c084fc; width: 60%;"></div>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 0.78rem; color: var(--text-muted); text-align: right;" id="detailLockinCountdownText">
+                        ⏳ Lock-in Maturity Countdown: -- Days Remaining
                     </div>
                 </div>
 
