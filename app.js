@@ -110,6 +110,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Initialize Username & Cloud Syncing Event Handlers
     initCloudSyncHandlers();
 
+    // Default startup view
+    switchView("landing");
+
     await loadMasterTickers();
     await fetchData();
     startLiveRefresh();
