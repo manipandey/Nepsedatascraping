@@ -987,6 +987,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         elif self.path == "/api/scrape" or self.path.startswith("/api/scrape?"):
             print("\n[Server] Live re-scrape requested from dashboard client...")
             success = scrape_nepse()
+            if success:
+                try:
+                    import threading
+                    import sync_to_supabase
+                    threading.Thread(target=sync_to_supabase.sync_all_to_supabase, daemon=True).start()
+                except Exception as sync_err:
+                    print(f"[Server] Failed to auto-sync to Supabase: {sync_err}")
             response_data = {"success": success, "source": "ShareSansar Live"}
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
@@ -1234,6 +1241,14 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 dashboard_file = os.path.join(DIRECTORY, "data", "nepse_today.json")
                 with open(dashboard_file, "w", encoding="utf-8") as f:
                     json.dump(tick_response, f, indent=2)
+
+                # Trigger asynchronous Supabase synchronization
+                try:
+                    import threading
+                    import sync_to_supabase
+                    threading.Thread(target=sync_to_supabase.sync_all_to_supabase, daemon=True).start()
+                except Exception as sync_err:
+                    print(f"[LiveTick] Failed to auto-sync to Supabase: {sync_err}")
 
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")

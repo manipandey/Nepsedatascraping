@@ -93,6 +93,25 @@ def sync_all_to_supabase():
         print(f"[Sync] Preparing {len(prices_batch)} daily prices records for date {today_date}...")
         post_to_supabase("daily_prices", prices_batch)
 
+        # Sync Market (NEPSE) Summary History
+        indices = today_data.get("indices", [])
+        nepse_idx = next((idx for idx in indices if idx.get("indicesName") == "NEPSE"), None)
+        if nepse_idx:
+            market_rec = {
+                "date": today_date,
+                "nepse_index": float(nepse_idx.get("value", 0.0)),
+                "point_change": float(nepse_idx.get("pointChange", 0.0)),
+                "percentage_change": float(nepse_idx.get("percentageChange", 0.0)),
+                "total_turnover": float(nepse_idx.get("turnover", 0.0)),
+                "total_volume": int(nepse_idx.get("sharesTraded", 0)),
+                "total_transactions": sum(int(st.get("transactions", 0) or 0) for st in stocks),
+                "advancers": int(nepse_idx.get("advancers", 0)),
+                "decliners": int(nepse_idx.get("decliners", 0)),
+                "unchanged": int(nepse_idx.get("unchanged", 0))
+            }
+            print(f"[Sync] Preparing NEPSE market history record for date {today_date}...")
+            post_to_supabase("market_history", [market_rec])
+
     # 2. Sync Real Live Fundamentals
     fund_file = os.path.join(DIRECTORY, "data", "nepse_fundamentals_live.json")
     if os.path.exists(fund_file):

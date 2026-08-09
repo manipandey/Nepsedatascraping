@@ -79,11 +79,19 @@ const formatNumber = (val) => {
 const savePortfolio = () => {
     localStorage.setItem(PORTFOLIO_STORAGE_KEY, JSON.stringify(portfolioHoldings));
     renderPortfolioView();
+    const username = localStorage.getItem("nepse_portfolio_username") || "Guest";
+    if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable()) {
+        syncToSupabase(username, portfolioHoldings, tradeJournal);
+    }
 };
 
 const saveJournal = () => {
     localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(tradeJournal));
     renderJournalView();
+    const username = localStorage.getItem("nepse_portfolio_username") || "Guest";
+    if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable()) {
+        syncToSupabase(username, portfolioHoldings, tradeJournal);
+    }
 };
 
 // Main Initialization
@@ -99,10 +107,84 @@ document.addEventListener("DOMContentLoaded", async () => {
         btnSignOut.addEventListener("click", handleSignOut);
     }
     
+    // Initialize Username & Cloud Syncing Event Handlers
+    initCloudSyncHandlers();
+
     await loadMasterTickers();
     await fetchData();
     startLiveRefresh();
 });
+
+// Bind username inputs and cloud synchronization routines
+function initCloudSyncHandlers() {
+    const userField = document.getElementById("portfolioUsername");
+    const syncBtn = document.getElementById("btnSyncSupabase");
+    
+    const savedUser = localStorage.getItem("nepse_portfolio_username") || "Guest";
+    if (userField) {
+        userField.value = savedUser;
+        userField.addEventListener("change", async () => {
+            const username = userField.value.trim() || "Guest";
+            localStorage.setItem("nepse_portfolio_username", username);
+            if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable()) {
+                const syncRes = await syncFromSupabase(username, portfolioHoldings, tradeJournal);
+                if (syncRes) {
+                    portfolioHoldings = syncRes.holdings;
+                    tradeJournal = syncRes.journal;
+                    localStorage.setItem(PORTFOLIO_STORAGE_KEY, JSON.stringify(portfolioHoldings));
+                    localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(tradeJournal));
+                    renderPortfolioView();
+                    renderJournalView();
+                }
+            }
+        });
+    }
+
+    if (syncBtn) {
+        syncBtn.addEventListener("click", async () => {
+            const originalText = syncBtn.innerHTML;
+            syncBtn.disabled = true;
+            syncBtn.innerHTML = "⏳ Syncing...";
+            
+            const username = localStorage.getItem("nepse_portfolio_username") || "Guest";
+            
+            if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable()) {
+                // Upload current local state to cloud first
+                await syncToSupabase(username, portfolioHoldings, tradeJournal);
+                // Then fetch remote updates
+                const syncRes = await syncFromSupabase(username, portfolioHoldings, tradeJournal);
+                if (syncRes) {
+                    portfolioHoldings = syncRes.holdings;
+                    tradeJournal = syncRes.journal;
+                    localStorage.setItem(PORTFOLIO_STORAGE_KEY, JSON.stringify(portfolioHoldings));
+                    localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(tradeJournal));
+                    renderPortfolioView();
+                    renderJournalView();
+                }
+                alert(`Cloud Sync Successful! Locked database state for username: '${username}'`);
+            } else {
+                alert("Supabase database is not configured. Portfolio data remains saved locally in your browser.");
+            }
+            
+            syncBtn.disabled = false;
+            syncBtn.innerHTML = originalText;
+        });
+    }
+
+    // Run initial sync on load
+    if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable()) {
+        syncFromSupabase(savedUser, portfolioHoldings, tradeJournal).then(syncRes => {
+            if (syncRes) {
+                portfolioHoldings = syncRes.holdings;
+                tradeJournal = syncRes.journal;
+                localStorage.setItem(PORTFOLIO_STORAGE_KEY, JSON.stringify(portfolioHoldings));
+                localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(tradeJournal));
+                renderPortfolioView();
+                renderJournalView();
+            }
+        }).catch(err => console.log("Initial Supabase sync error:", err));
+    }
+}
 
 // Load master ticker list (329+ NEPSE companies from merolagani)
 async function loadMasterTickers() {
