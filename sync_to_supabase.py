@@ -18,6 +18,23 @@ from datetime import datetime, timezone
 
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
+# Manually load environment variables from .env file if it exists
+def load_env():
+    env_path = os.path.join(DIRECTORY, ".env")
+    if os.path.exists(env_path):
+        with open(env_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                parts = line.split("=", 1)
+                if len(parts) == 2:
+                    key = parts[0].strip()
+                    val = parts[1].strip().strip('"').strip("'")
+                    os.environ[key] = val
+
+load_env()
+
 # Supabase Config
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://your-project-id.supabase.co")
 SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or os.environ.get("SUPABASE_ANON_KEY", "YOUR_SERVICE_ROLE_KEY")
