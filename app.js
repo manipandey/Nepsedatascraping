@@ -110,8 +110,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Initialize Username & Cloud Syncing Event Handlers
     initCloudSyncHandlers();
 
-    // Default startup view
-    switchView("landing");
+    // Default startup view (skip landing if they already entered the terminal)
+    const activeView = localStorage.getItem("nepse_active_view") || "landing";
+    switchView(activeView);
 
     await loadMasterTickers();
     await fetchData();
@@ -294,6 +295,9 @@ function initNavigation() {
 }
 
 function switchView(viewTarget) {
+    // Save last active view target to skip landing page on refresh
+    localStorage.setItem("nepse_active_view", viewTarget);
+
     // Intercept restricted sections (Portfolio & Trading)
     const restrictedViews = ["portfolio", "journal", "watchlist"];
     const isLoggedIn = localStorage.getItem("nepse_logged_in") === "true";
