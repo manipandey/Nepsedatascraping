@@ -6,6 +6,23 @@
 -- Enable UUID Extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+-- Clean Slate: Drop old schemas to overwrite previous UUID/Auth column layouts
+DROP TABLE IF EXISTS public.alert_notifications CASCADE;
+DROP TABLE IF EXISTS public.user_alerts CASCADE;
+DROP TABLE IF EXISTS public.user_watchlists CASCADE;
+DROP TABLE IF EXISTS public.portfolio_holdings CASCADE;
+DROP TABLE IF EXISTS public.portfolios CASCADE;
+DROP TABLE IF EXISTS public.profiles CASCADE;
+DROP TABLE IF EXISTS public.trade_journal CASCADE;
+DROP TABLE IF EXISTS public.market_history CASCADE;
+DROP TABLE IF EXISTS public.corporate_calendar CASCADE;
+DROP TABLE IF EXISTS public.dividend_history CASCADE;
+DROP TABLE IF EXISTS public.lockin_tracker CASCADE;
+DROP TABLE IF EXISTS public.share_structures CASCADE;
+DROP TABLE IF EXISTS public.company_fundamentals CASCADE;
+DROP TABLE IF EXISTS public.daily_prices CASCADE;
+DROP TABLE IF EXISTS public.companies CASCADE;
+
 -- 1. COMPANIES MASTER TABLE
 CREATE TABLE IF NOT EXISTS public.companies (
     symbol TEXT PRIMARY KEY,
