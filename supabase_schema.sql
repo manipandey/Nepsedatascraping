@@ -12,7 +12,9 @@ DROP TABLE IF EXISTS public.user_alerts CASCADE;
 DROP TABLE IF EXISTS public.user_watchlists CASCADE;
 DROP TABLE IF EXISTS public.portfolio_holdings CASCADE;
 DROP TABLE IF EXISTS public.portfolios CASCADE;
+DROP TABLE IF EXISTS public.user_preferences CASCADE;
 DROP TABLE IF EXISTS public.profiles CASCADE;
+DROP TABLE IF EXISTS public.users CASCADE;
 DROP TABLE IF EXISTS public.trade_journal CASCADE;
 DROP TABLE IF EXISTS public.market_history CASCADE;
 DROP TABLE IF EXISTS public.corporate_calendar CASCADE;
@@ -22,6 +24,31 @@ DROP TABLE IF EXISTS public.share_structures CASCADE;
 DROP TABLE IF EXISTS public.company_fundamentals CASCADE;
 DROP TABLE IF EXISTS public.daily_prices CASCADE;
 DROP TABLE IF EXISTS public.companies CASCADE;
+
+-- 0. USERS ACCESS TABLE (Auth-free, simple password)
+CREATE TABLE IF NOT EXISTS public.users (
+    username TEXT PRIMARY KEY,
+    password_hash TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE public.users DISABLE ROW LEVEL SECURITY;
+
+-- 0b. USER PREFERENCES TABLE (key-value store for per-user settings, watchlist, etc.)
+CREATE TABLE IF NOT EXISTS public.user_preferences (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    username TEXT NOT NULL REFERENCES public.users(username) ON DELETE CASCADE,
+    preference_key TEXT NOT NULL,
+    preference_value TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    CONSTRAINT uq_user_preference UNIQUE (username, preference_key)
+);
+
+CREATE INDEX IF NOT EXISTS idx_user_preferences_username ON public.user_preferences(username);
+
+ALTER TABLE public.user_preferences DISABLE ROW LEVEL SECURITY;
+
 
 -- 1. COMPANIES MASTER TABLE
 CREATE TABLE IF NOT EXISTS public.companies (

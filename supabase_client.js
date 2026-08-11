@@ -1,19 +1,33 @@
 /**
  * ====================================================================
  * SUPABASE CLIENT INTEGRATION FOR NEPSE TERMINAL (VERCEL DEPLOYMENT)
- * Auth-free, Username-based Cloud Database Syncing
+ * Database-Backed Authentication & Per-User Cloud Data Syncing
  * ====================================================================
  */
 
 window.SUPABASE_CONFIG = {
     // These will be overridden by Vercel deployment environment variables or client-side runtime config
-    url: window.ENV_SUPABASE_URL || "https://your-project-id.supabase.co",
-    anonKey: window.ENV_SUPABASE_ANON_KEY || "YOUR_SUPABASE_ANON_KEY"
+    url: window.ENV_SUPABASE_URL || "https://epvlpmizvswjgozpfrfz.supabase.co",
+    anonKey: window.ENV_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVwdmxwbWl6dnN3amdvenBmcmZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyNDY2MDIsImV4cCI6MjEwMTgyMjYwMn0.tKpz6cSOejAx-YWngWcwgKrqA6mLveqWD0-Lzpp3WUk"
 };
 
 let supabaseClient = null;
 
-function initSupabaseClient() {
+async function initSupabaseClient() {
+    try {
+        const res = await fetch("/api/config");
+        if (res.ok) {
+            const config = await res.json();
+            if (config.SUPABASE_URL && config.SUPABASE_ANON_KEY) {
+                window.SUPABASE_CONFIG.url = config.SUPABASE_URL;
+                window.SUPABASE_CONFIG.anonKey = config.SUPABASE_ANON_KEY;
+                console.log("[Supabase Client] Dynamically loaded configuration from local server.");
+            }
+        }
+    } catch (e) {
+        // Fallback silently if /api/config is not available (e.g. static host Vercel)
+    }
+
     if (typeof supabase !== "undefined" && window.SUPABASE_CONFIG.url && !window.SUPABASE_CONFIG.url.includes("your-project-id")) {
         try {
             supabaseClient = supabase.createClient(window.SUPABASE_CONFIG.url, window.SUPABASE_CONFIG.anonKey);
@@ -69,6 +83,62 @@ async function getOrCreatePortfolioId(username) {
 }
 
 /**
+ * Sync Watchlist To Supabase
+ * Saves the user's watchlist as a JSON blob in the user_preferences table.
+ * Uses upsert so it creates or replaces the existing record.
+ */
+async function syncWatchlistToSupabase(username, watchlist = []) {
+    if (!supabaseClient || !username || username === "Guest") return false;
+    try {
+        const { error } = await supabaseClient
+            .from("user_preferences")
+            .upsert([
+                {
+                    username: username,
+                    preference_key: "watchlist_v3",
+                    preference_value: JSON.stringify(watchlist),
+                    updated_at: new Date().toISOString()
+                }
+            ], { onConflict: "username,preference_key" });
+
+        if (error) throw error;
+        console.log(`[Supabase Client] Watchlist synced to cloud for '${username}' (${watchlist.length} items).`);
+        return true;
+    } catch (e) {
+        console.warn("[Supabase Client] syncWatchlistToSupabase error:", e);
+        return false;
+    }
+}
+
+/**
+ * Sync Watchlist From Supabase
+ * Fetches the user's watchlist blob from the user_preferences table.
+ * Returns the parsed watchlist array, or null if not found.
+ */
+async function syncWatchlistFromSupabase(username) {
+    if (!supabaseClient || !username || username === "Guest") return null;
+    try {
+        const { data, error } = await supabaseClient
+            .from("user_preferences")
+            .select("preference_value")
+            .eq("username", username)
+            .eq("preference_key", "watchlist_v3")
+            .limit(1);
+
+        if (error) throw error;
+        if (data && data.length > 0 && data[0].preference_value) {
+            const parsed = JSON.parse(data[0].preference_value);
+            console.log(`[Supabase Client] Watchlist loaded from cloud for '${username}' (${parsed.length} items).`);
+            return Array.isArray(parsed) ? parsed : null;
+        }
+        return null;
+    } catch (e) {
+        console.warn("[Supabase Client] syncWatchlistFromSupabase error:", e);
+        return null;
+    }
+}
+
+/**
  * Sync From Supabase
  * Pulls holdings and journal entries for the specified username from Supabase.
  * If no portfolio/journal entries exist in Supabase for this username, it pushes local data to Supabase instead.
@@ -97,6 +167,9 @@ async function syncFromSupabase(username, localHoldings = [], localJournal = [])
         if (journalError) throw journalError;
 
         const hasRemoteData = (holdingsData && holdingsData.length > 0) || (journalData && journalData.length > 0);
+
+        // Also fetch watchlist from cloud
+        const watchlistData = await syncWatchlistFromSupabase(username);
 
         if (!hasRemoteData) {
             // No remote data: upload local data to Supabase to initialize cloud backup
@@ -132,7 +205,7 @@ async function syncFromSupabase(username, localHoldings = [], localJournal = [])
         }));
 
         console.log(`[Supabase Client] Successfully synced ${holdings.length} holdings and ${journal.length} journal entries for '${username}'.`);
-        return { holdings, journal };
+        return { holdings, journal, watchlist: watchlistData };
     } catch (e) {
         console.error("[Supabase Client] Sync pull error:", e);
         return null;
@@ -215,6 +288,69 @@ async function syncToSupabase(username, localHoldings = [], localJournal = []) {
     } catch (e) {
         console.error("[Supabase Client] Sync push error:", e);
         return false;
+    }
+}
+
+/**
+ * Authenticate or Create User (One-time simple username & password registration/verification)
+ */
+async function authenticateOrCreateUser(username, password, action = "login") {
+    if (!supabaseClient) {
+        // Fallback for offline mode or unit testing
+        console.warn("[Supabase Auth] Client not initialized. Simulating success offline.");
+        return { success: true, isNew: (action === "signup") };
+    }
+    try {
+        const cleanUsername = username.trim().toLowerCase();
+        
+        // Check if user exists
+        const { data, error } = await supabaseClient
+            .from("users")
+            .select("password_hash")
+            .eq("username", cleanUsername)
+            .limit(1);
+
+        if (error) {
+            if (error.message && error.message.includes("relation \"public.users\" does not exist")) {
+                return { 
+                    success: false, 
+                    error: "Database table 'users' does not exist. Please run the SQL schema in your Supabase SQL Editor first!" 
+                };
+            }
+            throw error;
+        }
+
+        const userExists = data && data.length > 0;
+
+        if (action === "signup") {
+            if (userExists) {
+                return { success: false, error: "This username is already taken. Please choose a different one or sign in." };
+            } else {
+                // Register username and password "only one time"
+                const { error: insertError } = await supabaseClient
+                    .from("users")
+                    .insert([{ username: cleanUsername, password_hash: password }]);
+
+                if (insertError) throw insertError;
+                console.log(`[Supabase Auth] New user registered successfully: '${cleanUsername}'`);
+                return { success: true, isNew: true };
+            }
+        } else {
+            // Sign in
+            if (!userExists) {
+                return { success: false, error: "Username does not exist. If you are a new user, switch to 'Create a new profile' first!" };
+            }
+            
+            const storedPassword = data[0].password_hash;
+            if (storedPassword === password) {
+                return { success: true, isNew: false };
+            } else {
+                return { success: false, error: "Incorrect passcode for this username. Please try again." };
+            }
+        }
+    } catch (e) {
+        console.error("[Supabase Auth] Authentication error:", e);
+        return { success: false, error: e.message || "Failed to authenticate with database." };
     }
 }
 

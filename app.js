@@ -21,12 +21,26 @@ let bankRatesData = null; // Caches live bank rates from server
 let activeBankRatesTab = "fd"; // fd or savings
 let nrbIndicatorsData = null; // Caches live NRB macro indicators
 
-// LocalStorage Persistence Keys
-const PORTFOLIO_STORAGE_KEY = "nepse_portfolio_v3";
-const JOURNAL_STORAGE_KEY = "nepse_journal_v3";
+// LocalStorage Persistence Keys (base — scoped per-user at runtime)
+const PORTFOLIO_STORAGE_KEY_BASE = "nepse_portfolio_v3";
+const JOURNAL_STORAGE_KEY_BASE   = "nepse_journal_v3";
+const WATCHLIST_STORAGE_KEY_BASE = "nepse_watchlist_v3";
 
-// Portfolio & Journal Local Repositories with Initial Rich Demo Data
-let portfolioHoldings = JSON.parse(localStorage.getItem(PORTFOLIO_STORAGE_KEY)) || [
+/** Returns the username-scoped storage key for portfolio/journal/watchlist. */
+function getScopedKey(base) {
+    const user = localStorage.getItem("nepse_portfolio_username") || "guest";
+    return `${base}_${user}`;
+}
+
+// Back-compat aliases read from sessionStorage so existing init code still works
+const PORTFOLIO_STORAGE_KEY = PORTFOLIO_STORAGE_KEY_BASE;
+const JOURNAL_STORAGE_KEY   = JOURNAL_STORAGE_KEY_BASE;
+
+// Portfolio & Journal Local Repositories — load from user-scoped key, fall back to shared key for backward compat
+let portfolioHoldings = JSON.parse(
+    localStorage.getItem(getScopedKey(PORTFOLIO_STORAGE_KEY_BASE)) ||
+    localStorage.getItem(PORTFOLIO_STORAGE_KEY_BASE)
+) || [
     {
         id: 1,
         symbol: "ADBL",
@@ -49,7 +63,10 @@ let portfolioHoldings = JSON.parse(localStorage.getItem(PORTFOLIO_STORAGE_KEY)) 
     }
 ];
 
-let tradeJournal = JSON.parse(localStorage.getItem(JOURNAL_STORAGE_KEY)) || [
+let tradeJournal = JSON.parse(
+    localStorage.getItem(getScopedKey(JOURNAL_STORAGE_KEY_BASE)) ||
+    localStorage.getItem(JOURNAL_STORAGE_KEY_BASE)
+) || [
     {
         id: 1,
         date: "2026-08-01",
@@ -77,19 +94,19 @@ const formatNumber = (val) => {
 };
 
 const savePortfolio = () => {
-    localStorage.setItem(PORTFOLIO_STORAGE_KEY, JSON.stringify(portfolioHoldings));
+    localStorage.setItem(getScopedKey(PORTFOLIO_STORAGE_KEY_BASE), JSON.stringify(portfolioHoldings));
     renderPortfolioView();
     const username = localStorage.getItem("nepse_portfolio_username") || "Guest";
-    if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable()) {
+    if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable() && username !== "Guest") {
         syncToSupabase(username, portfolioHoldings, tradeJournal);
     }
 };
 
 const saveJournal = () => {
-    localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(tradeJournal));
+    localStorage.setItem(getScopedKey(JOURNAL_STORAGE_KEY_BASE), JSON.stringify(tradeJournal));
     renderJournalView();
     const username = localStorage.getItem("nepse_portfolio_username") || "Guest";
-    if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable()) {
+    if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable() && username !== "Guest") {
         syncToSupabase(username, portfolioHoldings, tradeJournal);
     }
 };
@@ -110,8 +127,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Initialize Username & Cloud Syncing Event Handlers
     initCloudSyncHandlers();
 
-    // Default startup view (skip landing if they already entered the terminal)
-    const activeView = localStorage.getItem("nepse_active_view") || "landing";
+    // Default startup view (landing page opens when tab is closed and opened again)
+    const activeView = sessionStorage.getItem("nepse_active_view") || "landing";
     switchView(activeView);
 
     await loadMasterTickers();
@@ -152,22 +169,28 @@ function initCloudSyncHandlers() {
             
             const username = localStorage.getItem("nepse_portfolio_username") || "Guest";
             
-            if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable()) {
+            if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable() && username !== "Guest") {
                 // Upload current local state to cloud first
                 await syncToSupabase(username, portfolioHoldings, tradeJournal);
+                await syncWatchlistToSupabase(username, customWatchlist);
                 // Then fetch remote updates
                 const syncRes = await syncFromSupabase(username, portfolioHoldings, tradeJournal);
                 if (syncRes) {
                     portfolioHoldings = syncRes.holdings;
                     tradeJournal = syncRes.journal;
-                    localStorage.setItem(PORTFOLIO_STORAGE_KEY, JSON.stringify(portfolioHoldings));
-                    localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(tradeJournal));
+                    if (syncRes.watchlist) {
+                        customWatchlist = syncRes.watchlist;
+                        localStorage.setItem(getScopedKey(WATCHLIST_STORAGE_KEY_BASE), JSON.stringify(customWatchlist));
+                        renderWatchlistView();
+                    }
+                    localStorage.setItem(getScopedKey(PORTFOLIO_STORAGE_KEY_BASE), JSON.stringify(portfolioHoldings));
+                    localStorage.setItem(getScopedKey(JOURNAL_STORAGE_KEY_BASE), JSON.stringify(tradeJournal));
                     renderPortfolioView();
                     renderJournalView();
                 }
                 alert(`Cloud Sync Successful! Locked database state for username: '${username}'`);
             } else {
-                alert("Supabase database is not configured. Portfolio data remains saved locally in your browser.");
+                alert("Supabase database is not configured or you are not logged in. Portfolio data remains saved locally in your browser.");
             }
             
             syncBtn.disabled = false;
@@ -175,14 +198,20 @@ function initCloudSyncHandlers() {
         });
     }
 
-    // Run initial sync on load
-    if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable()) {
+    // Run initial sync on load (only if already logged in)
+    const isLoggedIn = localStorage.getItem("nepse_logged_in") === "true";
+    if (isLoggedIn && typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable() && savedUser !== "Guest") {
         syncFromSupabase(savedUser, portfolioHoldings, tradeJournal).then(syncRes => {
             if (syncRes) {
                 portfolioHoldings = syncRes.holdings;
                 tradeJournal = syncRes.journal;
-                localStorage.setItem(PORTFOLIO_STORAGE_KEY, JSON.stringify(portfolioHoldings));
-                localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(tradeJournal));
+                if (syncRes.watchlist) {
+                    customWatchlist = syncRes.watchlist;
+                    localStorage.setItem(getScopedKey(WATCHLIST_STORAGE_KEY_BASE), JSON.stringify(customWatchlist));
+                    renderWatchlistView();
+                }
+                localStorage.setItem(getScopedKey(PORTFOLIO_STORAGE_KEY_BASE), JSON.stringify(portfolioHoldings));
+                localStorage.setItem(getScopedKey(JOURNAL_STORAGE_KEY_BASE), JSON.stringify(tradeJournal));
                 renderPortfolioView();
                 renderJournalView();
             }
@@ -295,8 +324,8 @@ function initNavigation() {
 }
 
 function switchView(viewTarget) {
-    // Save last active view target to skip landing page on refresh
-    localStorage.setItem("nepse_active_view", viewTarget);
+    // Save last active view target to session storage (persists during page refresh, resets on tab close)
+    sessionStorage.setItem("nepse_active_view", viewTarget);
 
     // Intercept restricted sections (Portfolio & Trading)
     const restrictedViews = ["portfolio", "journal", "watchlist"];
@@ -419,16 +448,26 @@ function initEventListeners() {
             refreshBtn.disabled = true;
             refreshBtn.innerHTML = `<span class="btn-icon">🔄</span> Syncing NEPSE Data...`;
             try {
-                const res = await fetch("/api/scrape");
-                const json = await res.json();
-                if (json.success) {
-                    await fetchData();
-                } else {
-                    alert("Re-scrape complete with warning.");
+                // On Vercel static hosting there is no server-side /api/scrape endpoint.
+                // Try it opportunistically (works on local dev), but silently fall through
+                // to a direct data refresh on any network/404 error.
+                let scraped = false;
+                try {
+                    const res = await fetch("/api/scrape", { signal: AbortSignal.timeout(4000) });
+                    if (res.ok) {
+                        const json = await res.json();
+                        scraped = !!json.success;
+                    }
+                } catch (_) {
+                    // No scrape endpoint available (Vercel static deploy) — that's fine
                 }
+
+                // Always re-fetch the latest data JSON from CDN / static files
+                await fetchData();
+                showToast("Market data refreshed successfully!", "success");
             } catch (err) {
                 console.error("Re-scrape error:", err);
-                alert("Error triggering re-scrape.");
+                showToast("Could not refresh data. Check your connection.", "warning");
             } finally {
                 refreshBtn.disabled = false;
                 refreshBtn.innerHTML = `<span class="btn-icon">🔄</span> Sync Live Data`;
@@ -895,17 +934,8 @@ async function fetchData() {
         try { renderHeatbubbleView(); } catch(e) { console.error("renderHeatbubbleView error:", e); }
     } catch (err) {
         console.error("Error loading data:", err);
-        // Fallback: Trigger live scrape if local file failed to load
-        try {
-            console.log("Attempting live auto-sync scrape...");
-            const resSync = await fetch("/api/scrape");
-            const dataSync = await resSync.json();
-            if (dataSync.success) {
-                setTimeout(fetchData, 1000);
-            }
-        } catch (syncErr) {
-            console.error("Auto-sync error:", syncErr);
-        }
+        const updEl = document.getElementById("lastUpdatedTime");
+        if (updEl) updEl.textContent = `Offline ● Retry in 30s`;
     }
 }
 
@@ -2609,23 +2639,35 @@ async function fetchBrokerFloorsheet(brokerNo) {
 let customWatchlist = [];
 
 function loadWatchlist() {
-    const saved = localStorage.getItem("nepse_watchlist_v3");
+    // Load from user-scoped key; fall back to legacy key for backward compat
+    const scopedKey = getScopedKey(WATCHLIST_STORAGE_KEY_BASE);
+    const saved = localStorage.getItem(scopedKey) || localStorage.getItem(WATCHLIST_STORAGE_KEY_BASE);
     if (saved) {
         try { customWatchlist = JSON.parse(saved); } catch(e) {}
     }
     if (!Array.isArray(customWatchlist) || customWatchlist.length === 0) {
-        // Default sample watchlist items
-        customWatchlist = [
-            { id: 1, symbol: "ADBL", highTarget: 340, lowTarget: 300, notes: "Breakout resistance watch at 340" },
-            { id: 2, symbol: "NABIL", highTarget: 560, lowTarget: 510, notes: "Accumulation near 510 support" }
-        ];
-        saveWatchlist();
+        // Only seed demo items for guest / first-time users
+        const isLoggedIn = localStorage.getItem("nepse_logged_in") === "true";
+        if (!isLoggedIn) {
+            customWatchlist = [
+                { id: 1, symbol: "ADBL", highTarget: 340, lowTarget: 300, notes: "Breakout resistance watch at 340" },
+                { id: 2, symbol: "NABIL", highTarget: 560, lowTarget: 510, notes: "Accumulation near 510 support" }
+            ];
+            saveWatchlist();
+        } else {
+            customWatchlist = [];
+        }
     }
 }
 
 function saveWatchlist() {
-    localStorage.setItem("nepse_watchlist_v3", JSON.stringify(customWatchlist));
+    localStorage.setItem(getScopedKey(WATCHLIST_STORAGE_KEY_BASE), JSON.stringify(customWatchlist));
     renderWatchlistView();
+    // Sync to cloud in background if logged in
+    const username = localStorage.getItem("nepse_portfolio_username") || "Guest";
+    if (typeof syncWatchlistToSupabase === "function" && username !== "Guest") {
+        syncWatchlistToSupabase(username, customWatchlist);
+    }
 }
 
 function checkPortfolioTPSLAlerts() {
@@ -4532,12 +4574,24 @@ function renderLandingWidget(data) {
 
 async function handleMockLogin(event) {
     event.preventDefault();
-    const email = document.getElementById("loginEmail").value.trim();
+    const usernameInput = document.getElementById("loginUsername");
+    const passwordInput = document.getElementById("loginPassword");
+    const username = usernameInput ? usernameInput.value.trim() : "";
+    const password = passwordInput ? passwordInput.value : "";
     const roleSelect = document.getElementById("loginAccountType");
     const roleText = roleSelect ? roleSelect.options[roleSelect.selectedIndex].text : "Verified Trader";
     const btnSubmit = document.getElementById("btnLoginSubmit");
+    const actionInput = document.getElementById("loginActionType");
+    const action = actionInput ? actionInput.value : "login";
 
-    if (!email) return;
+    if (!username || !password) {
+        showToast("Please enter both username and passcode.", "warning");
+        return;
+    }
+    if (!/^\d{4}$/.test(password)) {
+        showToast("Passcode must be exactly 4 digits.", "warning");
+        return;
+    }
 
     // Show loading spinner state
     if (btnSubmit) {
@@ -4545,28 +4599,46 @@ async function handleMockLogin(event) {
         btnSubmit.innerHTML = `<span class="loader-spinner"></span> Authenticating...`;
     }
 
-    // Simulate server verification delay of 1.2s
-    await new Promise(resolve => setTimeout(resolve, 1200));
+    // Check with Supabase database or register "only one time"
+    let authRes = { success: true, isNew: true };
+    if (typeof authenticateOrCreateUser === "function") {
+        authRes = await authenticateOrCreateUser(username, password, action);
+    }
+
+    if (!authRes.success) {
+        // Restore login button on error
+        if (btnSubmit) {
+            btnSubmit.disabled = false;
+            btnSubmit.innerHTML = action === "signup" ? `<span>✨ Register & Unlock</span>` : `<span>🔐 Authenticate & Unlock</span>`;
+        }
+        showToast(authRes.error, "error");
+        return;
+    }
 
     // Save session state
     localStorage.setItem("nepse_logged_in", "true");
-    localStorage.setItem("nepse_user_email", email);
+    localStorage.setItem("nepse_user_email", username);
     localStorage.setItem("nepse_user_role", roleText);
-    localStorage.setItem("nepse_portfolio_username", email);
+    localStorage.setItem("nepse_portfolio_username", username);
 
     // Sync username field and trigger remote portfolio fetch
     const userField = document.getElementById("portfolioUsername");
     if (userField) {
-        userField.value = email;
+        userField.value = username;
     }
     if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable()) {
         try {
-            const syncRes = await syncFromSupabase(email, portfolioHoldings, tradeJournal);
+            const syncRes = await syncFromSupabase(username, portfolioHoldings, tradeJournal);
             if (syncRes) {
                 portfolioHoldings = syncRes.holdings;
                 tradeJournal = syncRes.journal;
-                localStorage.setItem(PORTFOLIO_STORAGE_KEY, JSON.stringify(portfolioHoldings));
-                localStorage.setItem(JOURNAL_STORAGE_KEY, JSON.stringify(tradeJournal));
+                // Restore watchlist from cloud for this user
+                if (syncRes.watchlist && syncRes.watchlist.length > 0) {
+                    customWatchlist = syncRes.watchlist;
+                    localStorage.setItem(getScopedKey(WATCHLIST_STORAGE_KEY_BASE), JSON.stringify(customWatchlist));
+                }
+                localStorage.setItem(getScopedKey(PORTFOLIO_STORAGE_KEY_BASE), JSON.stringify(portfolioHoldings));
+                localStorage.setItem(getScopedKey(JOURNAL_STORAGE_KEY_BASE), JSON.stringify(tradeJournal));
                 renderPortfolioView();
                 renderJournalView();
             }
@@ -4580,7 +4652,11 @@ async function handleMockLogin(event) {
     const successContainer = document.getElementById("loginSuccessContainer");
     const successMsg = document.getElementById("loginSuccessMsg");
 
-    if (successMsg) successMsg.textContent = `Synchronizing portfolio profile for ${email}...`;
+    const welcomeMsg = authRes.isNew 
+        ? `Account registered successfully! Creating profile for ${username}...`
+        : `Synchronizing portfolio profile for ${username}...`;
+
+    if (successMsg) successMsg.textContent = welcomeMsg;
     if (formContainer) formContainer.style.display = "none";
     if (successContainer) successContainer.style.display = "flex";
 
@@ -4590,9 +4666,13 @@ async function handleMockLogin(event) {
     // Reset login form interface for next time
     if (formContainer) formContainer.style.display = "block";
     if (successContainer) successContainer.style.display = "none";
-    if (btnSubmit) {
-        btnSubmit.disabled = false;
-        btnSubmit.innerHTML = `<span>🔐 Authenticate & Unlock</span>`;
+    if (actionInput && actionInput.value === "signup") {
+        toggleLoginAction(null);
+    } else {
+        if (btnSubmit) {
+            btnSubmit.disabled = false;
+            btnSubmit.innerHTML = `<span>🔐 Authenticate & Unlock</span>`;
+        }
     }
 
     // Update UI state
@@ -4603,7 +4683,45 @@ async function handleMockLogin(event) {
     pendingViewTarget = null;
     switchView(target);
 
-    showToast(`Welcome back! Logged in as ${email}`, "success");
+    const toastMsg = authRes.isNew
+        ? `Registered & Logged in as ${username}`
+        : `Welcome back! Logged in as ${username}`;
+    showToast(toastMsg, "success");
+}
+
+function toggleLoginAction(event) {
+    if (event) event.preventDefault();
+    const actionInput = document.getElementById("loginActionType");
+    const headerTitle = document.querySelector(".login-card-title");
+    const headerSubtitle = document.querySelector(".login-card-subtitle");
+    const btnSubmit = document.getElementById("btnLoginSubmit");
+    const toggleLabel = document.getElementById("loginToggleContainer");
+    const infoText = document.getElementById("loginInfoText");
+    const iconBadge = document.querySelector(".login-icon-badge");
+
+    if (!actionInput || !btnSubmit) return;
+
+    const labelPassword = document.querySelector('label[for="loginPassword"]');
+
+    if (actionInput.value === "login") {
+        actionInput.value = "signup";
+        if (iconBadge) iconBadge.textContent = "✨";
+        if (headerTitle) headerTitle.textContent = "Create Profile";
+        if (headerSubtitle) headerSubtitle.textContent = "Register a username and 4-digit passcode to start journaling.";
+        if (labelPassword) labelPassword.textContent = "Create 4-Digit Passcode";
+        btnSubmit.innerHTML = "<span>✨ Register & Unlock</span>";
+        if (toggleLabel) toggleLabel.innerHTML = `Already have a profile? <a href="#" id="btnToggleLoginAction" onclick="toggleLoginAction(event)" style="color: var(--color-accent); font-weight: 600; text-decoration: none;">Sign in here</a>`;
+        if (infoText) infoText.innerHTML = "💡 <strong>Registration Info:</strong> Set up a unique username and a 4-digit numeric passcode to secure your profile.";
+    } else {
+        actionInput.value = "login";
+        if (iconBadge) iconBadge.textContent = "🔒";
+        if (headerTitle) headerTitle.textContent = "Access Premium Tools";
+        if (headerSubtitle) headerSubtitle.textContent = "Sign in to unlock the Portfolio Tracker & Trade Journaling System.";
+        if (labelPassword) labelPassword.textContent = "4-Digit Passcode";
+        btnSubmit.innerHTML = "<span>🔐 Authenticate & Unlock</span>";
+        if (toggleLabel) toggleLabel.innerHTML = `First time? <a href="#" id="btnToggleLoginAction" onclick="toggleLoginAction(event)" style="color: var(--color-accent); font-weight: 600; text-decoration: none;">Create a new profile</a>`;
+        if (infoText) infoText.innerHTML = "💡 <strong>Access Info:</strong> Enter your registered username and 4-digit numeric passcode to synchronize your profile.";
+    }
 }
 
 function updateUserProfileUI() {
@@ -4616,14 +4734,14 @@ function updateUserProfileUI() {
     if (profileSection) {
         if (isLoggedIn) {
             profileSection.style.display = "flex";
-            const email = localStorage.getItem("nepse_user_email") || "manipandey384@gmail.com";
+            // Use the stored username directly (not email — no .split('@') needed)
+            const username = localStorage.getItem("nepse_portfolio_username") ||
+                             localStorage.getItem("nepse_user_email") || "User";
             const role = localStorage.getItem("nepse_user_role") || "Verified Trader";
-            
-            // Extract username part of email
-            const username = email.split("@")[0];
+
             if (usernameEl) usernameEl.textContent = username;
             if (userRoleEl) userRoleEl.textContent = role;
-            
+
             // Use first letter of username for avatar
             if (avatarEl) avatarEl.textContent = username.charAt(0).toUpperCase();
         } else {
@@ -4633,13 +4751,30 @@ function updateUserProfileUI() {
 }
 
 function handleSignOut() {
+    const username = localStorage.getItem("nepse_portfolio_username") || "";
+
+    // Clear session flags
     localStorage.removeItem("nepse_logged_in");
     localStorage.removeItem("nepse_user_email");
     localStorage.removeItem("nepse_user_role");
-    
+
+    // Clear the username reference (used for scoped keys)
+    if (username) {
+        localStorage.removeItem("nepse_portfolio_username");
+        // Clear user-scoped data from local storage so next user starts fresh
+        localStorage.removeItem(`${PORTFOLIO_STORAGE_KEY_BASE}_${username}`);
+        localStorage.removeItem(`${JOURNAL_STORAGE_KEY_BASE}_${username}`);
+        localStorage.removeItem(`${WATCHLIST_STORAGE_KEY_BASE}_${username}`);
+    }
+
+    // Reset in-memory state
+    portfolioHoldings = [];
+    tradeJournal = [];
+    customWatchlist = [];
+
     updateUserProfileUI();
     switchView("dashboard");
-    showToast("Logged out of session. Restricted areas locked.", "error");
+    showToast("Signed out. Restricted areas locked. Your cloud data is safely preserved.", "error");
 }
 
 function showToast(message, type = "success") {
