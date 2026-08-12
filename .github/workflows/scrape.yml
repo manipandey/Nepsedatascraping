@@ -2,8 +2,10 @@ name: Daily NEPSE Stock Scraping
 
 on:
   schedule:
-    # Run every day at 15:30 NST (09:45 UTC)
+    # Primary run: 15:30 NST (09:45 UTC) — 30 min after market close
     - cron: '45 9 * * *'
+    # Secondary run: 16:15 NST (10:30 UTC) — ensures final closing prices are captured
+    - cron: '30 10 * * *'
   workflow_dispatch: # Allows manual trigger from GitHub Actions tab
 
 permissions:
@@ -24,21 +26,68 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Run NEPSE Scraper
+    - name: Install dependencies
+      run: pip install requests || true
+
+    - name: Run NEPSE Price Scraper
       run: python3 scrape.py
+
+    - name: Run Fundamentals Scraper
+      run: |
+        python3 -c "
+import sys
+sys.path.insert(0, '.')
+from scrape import scrape_live_official_fundamentals
+scrape_live_official_fundamentals()
+print('Fundamentals scrape complete.')
+"
+      continue-on-error: true
+
+    - name: Run Share Structure Scraper
+      run: |
+        python3 -c "
+import sys
+sys.path.insert(0, '.')
+from scrape import scrape_live_official_share_structure_and_lockin
+scrape_live_official_share_structure_and_lockin()
+print('Share structure scrape complete.')
+"
+      continue-on-error: true
+
+    - name: Run Corporate Calendar Scraper
+      run: |
+        python3 -c "
+import sys
+sys.path.insert(0, '.')
+from scrape import scrape_live_official_corporate_calendar
+scrape_live_official_corporate_calendar()
+print('Corporate calendar scrape complete.')
+"
+      continue-on-error: true
+
+    - name: Sync to Supabase
+      env:
+        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      run: python3 sync_to_supabase.py
+      continue-on-error: true
 
     - name: Commit and Push Changes
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        
-        # Check if files changed
-        git add data/nepse_today.json data/nepse_today.csv
-        
+
+        # Stage all updated data files
+        git add data/nepse_today.json \
+                data/nepse_today.csv \
+                data/nepse_fundamentals_live.json \
+                data/nepse_share_structure_live.json \
+                data/nepse_corporate_live.json || true
+
         if git diff --cached --quiet; then
           echo "No new stock data updates detected."
         else
-          git commit -m "auto(data): update today NEPSE stock price data sheet"
+          git commit -m "auto(data): update NEPSE stock data, fundamentals & corporate calendar [$(date -u '+%Y-%m-%d %H:%M UTC')]"
           git push
-          echo "Successfully updated stock data files on main branch!"
+          echo "Successfully updated all stock data files on main branch!"
         fi

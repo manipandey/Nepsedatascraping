@@ -984,6 +984,17 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps(response_data).encode("utf-8"))
             return
+        elif self.path == "/api/config" or self.path.startswith("/api/config?"):
+            response_data = {
+                "SUPABASE_URL": os.environ.get("SUPABASE_URL", ""),
+                "SUPABASE_ANON_KEY": os.environ.get("SUPABASE_ANON_KEY", "")
+            }
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Cache-Control", "no-store, no-cache, must-revalidate")
+            self.end_headers()
+            self.wfile.write(json.dumps(response_data).encode("utf-8"))
+            return
         elif self.path == "/api/scrape" or self.path.startswith("/api/scrape?"):
             print("\n[Server] Live re-scrape requested from dashboard client...")
             success = scrape_nepse()

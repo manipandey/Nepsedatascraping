@@ -120,6 +120,11 @@
     "sector": "HydroPower"
   },
   {
+    "symbol": "BNT",
+    "fullName": "BNT",
+    "sector": "Listed Company"
+  },
+  {
     "symbol": "BPCL",
     "fullName": "Butwal Power Company Limited",
     "sector": "HydroPower"
@@ -183,6 +188,11 @@
     "symbol": "CITY",
     "fullName": "City Hotel Limited",
     "sector": "Hotels And Tourism"
+  },
+  {
+    "symbol": "CIZBD90",
+    "fullName": "CIZBD90",
+    "sector": "Listed Company"
   },
   {
     "symbol": "CKHL",
@@ -258,6 +268,16 @@
     "symbol": "EBLD85",
     "fullName": "10.50% Everest Bank Limited Debenture 2085",
     "sector": "Bond"
+  },
+  {
+    "symbol": "EBLD86",
+    "fullName": "EBLD86",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "EBLD91",
+    "fullName": "EBLD91",
+    "sector": "Listed Company"
   },
   {
     "symbol": "ECL",
@@ -340,6 +360,11 @@
     "sector": "Mutual Fund"
   },
   {
+    "symbol": "GILB",
+    "fullName": "GILB",
+    "sector": "Listed Company"
+  },
+  {
     "symbol": "GLBSL",
     "fullName": "Gurans Laghubitta Bittiya Sanstha Limited",
     "sector": ""
@@ -383,6 +408,11 @@
     "symbol": "GVL",
     "fullName": "Green Ventures Limited",
     "sector": "HydroPower"
+  },
+  {
+    "symbol": "GWFD83",
+    "fullName": "GWFD83",
+    "sector": "Listed Company"
   },
   {
     "symbol": "H8020",
@@ -475,6 +505,16 @@
     "sector": "Finance"
   },
   {
+    "symbol": "ICFCD83",
+    "fullName": "ICFCD83",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "ICFCD88",
+    "fullName": "ICFCD88",
+    "sector": "Listed Company"
+  },
+  {
     "symbol": "ICFCD89",
     "fullName": "8% ICFC Finance Limited Debenture-2089",
     "sector": "Bond"
@@ -550,6 +590,11 @@
     "sector": "Bond"
   },
   {
+    "symbol": "KBLD89",
+    "fullName": "KBLD89",
+    "sector": "Listed Company"
+  },
+  {
     "symbol": "KBSH",
     "fullName": "Kutheli Bukhari Small Hydropower Limited",
     "sector": "HydroPower"
@@ -615,6 +660,11 @@
     "sector": "Life Insurance"
   },
   {
+    "symbol": "LLBS",
+    "fullName": "LLBS",
+    "sector": "Listed Company"
+  },
+  {
     "symbol": "LSH12",
     "fullName": "LS Horizon 12",
     "sector": ""
@@ -623,6 +673,11 @@
     "symbol": "LSL",
     "fullName": "Laxmi Sunrise Bank Limited",
     "sector": "Banking"
+  },
+  {
+    "symbol": "LUK",
+    "fullName": "LUK",
+    "sector": "Listed Company"
   },
   {
     "symbol": "LVF2",
@@ -688,6 +743,11 @@
     "symbol": "MEN",
     "fullName": "Mountain Energy Nepal Limited",
     "sector": "HydroPower"
+  },
+  {
+    "symbol": "MEPDL",
+    "fullName": "MEPDL",
+    "sector": "Listed Company"
   },
   {
     "symbol": "MERO",
@@ -880,6 +940,11 @@
     "sector": "Banking"
   },
   {
+    "symbol": "NICAD2091",
+    "fullName": "NICAD2091",
+    "sector": "Listed Company"
+  },
+  {
     "symbol": "NICBF",
     "fullName": "NIC Asia Balanced Fund",
     "sector": "Mutual Fund"
@@ -910,9 +975,24 @@
     "sector": "Microfinance"
   },
   {
+    "symbol": "NICSF",
+    "fullName": "NICSF",
+    "sector": "Listed Company"
+  },
+  {
     "symbol": "NIFRA",
     "fullName": "Nepal Infrastructure Bank Limited",
     "sector": "Investment"
+  },
+  {
+    "symbol": "NIFRAGED",
+    "fullName": "NIFRAGED",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "NIFRAUR85/86",
+    "fullName": "NIFRAUR85/86",
+    "sector": "Listed Company"
   },
   {
     "symbol": "NIL",
@@ -923,6 +1003,11 @@
     "symbol": "NIMB",
     "fullName": "Nepal Investment Mega Bank Limited",
     "sector": "Banking"
+  },
+  {
+    "symbol": "NIMBD90",
+    "fullName": "NIMBD90",
+    "sector": "Listed Company"
   },
   {
     "symbol": "NIMBPO",
@@ -953,6 +1038,11 @@
     "symbol": "NMB50",
     "fullName": "NMB 50",
     "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "NMBD87/88",
+    "fullName": "NMBD87/88",
+    "sector": "Listed Company"
   },
   {
     "symbol": "NMBHF2",
@@ -1040,6 +1130,11 @@
     "sector": ""
   },
   {
+    "symbol": "PBD88",
+    "fullName": "PBD88",
+    "sector": "Listed Company"
+  },
+  {
     "symbol": "PBLD87",
     "fullName": "8.5% Prabhu Bank Debenture 2087",
     "sector": "Bond"
@@ -1105,6 +1200,11 @@
     "sector": "Banking"
   },
   {
+    "symbol": "PRVUPO",
+    "fullName": "PRVUPO",
+    "sector": "Listed Company"
+  },
+  {
     "symbol": "PSF",
     "fullName": "Prabhu Select Fund",
     "sector": "Mutual Fund"
@@ -1123,6 +1223,11 @@
     "symbol": "RAWA",
     "fullName": "Rawa Energy Development Limited",
     "sector": "HydroPower"
+  },
+  {
+    "symbol": "RBBD2088",
+    "fullName": "RBBD2088",
+    "sector": "Listed Company"
   },
   {
     "symbol": "RBBF40",
@@ -1195,6 +1300,11 @@
     "sector": "Mutual Fund"
   },
   {
+    "symbol": "RSY2",
+    "fullName": "RSY2",
+    "sector": "Listed Company"
+  },
+  {
     "symbol": "RURU",
     "fullName": "Ru Ru Jalbidhyut Pariyojana Limited",
     "sector": "HydroPower"
@@ -1218,6 +1328,11 @@
     "symbol": "SAGAR",
     "fullName": "Sagar Distillery Limited",
     "sector": "Manu.& Pro."
+  },
+  {
+    "symbol": "SAGF",
+    "fullName": "SAGF",
+    "sector": "Listed Company"
   },
   {
     "symbol": "SAHAS",
@@ -1260,6 +1375,11 @@
     "sector": "Mutual Fund"
   },
   {
+    "symbol": "SBD87",
+    "fullName": "SBD87",
+    "sector": "Listed Company"
+  },
+  {
     "symbol": "SBD89",
     "fullName": "10.25% Sanima Debenture 2089",
     "sector": ""
@@ -1275,9 +1395,29 @@
     "sector": "Banking"
   },
   {
+    "symbol": "SBLD2091",
+    "fullName": "SBLD2091",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "SBLD84",
+    "fullName": "SBLD84",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "SBLD89",
+    "fullName": "SBLD89",
+    "sector": "Listed Company"
+  },
+  {
     "symbol": "SCB",
     "fullName": "Standard Chartered Bank Limited",
     "sector": "Banking"
+  },
+  {
+    "symbol": "SCBD",
+    "fullName": "SCBD",
+    "sector": "Listed Company"
   },
   {
     "symbol": "SEF",
@@ -1288,6 +1428,11 @@
     "symbol": "SEF2",
     "fullName": "Siddhartha Equity Fund 2",
     "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "SFEF",
+    "fullName": "SFEF",
+    "sector": "Listed Company"
   },
   {
     "symbol": "SFMF",
@@ -1348,6 +1493,11 @@
     "symbol": "SIFC",
     "fullName": "Shree Investment Finance Co. Ltd.",
     "sector": "Finance"
+  },
+  {
+    "symbol": "SIGS2",
+    "fullName": "SIGS2",
+    "sector": "Listed Company"
   },
   {
     "symbol": "SIGS3",
@@ -1505,6 +1655,11 @@
     "sector": "HydroPower"
   },
   {
+    "symbol": "STC",
+    "fullName": "STC",
+    "sector": "Listed Company"
+  },
+  {
     "symbol": "SWASTIK",
     "fullName": "Swastik Laghubitta Bittiya Sanstha Limited",
     "sector": "Microfinance"
@@ -1593,6 +1748,11 @@
     "symbol": "UNHPL",
     "fullName": "Union Hydropower Limited",
     "sector": "HydroPower"
+  },
+  {
+    "symbol": "UNL",
+    "fullName": "UNL",
+    "sector": "Listed Company"
   },
   {
     "symbol": "UNLB",

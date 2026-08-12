@@ -11,12 +11,24 @@
       "dest": "/data/nepse_fundamentals_live.json"
     },
     {
+      "src": "/api/share-structure",
+      "dest": "/data/nepse_share_structure_live.json"
+    },
+    {
+      "src": "/api/corporate",
+      "dest": "/data/nepse_corporate_live.json"
+    },
+    {
       "src": "/api/bank-rates",
       "dest": "/data/bank_rates.json"
     },
     {
       "src": "/api/nrb-indicators",
       "dest": "/data/nrb_indicators.json"
+    },
+    {
+      "src": "/api/all-tickers",
+      "dest": "/data/nepse_master_tickers.json"
     },
     {
       "src": "/api/(.*)",
@@ -42,6 +54,10 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "X-Requested-With, Content-Type, Authorization"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store, no-cache, must-revalidate, max-age=0"
         }
       ]
     }

@@ -22,3 +22,7 @@ Nepsedatascraping/
 !data/nepse_today.json
 !data/nepse_today.csv
 .vercel
+
+# Local environment secret variables
+.env
+

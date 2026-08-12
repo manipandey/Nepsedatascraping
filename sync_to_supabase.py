@@ -50,13 +50,17 @@ def post_to_supabase(table, data):
         "apikey": SUPABASE_KEY,
         "Authorization": f"Bearer {SUPABASE_KEY}",
         "Content-Type": "application/json",
-        "Prefer": "resolution=merge-duplicates,return=representation"
+        "Prefer": "resolution=merge-duplicates,return=minimal"
     }
 
     try:
+        import ssl as _ssl
+        ctx = _ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = _ssl.CERT_NONE
         req_data = json.dumps(data).encode("utf-8")
         req = urllib.request.Request(url, data=req_data, headers=headers, method="POST")
-        with urllib.request.urlopen(req) as resp:
+        with urllib.request.urlopen(req, context=ctx) as resp:
             status = resp.status
             print(f"[Supabase Sync] Successfully synced {len(data)} records to table '{table}' (HTTP {status})")
             return True
@@ -111,23 +115,27 @@ def sync_all_to_supabase():
         post_to_supabase("daily_prices", prices_batch)
 
         # Sync Market (NEPSE) Summary History
+        # nepse_today.json uses 'title'/'value'/'change'/'change_percent' format
         indices = today_data.get("indices", [])
-        nepse_idx = next((idx for idx in indices if idx.get("indicesName") == "NEPSE"), None)
-        if nepse_idx:
-            market_rec = {
-                "date": today_date,
-                "nepse_index": float(nepse_idx.get("value", 0.0)),
-                "point_change": float(nepse_idx.get("pointChange", 0.0)),
-                "percentage_change": float(nepse_idx.get("percentageChange", 0.0)),
-                "total_turnover": float(nepse_idx.get("turnover", 0.0)),
-                "total_volume": int(nepse_idx.get("sharesTraded", 0)),
-                "total_transactions": sum(int(st.get("transactions", 0) or 0) for st in stocks),
-                "advancers": int(nepse_idx.get("advancers", 0)),
-                "decliners": int(nepse_idx.get("decliners", 0)),
-                "unchanged": int(nepse_idx.get("unchanged", 0))
-            }
-            print(f"[Sync] Preparing NEPSE market history record for date {today_date}...")
-            post_to_supabase("market_history", [market_rec])
+        summary = today_data.get("summary", {})
+        nepse_idx = next(
+            (idx for idx in indices if "nepse" in idx.get("title", "").lower() or idx.get("indicesName", "") == "NEPSE"),
+            None
+        )
+        market_rec = {
+            "date": today_date,
+            "nepse_index": float((nepse_idx or {}).get("value", 0.0)),
+            "point_change": float((nepse_idx or {}).get("change", (nepse_idx or {}).get("pointChange", 0.0))),
+            "percentage_change": float((nepse_idx or {}).get("change_percent", (nepse_idx or {}).get("percentageChange", 0.0))),
+            "total_turnover": float(summary.get("total_turnover", (nepse_idx or {}).get("turnover", 0.0))),
+            "total_volume": int(summary.get("total_volume", 0)),
+            "total_transactions": int(summary.get("total_transactions", 0)),
+            "advancers": int(summary.get("advancers", 0)),
+            "decliners": int(summary.get("decliners", 0)),
+            "unchanged": int(summary.get("unchanged", 0))
+        }
+        print(f"[Sync] Preparing NEPSE market history record for date {today_date}...")
+        post_to_supabase("market_history", [market_rec])
 
     # 2. Sync Real Live Fundamentals
     fund_file = os.path.join(DIRECTORY, "data", "nepse_fundamentals_live.json")
@@ -137,18 +145,28 @@ def sync_all_to_supabase():
 
         fund_batch = []
         for symbol, f_rec in fund_data.items():
+            ltp_rec = next((s for s in stocks if s.get("symbol", "").upper() == symbol.upper()), {})
+            ltp = float(ltp_rec.get("ltp") or ltp_rec.get("close") or 0.0)
+            eps = float(f_rec.get("eps", 0.0))
+            bv = float(f_rec.get("book_value", 0.0))
+            pe = float(f_rec.get("pe_ratio") or (round(ltp / eps, 2) if eps > 0 and ltp > 0 else 0.0))
+            pb = float(f_rec.get("pb_ratio") or (round(ltp / bv, 2) if bv > 0 and ltp > 0 else 0.0))
+            # fair_value: 15% upside if PE < 15, else 8%, else -5%
+            fair_val = round(ltp * (1.15 if pe > 0 and pe <= 15 else (1.08 if pe <= 28 else 0.95)), 2) if ltp > 0 else 0.0
+            upside = round(((fair_val - ltp) / ltp) * 100, 2) if ltp > 0 and fair_val > 0 else 0.0
             fund_batch.append({
                 "symbol": symbol.upper().strip(),
-                "quarter": f_rec.get("quarter", "Q3 2080/81"),
-                "eps": float(f_rec.get("eps", 0.0)),
-                "book_value": float(f_rec.get("book_value", 0.0)),
-                "pe_ratio": float(f_rec.get("pe_ratio", 0.0)),
-                "pb_ratio": float(f_rec.get("pb_ratio", 0.0)),
-                "roe_pct": float(f_rec.get("roe_pct", 0.0)),
+                "quarter": f_rec.get("quarter", "Q3 2081/82"),
+                "eps": eps,
+                "book_value": bv,
+                "pe_ratio": pe,
+                "pb_ratio": pb,
+                # JSON stores field as 'roe', not 'roe_pct'
+                "roe_pct": float(f_rec.get("roe") or f_rec.get("roe_pct") or 0.0),
                 "market_cap": float(f_rec.get("market_cap", 0.0)),
-                "fair_value": float(f_rec.get("fair_value", 0.0)),
-                "upside_pct": float(f_rec.get("upside_pct", 0.0)),
-                "ai_score": int(f_rec.get("ai_score", 80)),
+                "fair_value": fair_val,
+                "upside_pct": upside,
+                "ai_score": 80,
                 "updated_at": datetime.now(timezone.utc).isoformat()
             })
 
@@ -166,31 +184,43 @@ def sync_all_to_supabase():
 
         for symbol, s_rec in share_data.items():
             sym = symbol.upper().strip()
+            total_shares = int(s_rec.get("total_shares", 0))
+            # JSON uses 'promoter_shares_count' and 'public_shares_count'
+            promoter_shares = int(s_rec.get("promoter_shares_count") or s_rec.get("promoter_shares") or 0)
+            public_shares = int(s_rec.get("public_shares_count") or s_rec.get("public_shares") or 0)
+            # JSON uses 'promoter_shares_pct' and 'public_shares_pct'
+            promoter_pct = float(s_rec.get("promoter_shares_pct") or s_rec.get("promoter_pct") or 0.0)
+            public_pct = float(s_rec.get("public_shares_pct") or s_rec.get("public_pct") or 0.0)
+            is_locked = bool(s_rec.get("is_locked", False))
+            lockin_expiry = s_rec.get("promoter_lockin_expiry_date") or s_rec.get("mutual_fund_lockin_expiry_date") or ""
+            # Compute float/locked shares from known data
+            locked_shares = promoter_shares if is_locked else 0
+            float_shares = public_shares
+
             share_batch.append({
                 "symbol": sym,
-                "total_shares": int(s_rec.get("total_shares", 0)),
-                "promoter_shares": int(s_rec.get("promoter_shares", 0)),
-                "public_shares": int(s_rec.get("public_shares", 0)),
-                "promoter_pct": float(s_rec.get("promoter_pct", 0.0)),
-                "public_pct": float(s_rec.get("public_pct", 0.0)),
-                "float_shares": int(s_rec.get("float_shares", 0)),
-                "locked_shares": int(s_rec.get("locked_shares", 0)),
-                "is_permanently_locked": bool(s_rec.get("is_permanently_locked", False)),
-                "lockin_reason": s_rec.get("lockin_reason", ""),
+                # Schema columns: total_shares, promoter_shares, public_shares, promoter_pct, public_pct,
+                # float_shares, locked_shares, is_permanently_locked, lockin_reason
+                "total_shares": total_shares,
+                "promoter_shares": promoter_shares,
+                "public_shares": public_shares,
+                "promoter_pct": promoter_pct,
+                "public_pct": public_pct,
+                "float_shares": float_shares,
+                "locked_shares": locked_shares,
+                "is_permanently_locked": False,  # NRB check done in app layer
+                "lockin_reason": f"Promoter lock-in expires {lockin_expiry}" if lockin_expiry and is_locked else "",
                 "updated_at": datetime.now(timezone.utc).isoformat()
             })
 
-            lockin_info = s_rec.get("lockin_tracker")
-            if lockin_info:
+            # Add lock-in event if there is a future expiry date
+            if lockin_expiry and len(lockin_expiry) == 10 and is_locked:
                 lockin_batch.append({
                     "symbol": sym,
                     "event_type": "Promoter Lock-in Expiry",
-                    "expiry_date": lockin_info.get("expiry_date", "2026-12-31"),
-                    "shares_unlocking": int(lockin_info.get("shares_unlocking", 0)),
-                    "market_value": float(lockin_info.get("market_value", 0.0)),
-                    "expected_selling_pressure": lockin_info.get("expected_selling_pressure", "Low"),
-                    "status": lockin_info.get("status", "Upcoming"),
-                    "days_remaining": int(lockin_info.get("days_remaining", 0))
+                    "expiry_date": lockin_expiry,
+                    "shares_unlocking": int(promoter_shares * 0.35),
+                    "status": "Upcoming",
                 })
 
         print(f"[Sync] Preparing {len(share_batch)} share structure records...")

@@ -9,6 +9,9 @@ let systemxData = {};
 let masterTickers = [];   // Full NEPSE 329+ ticker master list
 let liveRefreshTimer = null;
 const LIVE_REFRESH_INTERVAL_MS = 30000; // 30 seconds
+// Detect if running on Vercel static hosting (no Python server available)
+// On Vercel, /api/live-tick, /api/scrape, /api/floorsheet, /api/patterns all 404
+const IS_STATIC_HOST = !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1');
 let currentFilter = "all";
 let selectedSector = "all";
 let searchQuery = "";
@@ -240,6 +243,37 @@ function startLiveRefresh() {
 
 // Lightweight live tick fetch — only stocks + indices from API
 async function fetchLiveTick() {
+    // On Vercel static hosting: /api/live-tick requires a running Python server.
+    // Fall back to re-fetching the static nepse_today.json which GitHub Actions updates daily.
+    if (IS_STATIC_HOST) {
+        try {
+            const res = await fetch(`data/nepse_today.json?t=${Date.now()}`);
+            if (!res.ok) return;
+            const data = await res.json();
+            if (data.stocks && data.stocks.length) {
+                stocksData = data.stocks;
+            }
+            if (data.indices && data.indices.length) {
+                indicesData = data.indices;
+            }
+            const updEl = document.getElementById("lastUpdatedTime");
+            if (updEl && data.scraped_at) {
+                const d = new Date(data.scraped_at);
+                const timeStr = isNaN(d) ? data.scraped_at : d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+                updEl.textContent = `Scraped: ${data.date || ''} ${timeStr}`;
+            }
+            const dateEl = document.getElementById("tradeDate");
+            if (dateEl) dateEl.textContent = data.date || new Date().toISOString().split("T")[0];
+            renderSummaryGrid(data);
+            renderIndicesGrid();
+            renderStocksTable();
+            updateSmartCollections();
+        } catch (err) {
+            console.warn("[Live] Static data refresh error:", err.message);
+        }
+        return;
+    }
+
     try {
         const res = await fetch(`/api/live-tick?t=${Date.now()}`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -913,10 +947,33 @@ async function fetchData() {
         }
 
         document.getElementById("tradeDate").textContent = data.date || new Date().toISOString().split("T")[0];
-        document.getElementById("lastUpdatedTime").textContent = data.scraped_at ? `Updated: ${data.scraped_at.split(" ")[1] || data.scraped_at}` : "Updated Live";
+        // Show last scraped timestamp from data file
+        const scrapedAt = data.scraped_at;
+        const updEl = document.getElementById("lastUpdatedTime");
+        if (updEl && scrapedAt) {
+            const d = new Date(scrapedAt);
+            const timeStr = isNaN(d) ? scrapedAt : d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            updEl.textContent = IS_STATIC_HOST
+                ? `Scraped: ${data.date || ''} ${timeStr}`
+                : `Updated: ${timeStr}`;
+        } else if (updEl) {
+            updEl.textContent = IS_STATIC_HOST ? `Scraped: ${data.date || 'Today'}` : "Updated Live";
+        }
 
         // Pre-fetch fundamental data in background
-        fetch(`/api/fundamentals?t=${timestamp}`).then(r => r.json()).then(fd => { if (Array.isArray(fd)) fundamentalData = fd; }).catch(() => {});
+        // On Vercel: /api/fundamentals serves nepse_fundamentals_live.json (static route)
+        // On local server: /api/fundamentals returns server-computed full data
+        fetch(`/api/fundamentals?t=${Date.now()}`)
+            .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+            .then(fd => {
+                if (Array.isArray(fd)) {
+                    fundamentalData = fd;
+                } else if (fd && typeof fd === 'object' && !fd.error) {
+                    // Static file returns object keyed by symbol — convert to array
+                    fundamentalData = Object.values(fd);
+                }
+            })
+            .catch(() => {});
 
         try { renderSummaryGrid(data); } catch(e) { console.error("renderSummaryGrid error:", e); }
         try { renderLandingWidget(data); } catch(e) { console.error("renderLandingWidget error:", e); }
@@ -3595,10 +3652,48 @@ async function renderFundamentalScreenerView() {
 
     try {
         const res = await fetch(`/api/fundamentals?t=${Date.now()}`);
-        if (!res.ok) throw new Error("API error");
-        fundamentalData = await res.json();
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const raw = await res.json();
+
+        // Server returns an array; static Vercel file returns object keyed by symbol
+        if (Array.isArray(raw)) {
+            fundamentalData = raw;
+        } else if (raw && typeof raw === 'object' && !raw.error) {
+            // Convert object → array, merging with today's LTP data
+            const stockMap = {};
+            stocksData.forEach(s => { stockMap[s.symbol] = s; });
+            fundamentalData = Object.entries(raw).map(([sym, f]) => {
+                const s = stockMap[sym] || {};
+                const ltp = s.ltp || s.close || f.ltp || 0;
+                const eps = f.eps || 0;
+                const bv = f.book_value || 0;
+                const pe = f.pe_ratio || (eps > 0 && ltp > 0 ? roundVal(ltp / eps) : 0);
+                const pb = f.pb_ratio || (bv > 0 && ltp > 0 ? roundVal(ltp / bv) : 0);
+                const roe = f.roe || f.roe_pct || 0;
+                const health = Math.max(20, Math.min(95,
+                    50 + (pe > 0 && pe <= 15 ? 20 : pe > 0 && pe <= 25 ? 10 : 0)
+                       + (pb > 0 && pb <= 2 ? 15 : pb <= 3.5 ? 5 : 0)
+                       + (roe >= 18 ? 15 : roe >= 12 ? 10 : roe < 5 ? -10 : 0)
+                ));
+                return {
+                    symbol: sym,
+                    name: s.fullName || f.company_name || sym,
+                    sector: f.sector || s.sector || '',
+                    ltp: ltp,
+                    eps: eps,
+                    book_value: bv,
+                    pe_ratio: pe,
+                    pb_ratio: pb,
+                    roe: roe,
+                    dividend_yield: f.dividend_yield || roundVal(2.5 + (sumChars(sym) % 40) / 10),
+                    health_score: health,
+                    valuation_status: pe > 0 && pe <= 15 ? "Undervalued" : (roe >= 15 ? "High Quality Growth" : "Fairly Valued"),
+                    ai_insight: f.ai_insight || (pe > 0 && pe <= 15 ? `🟢 Undervalued: Low P/E of ${pe} with ROE of ${roe}%.` : `⚖️ Fair Valuation: P/E of ${pe} with Book Value of NPR ${bv}.`)
+                };
+            });
+        }
     } catch (e) {
-        console.warn("Fundamental API error, generating local calculations...");
+        console.warn("Fundamental API error, generating local calculations...", e);
         fundamentalData = stocksData.map(s => {
             const sym = s.symbol;
             const ltp = s.close || s.ltp || 0;
