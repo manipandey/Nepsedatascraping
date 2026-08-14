@@ -1063,17 +1063,21 @@ function renderSummaryGrid(data) {
     document.getElementById("barDecliners").style.width = `${(dec / total) * 100}%`;
 
     // Update Dashboard Hero Banner Elements
-    const nepseIndexObj = (indicesData || []).find(i => i.indicesName === "NEPSE" || i.indicesName === "NEPSE Index") || { value: 2650.09, percentageChange: -0.15 };
-    const nepseVal = nepseIndexObj.value || nepseIndexObj.currentPrice || 2650.09;
-    const nepseChg = nepseIndexObj.percentageChange || 0;
+    const nepseIndexObj = (indicesData || []).find(i => 
+        (i.indicesName && (i.indicesName === "NEPSE" || i.indicesName === "NEPSE Index")) ||
+        (i.title && (i.title === "NEPSE" || i.title === "NEPSE Index" || i.title.includes("NEPSE")))
+    ) || { value: 2647.83, percentageChange: -0.12 };
+
+    const nepseVal = nepseIndexObj.value !== undefined ? nepseIndexObj.value : (nepseIndexObj.currentPrice || nepseIndexObj.ltp || 2647.83);
+    const nepseChg = nepseIndexObj.percentageChange !== undefined ? nepseIndexObj.percentageChange : (nepseIndexObj.change_percent !== undefined ? nepseIndexObj.change_percent : (nepseIndexObj.change || 0));
     const isUp = nepseChg >= 0;
 
     const heroValEl = document.getElementById("heroNepseValue");
-    if (heroValEl) heroValEl.textContent = nepseVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    if (heroValEl) heroValEl.textContent = Number(nepseVal).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     const heroChgEl = document.getElementById("heroNepseChange");
     if (heroChgEl) {
-        heroChgEl.textContent = `${isUp ? "▲ +" : "▼ "}${nepseChg.toFixed(2)}%`;
+        heroChgEl.textContent = `${isUp ? "▲ +" : "▼ "}${Number(nepseChg).toFixed(2)}%`;
         heroChgEl.style.color = isUp ? "#10b981" : "#ef4444";
         heroChgEl.style.background = isUp ? "rgba(16, 185, 129, 0.15)" : "rgba(239, 68, 68, 0.15)";
         heroChgEl.style.borderColor = isUp ? "rgba(16, 185, 129, 0.35)" : "rgba(239, 68, 68, 0.35)";
@@ -1233,19 +1237,19 @@ function renderIndicesGrid() {
     }
 
     grid.innerHTML = indicesData.map(idx => {
-        const name = idx.indicesName || idx.name || "";
-        const val = idx.value || 0;
-        const change = idx.pointChange !== undefined ? idx.pointChange : (idx.change || 0);
-        const pct = idx.percentageChange !== undefined ? idx.percentageChange : (idx.diff_percent || 0);
-        const isUp = change >= 0;
+        const name = idx.indicesName || idx.title || idx.name || "Index";
+        const val = idx.value !== undefined ? idx.value : (idx.currentPrice || idx.ltp || 0);
+        const change = idx.pointChange !== undefined ? idx.pointChange : (idx.change !== undefined ? idx.change : 0);
+        const pct = idx.percentageChange !== undefined ? idx.percentageChange : (idx.change_percent !== undefined ? idx.change_percent : (idx.diff_percent || 0));
+        const isUp = change >= 0 || pct >= 0;
 
         return `
             <div class="index-card ${selectedSector === name ? 'active' : ''}" onclick="selectIndexFilter('${name}')">
                 <div class="index-name">${name}</div>
                 <div class="index-val-group">
-                    <span class="index-value">${val.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</span>
+                    <span class="index-value">${Number(val).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     <span class="index-badge ${isUp ? 'up' : 'down'}">
-                        ${isUp ? '▲ +' : '▼ '}${Math.abs(pct).toFixed(2)}%
+                        ${isUp ? '▲ +' : '▼ '}${Math.abs(Number(pct)).toFixed(2)}%
                     </span>
                 </div>
             </div>
