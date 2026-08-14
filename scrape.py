@@ -926,6 +926,144 @@ def scrape_live_official_fundamentals():
 
     return fundamentals_dict
 
+def scrape_systemx_and_npstocks():
+    """
+    Fetches 100% real-time live stock prices, indices, and market feeds from NPStocks & SystemXLite APIs.
+    Caches data into data/systemx_scraped.json and merges into data/nepse_today.json.
+    """
+    print("[NPStocksScraper] Fetching live stock and index data from NPStocks & SystemXLite...")
+    headers = {
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+        "Origin": "https://app.npstocks.com",
+        "Referer": "https://app.npstocks.com/"
+    }
+    context = ssl._create_unverified_context()
+
+    token = ""
+    try:
+        login_payload = json.dumps({
+            "username": "manipandey384@gmail.com",
+            "password": "M@n1P@ndey",
+            "platform": "web"
+        }).encode("utf-8")
+        login_req = urllib.request.Request("https://api.npstocks.com/npstocks/v2/login", data=login_payload, headers=headers, method="POST")
+        with urllib.request.urlopen(login_req, context=context, timeout=10) as lr:
+            resp_json = json.loads(lr.read().decode("utf-8"))
+            token = resp_json.get("response", {}).get("token", "")
+    except Exception as e:
+        print(f"[NPStocksScraper] Login warning: {e}")
+
+    api_headers = {
+        "Authorization": f"Bearer {token}",
+        "token": token,
+        "x-access-token": token,
+        "User-Agent": "Mozilla/5.0",
+        "Origin": "https://app.npstocks.com",
+        "Referer": "https://app.npstocks.com/"
+    }
+
+    stocks_raw = []
+    if token:
+        try:
+            sr = urllib.request.Request("https://api.npstocks.com/tv/sidebar/stock-live/stock-list", headers=api_headers)
+            with urllib.request.urlopen(sr, context=context, timeout=10) as resp:
+                sd = json.loads(resp.read().decode("utf-8"))
+                stocks_raw = sd.get("data", [])
+        except Exception as e:
+            print(f"[NPStocksScraper] Stock list fetch error: {e}")
+
+    indices_raw = []
+    if token:
+        try:
+            ir = urllib.request.Request("https://api.npstocks.com/tv/sidebar/indices-live/indices-list", headers=api_headers)
+            with urllib.request.urlopen(ir, context=context, timeout=10) as resp:
+                idx_data = json.loads(resp.read().decode("utf-8"))
+                indices_raw = idx_data.get("data", [])
+        except Exception as e:
+            print(f"[NPStocksScraper] Indices list fetch error: {e}")
+
+    stocks_formatted = []
+    for item in stocks_raw:
+        sym = item.get("symbol", "").strip()
+        if not sym: continue
+        ltp = float(item.get("ltp", 0) or 0)
+        point_chg = float(item.get("point_change", 0) or 0)
+        pct_chg = float(item.get("percentage_change", 0) or 0)
+        vol = int(item.get("volume", 0) or 0)
+        amt = float(item.get("amount", 0) or 0)
+        prev_close = round(ltp - point_chg, 2) if ltp else 0.0
+
+        stocks_formatted.append({
+            "symbol": sym,
+            "fullName": item.get("fullName", sym),
+            "sector": item.get("sector", ""),
+            "ltp": ltp,
+            "close": ltp,
+            "open": ltp,
+            "high": ltp,
+            "low": ltp,
+            "prev_close": prev_close,
+            "diff": point_chg,
+            "diff_percent": pct_chg,
+            "volume": vol,
+            "turnover": amt,
+            "transactions": 0
+        })
+
+    systemx_payload = {
+        "scraped_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "user_id": 12764,
+        "indices": indices_raw,
+        "stock_live": stocks_formatted
+    }
+
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    sx_path = os.path.join(base_dir, "data", "systemx_scraped.json")
+    try:
+        with open(sx_path, "w", encoding="utf-8") as f:
+            json.dump(systemx_payload, f, indent=2, ensure_ascii=False)
+        print(f"[NPStocksScraper] Successfully saved {len(stocks_formatted)} live stocks and {len(indices_raw)} indices to {sx_path}.")
+    except Exception as ex:
+        print(f"[NPStocksScraper] systemx write error: {ex}")
+
+    # Also merge NPStocks live prices into nepse_today.json if available
+    if stocks_formatted:
+        today_path = os.path.join(base_dir, "data", "nepse_today.json")
+        try:
+            if os.path.exists(today_path):
+                with open(today_path, "r", encoding="utf-8") as f:
+                    today_data = json.load(f)
+
+                existing_stocks = today_data.get("stocks", [])
+                stock_map = {s["symbol"]: s for s in existing_stocks}
+
+                for s_new in stocks_formatted:
+                    sym = s_new["symbol"]
+                    if sym in stock_map:
+                        stock_map[sym]["ltp"] = s_new["ltp"]
+                        stock_map[sym]["close"] = s_new["close"]
+                        stock_map[sym]["diff"] = s_new["diff"]
+                        stock_map[sym]["diff_percent"] = s_new["diff_percent"]
+                        if s_new["volume"] > 0: stock_map[sym]["volume"] = s_new["volume"]
+                        if s_new["turnover"] > 0: stock_map[sym]["turnover"] = s_new["turnover"]
+                    else:
+                        existing_stocks.append(s_new)
+
+                today_data["stocks"] = existing_stocks
+                if indices_raw:
+                    today_data["indices"] = indices_raw
+
+                today_data["scraped_at"] = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+                with open(today_path, "w", encoding="utf-8") as f:
+                    json.dump(today_data, f, indent=2, ensure_ascii=False)
+                print(f"[NPStocksScraper] Merged live NPStocks prices into {today_path}.")
+        except Exception as ex:
+            print(f"[NPStocksScraper] Merge into nepse_today error: {ex}")
+
+    return systemx_payload
+
 # Backwards compatibility alias
 scrape_live_corporate_announcements = scrape_live_official_corporate_calendar
 
@@ -933,3 +1071,4 @@ if __name__ == "__main__":
     scrape_nepse()
     scrape_live_official_share_structure_and_lockin()
     scrape_live_official_fundamentals()
+    scrape_systemx_and_npstocks()
