@@ -965,8 +965,8 @@ async function fetchData() {
 
         // Concurrently pre-fetch fundamental, share structure, and corporate datasets
         await Promise.allSettled([
-            fetch(`/api/fundamentals?t=${Date.now()}`)
-                .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+            fetch(`data/nepse_fundamentals_live.json?t=${Date.now()}`)
+                .then(r => r.ok ? r.json() : fetch(`/api/fundamentals?t=${Date.now()}`).then(res => res.json()))
                 .then(fd => {
                     if (Array.isArray(fd)) {
                         fundamentalData = fd;
@@ -975,8 +975,8 @@ async function fetchData() {
                     }
                 }).catch(e => console.warn("Fundamentals fetch fallback:", e)),
 
-            fetch(`/api/share-structure?t=${Date.now()}`)
-                .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+            fetch(`data/nepse_share_structure_live.json?t=${Date.now()}`)
+                .then(r => r.ok ? r.json() : fetch(`/api/share-structure?t=${Date.now()}`).then(res => res.json()))
                 .then(ss => {
                     if (Array.isArray(ss)) {
                         shareStructureData = ss;
@@ -985,8 +985,8 @@ async function fetchData() {
                     }
                 }).catch(e => console.warn("Share structure fetch fallback:", e)),
 
-            fetch(`/api/corporate?t=${Date.now()}`)
-                .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+            fetch(`data/nepse_corporate_live.json?t=${Date.now()}`)
+                .then(r => r.ok ? r.json() : fetch(`/api/corporate?t=${Date.now()}`).then(res => res.json()))
                 .then(cd => {
                     if (Array.isArray(cd)) {
                         corporateData = cd;
