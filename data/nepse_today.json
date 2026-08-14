@@ -273,8 +273,8 @@
       "open": 685.0,
       "high": 698.9,
       "low": 681.2,
-      "close": 695.0,
-      "ltp": 695.0,
+      "close": 692.1,
+      "ltp": 692.1,
       "prev_close": 685.5,
       "diff": 1.39,
       "diff_percent": 1.39,
@@ -284,8 +284,8 @@
       "fifty_two_week_high": 1233.0,
       "fifty_two_week_low": 285.0,
       "confidence": 27.43,
-      "dma20": 715.71,
-      "diff_20dma": -2.89,
+      "dma20": 715.56,
+      "diff_20dma": -3.28,
       "below_20dma": true
     },
     {
@@ -4817,8 +4817,8 @@
       "open": 426.4,
       "high": 427.0,
       "low": 422.5,
-      "close": 426.0,
-      "ltp": 426.0,
+      "close": 426.8,
+      "ltp": 426.8,
       "prev_close": 426.4,
       "diff": -0.09,
       "diff_percent": -0.09,
@@ -6658,9 +6658,9 @@
     },
     {
       "title": "Sensitive Index",
-      "value": 464.46,
-      "change": -0.09,
-      "change_percent": -0.02,
+      "value": 464.45,
+      "change": -0.14,
+      "change_percent": -0.03,
       "turnover": 0.0
     },
     {
