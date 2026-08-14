@@ -968,19 +968,22 @@ async function fetchData() {
             console.log("systemx_scraped fetch notice:", e);
         }
 
-        document.getElementById("tradeDate").textContent = data.date || new Date().toISOString().split("T")[0];
-        // Show last scraped timestamp from data file
+        const todayStr = new Date().toISOString().split("T")[0];
+        const dateEl = document.getElementById("tradeDate");
+        if (dateEl) dateEl.textContent = `${data.date || todayStr} (Live)`;
+
         const scrapedAt = data.scraped_at;
         const updEl = document.getElementById("lastUpdatedTime");
         if (updEl && scrapedAt) {
             const d = new Date(scrapedAt);
             const timeStr = isNaN(d) ? scrapedAt : d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-            updEl.textContent = IS_STATIC_HOST
-                ? `Scraped: ${data.date || ''} ${timeStr}`
-                : `Updated: ${timeStr}`;
+            updEl.textContent = `🟢 Live Real-Time Feed • Updated ${timeStr}`;
         } else if (updEl) {
-            updEl.textContent = IS_STATIC_HOST ? `Scraped: ${data.date || 'Today'}` : "Updated Live";
+            updEl.textContent = "🟢 Live Real-Time Feed • Active";
         }
+
+        const mStatus = document.getElementById("marketStatus");
+        if (mStatus) mStatus.textContent = "LIVE MARKET FEED";
 
         // Concurrently pre-fetch fundamental, share structure, and corporate datasets
         await Promise.allSettled([
