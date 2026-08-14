@@ -7,7 +7,7 @@ import urllib.request
 import urllib.parse
 import re
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from html.parser import HTMLParser
 
 class ShareSansarParser(HTMLParser):
