@@ -939,14 +939,33 @@ async function fetchData() {
         try {
             const resSx = await fetch(`data/systemx_scraped.json?t=${timestamp}`);
             systemxData = await resSx.json();
-            if (systemxData.stock_live && systemxData.stock_live.length && (!stocksData || !stocksData.length)) {
-                stocksData = systemxData.stock_live;
+
+            if (systemxData && systemxData.stock_live && systemxData.stock_live.length) {
+                const sxMap = {};
+                systemxData.stock_live.forEach(s => { sxMap[s.symbol] = s; });
+
+                if (!stocksData || !stocksData.length) {
+                    stocksData = systemxData.stock_live;
+                } else {
+                    stocksData.forEach(s => {
+                        const sx = sxMap[s.symbol];
+                        if (sx) {
+                            if (sx.ltp) s.ltp = sx.ltp;
+                            if (sx.close) s.close = sx.close;
+                            if (sx.diff !== undefined) s.diff = sx.diff;
+                            if (sx.diff_percent !== undefined) s.diff_percent = sx.diff_percent;
+                            if (sx.volume) s.volume = sx.volume;
+                            if (sx.turnover) s.turnover = sx.turnover;
+                        }
+                    });
+                }
             }
-            if (!indicesData.length && systemxData.indices) {
+
+            if (systemxData && systemxData.indices && systemxData.indices.length) {
                 indicesData = systemxData.indices;
             }
         } catch (e) {
-            console.log("No systemx_scraped.json found");
+            console.log("systemx_scraped fetch notice:", e);
         }
 
         document.getElementById("tradeDate").textContent = data.date || new Date().toISOString().split("T")[0];
