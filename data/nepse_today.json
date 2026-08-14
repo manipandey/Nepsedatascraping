@@ -543,6 +543,23 @@
       "confidence": 22.06
     },
     {
+      "symbol": "BOKD86",
+      "open": 1111.0,
+      "high": 1111.0,
+      "low": 1111.0,
+      "close": 1111.0,
+      "ltp": 1111.0,
+      "prev_close": 1145.0,
+      "diff": -2.97,
+      "diff_percent": -2.97,
+      "volume": 355,
+      "turnover": 394405.0,
+      "transactions": 7,
+      "fifty_two_week_high": 1145.0,
+      "fifty_two_week_low": 1025.1,
+      "confidence": 0.0
+    },
+    {
       "symbol": "BPCL",
       "open": 650.1,
       "high": 650.1,
@@ -3533,6 +3550,23 @@
       "confidence": 14.64
     },
     {
+      "symbol": "NCCD86",
+      "open": 1116.0,
+      "high": 1116.0,
+      "low": 1116.0,
+      "close": 1065.0,
+      "ltp": 1065.0,
+      "prev_close": 1116.0,
+      "diff": -4.57,
+      "diff_percent": -4.57,
+      "volume": 2,
+      "turnover": 2130.0,
+      "transactions": 1,
+      "fifty_two_week_high": 1299.0,
+      "fifty_two_week_low": 1052.0,
+      "confidence": 0.0
+    },
+    {
       "symbol": "NESDO",
       "open": 1425.0,
       "high": 1427.1,
@@ -3769,7 +3803,7 @@
       "fifty_two_week_low": 8.33,
       "confidence": 18.03,
       "dma20": 9.24,
-      "diff_20dma": -2.49,
+      "diff_20dma": -2.71,
       "below_20dma": true
     },
     {
@@ -4640,6 +4674,23 @@
       "confidence": 22.49
     },
     {
+      "symbol": "RBCLPO",
+      "open": 11225.0,
+      "high": 11225.0,
+      "low": 11225.0,
+      "close": 11225.0,
+      "ltp": 11225.0,
+      "prev_close": 11380.0,
+      "diff": -1.36,
+      "diff_percent": -1.36,
+      "volume": 40,
+      "turnover": 449000.0,
+      "transactions": 2,
+      "fifty_two_week_high": 13420.9,
+      "fifty_two_week_low": 11000.0,
+      "confidence": 0.0
+    },
+    {
       "symbol": "RFPL",
       "open": 353.0,
       "high": 353.0,
@@ -5085,6 +5136,23 @@
       "confidence": 22.03
     },
     {
+      "symbol": "SAPIL",
+      "open": 300.0,
+      "high": 345.0,
+      "low": 300.0,
+      "close": 345.0,
+      "ltp": 345.0,
+      "prev_close": 300.0,
+      "diff": 15.0,
+      "diff_percent": 15.0,
+      "volume": 70,
+      "turnover": 22824.0,
+      "transactions": 7,
+      "fifty_two_week_high": 345.0,
+      "fifty_two_week_low": 300.0,
+      "confidence": 0.0
+    },
+    {
       "symbol": "SARBTM",
       "open": 797.7,
       "high": 797.7,
@@ -5151,6 +5219,23 @@
       "fifty_two_week_high": 1226.0,
       "fifty_two_week_low": 1031.0,
       "confidence": 27.21
+    },
+    {
+      "symbol": "SBID83",
+      "open": 1036.0,
+      "high": 1036.0,
+      "low": 1035.1,
+      "close": 1035.1,
+      "ltp": 1035.1,
+      "prev_close": 1031.0,
+      "diff": 0.4,
+      "diff_percent": 0.4,
+      "volume": 25,
+      "turnover": 25886.5,
+      "transactions": 2,
+      "fifty_two_week_high": 1226.0,
+      "fifty_two_week_low": 1031.0,
+      "confidence": 0.0
     },
     {
       "symbol": "SBL",
