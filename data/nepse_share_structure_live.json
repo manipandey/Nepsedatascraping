@@ -251,20 +251,6 @@
     "is_locked": true,
     "is_official_live": true
   },
-  "ULHC": {
-    "symbol": "ULHC",
-    "company_name": "Upper Lohore Khola Hydropower Company Limited",
-    "total_shares": 5098040,
-    "promoter_shares_count": 2600000,
-    "public_shares_count": 2498040,
-    "promoter_shares_pct": 51.0,
-    "public_shares_pct": 49.0,
-    "allotment_date": "2023-08-13",
-    "promoter_lockin_expiry_date": "2026-08-13",
-    "mutual_fund_lockin_expiry_date": "2024-02-13",
-    "is_locked": true,
-    "is_official_live": true
-  },
   "BGWT": {
     "symbol": "BGWT",
     "company_name": "Bhagawati Hydropower Development Company Limited",
@@ -752,6 +738,34 @@
     "allotment_date": "2026-06-10",
     "promoter_lockin_expiry_date": "2029-06-10",
     "mutual_fund_lockin_expiry_date": "2026-12-10",
+    "is_locked": true,
+    "is_official_live": true
+  },
+  "MEPDL": {
+    "symbol": "MEPDL",
+    "company_name": "Mount Everest Power Development Limited",
+    "total_shares": 8600000,
+    "promoter_shares_count": 6020000,
+    "public_shares_count": 2580000,
+    "promoter_shares_pct": 70.0,
+    "public_shares_pct": 30.0,
+    "allotment_date": "2026-07-03",
+    "promoter_lockin_expiry_date": "2029-07-03",
+    "mutual_fund_lockin_expiry_date": "2027-01-03",
+    "is_locked": true,
+    "is_official_live": true
+  },
+  "SAPIL": {
+    "symbol": "SAPIL",
+    "company_name": "Sarvottam Paints Industries Limited",
+    "total_shares": 3400000,
+    "promoter_shares_count": 2550000,
+    "public_shares_count": 850000,
+    "promoter_shares_pct": 75.0,
+    "public_shares_pct": 25.0,
+    "allotment_date": "2026-06-25",
+    "promoter_lockin_expiry_date": "2029-06-25",
+    "mutual_fund_lockin_expiry_date": "2026-12-25",
     "is_locked": true,
     "is_official_live": true
   },
@@ -3916,6 +3930,20 @@
     "allotment_date": "",
     "promoter_lockin_expiry_date": "",
     "mutual_fund_lockin_expiry_date": "",
+    "is_locked": false,
+    "is_official_live": true
+  },
+  "ULHC": {
+    "symbol": "ULHC",
+    "company_name": "Upper Lohore Khola Hydropower Company Limited",
+    "total_shares": 5098040,
+    "promoter_shares_count": 2600000,
+    "public_shares_count": 2498040,
+    "promoter_shares_pct": 51.0,
+    "public_shares_pct": 49.0,
+    "allotment_date": "2023-08-13",
+    "promoter_lockin_expiry_date": "2026-08-13",
+    "mutual_fund_lockin_expiry_date": "2024-02-13",
     "is_locked": false,
     "is_official_live": true
   },
