@@ -1,0 +1,1807 @@
+[
+  {
+    "symbol": "ACLBSL",
+    "fullName": "Aarambha Chautari Laghubitta Bittiya Sanstha Limited",
+    "sector": ""
+  },
+  {
+    "symbol": "ADBL",
+    "fullName": "Agriculture Development Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "AHL",
+    "fullName": "Asian Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "AHPC",
+    "fullName": "Arun Valley Hydropower Development Co. Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "AKJCL",
+    "fullName": "Ankhu Khola Jalvidhyut Company Ltd",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "AKPL",
+    "fullName": "Arun Kabeli Power Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "ALBSL",
+    "fullName": "Asha Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "ALICL",
+    "fullName": "Asian Life Insurance Co. Limited",
+    "sector": "Life Insurance"
+  },
+  {
+    "symbol": "ANLB",
+    "fullName": "Aatmanirbhar Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "APHL",
+    "fullName": "Appolo Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "API",
+    "fullName": "Api Power Company Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "AVYAN",
+    "fullName": "Aviyan Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "BANDIPUR",
+    "fullName": "Bandipur Cablecar and Tourism Limited",
+    "sector": "Hotels And Tourism"
+  },
+  {
+    "symbol": "BARUN",
+    "fullName": "Barun Hydropower Co. Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "BBC",
+    "fullName": "Bishal Bazar Company Limited",
+    "sector": "Trading"
+  },
+  {
+    "symbol": "BEDC",
+    "fullName": "Bhugol Energy Development Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "BFC",
+    "fullName": "Best Finance Company Ltd.",
+    "sector": "Finance"
+  },
+  {
+    "symbol": "BGWT",
+    "fullName": "Bhagawati Hydropower Development Company Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "BHCL",
+    "fullName": "Bikash Hydropower Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "BHDC",
+    "fullName": "Bindyabasini Hydropower Development Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "BHL",
+    "fullName": "Balephi Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "BHPL",
+    "fullName": "Barahi Hydropower Public Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "BJHL",
+    "fullName": "Bhujung Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "BNHC",
+    "fullName": "Buddhabhumi Nepal Hydropower Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "BNT",
+    "fullName": "BNT",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "BPCL",
+    "fullName": "Butwal Power Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "BUNGAL",
+    "fullName": "Bungal Hydro Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "C30MF",
+    "fullName": "Citizens Super 30 Mutual Fund",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "CBBL",
+    "fullName": "Chhimek Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "CBLD88",
+    "fullName": "Civil Bank Debenture 2088",
+    "sector": "Bond"
+  },
+  {
+    "symbol": "CCBD88",
+    "fullName": "Century Debenture 2088",
+    "sector": "Bond"
+  },
+  {
+    "symbol": "CFCL",
+    "fullName": "Central Finance Co. Ltd.",
+    "sector": "Finance"
+  },
+  {
+    "symbol": "CGH",
+    "fullName": "Chandragiri Hills Limited",
+    "sector": "Hotels And Tourism"
+  },
+  {
+    "symbol": "CHCL",
+    "fullName": "Chilime Hydropower Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "CHDC",
+    "fullName": "CEDB Holdings Limited",
+    "sector": "Investment"
+  },
+  {
+    "symbol": "CHL",
+    "fullName": "Chhyangdi Hydropower Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "CIT",
+    "fullName": "Citizen Investment Trust",
+    "sector": "Investment"
+  },
+  {
+    "symbol": "CITY",
+    "fullName": "City Hotel Limited",
+    "sector": "Hotels And Tourism"
+  },
+  {
+    "symbol": "CIZBD90",
+    "fullName": "CIZBD90",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "CKHL",
+    "fullName": "Chirkhwa Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "CLI",
+    "fullName": "Citizen Life Insurance Company Limited",
+    "sector": "Life Insurance"
+  },
+  {
+    "symbol": "CORBL",
+    "fullName": "Corporate Development Bank Limited",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "CREST",
+    "fullName": "Crest Micro Life Insurance Ltd.",
+    "sector": "Life Insurance"
+  },
+  {
+    "symbol": "CSY",
+    "fullName": "Citizens Santulit Yojana",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "CYCL",
+    "fullName": "CYC Nepal Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "CZBIL",
+    "fullName": "Citizen Bank International Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "DDBL",
+    "fullName": "Deprosc Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "DHEL",
+    "fullName": "Daramkhola Hydro Energy Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "DHPL",
+    "fullName": "Dibyashwori Hydropower Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "DLBS",
+    "fullName": "Dhaulagiri Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "DOLTI",
+    "fullName": "Dolti Power Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "DORDI",
+    "fullName": "Dordi Khola Jal Bidyut Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "EBL",
+    "fullName": "Everest Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "EBLD85",
+    "fullName": "10.50% Everest Bank Limited Debenture 2085",
+    "sector": "Bond"
+  },
+  {
+    "symbol": "EBLD86",
+    "fullName": "EBLD86",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "EBLD91",
+    "fullName": "EBLD91",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "ECL",
+    "fullName": "Everest Colour Limited",
+    "sector": "Manu.& Pro."
+  },
+  {
+    "symbol": "EDBL",
+    "fullName": "Excel Development Bank Ltd.",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "EDBLPO",
+    "fullName": "Excel Development Bank Ltd. Promoter Share",
+    "sector": ""
+  },
+  {
+    "symbol": "EHPL",
+    "fullName": "Eastern Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "ENL",
+    "fullName": "Emerging Nepal Limited",
+    "sector": "Investment"
+  },
+  {
+    "symbol": "FMDBL",
+    "fullName": "First Micro Finance Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "FOWAD",
+    "fullName": "Forward Microfinance Laghubitta Bittiya Sanstha Ltd.",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "GBBD85",
+    "fullName": "Garima Debenture, 2085",
+    "sector": "Bond"
+  },
+  {
+    "symbol": "GBBL",
+    "fullName": "Garima Bikas Bank Limited",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "GBIME",
+    "fullName": "Global IME Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "GBIMESY2",
+    "fullName": "Global IME Samunnat Yojana - II",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "GBLBS",
+    "fullName": "Grameen Bikas Laghubitta Bittiya Sanstha Ltd.",
+    "sector": ""
+  },
+  {
+    "symbol": "GCIL",
+    "fullName": "Ghorahi Cement Industry Limited",
+    "sector": "Manu.& Pro."
+  },
+  {
+    "symbol": "GFCL",
+    "fullName": "Goodwill Finance Co. Ltd.",
+    "sector": "Finance"
+  },
+  {
+    "symbol": "GHL",
+    "fullName": "Ghalemdi Hydro Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "GIBF1",
+    "fullName": "Global IME Balanced Fund-1",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "GILB",
+    "fullName": "GILB",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "GLBSL",
+    "fullName": "Gurans Laghubitta Bittiya Sanstha Limited",
+    "sector": ""
+  },
+  {
+    "symbol": "GLH",
+    "fullName": "Greenlife Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "GMFBS",
+    "fullName": "Ganapati Microfinance Bittiya Sanstha Ltd",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "GMFIL",
+    "fullName": "Guheshowori Merchant Bank & Finance Co. Ltd.",
+    "sector": "Finance"
+  },
+  {
+    "symbol": "GMLI",
+    "fullName": "Guardian Micro-Life Insurance Limited",
+    "sector": "Life Insurance"
+  },
+  {
+    "symbol": "GRDBL",
+    "fullName": "Green Development Bank Ltd.",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "GSY",
+    "fullName": "Garima Samriddhi Yojana",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "GUFL",
+    "fullName": "Gurkhas Finance Ltd.",
+    "sector": "Finance"
+  },
+  {
+    "symbol": "GVL",
+    "fullName": "Green Ventures Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "GWFD83",
+    "fullName": "GWFD83",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "H8020",
+    "fullName": "Himalayan 80-20",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "HATHY",
+    "fullName": "Hathway Investment Nepal Limited",
+    "sector": "Investment"
+  },
+  {
+    "symbol": "HBL",
+    "fullName": "Himalayan Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "HDHPC",
+    "fullName": "Himal Dolakha Hydropower Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "HDL",
+    "fullName": "Himalayan Distillery Limited",
+    "sector": "Manu.& Pro."
+  },
+  {
+    "symbol": "HEI",
+    "fullName": "Himalayan Everest Insurance Limited",
+    "sector": "Non Life Insurance"
+  },
+  {
+    "symbol": "HFIN",
+    "fullName": "Hotel Forest Inn Limited",
+    "sector": "Hotels And Tourism"
+  },
+  {
+    "symbol": "HHL",
+    "fullName": "Himalayan Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "HIDCL",
+    "fullName": "Hydorelectricity Investment and Development Company Ltd",
+    "sector": "Investment"
+  },
+  {
+    "symbol": "HIDCLP",
+    "fullName": "Hydroelectricity Investment and Development Company Limited Promoter Share",
+    "sector": "Investment"
+  },
+  {
+    "symbol": "HIMSTAR",
+    "fullName": "Him Star Urja Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "HLBSL",
+    "fullName": "Himalayan Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "HLI",
+    "fullName": "Himalayan Life Insurance Limited",
+    "sector": "Life Insurance"
+  },
+  {
+    "symbol": "HLICF",
+    "fullName": "HLI Large Cap Fund",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "HPPL",
+    "fullName": "Himalayan Power Partner Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "HRL",
+    "fullName": "Himalayan Reinsurance Limited",
+    "sector": "Others"
+  },
+  {
+    "symbol": "HURJA",
+    "fullName": "Himalaya Urja Bikas Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "ICFC",
+    "fullName": "ICFC Finance Limited",
+    "sector": "Finance"
+  },
+  {
+    "symbol": "ICFCD83",
+    "fullName": "ICFCD83",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "ICFCD88",
+    "fullName": "ICFCD88",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "ICFCD89",
+    "fullName": "8% ICFC Finance Limited Debenture-2089",
+    "sector": "Bond"
+  },
+  {
+    "symbol": "IGI",
+    "fullName": "IGI Prudential Insurance Company Limited",
+    "sector": "Non Life Insurance"
+  },
+  {
+    "symbol": "IHL",
+    "fullName": "Ingwa Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "ILBS",
+    "fullName": "Infinity Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "ILI",
+    "fullName": "IME Life Insurance Company Limited",
+    "sector": "Life Insurance"
+  },
+  {
+    "symbol": "JBBD87",
+    "fullName": "Jyoti Bikash Bank Bond 2087",
+    "sector": ""
+  },
+  {
+    "symbol": "JBBL",
+    "fullName": "Jyoti Bikas Bank Limited",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "JBLB",
+    "fullName": "Jeevan Bikas Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "JFL",
+    "fullName": "Janaki Finance Ltd.",
+    "sector": "Finance"
+  },
+  {
+    "symbol": "JHAPA",
+    "fullName": "Jhapa Energy Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "JOSHI",
+    "fullName": "Joshi Hydropower Development Company Ltd",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "JSLBB",
+    "fullName": "Janautthan Samudayic Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "KAHL",
+    "fullName": "Kalanga Hydro Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "KBL",
+    "fullName": "Kumari Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "KBLD86",
+    "fullName": "10.25% Kumari Bank Debenture 2086",
+    "sector": "Bond"
+  },
+  {
+    "symbol": "KBLD89",
+    "fullName": "KBLD89",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "KBSH",
+    "fullName": "Kutheli Bukhari Small Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "KDBY",
+    "fullName": "Kumari Dhanabriddhi Yojana",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "KDL",
+    "fullName": "Kalinchowk Darshan Limited",
+    "sector": "Hotels And Tourism"
+  },
+  {
+    "symbol": "KEF",
+    "fullName": "Kumari Equity Fund",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "KHPL",
+    "fullName": "Kalinchock Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "KKHC",
+    "fullName": "Khanikhola Hydropower Co. Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "KMCDB",
+    "fullName": "Kalika Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "KPCL",
+    "fullName": "Kalika power Company Ltd",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "KSBBL",
+    "fullName": "Kamana Sewa Bikas Bank Limited",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "KSY",
+    "fullName": "Kumari Sabal Yojana",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "LBBL",
+    "fullName": "Lumbini Bikas Bank Ltd.",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "LEC",
+    "fullName": "Liberty Energy Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "LICN",
+    "fullName": "Life Insurance Co. Nepal",
+    "sector": "Life Insurance"
+  },
+  {
+    "symbol": "LLBS",
+    "fullName": "LLBS",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "LSH12",
+    "fullName": "LS Horizon 12",
+    "sector": ""
+  },
+  {
+    "symbol": "LSL",
+    "fullName": "Laxmi Sunrise Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "LUK",
+    "fullName": "LUK",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "LVF2",
+    "fullName": "Laxmi Value Fund 2",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "MABEL",
+    "fullName": "Mabilung Energy Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MAKAR",
+    "fullName": "Makar Jitumaya Suri Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MANDU",
+    "fullName": "Mandu Hydropower Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MATRI",
+    "fullName": "Matribhumi Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "MBJC",
+    "fullName": "Madhya Bhotekoshi Jalavidyut Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MBL",
+    "fullName": "Machhapuchchhre Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "MBLEF",
+    "fullName": "MBL Equity Fund",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "MCHL",
+    "fullName": "Menchhiyam Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MDB",
+    "fullName": "Miteri Development Bank Limited",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "MEHL",
+    "fullName": "Manakamana Engineering Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MEL",
+    "fullName": "Modi Energy Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MEN",
+    "fullName": "Mountain Energy Nepal Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MEPDL",
+    "fullName": "MEPDL",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "MERO",
+    "fullName": "Meromicrofinance Laghubitta Bittiya Sanstha Ltd.",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "MFIL",
+    "fullName": "Manjushree Finance Ltd.",
+    "sector": "Finance"
+  },
+  {
+    "symbol": "MHCL",
+    "fullName": "Molung Hydropower Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MHL",
+    "fullName": "Mandakini Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MHNL",
+    "fullName": "Mountain Hydro Nepal Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MKCL",
+    "fullName": "Muktinath Krishi Company Limited",
+    "sector": "Others"
+  },
+  {
+    "symbol": "MKHC",
+    "fullName": "Maya Khola Hydropower Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MKHL",
+    "fullName": "Mai Khola Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MKJC",
+    "fullName": "Mailung Khola Jal Vidhyut Company  Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MLBBL",
+    "fullName": "Mithila Laghubitta Bittiya Sanstha Ltd.",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "MLBL",
+    "fullName": "Mahalaxmi Bikas Bank Ltd.",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "MLBS",
+    "fullName": "Manushi Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "MLBSL",
+    "fullName": "Mahila Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "MMF1",
+    "fullName": "Mega Mutual Fund-1",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "MMKJL",
+    "fullName": "Mathillo Mailun Khola Jalvidhyut Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MNBBL",
+    "fullName": "Muktinath Bikas Bank Ltd.",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "MNMF1",
+    "fullName": "Muktinath Mutual Fund 1",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "MPFL",
+    "fullName": "Multipurpose Finance Company Limited",
+    "sector": "Finance"
+  },
+  {
+    "symbol": "MSHL",
+    "fullName": "Mid-Solu Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "MSLB",
+    "fullName": "Mahuli Laghubitta Bittiya Sanstha Ltd.",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "NABBC",
+    "fullName": "Narayani Development Bank Limited",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "NABIL",
+    "fullName": "Nabil Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "NABILD2089",
+    "fullName": "7% Nabil Debenture 2089",
+    "sector": "Bond"
+  },
+  {
+    "symbol": "NADEP",
+    "fullName": "Nadep Laghubitta Bittiya Sanstha Ltd.",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "NBF2",
+    "fullName": "NABIL BALANCED FUND-2",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "NBF3",
+    "fullName": "Nabil Balanced Fund-3",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "NBL",
+    "fullName": "Nepal Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "NBLD82",
+    "fullName": "10% Nabil Debenture 2082",
+    "sector": "Bond"
+  },
+  {
+    "symbol": "NBLD87",
+    "fullName": "8.5% Nepal Bank Debenture 2087",
+    "sector": "Bond"
+  },
+  {
+    "symbol": "NESDO",
+    "fullName": "NESDO Sambridha Laghubitta Bittiye Sanstha Limited",
+    "sector": ""
+  },
+  {
+    "symbol": "NFS",
+    "fullName": "Nepal Finance Ltd.",
+    "sector": "Finance"
+  },
+  {
+    "symbol": "NGPL",
+    "fullName": "Ngadi Group Power Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "NHDL",
+    "fullName": "Nepal Hydro Developers Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "NHPC",
+    "fullName": "National Hydro Power Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "NIBLGF",
+    "fullName": "NIBL Growth Fund",
+    "sector": ""
+  },
+  {
+    "symbol": "NIBLSTF",
+    "fullName": "NIBL Stable Fund",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "NIBSF2",
+    "fullName": "NIBL Samriddhi Fund 2",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "NICA",
+    "fullName": "NIC Asia Bank Ltd.",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "NICAD2091",
+    "fullName": "NICAD2091",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "NICBF",
+    "fullName": "NIC Asia Balanced Fund",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "NICD88",
+    "fullName": "8.5% NIC Asia Rinpatra 2088",
+    "sector": ""
+  },
+  {
+    "symbol": "NICFC",
+    "fullName": "NIC ASIA Flexi CAP Fund",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "NICGF2",
+    "fullName": "NIC Asia Growth Fund-2",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "NICL",
+    "fullName": "Nepal Insurance Co. Ltd.",
+    "sector": "Non Life Insurance"
+  },
+  {
+    "symbol": "NICLBSL",
+    "fullName": "NIC Asia Laghubitta Biitiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "NICSF",
+    "fullName": "NICSF",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "NIFRA",
+    "fullName": "Nepal Infrastructure Bank Limited",
+    "sector": "Investment"
+  },
+  {
+    "symbol": "NIFRAGED",
+    "fullName": "NIFRAGED",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "NIFRAUR85/86",
+    "fullName": "NIFRAUR85/86",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "NIL",
+    "fullName": "Neco Insurance Co. Ltd.",
+    "sector": "Non Life Insurance"
+  },
+  {
+    "symbol": "NIMB",
+    "fullName": "Nepal Investment Mega Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "NIMBD90",
+    "fullName": "NIMBD90",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "NIMBPO",
+    "fullName": "Nepal Investment Mega Bank Ltd. Promoter Share",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "NLG",
+    "fullName": "NLG Insurance Company Ltd.",
+    "sector": "Non Life Insurance"
+  },
+  {
+    "symbol": "NLIC",
+    "fullName": "Nepal Life Insurance Co. Ltd.",
+    "sector": "Life Insurance"
+  },
+  {
+    "symbol": "NLICL",
+    "fullName": "National Life Insurance Co. Ltd.",
+    "sector": "Life Insurance"
+  },
+  {
+    "symbol": "NMB",
+    "fullName": "NMB Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "NMB50",
+    "fullName": "NMB 50",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "NMBD87/88",
+    "fullName": "NMBD87/88",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "NMBHF2",
+    "fullName": "NMB Hybrid Fund L-II",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "NMBMF",
+    "fullName": "NMB Laghubitta Bittiya Sanstha Ltd.",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "NMFBS",
+    "fullName": "National Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "NMIC",
+    "fullName": "Nepal Micro Insurance Co. Ltd.",
+    "sector": "Non Life Insurance"
+  },
+  {
+    "symbol": "NMLBBL",
+    "fullName": "Nerude Mirmire Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "NRIC",
+    "fullName": "Nepal Re-Insurance Company Limited",
+    "sector": "Others"
+  },
+  {
+    "symbol": "NRM",
+    "fullName": "Nepal Republic Media Limited",
+    "sector": "Others"
+  },
+  {
+    "symbol": "NRN",
+    "fullName": "NRN Infrastructure and Development Limited",
+    "sector": "Investment"
+  },
+  {
+    "symbol": "NSIF2",
+    "fullName": "NMB Sulav Investment Fund - 2",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "NSY",
+    "fullName": "Nepal Life Samriddhi Lagani Yojana",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "NTC",
+    "fullName": "Nepal Doorsanchar Comapany Limited",
+    "sector": "Others"
+  },
+  {
+    "symbol": "NUBL",
+    "fullName": "Nirdhan Utthan Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "NWCL",
+    "fullName": "Nepal Warehousing Company Limited",
+    "sector": "Others"
+  },
+  {
+    "symbol": "NYADI",
+    "fullName": "Nyadi Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "OHL",
+    "fullName": "Oriental Hotels Limited",
+    "sector": "Hotels And Tourism"
+  },
+  {
+    "symbol": "OMPL",
+    "fullName": "Om Megashree Pharmaceuticals Limited",
+    "sector": "Manu.& Pro."
+  },
+  {
+    "symbol": "PBD85",
+    "fullName": "8.75% Prime Commercial Bank Debenture 2085",
+    "sector": ""
+  },
+  {
+    "symbol": "PBD88",
+    "fullName": "PBD88",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "PBLD87",
+    "fullName": "8.5% Prabhu Bank Debenture 2087",
+    "sector": "Bond"
+  },
+  {
+    "symbol": "PCBL",
+    "fullName": "Prime Commercial Bank Ltd.",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "PCIL",
+    "fullName": "Palpa Cement Industries Limited",
+    "sector": "Manu.& Pro."
+  },
+  {
+    "symbol": "PHCL",
+    "fullName": "Peoples Hydropower Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "PMHPL",
+    "fullName": "Panchakanya Mai Hydropower Ltd",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "PMLI",
+    "fullName": "Prabhu Mahalaxmi Life Insurance Limited",
+    "sector": "Life Insurance"
+  },
+  {
+    "symbol": "PPCL",
+    "fullName": "Panchthar Power Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "PPL",
+    "fullName": "People's Power Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "PRIN",
+    "fullName": "Prabhu Insurance Ltd.",
+    "sector": "Non Life Insurance"
+  },
+  {
+    "symbol": "PROFL",
+    "fullName": "Progressive Finance Limited",
+    "sector": "Finance"
+  },
+  {
+    "symbol": "PROFLP",
+    "fullName": "Progressive Finance Limited Promoter Share",
+    "sector": ""
+  },
+  {
+    "symbol": "PRSF",
+    "fullName": "Prabhu Smart Fund",
+    "sector": ""
+  },
+  {
+    "symbol": "PRVU",
+    "fullName": "Prabhu Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "PRVUPO",
+    "fullName": "PRVUPO",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "PSF",
+    "fullName": "Prabhu Select Fund",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "PURE",
+    "fullName": "Pure Energy Ltd.",
+    "sector": "Others"
+  },
+  {
+    "symbol": "RADHI",
+    "fullName": "Radhi Bidyut Company Ltd",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "RAWA",
+    "fullName": "Rawa Energy Development Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "RBBD2088",
+    "fullName": "RBBD2088",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "RBBF40",
+    "fullName": "RBB FOCUS 40",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "RBCL",
+    "fullName": "Rastriya Beema Company Limited",
+    "sector": "Non Life Insurance"
+  },
+  {
+    "symbol": "RFPL",
+    "fullName": "River Falls Power Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "RHGCL",
+    "fullName": "Rapti Hydro and General Construction Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "RHPL",
+    "fullName": "RASUWAGADHI HYDROPOWER COMPANY LIMITED",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "RIDI",
+    "fullName": "Ridi Power Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "RLEL",
+    "fullName": "Ridge Line Energy Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "RLFL",
+    "fullName": "Reliance Finance Ltd.",
+    "sector": "Finance"
+  },
+  {
+    "symbol": "RMF1",
+    "fullName": "RBB Mutual Fund 1",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "RMF2",
+    "fullName": "RBB Mutual Fund 2",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "RNLI",
+    "fullName": "Reliable Nepal Life Insurance Limited",
+    "sector": "Life Insurance"
+  },
+  {
+    "symbol": "RSDC",
+    "fullName": "RSDC Laghubitta Bittiya Sanstha Ltd.",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "RSML",
+    "fullName": "Reliance Spinning Mills Limited",
+    "sector": "Manu.& Pro."
+  },
+  {
+    "symbol": "RSY",
+    "fullName": "Reliable Samriddhi Yojana",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "RSY2",
+    "fullName": "RSY2",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "RURU",
+    "fullName": "Ru Ru Jalbidhyut Pariyojana Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SABBL",
+    "fullName": "Salapa Bikas Bank Limited",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "SADBL",
+    "fullName": "Shangrila Development Bank Ltd.",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "SAEF2",
+    "fullName": "Sanima Equity Fund-2",
+    "sector": ""
+  },
+  {
+    "symbol": "SAGAR",
+    "fullName": "Sagar Distillery Limited",
+    "sector": "Manu.& Pro."
+  },
+  {
+    "symbol": "SAGF",
+    "fullName": "SAGF",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "SAHAS",
+    "fullName": "Sahas Urja Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SAIL",
+    "fullName": "Shreenagar Agritech Industries Limited",
+    "sector": "Manu.& Pro."
+  },
+  {
+    "symbol": "SALICO",
+    "fullName": "Sagarmatha Lumbini Insurance Co. Limited",
+    "sector": "Non Life Insurance"
+  },
+  {
+    "symbol": "SANIMA",
+    "fullName": "Sanima Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "SANVI",
+    "fullName": "Sanvi Energy Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SAPDBL",
+    "fullName": "Saptakoshi Development Bank Ltd",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "SARBTM",
+    "fullName": "Sarbottam Cement Limited",
+    "sector": "Manu.& Pro."
+  },
+  {
+    "symbol": "SBCF",
+    "fullName": "Sunrise Bluechip Fund",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "SBD87",
+    "fullName": "SBD87",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "SBD89",
+    "fullName": "10.25% Sanima Debenture 2089",
+    "sector": ""
+  },
+  {
+    "symbol": "SBI",
+    "fullName": "Nepal SBI Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "SBL",
+    "fullName": "Siddhartha Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "SBLD2091",
+    "fullName": "SBLD2091",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "SBLD84",
+    "fullName": "SBLD84",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "SBLD89",
+    "fullName": "SBLD89",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "SCB",
+    "fullName": "Standard Chartered Bank Limited",
+    "sector": "Banking"
+  },
+  {
+    "symbol": "SCBD",
+    "fullName": "SCBD",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "SEF",
+    "fullName": "Siddhartha Equity Fund",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "SEF2",
+    "fullName": "Siddhartha Equity Fund 2",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "SFEF",
+    "fullName": "SFEF",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "SFMF",
+    "fullName": "Sunrise First Mutual Fund",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "SGHC",
+    "fullName": "Swet-Ganga Hydropower & Construction Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SGHL",
+    "fullName": "Sanigad Hydro Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SGIC",
+    "fullName": "Sanima GIC Insurance Limited",
+    "sector": "Non Life Insurance"
+  },
+  {
+    "symbol": "SHEL",
+    "fullName": "Singati Hydro Energy Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SHINE",
+    "fullName": "Shine Resunga Development Bank Ltd.",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "SHIVM",
+    "fullName": "SHIVAM CEMENTS LTD",
+    "sector": "Manu.& Pro."
+  },
+  {
+    "symbol": "SHL",
+    "fullName": "Soaltee Hotel Limited",
+    "sector": "Hotels And Tourism"
+  },
+  {
+    "symbol": "SHLB",
+    "fullName": "Shrijanshil Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "SHPC",
+    "fullName": "Sanima Mai Hydropower Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SICL",
+    "fullName": "Shikhar Insurance Co. Ltd.",
+    "sector": "Non Life Insurance"
+  },
+  {
+    "symbol": "SIFC",
+    "fullName": "Shree Investment Finance Co. Ltd.",
+    "sector": "Finance"
+  },
+  {
+    "symbol": "SIGS2",
+    "fullName": "SIGS2",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "SIGS3",
+    "fullName": "Siddhartha Investment Growth Scheme 3",
+    "sector": ""
+  },
+  {
+    "symbol": "SIKLES",
+    "fullName": "Sikles Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SINDU",
+    "fullName": "Sindhu Bikash Bank Ltd",
+    "sector": "Development Bank"
+  },
+  {
+    "symbol": "SIPD",
+    "fullName": "Shikhar Power Development Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SJCL",
+    "fullName": "SANJEN JALAVIDHYUT COMPANY LIMITED",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SJLIC",
+    "fullName": "SuryaJyoti Life Insurance Company Limited",
+    "sector": "Life Insurance"
+  },
+  {
+    "symbol": "SKBBL",
+    "fullName": "Sana Kisan Bikas Laghubitta Bittiya sanstha Limited.",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "SKHEL",
+    "fullName": "Suryakunda Hydro Electric Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SKHL",
+    "fullName": "Super Khudi Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SLBBL",
+    "fullName": "Swarojgar Laghubitta Bittiya Sanstha Ltd.",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "SLBSL",
+    "fullName": "Samudayik Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "SLCF",
+    "fullName": "Sanima Large Cap Fund",
+    "sector": "Mutual Fund"
+  },
+  {
+    "symbol": "SMATA",
+    "fullName": "Samata Gharelu Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "SMB",
+    "fullName": "Support Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "SMFBS",
+    "fullName": "Swabhimaan Laghubitta Bittiya Sanstha Ltd",
+    "sector": ""
+  },
+  {
+    "symbol": "SMH",
+    "fullName": "Super Mai Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SMHL",
+    "fullName": "Super Madi Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SMJC",
+    "fullName": "Sagarmatha Jalabidhyut Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SMPDA",
+    "fullName": "Sampada Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "SNLI",
+    "fullName": "Sun Nepal Life Insurance Company Limited",
+    "sector": "Life Insurance"
+  },
+  {
+    "symbol": "SNORL",
+    "fullName": "Snow Rivers Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SOHL",
+    "fullName": "Solu Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SONA",
+    "fullName": "Sonapur Minerals and Oil Limited",
+    "sector": "Manu.& Pro."
+  },
+  {
+    "symbol": "SOPL",
+    "fullName": "Sopan Pharmaceuticals Limited",
+    "sector": "Manu.& Pro."
+  },
+  {
+    "symbol": "SPC",
+    "fullName": "Samling Power Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SPDL",
+    "fullName": "Synergy Power Development Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SPHL",
+    "fullName": "Sayapatri Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SPIL",
+    "fullName": "Siddhartha Premier Insurance Limited",
+    "sector": "Non Life Insurance"
+  },
+  {
+    "symbol": "SPL",
+    "fullName": "Shuvam Power Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "SRLI",
+    "fullName": "Sanima Reliance Life Insurance Limited",
+    "sector": "Life Insurance"
+  },
+  {
+    "symbol": "SSHL",
+    "fullName": "Shiva Shree Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "STC",
+    "fullName": "STC",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "SWASTIK",
+    "fullName": "Swastik Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "SWBBL",
+    "fullName": "Swabalamban Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "SWMF",
+    "fullName": "Suryodaya Womi Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "SYPNL",
+    "fullName": "SY Panel Nepal Limited",
+    "sector": "Manu.& Pro."
+  },
+  {
+    "symbol": "TAMOR",
+    "fullName": "Sanima Middle Tamor Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "TPC",
+    "fullName": "Terhathum Power Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "TPKHL",
+    "fullName": "Taksar Pikhuwa Khola Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "TRH",
+    "fullName": "Taragaon Regency Hotel Limited",
+    "sector": "Hotels And Tourism"
+  },
+  {
+    "symbol": "TSHL",
+    "fullName": "Three Star Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "TTL",
+    "fullName": "Trade Tower Limited",
+    "sector": "Others"
+  },
+  {
+    "symbol": "TVCL",
+    "fullName": "Trishuli Jal Vidhyut Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "UAIL",
+    "fullName": "United Ajod Insurance Limited",
+    "sector": "Non Life Insurance"
+  },
+  {
+    "symbol": "UHEWA",
+    "fullName": "Upper Hewakhola Hydropower Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "ULBSL",
+    "fullName": "Upakar Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "ULHC",
+    "fullName": "Upper Lohore Khola Hydropower Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "UMHL",
+    "fullName": "United Modi Hydropower Ltd.",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "UMRH",
+    "fullName": "United IDI Mardi RB Hydropower Limited.",
+    "sector": ""
+  },
+  {
+    "symbol": "UNHPL",
+    "fullName": "Union Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "UNL",
+    "fullName": "UNL",
+    "sector": "Listed Company"
+  },
+  {
+    "symbol": "UNLB",
+    "fullName": "Unique Nepal Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "UPCL",
+    "fullName": "UNIVERSAL POWER COMPANY LTD",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "UPPER",
+    "fullName": "Upper Tamakoshi Hydropower Ltd",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "USHEC",
+    "fullName": "Upper Solu Hydro Electric Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "USHL",
+    "fullName": "Upper Syange  Hydropower Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "USLB",
+    "fullName": "Unnati Sahakarya Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "VLBS",
+    "fullName": "Vijaya laghubitta Bittiya Sanstha Ltd.",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "VLUCL",
+    "fullName": "Vision Lumbini Urja Company Limited",
+    "sector": "HydroPower"
+  },
+  {
+    "symbol": "WNLB",
+    "fullName": "WEAN Nepal Laghubitta Bittiya Sanstha Limited",
+    "sector": "Microfinance"
+  },
+  {
+    "symbol": "YMHL",
+    "fullName": "Yambaling Hydropower Limited",
+    "sector": "HydroPower"
+  }
+]

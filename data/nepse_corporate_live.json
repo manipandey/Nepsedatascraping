@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "SIKLES-Dividend-1092",
+    "symbol": "SIKLES",
+    "companyname": "Sikles Hydropower Limited",
+    "category": "Dividend",
+    "details": "15.00% Bonus Share + 0.789% Cash Dividend (FY 2081/2082) | Book Close: 2025-12-04 [Closed]",
+    "event_date": "2025-08-11",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "RMF1-Dividend-1089",
+    "symbol": "RMF1",
+    "companyname": "RBB Mutual Fund 1",
+    "category": "Dividend",
+    "details": "20.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-08-25 [Closed]",
+    "event_date": "2025-08-15",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "RMF2-Dividend-1223",
+    "symbol": "RMF2",
+    "companyname": "RBB Mutual Fund 2",
+    "category": "Dividend",
+    "details": "13.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-08-25 [Closed]",
+    "event_date": "2025-08-15",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "PRSF-Dividend-1118",
+    "symbol": "PRSF",
+    "companyname": "Prabhu Smart Fund",
+    "category": "Dividend",
+    "details": "10.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-08-31 [Closed]",
+    "event_date": "2025-08-15",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "PSF-Dividend-1076",
+    "symbol": "PSF",
+    "companyname": "Prabhu Select Fund",
+    "category": "Dividend",
+    "details": "12.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-08-31 [Closed]",
+    "event_date": "2025-08-15",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "SLCF-Dividend-1005",
+    "symbol": "SLCF",
+    "companyname": "Sanima Large Cap Fund",
+    "category": "Dividend",
+    "details": "21.05% Cash Dividend (FY 2081/2082) | Book Close: 2025-08-22 [Closed]",
+    "event_date": "2025-08-15",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "SAGF-Dividend-1112",
+    "symbol": "SAGF",
+    "companyname": "Sanima Growth Fund",
+    "category": "Dividend",
+    "details": "15.79% Cash Dividend (FY 2081/2082) | Book Close: 2025-08-22 [Closed]",
+    "event_date": "2025-08-15",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "CMF2-Dividend-890",
+    "symbol": "CMF2",
+    "companyname": "Citizens Mutual Fund - 2",
+    "category": "Dividend",
+    "details": "8.25% Cash Dividend (FY 2081/2082) | Book Close: 2025-08-29 [Closed]",
+    "event_date": "2025-08-18",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "C30MF-Dividend-1123",
+    "symbol": "C30MF",
+    "companyname": "Citizens Super 30 Mutual Fund",
+    "category": "Dividend",
+    "details": "12.75% Cash Dividend (FY 2081/2082) | Book Close: 2025-08-29 [Closed]",
+    "event_date": "2025-08-18",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "NMB50-Dividend-901",
+    "symbol": "NMB50",
+    "companyname": "NMB 50",
+    "category": "Dividend",
+    "details": "15.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-08-29 [Closed]",
+    "event_date": "2025-08-19",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "NSIF2-Dividend-1113",
+    "symbol": "NSIF2",
+    "companyname": "NMB Sulav Investment Fund - II",
+    "category": "Dividend",
+    "details": "15.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-08-29 [Closed]",
+    "event_date": "2025-08-19",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "HATHY-Dividend-1022",
+    "symbol": "HATHY",
+    "companyname": "Hathway Investment Nepal Limited",
+    "category": "Dividend",
+    "details": "12.00% Bonus Share + 0.632% Cash Dividend (FY 2081/2082) | Book Close: 2025-08-29 [Closed]",
+    "event_date": "2025-08-19",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "VHPL-Dividend-1612",
+    "symbol": "VHPL",
+    "companyname": "Venture Hire Purchase Limited",
+    "category": "Dividend",
+    "details": "10.00% Cash Dividend (FY 2081/2082)",
+    "event_date": "2025-08-21",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "GIBF1-Dividend-686",
+    "symbol": "GIBF1",
+    "companyname": "Global IME Balanced Fund-I",
+    "category": "Dividend",
+    "details": "12.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-09-12 [Closed]",
+    "event_date": "2025-08-26",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "SNORL-Dividend-1327",
+    "symbol": "SNORL",
+    "companyname": "Snow Rivers Limited",
+    "category": "Dividend",
+    "details": "4.211% Cash Dividend (FY 2081/2082) | Book Close: 2025-09-09 [Closed]",
+    "event_date": "2025-08-28",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "HHEL-Dividend-1326",
+    "symbol": "HHEL",
+    "companyname": "Hilton Hydro Energy Limited",
+    "category": "Dividend",
+    "details": "5.263% Cash Dividend (FY 2081/2082) | Book Close: 2025-09-09 [Closed]",
+    "event_date": "2025-08-28",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "AELTD-Dividend-1363",
+    "symbol": "AELTD",
+    "companyname": "Aashutosh Energy Limited",
+    "category": "Dividend",
+    "details": "15.7895% Cash Dividend (FY 2081/2082) | Book Close: 2025-09-09 [Closed]",
+    "event_date": "2025-08-28",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "MSHL-Dividend-1170",
+    "symbol": "MSHL",
+    "companyname": "Mid Solu Hydropower Company Limited",
+    "category": "Dividend",
+    "details": "15.00% Bonus Share + 0.789% Cash Dividend (FY 2081/2082) | Book Close: 2025-12-28 [Closed]",
+    "event_date": "2025-08-28",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "NBF2-Dividend-891",
+    "symbol": "NBF2",
+    "companyname": "Nabil Balanced Fund - 2",
+    "category": "Dividend",
+    "details": "13.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-09-07 [Closed]",
+    "event_date": "2025-08-29",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "NBF3-Dividend-1117",
+    "symbol": "NBF3",
+    "companyname": "Nabil Balanced Fund III",
+    "category": "Dividend",
+    "details": "13.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-09-07 [Closed]",
+    "event_date": "2025-08-29",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "MBL-Dividend-7",
+    "symbol": "MBL",
+    "companyname": "Machhapuchchhre Bank Limited",
+    "category": "Dividend",
+    "details": "4.00% Bonus Share + 4.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-09-12 [Closed]",
+    "event_date": "2025-08-29",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "H8020-Dividend-1306",
+    "symbol": "H8020",
+    "companyname": "Himalayan 80-20",
+    "category": "Dividend",
+    "details": "16.16% Cash Dividend (FY 2081/2082) | Book Close: 2025-09-12 [Closed]",
+    "event_date": "2025-08-31",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "KCL-Dividend-976",
+    "symbol": "KCL",
+    "companyname": "Kumari Capital Limited",
+    "category": "Dividend",
+    "details": "17.00% Cash Dividend (FY 2081/2082)",
+    "event_date": "2025-08-15",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "SIDCL-Dividend-433",
+    "symbol": "SIDCL",
+    "companyname": "Siddhartha Capital Limited",
+    "category": "Dividend",
+    "details": "30.00% Cash Dividend (FY 2081/2082)",
+    "event_date": "2025-09-04",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "NIBLGF-Dividend-1121",
+    "symbol": "NIBLGF",
+    "companyname": "NIBL Growth Fund",
+    "category": "Dividend",
+    "details": "10.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-09-12 [Closed]",
+    "event_date": "2025-09-04",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "MMF1-Dividend-1100",
+    "symbol": "MMF1",
+    "companyname": "Mega Mutual Fund - 1",
+    "category": "Dividend",
+    "details": "11.75% Cash Dividend (FY 2081/2082) | Book Close: 2025-09-12 [Closed]",
+    "event_date": "2025-09-04",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "NIBSF2-Dividend-1073",
+    "symbol": "NIBSF2",
+    "companyname": "NIBL Samriddhi Fund - 2",
+    "category": "Dividend",
+    "details": "7.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-09-12 [Closed]",
+    "event_date": "2025-09-04",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "EBL-Dividend-10",
+    "symbol": "EBL",
+    "companyname": "Everest Bank Limited",
+    "category": "Dividend",
+    "details": "6.00% Bonus Share + 14.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-10-10 [Closed]",
+    "event_date": "2025-09-04",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "NIFRA-Dividend-896",
+    "symbol": "NIFRA",
+    "companyname": "Nepal Infrastructure Bank Limited",
+    "category": "Dividend",
+    "details": "6.3158% Cash Dividend (FY 2081/2082) | Book Close: 2025-11-28 [Closed]",
+    "event_date": "2025-09-05",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "JCL-Dividend-1290",
+    "symbol": "JCL",
+    "companyname": "Jyoti Capital Limited",
+    "category": "Dividend",
+    "details": "7.00% Cash Dividend (FY 2081/2082)",
+    "event_date": "2025-09-05",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "PRABHU-Dividend-357",
+    "symbol": "PRABHU",
+    "companyname": "Prabhu Capital Limited",
+    "category": "Dividend",
+    "details": "4.00% Bonus Share + 8.6316% Cash Dividend (FY 2081/2082)",
+    "event_date": "2025-09-05",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "MUKTINATHCAP-Dividend-381",
+    "symbol": "MUKTINATHCAP",
+    "companyname": "Muktinath Capital Limited",
+    "category": "Dividend",
+    "details": "9.00% Cash Dividend (FY 2081/2082)",
+    "event_date": "2025-09-05",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "GBIMEL-Dividend-847",
+    "symbol": "GBIMEL",
+    "companyname": "Global IME Capital Limited",
+    "category": "Dividend",
+    "details": "20.00% Cash Dividend (FY 2081/2082)",
+    "event_date": "2025-09-07",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "UPCL-Dividend-610",
+    "symbol": "UPCL",
+    "companyname": "Universal Power Company Limited",
+    "category": "Dividend",
+    "details": "9.00% Bonus Share + 0.4737% Cash Dividend (FY 2081/2082) | Book Close: 2025-09-24 [Closed]",
+    "event_date": "2025-09-15",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "MNBBL-Dividend-306",
+    "symbol": "MNBBL",
+    "companyname": "Muktinath Bikas Bank Limited",
+    "category": "Dividend",
+    "details": "13.53% Bonus Share + 4.67% Cash Dividend (FY 2081/2082) | Book Close: 2025-10-17 [Closed]",
+    "event_date": "2025-09-18",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "AHPC-Dividend-121",
+    "symbol": "AHPC",
+    "companyname": "Arun Valley Hydropower Development Company Limited",
+    "category": "Dividend",
+    "details": "5.00% Bonus Share + 0.263% Cash Dividend (FY 2081/2082) | Book Close: 2026-01-02 [Closed]",
+    "event_date": "2025-09-18",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "NLO-Dividend-99",
+    "symbol": "NLO",
+    "companyname": "Nepal Lube Oil Limited",
+    "category": "Dividend",
+    "details": "20.00% Bonus Share + 1.0526% Cash Dividend (FY 2081/2082) | Book Close: 2025-09-28 [Closed]",
+    "event_date": "2025-09-18",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "NABILINV-Dividend-431",
+    "symbol": "NABILINV",
+    "companyname": "Nabil Investment Banking Limited",
+    "category": "Dividend",
+    "details": "25.00% Bonus Share + 1.3158% Cash Dividend (FY 2081/2082) | Book Close: 2025-09-28 [Closed]",
+    "event_date": "2025-09-18",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "SANIMA-Dividend-166",
+    "symbol": "SANIMA",
+    "companyname": "Sanima Bank Limited",
+    "category": "Dividend",
+    "details": "7.3685% Cash Dividend (FY 2081/2082) | Book Close: 2025-10-13 [Closed]",
+    "event_date": "2025-09-21",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "UNL-Dividend-109",
+    "symbol": "UNL",
+    "companyname": "Unilever Nepal Limited",
+    "category": "Dividend",
+    "details": "1,842.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-10-28 [Closed]",
+    "event_date": "2025-09-23",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "MFIL-Dividend-337",
+    "symbol": "MFIL",
+    "companyname": "Manjushree Finance Limited",
+    "category": "Dividend",
+    "details": "15.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-10-08 [Closed]",
+    "event_date": "2025-09-23",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "TIME-Dividend-1528",
+    "symbol": "TIME",
+    "companyname": "Time Pharmaceuticals Limited",
+    "category": "Dividend",
+    "details": "14.5479% Bonus Share (FY 2081/2082)",
+    "event_date": "2025-09-23",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "NSMBL-Dividend-690",
+    "symbol": "NSMBL",
+    "companyname": "Nepal SBI Merchant Banking Limited",
+    "category": "Dividend",
+    "details": "25.00% Cash Dividend (FY 2081/2082)",
+    "event_date": "2025-09-23",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "GLBSL-Dividend-719",
+    "symbol": "GLBSL",
+    "companyname": "Gurans Laghubitta Bittiya Sanstha Limited",
+    "category": "Dividend",
+    "details": "14.25% Bonus Share + 0.75% Cash Dividend (FY 2081/2082) | Book Close: 2025-10-31 [Closed]",
+    "event_date": "2025-09-25",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "SNCL-Dividend-1477",
+    "symbol": "SNCL",
+    "companyname": "Sunlife Capital Limited",
+    "category": "Dividend",
+    "details": "9.00% Cash Dividend (FY 2081/2082)",
+    "event_date": "2025-09-25",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "NFML-Dividend-1371",
+    "symbol": "NFML",
+    "companyname": "National Fund Management Limited",
+    "category": "Dividend",
+    "details": "4.00% Bonus Share + 0.2105% Cash Dividend (FY 2081/2082) | Book Close: 2025-10-05 [Closed]",
+    "event_date": "2025-09-25",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "SANCAP-Dividend-638",
+    "symbol": "SANCAP",
+    "companyname": "Sanima Capital Limited",
+    "category": "Dividend",
+    "details": "12.00% Cash Dividend (FY 2081/2082)",
+    "event_date": "2025-09-25",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "CZBIL-Dividend-18",
+    "symbol": "CZBIL",
+    "companyname": "Citizens Bank International Limited",
+    "category": "Dividend",
+    "details": "5.00% Bonus Share + 0.263% Cash Dividend (FY 2081/2082) | Book Close: 2025-11-03 [Closed]",
+    "event_date": "2025-09-26",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "RBBMBL-Dividend-718",
+    "symbol": "RBBMBL",
+    "companyname": "RBB Merchant Banking Limited",
+    "category": "Dividend",
+    "details": "20.00% Cash Dividend (FY 2081/2082)",
+    "event_date": "2025-09-26",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "RSDC-Dividend-490",
+    "symbol": "RSDC",
+    "companyname": "RSDC Laghubitta Bittiya Sanstha Limited",
+    "category": "Dividend",
+    "details": "8.00% Cash Dividend (FY 2081/2082) | Book Close: 2025-11-11 [Closed]",
+    "event_date": "2025-09-28",
+    "status": "Official Announced",
+    "is_official_live": true
+  },
+  {
+    "id": "BENI-IPO-1352",
+    "symbol": "BENI",
+    "companyname": "Beni Hydropower Project Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (2,080,000 units) | Manager: NMB Capital Limited",
+    "event_date": "2026-08-12",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "MEPDL-IPO-1549",
+    "symbol": "MEPDL",
+    "companyname": "Mount Everest Power Development Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,427,600 units) | Manager: NIMB Ace Capital Limited",
+    "event_date": "2026-06-17",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SAPIL-IPO-1593",
+    "symbol": "SAPIL",
+    "companyname": "Sarvottam Paints Industries Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (705,500 units) | Manager: Global IME Capital Ltd",
+    "event_date": "2026-06-11",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "ECL-IPO-1540",
+    "symbol": "ECL",
+    "companyname": "Everest Colour Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (655,700 units) | Manager: Muktinath Capital Limited",
+    "event_date": "2026-06-05",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SGHL-IPO-1180",
+    "symbol": "SGHL",
+    "companyname": "Sanigad Hydro Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (4,674,000 units) | Manager: LS Capital Limited",
+    "event_date": "2026-06-01",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "KAHL-IPO-1181",
+    "symbol": "KAHL",
+    "companyname": "Kalanga Hydro Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (2,870,000 units) | Manager: Sanima Capital Limited",
+    "event_date": "2026-05-22",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SNORL-IPO-1327",
+    "symbol": "SNORL",
+    "companyname": "Snow Rivers Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (778,125 units) | Manager: Sanima Capital Limited",
+    "event_date": "2026-05-12",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "TPKHL-IPO-887",
+    "symbol": "TPKHL",
+    "companyname": "Taksar Pikhuwa Khola Hydropower Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (2,515,455 units) | Manager: Prabhu Capital Limited",
+    "event_date": "2026-05-06",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "YMHL-IPO-1320",
+    "symbol": "YMHL",
+    "companyname": "Yambaling Hydropower Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,743,000 units) | Manager: Muktinath Capital Limited",
+    "event_date": "2026-04-29",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SOPL-IPO-1216",
+    "symbol": "SOPL",
+    "companyname": "Sopan Pharmaceuticals Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (3,474,900 units) | Manager: NMB Capital Limited",
+    "event_date": "2026-04-16",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "APHL-IPO-1548",
+    "symbol": "APHL",
+    "companyname": "Appolo Hydropower Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (780,200 units) | Manager: Himalayan Capital Limited",
+    "event_date": "2026-04-09",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "KHPL-IPO-1376",
+    "symbol": "KHPL",
+    "companyname": "Kalinchowk Hydropower Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (684,750 units) | Manager: RBB Merchant Banking Ltd",
+    "event_date": "2026-04-05",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SIPD-IPO-1239",
+    "symbol": "SIPD",
+    "companyname": "Shikhar Power Development Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,842,600 units) | Manager: Global IME Capital Ltd",
+    "event_date": "2026-03-01",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "PCIL-IPO-932",
+    "symbol": "PCIL",
+    "companyname": "Palpa Cements Industries Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (4,500,000 units) | Manager: Nabil Investment Banking Ltd.",
+    "event_date": "2026-02-24",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SKHL-IPO-1399",
+    "symbol": "SKHL",
+    "companyname": "Super Khudi Hydropower Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,286,500 units) | Manager: Global IME Capital Ltd",
+    "event_date": "2026-02-17",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "RLEL-IPO-1446",
+    "symbol": "RLEL",
+    "companyname": "Ridge Line Energy Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,180,260 units) | Manager: Prabhu Capital Limited",
+    "event_date": "2026-02-11",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "HFIN-IPO-1357",
+    "symbol": "HFIN",
+    "companyname": "Hotel Forest Inn Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (3,320,000 units) | Manager: NIC Asia Capital Limited",
+    "event_date": "2026-02-05",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SKHEL-IPO-1459",
+    "symbol": "SKHEL",
+    "companyname": "Suryakunda Hydro Electric Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (572,431 units) | Manager: Kumari Capital Limited",
+    "event_date": "2026-02-01",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "BJHL-IPO-1222",
+    "symbol": "BJHL",
+    "companyname": "Bhujung Hydropower Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (830,000 units) | Manager: Kumari Capital Limited",
+    "event_date": "2026-01-26",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SOHL-IPO-1362",
+    "symbol": "SOHL",
+    "companyname": "Solu Hydropower Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (8,200,000 units) | Manager: Nabil Investment Banking Limited",
+    "event_date": "2026-01-13",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SABBL-IPO-447",
+    "symbol": "SABBL",
+    "companyname": "Salapa Bikas Bank Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,439,179 units) | Manager: Muktinath Capital Limited",
+    "event_date": "2025-12-31",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "RSML-IPO-1090",
+    "symbol": "RSML",
+    "companyname": "Reliance Spinning Mills Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 820.80 (924,768 units) | Manager: Global IME Capital Limited",
+    "event_date": "2025-12-22",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SYPNL-IPO-1355",
+    "symbol": "SYPNL",
+    "companyname": "SY Panel Nepal Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (4,076,156 units) | Manager: Prabhu Capital Limited",
+    "event_date": "2025-11-05",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SAIL-IPO-1455",
+    "symbol": "SAIL",
+    "companyname": "Shreenagar Agritech Industries Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (2,510,493 units) | Manager: Nabil Investment Banking Limited",
+    "event_date": "2025-10-12",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SAGAR-IPO-1369",
+    "symbol": "SAGAR",
+    "companyname": "Sagar Distillery Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,190,640 units) | Manager: Muktinath Capital Limited",
+    "event_date": "2025-09-15",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "JHAPA-IPO-1445",
+    "symbol": "JHAPA",
+    "companyname": "Jhapa Energy Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (473,336 units) | Manager: Himalayan Capital Limited",
+    "event_date": "2025-09-05",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "BUNGAL-IPO-1179",
+    "symbol": "BUNGAL",
+    "companyname": "Bungal Hydro Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,701,500 units) | Manager: Himalayan Capital Limited",
+    "event_date": "2025-09-01",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "BANDIPUR-IPO-1387",
+    "symbol": "BANDIPUR",
+    "companyname": "Bandipur Cable Car and Tourism Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (4,341,080 units) | Manager: Nepal SBI Merchant Banking Limited",
+    "event_date": "2025-08-27",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "MABEL-IPO-1317",
+    "symbol": "MABEL",
+    "companyname": "Mabilung Energy Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,248,904 units) | Manager: LS Capital Limited",
+    "event_date": "2025-08-11",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "BHCL-IPO-1397",
+    "symbol": "BHCL",
+    "companyname": "Bikash Hydropower Company Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (2,942,760 units) | Manager: Prabhu Capital Ltd.",
+    "event_date": "2025-07-02",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "PURE-IPO-1300",
+    "symbol": "PURE",
+    "companyname": "Pure Energy Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,195,200 units) | Manager: Nabil Investment Banking Limited",
+    "event_date": "2025-04-10",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SWASTIK-IPO-915",
+    "symbol": "SWASTIK",
+    "companyname": "Swastik Laghubitta Bittiya Sanstha Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (195,195 units) | Manager: Nabil Investment Banking Limited",
+    "event_date": "2025-08-15",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "DHEL-IPO-1125",
+    "symbol": "DHEL",
+    "companyname": "Daramkhola Hydro Energy Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (2,423,185 units) | Manager: Laxmi Sunrise Capital Limited",
+    "event_date": "2025-07-31",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "CREST-IPO-1316",
+    "symbol": "CREST",
+    "companyname": "Crest Micro Life Insurance Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,845,000 units) | Manager: NIMB Ace Capital Ltd.",
+    "event_date": "2025-03-06",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "OMPL-IPO-1206",
+    "symbol": "OMPL",
+    "companyname": "Om Megashree Pharmaceuticals Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,476,000 units) | Manager: Prabhu Capital Limited",
+    "event_date": "2025-03-11",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "HIMSTAR-IPO-1298",
+    "symbol": "HIMSTAR",
+    "companyname": "Him Star Urja Company Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (773,975 units) | Manager: NIC Asia Capital Limited",
+    "event_date": "2025-07-08",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "TTL-IPO-1145",
+    "symbol": "TTL",
+    "companyname": "Trade Tower Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (3,296,505 units) | Manager: LS Capital Limited",
+    "event_date": "2025-05-28",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SANVI-IPO-1338",
+    "symbol": "SANVI",
+    "companyname": "Sanvi Energy Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (2,415,300 units) | Manager: Nepal SBI Merchant Banking Limited",
+    "event_date": "2025-05-23",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "NMIC-IPO-1324",
+    "symbol": "NMIC",
+    "companyname": "Nepal Micro Insurance Company Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,845,000 units) | Manager: NIMB Ace Capital Ltd",
+    "event_date": "2025-02-23",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SARBTM-IPO-1071",
+    "symbol": "SARBTM",
+    "companyname": "Sarbottam Cement Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 360.90 (2,776,076 units) | Manager: Global IME Capital Ltd",
+    "event_date": "2024-02-25",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "GMLI-IPO-1323",
+    "symbol": "GMLI",
+    "companyname": "Guardian Micro Life Insurance Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,845,000 units) | Manager: Kumari Capital Ltd",
+    "event_date": "2025-01-05",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "HRL-IPO-1119",
+    "symbol": "HRL",
+    "companyname": "Himalayan Reinsurance Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 206.00 (24,900,000 units) | Manager: NMB Capital Limited",
+    "event_date": "2023-12-13",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "NWCL-IPO-1211",
+    "symbol": "NWCL",
+    "companyname": "Nepal Warehousing Company Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,141,250 units) | Manager: Himalayan Capital Ltd",
+    "event_date": "2023-11-26",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "MKCL-IPO-1152",
+    "symbol": "MKCL",
+    "companyname": "Muktinath Krishi Company Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,148,000 units) | Manager: NIMB Ace Capital Limited",
+    "event_date": "2023-11-24",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "VLUCL-IPO-1260",
+    "symbol": "VLUCL",
+    "companyname": "Vision Lumbini Urja Company Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (2,075,285 units) | Manager: Muktinath Capital Ltd.",
+    "event_date": "2023-11-02",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "CKHL-IPO-1229",
+    "symbol": "CKHL",
+    "companyname": "Chirkhwa Hydro Power Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (859,300 units) | Manager: RBB Merchant Banking Ltd.",
+    "event_date": "2023-10-10",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "MSHL-IPO-1170",
+    "symbol": "MSHL",
+    "companyname": "Mid Solu Hydropower Company Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (621,172 units) | Manager: NIC Asia Capital Ltd",
+    "event_date": "2023-09-15",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "SONA-IPO-1193",
+    "symbol": "SONA",
+    "companyname": "Sonapur Minerals and Oil Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 237.58 (9,732,544 units) | Manager: NIMB Ace Capital Limited",
+    "event_date": "2023-10-01",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "MMKJL-IPO-966",
+    "symbol": "MMKJL",
+    "companyname": "Mathillo Mailun Khola Jalvidhyut Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 100.00 (1,284,200 units) | Manager: Sanima Capital Ltd",
+    "event_date": "2023-10-05",
+    "status": "Official Open",
+    "is_official_live": true
+  },
+  {
+    "id": "HATHY-IPO-1022",
+    "symbol": "HATHY",
+    "companyname": "Hathway Investment Nepal Limited",
+    "category": "IPO",
+    "details": "Others @ NPR 50.00 (2,427,750 units) | Manager: Global IME Capital Limited",
+    "event_date": "2023-09-07",
+    "status": "Official Open",
+    "is_official_live": true
+  }
+]
