@@ -5,10 +5,24 @@ __pycache__/
 *.pyd
 .ipynb_checkpoints/
 
-# macOS files
-.DS_Store
+# macOS / iCloud duplicate files
+*.DS_Store
+* 2.*
+
+# Backup and recovery files
+*.bak
+*.recovered
+history_dump/
+
+# Nested repos / folders
+Nepsedatascraping/
 
 # Scraped data files (generated at runtime)
 # We track them so Vercel has initial data on deployment
 !data/nepse_today.json
 !data/nepse_today.csv
+.vercel
+
+# Local environment secret variables
+.env
+
