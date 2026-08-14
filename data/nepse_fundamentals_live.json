@@ -136,11 +136,11 @@
     "sector": "Hydro Power",
     "eps": 13.76,
     "book_value": 115.32,
-    "pe_ratio": 23.98,
+    "pe_ratio": 23.95,
     "pb_ratio": 2.86,
     "roe": 11.93,
     "shares_outstanding": 63797241,
-    "market_cap": 21053089856.7,
+    "market_cap": 21021191235.71,
     "is_official_live": true
   },
   "AVYAN": {
@@ -160,11 +160,11 @@
     "sector": "Hotels And Tourism",
     "eps": -0.77,
     "book_value": 91.9,
-    "pe_ratio": -903.9,
-    "pb_ratio": 7.57,
+    "pe_ratio": -907.66,
+    "pb_ratio": 7.61,
     "roe": 0.0,
     "shares_outstanding": 28299930,
-    "market_cap": 19696751280.0,
+    "market_cap": 19778821077.0,
     "is_official_live": true
   },
   "BARUN": {
@@ -256,11 +256,11 @@
     "sector": "Hydro Power",
     "eps": 8.59,
     "book_value": 79.95,
-    "pe_ratio": 24.51,
-    "pb_ratio": 2.63,
+    "pe_ratio": 24.8,
+    "pb_ratio": 2.66,
     "roe": 10.74,
     "shares_outstanding": 36559400,
-    "market_cap": 7695753700.0,
+    "market_cap": 7787152200.0,
     "is_official_live": true
   },
   "BHPL": {
@@ -280,11 +280,11 @@
     "sector": "Hydro Power",
     "eps": -2.6,
     "book_value": 88.95,
-    "pe_ratio": -269.19,
-    "pb_ratio": 7.87,
+    "pe_ratio": -271.54,
+    "pb_ratio": 7.94,
     "roe": 0.0,
     "shares_outstanding": 10000000,
-    "market_cap": 6999000000.0,
+    "market_cap": 7060000000.0,
     "is_official_live": true
   },
   "BNHC": {
@@ -494,11 +494,11 @@
   "CLI": {
     "symbol": "CLI",
     "sector": "Life Insurance",
-    "eps": 9.26,
-    "book_value": 126.52,
-    "pe_ratio": 47.08,
-    "pb_ratio": 3.45,
-    "roe": 7.32,
+    "eps": 7.82,
+    "book_value": 131.6,
+    "pe_ratio": 55.75,
+    "pb_ratio": 3.31,
+    "roe": 5.94,
     "shares_outstanding": 50000000,
     "market_cap": 21800000000.0,
     "is_official_live": true
@@ -508,11 +508,11 @@
     "sector": "Development Bank Limited",
     "eps": 9.54,
     "book_value": 139.73,
-    "pe_ratio": 113.21,
-    "pb_ratio": 7.73,
+    "pe_ratio": 113.62,
+    "pb_ratio": 7.76,
     "roe": 6.83,
     "shares_outstanding": 5250000,
-    "market_cap": 5670000000.0,
+    "market_cap": 5690475000.0,
     "is_official_live": true
   },
   "CREST": {
@@ -616,11 +616,11 @@
     "sector": "Hydro Power",
     "eps": 0.87,
     "book_value": 59.87,
-    "pe_ratio": 368.39,
-    "pb_ratio": 5.35,
+    "pe_ratio": 370.11,
+    "pb_ratio": 5.38,
     "roe": 1.45,
     "shares_outstanding": 5499860,
-    "market_cap": 1762705130.0,
+    "market_cap": 1770954920.0,
     "is_official_live": true
   },
   "DORDI": {
@@ -640,11 +640,11 @@
     "sector": "Commercial Banks",
     "eps": 36.95,
     "book_value": 256.47,
-    "pe_ratio": 19.54,
+    "pe_ratio": 19.57,
     "pb_ratio": 2.82,
     "roe": 14.41,
     "shares_outstanding": 137213760,
-    "market_cap": 99068334720.0,
+    "market_cap": 99205548480.0,
     "is_official_live": true
   },
   "EBLD91": {
@@ -668,7 +668,7 @@
     "pb_ratio": 15.38,
     "roe": 0.0,
     "shares_outstanding": 3000000,
-    "market_cap": 4614900000.0,
+    "market_cap": 4615200000.0,
     "is_official_live": true
   },
   "EDBL": {
@@ -772,11 +772,11 @@
     "sector": "Commercial Banks",
     "eps": 16.34,
     "book_value": 183.14,
-    "pe_ratio": 15.51,
+    "pe_ratio": 15.48,
     "pb_ratio": 1.38,
     "roe": 8.92,
     "shares_outstanding": 381158350,
-    "market_cap": 96585525890.0,
+    "market_cap": 96433062550.0,
     "is_official_live": true
   },
   "GBIMEP": {
@@ -844,11 +844,11 @@
     "sector": "Hydro Power",
     "eps": -2.15,
     "book_value": 95.07,
-    "pe_ratio": -118.14,
-    "pb_ratio": 2.67,
+    "pe_ratio": -117.67,
+    "pb_ratio": 2.66,
     "roe": 0.0,
     "shares_outstanding": 16500000,
-    "market_cap": 4191000000.0,
+    "market_cap": 4174500000.0,
     "is_official_live": true
   },
   "GIBF1": {
@@ -1024,11 +1024,11 @@
     "sector": "Commercial Banks",
     "eps": 6.56,
     "book_value": 177.48,
-    "pe_ratio": 29.73,
-    "pb_ratio": 1.1,
+    "pe_ratio": 29.6,
+    "pb_ratio": 1.09,
     "roe": 3.7,
     "shares_outstanding": 225816625,
-    "market_cap": 44034241937.4,
+    "market_cap": 43853588637.14,
     "is_official_live": true
   },
   "HDHPC": {
@@ -1048,11 +1048,11 @@
     "sector": "Manufacturing And Processing",
     "eps": 32.71,
     "book_value": 141.43,
-    "pe_ratio": 35.95,
-    "pb_ratio": 8.32,
+    "pe_ratio": 35.88,
+    "pb_ratio": 8.3,
     "roe": 23.13,
     "shares_outstanding": 36880821,
-    "market_cap": 43371846378.0,
+    "market_cap": 43279644323.63,
     "is_official_live": true
   },
   "HEI": {
@@ -1192,11 +1192,11 @@
     "sector": "Others",
     "eps": -0.54,
     "book_value": 150.18,
-    "pe_ratio": -1072.22,
-    "pb_ratio": 3.86,
+    "pe_ratio": -1077.78,
+    "pb_ratio": 3.88,
     "roe": 0.0,
     "shares_outstanding": 108680000,
-    "market_cap": 62925720000.0,
+    "market_cap": 63251760000.0,
     "is_official_live": true
   },
   "HURJA": {
@@ -1384,11 +1384,11 @@
     "sector": "Hydro Power",
     "eps": 3.75,
     "book_value": 101.85,
-    "pe_ratio": 142.4,
-    "pb_ratio": 5.24,
+    "pe_ratio": 142.8,
+    "pb_ratio": 5.26,
     "roe": 3.68,
     "shares_outstanding": 14000000,
-    "market_cap": 7476000000.0,
+    "market_cap": 7497000000.0,
     "is_official_live": true
   },
   "KBL": {
@@ -1400,7 +1400,7 @@
     "pb_ratio": 1.27,
     "roe": 16.49,
     "shares_outstanding": 262258613,
-    "market_cap": 56883893246.46,
+    "market_cap": 56910119107.8,
     "is_official_live": true
   },
   "KBSH": {
@@ -1408,11 +1408,11 @@
     "sector": "Hydro Power",
     "eps": 7.46,
     "book_value": 130.21,
-    "pe_ratio": 127.88,
-    "pb_ratio": 7.33,
+    "pe_ratio": 126.54,
+    "pb_ratio": 7.25,
     "roe": 5.73,
     "shares_outstanding": 1474596,
-    "market_cap": 1406765299.5,
+    "market_cap": 1392019332.0,
     "is_official_live": true
   },
   "KDBY": {
@@ -1468,11 +1468,11 @@
     "sector": "Hydro Power",
     "eps": -3.01,
     "book_value": 86.85,
-    "pe_ratio": -105.98,
-    "pb_ratio": 3.67,
+    "pe_ratio": -106.31,
+    "pb_ratio": 3.68,
     "roe": 0.0,
     "shares_outstanding": 9314286,
-    "market_cap": 2971257234.0,
+    "market_cap": 2980571520.0,
     "is_official_live": true
   },
   "KMCDB": {
@@ -1508,7 +1508,7 @@
     "pb_ratio": 2.79,
     "roe": 13.3,
     "shares_outstanding": 38619308,
-    "market_cap": 18429133873.04,
+    "market_cap": 18436857734.68,
     "is_official_live": true
   },
   "KSBBLD87": {
@@ -1564,11 +1564,11 @@
     "sector": "Hydro Power",
     "eps": 0.6,
     "book_value": 69.77,
-    "pe_ratio": 378.33,
+    "pe_ratio": 378.17,
     "pb_ratio": 3.25,
     "roe": 0.86,
     "shares_outstanding": 22500000,
-    "market_cap": 5107500000.0,
+    "market_cap": 5105250000.0,
     "is_official_live": true
   },
   "LICN": {
@@ -1612,11 +1612,11 @@
     "sector": "Commercial Banks",
     "eps": 10.15,
     "book_value": 175.08,
-    "pe_ratio": 21.7,
+    "pe_ratio": 21.69,
     "pb_ratio": 1.26,
     "roe": 5.8,
     "shares_outstanding": 267811630,
-    "market_cap": 58998902089.0,
+    "market_cap": 58972120926.0,
     "is_official_live": true
   },
   "LUK": {
@@ -1696,11 +1696,11 @@
     "sector": "Hydro Power",
     "eps": 1.71,
     "book_value": 94.7,
-    "pe_ratio": 155.15,
+    "pe_ratio": 155.2,
     "pb_ratio": 2.8,
     "roe": 1.81,
     "shares_outstanding": 60000000,
-    "market_cap": 15918000000.0,
+    "market_cap": 15924000000.0,
     "is_official_live": true
   },
   "MBL": {
@@ -1780,11 +1780,11 @@
     "sector": "Hydro Power",
     "eps": 25.52,
     "book_value": 150.78,
-    "pe_ratio": 24.04,
-    "pb_ratio": 4.07,
+    "pe_ratio": 24.09,
+    "pb_ratio": 4.08,
     "roe": 16.93,
     "shares_outstanding": 31232588,
-    "market_cap": 19161193044.75,
+    "market_cap": 19204918668.65,
     "is_official_live": true
   },
   "MEPDL": {
@@ -1828,11 +1828,11 @@
     "sector": "Hydro Power",
     "eps": 10.4,
     "book_value": 87.89,
-    "pe_ratio": 30.0,
-    "pb_ratio": 3.55,
+    "pe_ratio": 30.29,
+    "pb_ratio": 3.58,
     "roe": 11.83,
     "shares_outstanding": 8025000,
-    "market_cap": 2503800000.0,
+    "market_cap": 2527875000.0,
     "is_official_live": true
   },
   "MHL": {
@@ -2116,11 +2116,11 @@
     "sector": "Commercial Banks",
     "eps": 25.34,
     "book_value": 272.79,
-    "pe_ratio": 10.64,
+    "pe_ratio": 10.62,
     "pb_ratio": 0.99,
     "roe": 9.29,
     "shares_outstanding": 146940229,
-    "market_cap": 39600391790.96,
+    "market_cap": 39526921676.32,
     "is_official_live": true
   },
   "NBLD87": {
@@ -2176,11 +2176,11 @@
     "sector": "Hydro Power",
     "eps": 1.27,
     "book_value": 138.35,
-    "pe_ratio": 328.27,
+    "pe_ratio": 327.64,
     "pb_ratio": 3.01,
     "roe": 0.92,
     "shares_outstanding": 38784299,
-    "market_cap": 16169174544.93,
+    "market_cap": 16138147105.17,
     "is_official_live": true
   },
   "NHDL": {
@@ -2240,7 +2240,7 @@
     "pb_ratio": 0.0,
     "roe": 0.0,
     "shares_outstanding": 113000000,
-    "market_cap": 1014740000.0,
+    "market_cap": 1011350000.0,
     "is_official_live": true
   },
   "NIBSF2": {
@@ -2416,11 +2416,11 @@
     "sector": "Life Insurance",
     "eps": 3.64,
     "book_value": 126.07,
-    "pe_ratio": 201.65,
+    "pe_ratio": 201.62,
     "pb_ratio": 5.82,
     "roe": 2.89,
     "shares_outstanding": 94802013,
-    "market_cap": 69584678055.8,
+    "market_cap": 69575197854.43,
     "is_official_live": true
   },
   "NLICL": {
@@ -2476,11 +2476,11 @@
     "sector": "Microfinance",
     "eps": 20.43,
     "book_value": 150.76,
-    "pe_ratio": 29.86,
-    "pb_ratio": 4.05,
+    "pe_ratio": 29.37,
+    "pb_ratio": 3.98,
     "roe": 13.55,
     "shares_outstanding": 7214491,
-    "market_cap": 4400839815.0,
+    "market_cap": 4328694900.0,
     "is_official_live": true
   },
   "NMFBS": {
@@ -2704,11 +2704,11 @@
     "sector": "Commercial Banks",
     "eps": 19.63,
     "book_value": 175.8,
-    "pe_ratio": 12.24,
+    "pe_ratio": 12.26,
     "pb_ratio": 1.37,
     "roe": 11.17,
     "shares_outstanding": 209547817,
-    "market_cap": 50333385818.75,
+    "market_cap": 50438159727.61,
     "is_official_live": true
   },
   "PCIL": {
@@ -2716,11 +2716,11 @@
     "sector": "Manufacturing And Processing",
     "eps": 1.07,
     "book_value": 129.15,
-    "pe_ratio": 602.8,
+    "pe_ratio": 602.9,
     "pb_ratio": 4.99,
     "roe": 0.83,
     "shares_outstanding": 37500000,
-    "market_cap": 24187500000.0,
+    "market_cap": 24191250000.0,
     "is_official_live": true
   },
   "PHCL": {
@@ -2824,11 +2824,11 @@
     "sector": "Commercial Banks",
     "eps": -1.02,
     "book_value": 140.92,
-    "pe_ratio": -183.33,
-    "pb_ratio": 1.33,
+    "pe_ratio": -182.94,
+    "pb_ratio": 1.32,
     "roe": 0.0,
     "shares_outstanding": 235424900,
-    "market_cap": 44024456300.0,
+    "market_cap": 43930286340.0,
     "is_official_live": true
   },
   "PSF": {
@@ -2956,11 +2956,11 @@
     "sector": "Hydro Power",
     "eps": 4.3,
     "book_value": 103.2,
-    "pe_ratio": 86.49,
+    "pe_ratio": 86.3,
     "pb_ratio": 3.6,
     "roe": 4.17,
     "shares_outstanding": 23233518,
-    "market_cap": 8640545344.2,
+    "market_cap": 8621958529.8,
     "is_official_live": true
   },
   "RLEL": {
@@ -3016,11 +3016,11 @@
     "sector": "Life Insurance",
     "eps": 12.07,
     "book_value": 146.17,
-    "pe_ratio": 35.24,
+    "pe_ratio": 35.26,
     "pb_ratio": 2.91,
     "roe": 8.26,
     "shares_outstanding": 51968000,
-    "market_cap": 22101990400.0,
+    "market_cap": 22117580800.0,
     "is_official_live": true
   },
   "RSDC": {
@@ -3148,11 +3148,11 @@
     "sector": "Hydro Power",
     "eps": 29.72,
     "book_value": 180.58,
-    "pe_ratio": 22.68,
-    "pb_ratio": 3.73,
+    "pe_ratio": 22.71,
+    "pb_ratio": 3.74,
     "roe": 16.46,
     "shares_outstanding": 45738000,
-    "market_cap": 30827412000.0,
+    "market_cap": 30868576200.0,
     "is_official_live": true
   },
   "SAIL": {
@@ -3472,11 +3472,11 @@
     "sector": "Hydro Power",
     "eps": 7.85,
     "book_value": 137.5,
-    "pe_ratio": 63.18,
+    "pe_ratio": 63.15,
     "pb_ratio": 3.61,
     "roe": 5.71,
     "shares_outstanding": 37379937,
-    "market_cap": 18540448801.6,
+    "market_cap": 18529234820.47,
     "is_official_live": true
   },
   "SICL": {
@@ -3604,11 +3604,11 @@
     "sector": "Hydro Power",
     "eps": 19.1,
     "book_value": 145.29,
-    "pe_ratio": 45.58,
-    "pb_ratio": 5.99,
+    "pe_ratio": 45.81,
+    "pb_ratio": 6.02,
     "roe": 13.15,
     "shares_outstanding": 15500000,
-    "market_cap": 13492750000.0,
+    "market_cap": 13562500000.0,
     "is_official_live": true
   },
   "SLBBL": {
@@ -3644,7 +3644,7 @@
     "pb_ratio": 0.0,
     "roe": 0.0,
     "shares_outstanding": 120000000,
-    "market_cap": 1200000000.0,
+    "market_cap": 1164000000.0,
     "is_official_live": true
   },
   "SMATA": {
@@ -3700,11 +3700,11 @@
     "sector": "Hydro Power",
     "eps": 18.4,
     "book_value": 119.5,
-    "pe_ratio": 26.96,
-    "pb_ratio": 4.15,
+    "pe_ratio": 26.99,
+    "pb_ratio": 4.16,
     "roe": 15.4,
     "shares_outstanding": 23152500,
-    "market_cap": 11483640000.0,
+    "market_cap": 11499846750.0,
     "is_official_live": true
   },
   "SMJC": {
@@ -3712,11 +3712,11 @@
     "sector": "Hydro Power",
     "eps": 3.78,
     "book_value": 109.59,
-    "pe_ratio": 115.61,
-    "pb_ratio": 3.99,
+    "pe_ratio": 115.34,
+    "pb_ratio": 3.98,
     "roe": 3.45,
     "shares_outstanding": 11732000,
-    "market_cap": 5126884000.0,
+    "market_cap": 5115152000.0,
     "is_official_live": true
   },
   "SMPDA": {
@@ -3736,11 +3736,11 @@
     "sector": "Life Insurance",
     "eps": 8.58,
     "book_value": 141.38,
-    "pe_ratio": 48.48,
-    "pb_ratio": 2.94,
+    "pe_ratio": 48.14,
+    "pb_ratio": 2.92,
     "roe": 6.07,
     "shares_outstanding": 52827936,
-    "market_cap": 21976421376.0,
+    "market_cap": 21817937568.0,
     "is_official_live": true
   },
   "SNORL": {
@@ -3748,11 +3748,11 @@
     "sector": "Hydro Power",
     "eps": 11.93,
     "book_value": 112.09,
-    "pe_ratio": 74.61,
+    "pe_ratio": 74.62,
     "pb_ratio": 7.94,
     "roe": 10.64,
     "shares_outstanding": 9375000,
-    "market_cap": 8344687500.0,
+    "market_cap": 8345625000.0,
     "is_official_live": true
   },
   "SOHL": {
@@ -3760,11 +3760,11 @@
     "sector": "Hydro Power",
     "eps": 11.14,
     "book_value": 138.04,
-    "pe_ratio": 60.7,
-    "pb_ratio": 4.9,
+    "pe_ratio": 60.86,
+    "pb_ratio": 4.91,
     "roe": 8.07,
     "shares_outstanding": 100000000,
-    "market_cap": 67620000000.0,
+    "market_cap": 67800000000.0,
     "is_official_live": true
   },
   "SONA": {
@@ -3785,10 +3785,10 @@
     "eps": 0.0,
     "book_value": 100.0,
     "pe_ratio": 0.0,
-    "pb_ratio": 8.0,
+    "pb_ratio": 8.01,
     "roe": 0.0,
     "shares_outstanding": 17160000,
-    "market_cap": 13729716000.0,
+    "market_cap": 13736580000.0,
     "is_official_live": true
   },
   "SPC": {
@@ -3856,11 +3856,11 @@
     "sector": "Life Insurance",
     "eps": 7.65,
     "book_value": 112.62,
-    "pe_ratio": 48.6,
-    "pb_ratio": 3.3,
+    "pe_ratio": 48.39,
+    "pb_ratio": 3.29,
     "roe": 6.79,
     "shares_outstanding": 50149240,
-    "market_cap": 18645487655.08,
+    "market_cap": 18565248870.12,
     "is_official_live": true
   },
   "SSHL": {
@@ -3964,11 +3964,11 @@
     "sector": "Hydro Power",
     "eps": 2.96,
     "book_value": 102.44,
-    "pe_ratio": 183.21,
-    "pb_ratio": 5.29,
+    "pe_ratio": 184.46,
+    "pb_ratio": 5.33,
     "roe": 2.89,
     "shares_outstanding": 12000000,
-    "market_cap": 6507600000.0,
+    "market_cap": 6552000000.0,
     "is_official_live": true
   },
   "TRH": {
@@ -4072,11 +4072,11 @@
     "sector": "Hydro Power",
     "eps": 5.74,
     "book_value": 105.95,
-    "pe_ratio": 103.47,
-    "pb_ratio": 5.61,
+    "pe_ratio": 102.46,
+    "pb_ratio": 5.55,
     "roe": 5.42,
     "shares_outstanding": 13166350,
-    "market_cap": 7819495265.0,
+    "market_cap": 7743130435.0,
     "is_official_live": true
   },
   "UMRH": {
@@ -4132,11 +4132,11 @@
     "sector": "Hydro Power",
     "eps": 4.37,
     "book_value": 44.48,
-    "pe_ratio": 44.19,
-    "pb_ratio": 4.34,
+    "pe_ratio": 44.32,
+    "pb_ratio": 4.35,
     "roe": 9.82,
     "shares_outstanding": 211800000,
-    "market_cap": 40898580000.0,
+    "market_cap": 41025660000.0,
     "is_official_live": true
   },
   "USHEC": {
