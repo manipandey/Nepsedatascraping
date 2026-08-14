@@ -7,6 +7,10 @@
       "dest": "/data/nepse_today.json"
     },
     {
+      "src": "/api/scrape",
+      "dest": "/data/nepse_today.json"
+    },
+    {
       "src": "/api/fundamentals",
       "dest": "/data/nepse_fundamentals_live.json"
     },
@@ -16,6 +20,10 @@
     },
     {
       "src": "/api/corporate",
+      "dest": "/data/nepse_corporate_live.json"
+    },
+    {
+      "src": "/api/calendar",
       "dest": "/data/nepse_corporate_live.json"
     },
     {

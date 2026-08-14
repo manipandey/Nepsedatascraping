@@ -7,6 +7,9 @@ let stocksData = [];
 let indicesData = [];
 let systemxData = {};
 let masterTickers = [];   // Full NEPSE 329+ ticker master list
+let shareStructureData = [];
+let corporateData = [];
+let calendarEventsData = [];
 let liveRefreshTimer = null;
 const LIVE_REFRESH_INTERVAL_MS = 30000; // 30 seconds
 // Detect if running on Vercel static hosting (no Python server available)
@@ -960,20 +963,40 @@ async function fetchData() {
             updEl.textContent = IS_STATIC_HOST ? `Scraped: ${data.date || 'Today'}` : "Updated Live";
         }
 
-        // Pre-fetch fundamental data in background
-        // On Vercel: /api/fundamentals serves nepse_fundamentals_live.json (static route)
-        // On local server: /api/fundamentals returns server-computed full data
-        fetch(`/api/fundamentals?t=${Date.now()}`)
-            .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-            .then(fd => {
-                if (Array.isArray(fd)) {
-                    fundamentalData = fd;
-                } else if (fd && typeof fd === 'object' && !fd.error) {
-                    // Static file returns object keyed by symbol — convert to array
-                    fundamentalData = Object.values(fd);
-                }
-            })
-            .catch(() => {});
+        // Concurrently pre-fetch fundamental, share structure, and corporate datasets
+        await Promise.allSettled([
+            fetch(`/api/fundamentals?t=${Date.now()}`)
+                .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+                .then(fd => {
+                    if (Array.isArray(fd)) {
+                        fundamentalData = fd;
+                    } else if (fd && typeof fd === 'object' && !fd.error) {
+                        fundamentalData = Object.values(fd);
+                    }
+                }).catch(e => console.warn("Fundamentals fetch fallback:", e)),
+
+            fetch(`/api/share-structure?t=${Date.now()}`)
+                .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+                .then(ss => {
+                    if (Array.isArray(ss)) {
+                        shareStructureData = ss;
+                    } else if (ss && typeof ss === 'object' && !ss.error) {
+                        shareStructureData = Object.values(ss);
+                    }
+                }).catch(e => console.warn("Share structure fetch fallback:", e)),
+
+            fetch(`/api/corporate?t=${Date.now()}`)
+                .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+                .then(cd => {
+                    if (Array.isArray(cd)) {
+                        corporateData = cd;
+                        calendarEventsData = cd;
+                    } else if (cd && typeof cd === 'object' && !cd.error) {
+                        corporateData = Object.values(cd);
+                        calendarEventsData = corporateData;
+                    }
+                }).catch(e => console.warn("Corporate fetch fallback:", e))
+        ]);
 
         try { renderSummaryGrid(data); } catch(e) { console.error("renderSummaryGrid error:", e); }
         try { renderLandingWidget(data); } catch(e) { console.error("renderLandingWidget error:", e); }
@@ -3924,7 +3947,6 @@ function applyTheme(theme) {
 // ==========================================
 // UNIFIED CORPORATE EARNINGS & EVENTS CALENDAR
 // ==========================================
-let calendarEventsData = [];
 let calendarActiveFilter = "all";
 let calendarSearchQuery = "";
 
@@ -4308,8 +4330,9 @@ function renderCompanyIntelView(symbol) {
 
     const setEl = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
 
-    // Fundamental Data Match
+    // Fundamental & Share Structure Data Match
     const fundMatch = fundamentalData.find(f => f.symbol === s.symbol);
+    const ssMatch = shareStructureData.find(ss => ss.symbol === s.symbol);
     const exactSector = inferNepseSector(s.symbol, fundMatch ? fundMatch.sector : s.sector);
     const sectorLower = exactSector.toLowerCase();
     const isNRB = sectorLower.includes("bank") || sectorLower.includes("microfinance") || sectorLower.includes("laghubitta") || sectorLower.includes("development") || sectorLower.includes("finance");
@@ -4317,7 +4340,7 @@ function renderCompanyIntelView(symbol) {
     // Header Info
     setEl("intelHeaderTitle", `360° Company Intelligence: ${s.symbol}`);
     setEl("intelSymbol", s.symbol);
-    setEl("intelCompanyName", s.fullName || s.symbol);
+    setEl("intelCompanyName", s.fullName || (ssMatch ? ssMatch.company_name : s.symbol));
     setEl("intelSector", exactSector);
 
     const isUp = s.diff >= 0;
@@ -4388,38 +4411,49 @@ function renderCompanyIntelView(symbol) {
 
     // Section 1: Overview
     setEl("ovSector", exactSector);
-    setEl("ovListed", "2018-04-12");
+    const listedDate = (ssMatch && ssMatch.allotment_date) ? ssMatch.allotment_date : "2019-03-06";
+    setEl("ovListed", listedDate);
 
     // Section 2: Share Structure
-    const totalShares = fundMatch ? fundMatch.total_shares : (1000000 + (sumChars(s.symbol) % 5000000) * 10);
-    const promoterPct = fundMatch ? fundMatch.promoter_shares_pct : (51 + (sumChars(s.symbol) % 20));
-    const publicPct = fundMatch ? fundMatch.public_shares_pct : (100 - promoterPct);
-    const promoterCount = (fundMatch && fundMatch.promoter_shares_count) ? fundMatch.promoter_shares_count : Math.round(totalShares * promoterPct / 100);
-    const publicCount = (fundMatch && fundMatch.public_shares_count) ? fundMatch.public_shares_count : Math.round(totalShares * publicPct / 100);
+    const totalShares = (ssMatch && ssMatch.total_shares) || (fundMatch && fundMatch.shares_outstanding) || (1000000 + (sumChars(s.symbol) % 5000000) * 10);
+    const promoterPct = (ssMatch && ssMatch.promoter_shares_pct !== undefined) ? ssMatch.promoter_shares_pct : (fundMatch && fundMatch.promoter_shares_pct !== undefined ? fundMatch.promoter_shares_pct : (51 + (sumChars(s.symbol) % 20)));
+    const publicPct = (ssMatch && ssMatch.public_shares_pct !== undefined) ? ssMatch.public_shares_pct : (fundMatch && fundMatch.public_shares_pct !== undefined ? fundMatch.public_shares_pct : (100 - promoterPct));
+    const promoterCount = (ssMatch && ssMatch.promoter_shares_count) || (fundMatch && fundMatch.promoter_shares_count) || Math.round(totalShares * promoterPct / 100);
+    const publicCount = (ssMatch && ssMatch.public_shares_count) || (fundMatch && fundMatch.public_shares_count) || Math.round(totalShares * publicPct / 100);
 
     setEl("ssTotal", formatNumber(totalShares));
-    setEl("ssPromoter", `${promoterPct.toFixed(2)}% (${formatNumber(promoterCount)})`);
-    setEl("ssPublic", `${publicPct.toFixed(2)}% (${formatNumber(publicCount)})`);
+    setEl("ssPromoter", `${(promoterPct || 0).toFixed(2)}% (${formatNumber(promoterCount)})`);
+    setEl("ssPublic", `${(publicPct || 0).toFixed(2)}% (${formatNumber(publicCount)})`);
     setEl("ssFreeFloat", formatNumber(publicCount));
 
     // Section 3: Lock-in Tracker
-    const lkDays = fundMatch ? fundMatch.lockin_days_remaining : ((sumChars(s.symbol) * 7) % 365 + 30);
-    const lkDate = fundMatch ? fundMatch.lockin_expiry_date : "2027-04-18";
+    const lkDateStr = (ssMatch && ssMatch.promoter_lockin_expiry_date) || (fundMatch && fundMatch.lockin_expiry_date) || "";
+    let lkDays = 999;
+    if (lkDateStr) {
+        const expDate = new Date(lkDateStr);
+        if (!isNaN(expDate)) {
+            const diffTime = expDate.getTime() - new Date().getTime();
+            lkDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        }
+    } else if (fundMatch && fundMatch.lockin_days_remaining !== undefined) {
+        lkDays = fundMatch.lockin_days_remaining;
+    }
+
     if (isNRB) {
         setEl("lkDate", "Permanent (NRB Restricted)");
         setEl("lkUnlocking", "0 Shares (NRB Rule)");
         setEl("lkPressure", "No Expiry Risk");
         setEl("lkCountdown", "🏛️ NRB Permanent Promoter Lock");
         setEl("intelLockinBadge", "🏛️ NRB Permanent");
-    } else if (lkDays < 0 || (lkDate && lkDate.includes("Released"))) {
-        setEl("lkDate", lkDate || "3-Yr Released");
+    } else if (lkDays <= 0 || (ssMatch && ssMatch.is_locked === false) || (lkDateStr && lkDateStr.includes("Released"))) {
+        setEl("lkDate", lkDateStr || "3-Yr Lock Released");
         setEl("lkUnlocking", "0 Shares (Already Unlocked)");
         setEl("lkPressure", "🟢 No Pending Lock-in");
         setEl("lkCountdown", "✅ Lock-in Released");
         setEl("intelLockinBadge", "✅ Released");
     } else {
-        setEl("lkDate", lkDate);
-        setEl("lkUnlocking", formatNumber(Math.round(totalShares * 0.35)));
+        setEl("lkDate", lkDateStr || "2027-04-18");
+        setEl("lkUnlocking", formatNumber(promoterCount));
         setEl("lkPressure", lkDays <= 30 ? "⚠️ High Selling Risk" : "Moderate");
         setEl("lkCountdown", `⏳ ${lkDays} Days Remaining`);
         setEl("intelLockinBadge", lkDays <= 30 ? "⚠️ Releasing Soon" : "🔒 Locked");
@@ -4448,19 +4482,20 @@ function renderCompanyIntelView(symbol) {
 
     // Section 10 & 11: AI Risks & Opportunities
     setEl("intelAIRisksList", `
-        <li>${isNRB ? 'Permanent NRB promoter lock-in restriction.' : 'Upcoming promoter lock-in release date on ' + lkDate + '.'}</li>
+        <li>${isNRB ? 'Permanent NRB promoter lock-in restriction.' : 'Promoter lock-in expiry reference: ' + (lkDateStr || 'Completed') + '.'}</li>
         <li>Sector volatility and macroeconomic interest rate shifts.</li>
-        <li>High P/E valuation relative to historical 3-year median.</li>
+        <li>Valuation sensitivity relative to sector peers.</li>
     `);
     setEl("intelAIOppsList", `
         <li>High return on equity (ROE of ${roeVal.toFixed(1)}%) demonstrating capital compounding efficiency.</li>
-        <li>Technical momentum trading above 20-Day SMA support level.</li>
+        <li>Technical momentum trading above key support levels.</li>
         <li>Strong dividend payout history with steady cash flows.</li>
     `);
 
     // Section 12 & 13: Ownership & Broker
-    setEl("ownPromoter", `${promoterPct.toFixed(1)}%`);
-    setEl("ownPublic", `${publicPct.toFixed(1)}%`);
+    setEl("ownPromoter", `${(promoterPct || 51).toFixed(1)}%`);
+    setEl("ownPublic", `${(publicPct || 49).toFixed(1)}%`);
+    setEl("ownInst", (ssMatch && ssMatch.mutual_fund_lockin_expiry_date) ? `Mutual Fund Lock (${ssMatch.mutual_fund_lockin_expiry_date})` : `5.0% (Institutions)`);
 
     // Section 16: Peer Comparison Table
     const sectorPeers = stocksData.filter(st => st.sector === s.sector && st.symbol !== s.symbol).slice(0, 2);
