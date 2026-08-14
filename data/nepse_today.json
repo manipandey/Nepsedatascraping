@@ -3263,8 +3263,8 @@
       "open": 442.0,
       "high": 448.0,
       "low": 442.0,
-      "close": 444.0,
-      "ltp": 444.0,
+      "close": 448.0,
+      "ltp": 448.0,
       "prev_close": 446.0,
       "diff": -0.45,
       "diff_percent": -0.45,
@@ -3274,8 +3274,8 @@
       "fifty_two_week_high": 699.9,
       "fifty_two_week_low": 429.1,
       "confidence": 21.77,
-      "dma20": 465.14,
-      "diff_20dma": -4.54,
+      "dma20": 465.34,
+      "diff_20dma": -3.73,
       "below_20dma": true
     },
     {
