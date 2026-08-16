@@ -114,44 +114,52 @@ export async function fetchPatternScanData() {
  * Fetch Full Fundamental reports for all scrips
  */
 export async function fetchFundamentalsReport() {
-    const res = await fetch(`/api/fundamentals?t=${Date.now()}`);
-    if (!res.ok) {
-        throw new Error(`Fundamentals fetch error: ${res.statusText}`);
-    }
-    return await res.json();
+    try {
+        const res = await fetch(`/api/fundamentals?t=${Date.now()}`);
+        if (res.ok) return await res.json();
+    } catch (e) {}
+    const resStatic = await fetch(`data/nepse_fundamentals_live.json?t=${Date.now()}`);
+    if (!resStatic.ok) throw new Error("Could not load fundamentals dataset");
+    return await resStatic.json();
 }
 
 /**
  * Fetch Corporate earnings calendar events
  */
 export async function fetchCorporateCalendar() {
-    const res = await fetch("/api/calendar");
-    if (!res.ok) {
-        throw new Error(`Corporate calendar fetch error: ${res.statusText}`);
-    }
-    return await res.json();
+    try {
+        const res = await fetch(`/api/calendar?t=${Date.now()}`);
+        if (res.ok) return await res.json();
+    } catch (e) {}
+    const resStatic = await fetch(`data/nepse_corporate_live.json?t=${Date.now()}`);
+    if (!resStatic.ok) throw new Error("Could not load corporate calendar dataset");
+    return await resStatic.json();
 }
 
 /**
  * Fetch Nepal Bank Rates (Fixed Deposits & Savings accounts)
  */
 export async function fetchBankRates() {
-    const res = await fetch("/api/bank-rates");
-    if (!res.ok) {
-        throw new Error(`Bank rates fetch error: ${res.statusText}`);
-    }
-    return await res.json();
+    try {
+        const res = await fetch(`/api/bank-rates?t=${Date.now()}`);
+        if (res.ok) return await res.json();
+    } catch (e) {}
+    const resStatic = await fetch(`data/bank_rates.json?t=${Date.now()}`);
+    if (!resStatic.ok) throw new Error("Could not load bank rates dataset");
+    return await resStatic.json();
 }
 
 /**
  * Fetch NRB Macroeconomic Indicators (FX, inflation, reserves)
  */
 export async function fetchNrbIndicators() {
-    const res = await fetch("/api/nrb-indicators");
-    if (!res.ok) {
-        throw new Error(`NRB indicators fetch error: ${res.statusText}`);
-    }
-    return await res.json();
+    try {
+        const res = await fetch(`/api/nrb-indicators?t=${Date.now()}`);
+        if (res.ok) return await res.json();
+    } catch (e) {}
+    const resStatic = await fetch(`data/nrb_indicators.json?t=${Date.now()}`);
+    if (!resStatic.ok) throw new Error("Could not load NRB indicators dataset");
+    return await resStatic.json();
 }
 
 /**
