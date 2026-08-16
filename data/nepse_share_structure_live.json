@@ -13,20 +13,6 @@
     "is_locked": true,
     "is_official_live": true
   },
-  "RNLI": {
-    "symbol": "RNLI",
-    "company_name": "Reliable Nepal Life Insurance Limited",
-    "total_shares": 51968000,
-    "promoter_shares_count": 36377600,
-    "public_shares_count": 15590400,
-    "promoter_shares_pct": 70.0,
-    "public_shares_pct": 30.0,
-    "allotment_date": "2023-08-16",
-    "promoter_lockin_expiry_date": "2026-08-15",
-    "mutual_fund_lockin_expiry_date": "2024-02-16",
-    "is_locked": true,
-    "is_official_live": true
-  },
   "SNLI": {
     "symbol": "SNLI",
     "company_name": "Sun Nepal Life Insurance Company Limited",
@@ -2628,6 +2614,20 @@
     "allotment_date": "2023-07-15",
     "promoter_lockin_expiry_date": "2026-07-15",
     "mutual_fund_lockin_expiry_date": "2024-01-15",
+    "is_locked": false,
+    "is_official_live": true
+  },
+  "RNLI": {
+    "symbol": "RNLI",
+    "company_name": "Reliable Nepal Life Insurance Limited",
+    "total_shares": 51968000,
+    "promoter_shares_count": 36377600,
+    "public_shares_count": 15590400,
+    "promoter_shares_pct": 70.0,
+    "public_shares_pct": 30.0,
+    "allotment_date": "2023-08-16",
+    "promoter_lockin_expiry_date": "2026-08-15",
+    "mutual_fund_lockin_expiry_date": "2024-02-16",
     "is_locked": false,
     "is_official_live": true
   },

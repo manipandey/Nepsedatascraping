@@ -10,6 +10,24 @@ import time
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 
+def load_env():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    env_path = os.path.join(base_dir, ".env")
+    if os.path.exists(env_path):
+        with open(env_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                parts = line.split("=", 1)
+                if len(parts) == 2:
+                    key = parts[0].strip()
+                    val = parts[1].strip().strip('"').strip("'")
+                    os.environ[key] = val
+
+load_env()
+
+
 class ShareSansarParser(HTMLParser):
     def __init__(self):
         super().__init__()
@@ -877,11 +895,13 @@ def scrape_live_official_fundamentals():
         try: return float(c)
         except: return 0.0
 
-    for sym in symbols:
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    def fetch_company_fundamental(sym):
         try:
             url = f"https://merolagani.com/CompanyDetail.aspx?symbol={sym}"
             req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, context=context, timeout=6) as resp:
+            with urllib.request.urlopen(req, context=context, timeout=8) as resp:
                 html = resp.read().decode("utf-8")
                 rows = re.findall(r'<tr>\s*<th[^>]*>(.*?)</th>\s*<td[^>]*>(.*?)</td>\s*</tr>', html, re.DOTALL)
                 
@@ -901,7 +921,7 @@ def scrape_live_official_fundamentals():
 
                 roe = round((eps / bv) * 100, 2) if (bv > 0 and eps > 0) else 0.0
 
-                fundamentals_dict[sym] = {
+                return sym, {
                     "symbol": sym,
                     "sector": sector,
                     "eps": eps,
@@ -913,8 +933,17 @@ def scrape_live_official_fundamentals():
                     "market_cap": mcap,
                     "is_official_live": True
                 }
-        except Exception as e:
-            pass
+        except Exception:
+            return sym, None
+
+    max_workers = 15
+    print(f"[FundamentalsScraper] Scraping fundamentals for {len(symbols)} symbols concurrently (workers={max_workers})...")
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(fetch_company_fundamental, sym): sym for sym in symbols}
+        for future in as_completed(futures):
+            sym, result = future.result()
+            if result:
+                fundamentals_dict[sym] = result
 
     cache_path = os.path.join(base_dir, "data", "nepse_fundamentals_live.json")
     try:
@@ -942,9 +971,11 @@ def scrape_systemx_and_npstocks():
 
     token = ""
     try:
+        username = os.environ.get("NPSTOCKS_USERNAME", "manipandey384@gmail.com")
+        password = os.environ.get("NPSTOCKS_PASSWORD", "M@n1P@ndey")
         login_payload = json.dumps({
-            "username": "manipandey384@gmail.com",
-            "password": "M@n1P@ndey",
+            "username": username,
+            "password": password,
             "platform": "web"
         }).encode("utf-8")
         login_req = urllib.request.Request("https://api.npstocks.com/npstocks/v2/login", data=login_payload, headers=headers, method="POST")

@@ -1137,9 +1137,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
             try:
                 # Re-use existing token or login fresh
+                username = os.environ.get("NPSTOCKS_USERNAME", "manipandey384@gmail.com")
+                password = os.environ.get("NPSTOCKS_PASSWORD", "M@n1P@ndey")
                 login_payload = json.dumps({
-                    "username": "manipandey384@gmail.com",
-                    "password": "M@n1P@ndey",
+                    "username": username,
+                    "password": password,
                     "platform": "web"
                 }).encode("utf-8")
                 login_req = urllib.request.Request(

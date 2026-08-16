@@ -2,50 +2,68 @@
  * NEPSE & SystemXLite Terminal Dashboard & Journal Engine
  * ------------------------------------------------------------- */
 
-// Global Application State
-let stocksData = [];
-let indicesData = [];
-let systemxData = {};
-let masterTickers = [];   // Full NEPSE 329+ ticker master list
-let shareStructureData = [];
-let corporateData = [];
-let calendarEventsData = [];
-let liveRefreshTimer = null;
-const LIVE_REFRESH_INTERVAL_MS = 30000; // 30 seconds
-// Detect if running on Vercel static hosting (no Python server available)
-// On Vercel, /api/live-tick, /api/scrape, /api/floorsheet, /api/patterns all 404
-const IS_STATIC_HOST = !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1');
-let currentFilter = "all";
-let selectedSector = "all";
-let searchQuery = "";
-let sortColumn = "symbol";
-let sortDirection = "asc";
-let currentPage = 1;
-let rowsPerPage = 25; // 25, 50, 100, "all"
-let pendingViewTarget = null; // Target view to load after successful mock authentication
-let bankRatesData = null; // Caches live bank rates from server
-let activeBankRatesTab = "fd"; // fd or savings
-let nrbIndicatorsData = null; // Caches live NRB macro indicators
+import { state, getScopedKey } from './src/state.js';
+import { formatNPR, formatNumber } from './src/utils.js';
+import {
+    fetchData as apiFetchData,
+    loadMasterTickers as apiLoadMasterTickers,
+    triggerLiveScrape as apiTriggerLiveScrape,
+    fetchFloorsheetData as apiFetchFloorsheetData,
+    fetchPatternScanData as apiFetchPatternScanData,
+    fetchFundamentalsReport as apiFetchFundamentalsReport,
+    fetchCorporateCalendar as apiFetchCorporateCalendar,
+    fetchBankRates as apiFetchBankRates,
+    fetchNrbIndicators as apiFetchNrbIndicators,
+    fetchLiveTick as apiFetchLiveTick
+} from './src/api.js';
 
-// LocalStorage Persistence Keys (base — scoped per-user at runtime)
-const PORTFOLIO_STORAGE_KEY_BASE = "nepse_portfolio_v3";
-const JOURNAL_STORAGE_KEY_BASE   = "nepse_journal_v3";
-const WATCHLIST_STORAGE_KEY_BASE = "nepse_watchlist_v3";
+// Expose ES Module functions and states globally for compatibility with HTML event handlers
+window.getScopedKey = getScopedKey;
+window.formatNPR = formatNPR;
+window.formatNumber = formatNumber;
+window.apiFetchData = apiFetchData;
+window.apiLoadMasterTickers = apiLoadMasterTickers;
+window.apiTriggerLiveScrape = apiTriggerLiveScrape;
+window.apiFetchFloorsheetData = apiFetchFloorsheetData;
+window.apiFetchPatternScanData = apiFetchPatternScanData;
+window.apiFetchFundamentalsReport = apiFetchFundamentalsReport;
+window.apiFetchCorporateCalendar = apiFetchCorporateCalendar;
+window.apiFetchBankRates = apiFetchBankRates;
+window.apiFetchLiveTick = apiFetchLiveTick;
+window.apiFetchNrbIndicators = apiFetchNrbIndicators;
 
-/** Returns the username-scoped storage key for portfolio/journal/watchlist. */
-function getScopedKey(base) {
-    const user = localStorage.getItem("nepse_portfolio_username") || "guest";
-    return `${base}_${user}`;
-}
+const LIVE_REFRESH_INTERVAL_MS = 30000;
 
-// Back-compat aliases read from sessionStorage so existing init code still works
-const PORTFOLIO_STORAGE_KEY = PORTFOLIO_STORAGE_KEY_BASE;
-const JOURNAL_STORAGE_KEY   = JOURNAL_STORAGE_KEY_BASE;
+// Central State Proxies
+const stateKeys = [
+    'stocksData', 'indicesData', 'systemxData', 'masterTickers',
+    'shareStructureData', 'corporateData', 'calendarEventsData',
+    'liveRefreshTimer', 'currentFilter', 'selectedSector', 'searchQuery',
+    'sortColumn', 'sortDirection', 'currentPage', 'rowsPerPage',
+    'pendingViewTarget', 'bankRatesData', 'activeBankRatesTab', 'nrbIndicatorsData',
+    'portfolioHoldings', 'tradeJournal', 'customWatchlist', 'priceAlerts'
+];
 
-// Portfolio & Journal Local Repositories — load from user-scoped key, fall back to shared key for backward compat
-let portfolioHoldings = JSON.parse(
-    localStorage.getItem(getScopedKey(PORTFOLIO_STORAGE_KEY_BASE)) ||
-    localStorage.getItem(PORTFOLIO_STORAGE_KEY_BASE)
+stateKeys.forEach(key => {
+    Object.defineProperty(window, key, {
+        get() { return state[key]; },
+        set(val) { state[key] = val; },
+        configurable: true
+    });
+});
+
+Object.defineProperty(window, 'PORTFOLIO_STORAGE_KEY_BASE', { get() { return state.PORTFOLIO_STORAGE_KEY_BASE; } });
+Object.defineProperty(window, 'JOURNAL_STORAGE_KEY_BASE', { get() { return state.JOURNAL_STORAGE_KEY_BASE; } });
+Object.defineProperty(window, 'WATCHLIST_STORAGE_KEY_BASE', { get() { return state.WATCHLIST_STORAGE_KEY_BASE; } });
+
+const PORTFOLIO_STORAGE_KEY = state.PORTFOLIO_STORAGE_KEY_BASE;
+const JOURNAL_STORAGE_KEY   = state.JOURNAL_STORAGE_KEY_BASE;
+const WATCHLIST_STORAGE_KEY = state.WATCHLIST_STORAGE_KEY_BASE;
+
+// Inject initial values from storage/fallback into the state object
+state.portfolioHoldings = JSON.parse(
+    localStorage.getItem(getScopedKey(state.PORTFOLIO_STORAGE_KEY_BASE)) ||
+    localStorage.getItem(state.PORTFOLIO_STORAGE_KEY_BASE)
 ) || [
     {
         id: 1,
@@ -69,9 +87,9 @@ let portfolioHoldings = JSON.parse(
     }
 ];
 
-let tradeJournal = JSON.parse(
-    localStorage.getItem(getScopedKey(JOURNAL_STORAGE_KEY_BASE)) ||
-    localStorage.getItem(JOURNAL_STORAGE_KEY_BASE)
+state.tradeJournal = JSON.parse(
+    localStorage.getItem(getScopedKey(state.JOURNAL_STORAGE_KEY_BASE)) ||
+    localStorage.getItem(state.JOURNAL_STORAGE_KEY_BASE)
 ) || [
     {
         id: 1,
@@ -88,16 +106,10 @@ let tradeJournal = JSON.parse(
     }
 ];
 
-// Helper Utilities
-const formatNPR = (val) => {
-    if (val === undefined || val === null || isNaN(val)) return "NPR 0.00";
-    return "NPR " + Number(val).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-};
-
-const formatNumber = (val) => {
-    if (val === undefined || val === null || isNaN(val)) return "0";
-    return Number(val).toLocaleString("en-IN");
-};
+state.customWatchlist = JSON.parse(
+    localStorage.getItem(getScopedKey(state.WATCHLIST_STORAGE_KEY_BASE)) ||
+    localStorage.getItem(state.WATCHLIST_STORAGE_KEY_BASE)
+) || [];
 
 const savePortfolio = () => {
     localStorage.setItem(getScopedKey(PORTFOLIO_STORAGE_KEY_BASE), JSON.stringify(portfolioHoldings));
@@ -133,8 +145,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Initialize Username & Cloud Syncing Event Handlers
     initCloudSyncHandlers();
 
-    // Default startup view (landing page opens when tab is closed and opened again)
-    const activeView = sessionStorage.getItem("nepse_active_view") || "landing";
+    // Default startup view (Market Overview dashboard)
+    let activeView = sessionStorage.getItem("nepse_active_view") || "dashboard";
+    if (activeView === "landing") activeView = "dashboard";
     switchView(activeView);
 
     await loadMasterTickers();
@@ -228,8 +241,7 @@ function initCloudSyncHandlers() {
 // Load master ticker list (329+ NEPSE companies from merolagani)
 async function loadMasterTickers() {
     try {
-        const res = await fetch(`/api/all-tickers?t=${Date.now()}`);
-        masterTickers = await res.json();
+        await apiLoadMasterTickers();
         console.log(`[Master] Loaded ${masterTickers.length} NEPSE tickers`);
         populateTickerDropdowns();
     } catch (e) {
@@ -242,45 +254,13 @@ function startLiveRefresh() {
     if (liveRefreshTimer) clearInterval(liveRefreshTimer);
     liveRefreshTimer = setInterval(fetchLiveTick, LIVE_REFRESH_INTERVAL_MS);
     console.log(`[Live] Auto-refresh started: every ${LIVE_REFRESH_INTERVAL_MS / 1000}s`);
+    fetchLiveTick();
 }
 
 // Lightweight live tick fetch — only stocks + indices from API
 async function fetchLiveTick() {
-    // On Vercel static hosting: /api/live-tick requires a running Python server.
-    // Fall back to re-fetching the static nepse_today.json which GitHub Actions updates daily.
-    if (IS_STATIC_HOST) {
-        try {
-            const res = await fetch(`data/nepse_today.json?t=${Date.now()}`);
-            if (!res.ok) return;
-            const data = await res.json();
-            if (data.stocks && data.stocks.length) {
-                stocksData = data.stocks;
-            }
-            if (data.indices && data.indices.length) {
-                indicesData = data.indices;
-            }
-            const updEl = document.getElementById("lastUpdatedTime");
-            if (updEl && data.scraped_at) {
-                const d = new Date(data.scraped_at);
-                const timeStr = isNaN(d) ? data.scraped_at : d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-                updEl.textContent = `Scraped: ${data.date || ''} ${timeStr}`;
-            }
-            const dateEl = document.getElementById("tradeDate");
-            if (dateEl) dateEl.textContent = data.date || new Date().toISOString().split("T")[0];
-            renderSummaryGrid(data);
-            renderIndicesGrid();
-            renderStocksTable();
-            updateSmartCollections();
-        } catch (err) {
-            console.warn("[Live] Static data refresh error:", err.message);
-        }
-        return;
-    }
-
     try {
-        const res = await fetch(`/api/live-tick?t=${Date.now()}`);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+        const data = await apiFetchLiveTick();
 
         // Update global state by merging live ticks into existing stocksData
         if (data.stocks && data.stocks.length) {
@@ -342,9 +322,34 @@ async function fetchLiveTick() {
 
         console.log(`[Live] Updated ${stocksData.length} stocks + ${indicesData.length} indices at ${timeStr}`);
     } catch (err) {
-        console.warn("[Live] Tick fetch error:", err.message);
-        const updEl = document.getElementById("lastUpdatedTime");
-        if (updEl) updEl.textContent = `Offline ● Retry in 30s`;
+        console.warn("[Live] Dynamic tick fetch failed, trying static fallback:", err.message);
+        try {
+            const res = await fetch(`data/nepse_today.json?t=${Date.now()}`);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            if (data.stocks && data.stocks.length) {
+                stocksData = data.stocks;
+            }
+            if (data.indices && data.indices.length) {
+                indicesData = data.indices;
+            }
+            const updEl = document.getElementById("lastUpdatedTime");
+            if (updEl && data.scraped_at) {
+                const d = new Date(data.scraped_at);
+                const timeStr = isNaN(d) ? data.scraped_at : d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+                updEl.textContent = `Scraped: ${data.date || ''} ${timeStr}`;
+            }
+            const dateEl = document.getElementById("tradeDate");
+            if (dateEl) dateEl.textContent = data.date || new Date().toISOString().split("T")[0];
+            renderSummaryGrid(data);
+            renderIndicesGrid();
+            renderStocksTable();
+            updateSmartCollections();
+        } catch (staticErr) {
+            console.warn("[Live] Static fallback error:", staticErr.message);
+            const updEl = document.getElementById("lastUpdatedTime");
+            if (updEl) updEl.textContent = `Offline ● Retry in 30s`;
+        }
     }
 }
 
@@ -360,114 +365,99 @@ function initNavigation() {
     });
 }
 
+let isSwitchingView = false;
 function switchView(viewTarget) {
-    // Save last active view target to session storage (persists during page refresh, resets on tab close)
-    sessionStorage.setItem("nepse_active_view", viewTarget);
+    if (isSwitchingView) return;
+    if (viewTarget === "landing") viewTarget = "dashboard";
+    isSwitchingView = true;
+    try {
+        // Save last active view target to session storage
+        sessionStorage.setItem("nepse_active_view", viewTarget);
 
-    // Intercept restricted sections (Portfolio & Trading)
-    const restrictedViews = ["portfolio", "journal", "watchlist"];
-    const isLoggedIn = localStorage.getItem("nepse_logged_in") === "true";
-    
-    if (restrictedViews.includes(viewTarget) && !isLoggedIn) {
-        pendingViewTarget = viewTarget;
-        switchView("login");
-        return;
-    }
-
-    // Handle Fullscreen Landing Page Layout Toggling
-    const appContainer = document.querySelector(".app-container");
-    if (appContainer) {
-        if (viewTarget === "landing") {
-            appContainer.classList.add("hide-sidebar-header");
-        } else {
-            appContainer.classList.remove("hide-sidebar-header");
+        // Reset Scroll Position of Main Content area
+        const mainContent = document.querySelector(".main-content");
+        if (mainContent) {
+            mainContent.scrollTop = 0;
         }
-    }
 
-    // Reset Scroll Position of Main Content area
-    const mainContent = document.querySelector(".main-content");
-    if (mainContent) {
-        mainContent.scrollTop = 0;
-    }
+        // Update active nav item styles
+        const navItems = document.querySelectorAll(".sidebar-nav .nav-item[data-view]");
+        navItems.forEach(n => {
+            if (n.getAttribute("data-view") === viewTarget) {
+                n.classList.add("active");
+                // Add inline styles matching active item to make sure it stands out
+                n.style.background = "rgba(99, 102, 241, 0.15)";
+                n.style.color = "#818cf8";
+                n.style.fontWeight = "700";
+                n.style.borderLeft = "3px solid #6366f1";
+            } else {
+                n.classList.remove("active");
+                n.style.background = "";
+                n.style.color = "";
+                n.style.fontWeight = "";
+                n.style.borderLeft = "";
+            }
+        });
 
-    // Update active nav item styles
-    const navItems = document.querySelectorAll(".sidebar-nav .nav-item[data-view]");
-    navItems.forEach(n => {
-        if (n.getAttribute("data-view") === viewTarget) {
-            n.classList.add("active");
-            // Add inline styles matching active item to make sure it stands out
-            n.style.background = "rgba(99, 102, 241, 0.15)";
-            n.style.color = "#818cf8";
-            n.style.fontWeight = "700";
-            n.style.borderLeft = "3px solid #6366f1";
-        } else {
-            n.classList.remove("active");
-            n.style.background = "";
-            n.style.color = "";
-            n.style.fontWeight = "";
-            n.style.borderLeft = "";
+        // Hide all view sections
+        document.querySelectorAll(".view-section").forEach(v => v.classList.add("hidden"));
+        
+        // Show target view section
+        const targetSection = document.getElementById(`${viewTarget}View`);
+        if (targetSection) targetSection.classList.remove("hidden");
+
+        // Update Header Page Title & Trigger Data Renderings
+        const pageTitle = document.getElementById("pageTitle");
+        if (pageTitle) {
+            if (viewTarget === "dashboard") {
+                pageTitle.textContent = "Market Overview & All Scrips";
+            } else if (viewTarget === "portfolio") {
+                pageTitle.textContent = "Portfolio Tracker & Journal";
+                renderPortfolioView();
+            } else if (viewTarget === "journal") {
+                pageTitle.textContent = "📓 Trading Journal & Performance Analytics";
+                renderJournalView();
+            } else if (viewTarget === "dalal") {
+                pageTitle.textContent = "🔥 Broker Accumulation & Dalal Signals";
+                renderDalalView();
+            } else if (viewTarget === "lockin") {
+                pageTitle.textContent = "🔒 Promoter Lock-in Expiry Monitor";
+                renderLockinView();
+            } else if (viewTarget === "floorsheet") {
+                pageTitle.textContent = "🔍 Institutional Floorsheet Intelligence";
+                renderFloorsheetView();
+            } else if (viewTarget === "watchlist") {
+                pageTitle.textContent = "⭐ Real-Time Watchlist & Price Alerts";
+                renderWatchlistView();
+            } else if (viewTarget === "heatbubble") {
+                pageTitle.textContent = "🫧 Dynamic NEPSE Heat Bubble Map";
+                renderHeatbubbleView();
+            } else if (viewTarget === "patterns") {
+                pageTitle.textContent = "📐 Technical Chart Pattern & Support/Resistance Scanner";
+                renderPatternScannerView();
+            } else if (viewTarget === "fundamental") {
+                pageTitle.textContent = "🏢 Fundamental Screener & AI Insights Report";
+                renderFundamentalScreenerView();
+            } else if (viewTarget === "calendar") {
+                pageTitle.textContent = "📅 Unified Corporate Earnings & Events Calendar";
+                renderCorporateCalendarView();
+            } else if (viewTarget === "companyIntel") {
+                pageTitle.textContent = "📊 360° Company Intelligence Report";
+                renderCompanyIntelView("SHIVM");
+            } else if (viewTarget === "curatedCollections") {
+                pageTitle.textContent = "⭐ Curated Scrip Collections & Ratings";
+                renderCuratedCollectionsView(activeCuratedCollection || "swing");
+            } else if (viewTarget === "landing") {
+                pageTitle.textContent = "🚀 NEPSE Terminal Platform Overview";
+            } else if (viewTarget === "login") {
+                pageTitle.textContent = "🔒 Authenticate Access";
+            } else if (viewTarget === "bankRates") {
+                pageTitle.textContent = "🏦 Banking Rates & Margin Lending Suite";
+                renderBankRatesView();
+            }
         }
-    });
-
-    // Hide all view sections
-    document.querySelectorAll(".view-section").forEach(v => v.classList.add("hidden"));
-    
-    // Show target view section
-    const targetSection = document.getElementById(`${viewTarget}View`);
-    if (targetSection) targetSection.classList.remove("hidden");
-
-    // Update Header Page Title & Trigger Data Renderings
-    const pageTitle = document.getElementById("pageTitle");
-    if (pageTitle) {
-        if (viewTarget === "dashboard") {
-            pageTitle.textContent = "Market Overview & All Scrips";
-        } else if (viewTarget === "portfolio") {
-            pageTitle.textContent = "Portfolio Tracker & Journal";
-            renderPortfolioView();
-        } else if (viewTarget === "journal") {
-            pageTitle.textContent = "Trading Journal";
-            renderJournalView();
-        } else if (viewTarget === "dalal") {
-            pageTitle.textContent = "Dalal Street Signals";
-            renderDalalView();
-        } else if (viewTarget === "strategy") {
-            pageTitle.textContent = "🎯 EMA 20>50>100 + Fractal Low Sweep Strategy Radar";
-            renderStrategyView();
-        } else if (viewTarget === "lockin") {
-            pageTitle.textContent = "🔒 Promoter Lock-in Expiry Tracker";
-            renderLockinView();
-        } else if (viewTarget === "floorsheet") {
-            pageTitle.textContent = "🔍 Institutional Floorsheet Intelligence";
-            renderFloorsheetView();
-        } else if (viewTarget === "watchlist") {
-            pageTitle.textContent = "⭐ Real-Time Watchlist & Price Alerts";
-            renderWatchlistView();
-        } else if (viewTarget === "heatbubble") {
-            pageTitle.textContent = "🫧 Dynamic NEPSE Heat Bubble Map";
-            renderHeatbubbleView();
-        } else if (viewTarget === "patterns") {
-            pageTitle.textContent = "📐 Technical Chart Pattern & Support/Resistance Scanner";
-            renderPatternScannerView();
-        } else if (viewTarget === "fundamental") {
-            pageTitle.textContent = "🏢 Fundamental Screener & AI Insights Report";
-            renderFundamentalScreenerView();
-        } else if (viewTarget === "calendar") {
-            pageTitle.textContent = "📅 Unified Corporate Earnings & Events Calendar";
-            renderCorporateCalendarView();
-        } else if (viewTarget === "companyIntel") {
-            pageTitle.textContent = "📊 360° Company Intelligence Report";
-            renderCompanyIntelView("SHIVM");
-        } else if (viewTarget === "curatedCollections") {
-            pageTitle.textContent = "⭐ Curated Scrip Collections & Ratings";
-            renderCuratedCollectionsView(activeCuratedCollection || "swing");
-        } else if (viewTarget === "landing") {
-            pageTitle.textContent = "🚀 NEPSE Terminal Platform Overview";
-        } else if (viewTarget === "login") {
-            pageTitle.textContent = "🔒 Authenticate Access";
-        } else if (viewTarget === "bankRates") {
-            pageTitle.textContent = "🏦 Banking Rates & Margin Lending Suite";
-            renderBankRatesView();
-        }
+    } finally {
+        isSwitchingView = false;
     }
 }
 
@@ -490,11 +480,8 @@ function initEventListeners() {
                 // to a direct data refresh on any network/404 error.
                 let scraped = false;
                 try {
-                    const res = await fetch("/api/scrape", { signal: AbortSignal.timeout(4000) });
-                    if (res.ok) {
-                        const json = await res.json();
-                        scraped = !!json.success;
-                    }
+                    const json = await apiTriggerLiveScrape();
+                    scraped = !!json.success;
                 } catch (_) {
                     // No scrape endpoint available (Vercel static deploy) — that's fine
                 }
@@ -929,44 +916,7 @@ function populateTickerDropdowns() {
 // Fetch Core Data
 async function fetchData() {
     try {
-        const timestamp = Date.now();
-        const res = await fetch(`data/nepse_today.json?t=${timestamp}`);
-        const data = await res.json();
-
-        stocksData = data.stocks || [];
-        indicesData = data.indices || [];
-
-        try {
-            const resSx = await fetch(`data/systemx_scraped.json?t=${timestamp}`);
-            systemxData = await resSx.json();
-
-            if (systemxData && systemxData.stock_live && systemxData.stock_live.length) {
-                const sxMap = {};
-                systemxData.stock_live.forEach(s => { sxMap[s.symbol] = s; });
-
-                if (!stocksData || !stocksData.length) {
-                    stocksData = systemxData.stock_live;
-                } else {
-                    stocksData.forEach(s => {
-                        const sx = sxMap[s.symbol];
-                        if (sx) {
-                            if (sx.ltp) s.ltp = sx.ltp;
-                            if (sx.close) s.close = sx.close;
-                            if (sx.diff !== undefined) s.diff = sx.diff;
-                            if (sx.diff_percent !== undefined) s.diff_percent = sx.diff_percent;
-                            if (sx.volume) s.volume = sx.volume;
-                            if (sx.turnover) s.turnover = sx.turnover;
-                        }
-                    });
-                }
-            }
-
-            if (systemxData && systemxData.indices && systemxData.indices.length) {
-                indicesData = systemxData.indices;
-            }
-        } catch (e) {
-            console.log("systemx_scraped fetch notice:", e);
-        }
+        const data = await apiFetchData();
 
         const todayStr = new Date().toISOString().split("T")[0];
         const dateEl = document.getElementById("tradeDate");
@@ -1226,6 +1176,25 @@ function renderMoneyFlowTracker(indices) {
     `).join("") || `<span style="font-size: 0.74rem; color: var(--text-muted);">No Net Outflow</span>`;
 }
 
+function getSectorIcon(name) {
+    if (!name) return "📊";
+    const n = name.toLowerCase();
+    if (n.includes("bank") && !n.includes("development")) return "🏦";
+    if (n.includes("development")) return "🏗️";
+    if (n.includes("finance")) return "💰";
+    if (n.includes("hotel") || n.includes("tourism")) return "🏨";
+    if (n.includes("hydro")) return "⚡";
+    if (n.includes("investment")) return "📈";
+    if (n.includes("life insurance")) return "🛡️";
+    if (n.includes("non life")) return "📄";
+    if (n.includes("insurance")) return "🛡️";
+    if (n.includes("microfinance")) return "🤝";
+    if (n.includes("manufactur")) return "🏭";
+    if (n.includes("trading")) return "📦";
+    if (n.includes("mutual")) return "📊";
+    return "📈";
+}
+
 // Render Sub-Indices Grid Cards
 function renderIndicesGrid() {
     const grid = document.getElementById("indicesGrid");
@@ -1242,15 +1211,20 @@ function renderIndicesGrid() {
         const change = idx.pointChange !== undefined ? idx.pointChange : (idx.change !== undefined ? idx.change : 0);
         const pct = idx.percentageChange !== undefined ? idx.percentageChange : (idx.change_percent !== undefined ? idx.change_percent : (idx.diff_percent || 0));
         const isUp = change >= 0 || pct >= 0;
+        const icon = getSectorIcon(name);
 
         return `
-            <div class="index-card ${selectedSector === name ? 'active' : ''}" onclick="selectIndexFilter('${name}')">
-                <div class="index-name">${name}</div>
+            <div class="index-card ${selectedSector === name ? 'active' : ''}" onclick="selectIndexFilter('${name}')" title="Click to filter stocks by ${name}">
+                <div class="index-card-header">
+                    <span class="index-name">${icon} ${name}</span>
+                    ${selectedSector === name ? '<span class="index-active-dot">● Filtered</span>' : ''}
+                </div>
                 <div class="index-val-group">
                     <span class="index-value">${Number(val).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                    <span class="index-badge ${isUp ? 'up' : 'down'}">
-                        ${isUp ? '▲ +' : '▼ '}${Math.abs(Number(pct)).toFixed(2)}%
-                    </span>
+                    <div class="index-badge ${isUp ? 'up' : 'down'}">
+                        <span>${isUp ? '▲ +' : '▼ '}${Math.abs(Number(change)).toFixed(2)}</span>
+                        <span style="opacity: 0.85; font-size: 0.7rem;">(${isUp ? '+' : ''}${Number(pct).toFixed(2)}%)</span>
+                    </div>
                 </div>
             </div>
         `;
@@ -1934,7 +1908,7 @@ function renderDalalView() {
             refreshBtn.disabled = true;
             refreshBtn.innerHTML = `<span class="btn-icon">⏳</span> Syncing...`;
             try {
-                await fetch("/api/scrape");
+                await apiTriggerLiveScrape();
                 await fetchData();
                 alert("🎉 Dalal Street Signals refreshed with live NP Stocks floorsheet data!");
             } catch (e) {
@@ -2170,7 +2144,31 @@ let lockinCurrentPage = 1;
 const LOCKIN_PAGE_SIZE = 20;
 
 function renderLockinView() {
-    const rawData = (systemxData.lock_in_periods || []);
+    let rawData = (systemxData && systemxData.lock_in_periods && systemxData.lock_in_periods.length) ? [...systemxData.lock_in_periods] : [];
+
+    if (!rawData.length && shareStructureData && shareStructureData.length) {
+        shareStructureData.forEach(item => {
+            const sym = item.symbol;
+            const name = item.company_name || sym;
+            const promShares = item.promoter_shares_count || 0;
+            const promExp = item.promoter_lockin_expiry_date;
+
+            if (promExp) {
+                try {
+                    const ts = new Date(promExp).getTime();
+                    if (!isNaN(ts)) {
+                        rawData.push({
+                            tickerSymbol: sym,
+                            companyName: name,
+                            lockInPeriod: ts,
+                            lockedShares: promShares
+                        });
+                    }
+                } catch (e) {}
+            }
+        });
+    }
+
     const tbody = document.getElementById("lockinTableBody");
     if (!rawData.length) {
         if (tbody) tbody.innerHTML = `<tr><td colspan="7" class="text-center loading-placeholder">No lock-in data available. Click "Sync Live Data" to refresh.</td></tr>`;
@@ -2488,8 +2486,7 @@ async function fetchScripFloorsheet(symbol) {
     if (tbody) tbody.innerHTML = `<tr><td colspan="7" class="text-center loading-placeholder">Loading transactions for ${symbol}...</td></tr>`;
 
     try {
-        const res = await fetch(`/api/floorsheet?symbol=${symbol}&length=500`);
-        const records = await res.json();
+        const records = await apiFetchFloorsheetData(symbol);
 
         if (!Array.isArray(records) || records.length === 0) {
             if (statusEl) statusEl.textContent = `No floorsheet records found for ${symbol} today.`;
@@ -2630,7 +2627,7 @@ async function fetchBrokerFloorsheet(brokerNo) {
     try {
         // Fetch floorsheet records across top active stocks
         const topSymbols = (stocksData.length ? stocksData.slice(0, 15) : masterTickers.slice(0, 15)).map(s => s.symbol);
-        const fetchPromises = topSymbols.map(sym => fetch(`/api/floorsheet?symbol=${sym}&length=200`).then(r => r.json()).catch(() => []));
+        const fetchPromises = topSymbols.map(sym => apiFetchFloorsheetData(sym).catch(() => []));
         const results = await Promise.all(fetchPromises);
 
         const allRecords = results.flat().filter(r => r && typeof r === 'object');
@@ -3540,9 +3537,7 @@ async function renderPatternScannerView() {
     if (tbody) tbody.innerHTML = `<tr><td colspan="9" class="text-center loading-placeholder">Scanning candlestick patterns, triangles, channels, and support/resistance...</td></tr>`;
 
     try {
-        const res = await fetch(`/api/patterns?t=${Date.now()}`);
-        if (!res.ok) throw new Error("API error");
-        patternData = await res.json();
+        patternData = await apiFetchPatternScanData();
     } catch (e) {
         console.warn("Pattern API unavailable, using client-side fallback...");
         patternData = stocksData.map(s => {
@@ -3700,9 +3695,7 @@ async function renderFundamentalScreenerView() {
     initFundamentalEventListeners();
 
     try {
-        const res = await fetch(`/api/fundamentals?t=${Date.now()}`);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const raw = await res.json();
+        const raw = await apiFetchFundamentalsReport();
 
         // Server returns an array; static Vercel file returns object keyed by symbol
         if (Array.isArray(raw)) {
@@ -3983,8 +3976,7 @@ async function renderCorporateCalendarView() {
     if (calendarEventsData.length === 0) {
         tbody.innerHTML = `<tr><td colspan="7" class="text-center loading-placeholder">Loading corporate calendar events from NEPSE server...</td></tr>`;
         try {
-            const res = await fetch("/api/calendar");
-            calendarEventsData = await res.json();
+            calendarEventsData = await apiFetchCorporateCalendar();
         } catch (err) {
             console.error("Error fetching corporate calendar:", err);
             tbody.innerHTML = `<tr><td colspan="7" class="text-center text-down">Error loading corporate calendar events. Please check connection.</td></tr>`;
@@ -4969,8 +4961,7 @@ async function renderBankRatesView() {
 
     try {
         if (!bankRatesData) {
-            const res = await fetch("/api/bank-rates");
-            bankRatesData = await res.json();
+            bankRatesData = await apiFetchBankRates();
             
             const lastUpdatedEl = document.getElementById("bankRatesLastUpdated");
             if (lastUpdatedEl && bankRatesData.last_updated) {
@@ -5225,8 +5216,7 @@ async function renderNrbIndicators() {
 
     try {
         if (!nrbIndicatorsData) {
-            const res = await fetch("/api/nrb-indicators");
-            nrbIndicatorsData = await res.json();
+            nrbIndicatorsData = await apiFetchNrbIndicators();
         }
 
         const list = nrbIndicatorsData.indicators || [];
@@ -5302,3 +5292,24 @@ async function renderNrbIndicators() {
         grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 20px; color: var(--color-down);">⚠️ Failed to load NRB macroeconomics data. Check connection.</div>`;
     }
 }
+
+// Expose module functions globally for compatibility with HTML inline onclick events
+window.switchView = switchView;
+window.triggerLandingSync = triggerLandingSync;
+window.toggleLoginAction = toggleLoginAction;
+window.toggleBankRatesTab = toggleBankRatesTab;
+window.setMarginMaxLoan = setMarginMaxLoan;
+window.showToast = showToast;
+window.handleSignOut = handleSignOut;
+window.deleteHolding = deleteHolding;
+window.deleteJournalTrade = deleteJournalTrade;
+window.deleteWatchlistItem = deleteWatchlistItem;
+window.triggerLiveRefresh = triggerLiveRefresh;
+window.triggerScreenerFilter = triggerScreenerFilter;
+window.triggerPatternFilter = triggerPatternFilter;
+window.triggerWatchlistTab = triggerWatchlistTab;
+window.triggerCollectionTab = triggerCollectionTab;
+window.renderCompanyIntelView = renderCompanyIntelView;
+window.openPatternAnalysisModal = typeof openPatternAnalysisModal !== "undefined" ? openPatternAnalysisModal : null;
+window.openTechnicalTechnicalsPanel = typeof openTechnicalTechnicalsPanel !== "undefined" ? openTechnicalTechnicalsPanel : null;
+

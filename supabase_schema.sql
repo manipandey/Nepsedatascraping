@@ -136,7 +136,8 @@ CREATE TABLE IF NOT EXISTS public.lockin_tracker (
     expected_selling_pressure TEXT DEFAULT 'Low',
     status TEXT DEFAULT 'Upcoming',
     days_remaining INTEGER DEFAULT 0,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    CONSTRAINT uq_symbol_event_expiry UNIQUE (symbol, event_type, expiry_date)
 );
 
 CREATE INDEX IF NOT EXISTS idx_lockin_expiry_date ON public.lockin_tracker(expiry_date);

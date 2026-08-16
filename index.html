@@ -17,10 +17,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-container hide-sidebar-header">
+    <div class="app-container">
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
-            <div class="sidebar-logo">
+            <div class="sidebar-logo" onclick="switchView('dashboard')" style="cursor: pointer;">
                 <span class="logo-icon">📈</span>
                 <span class="logo-text">NEPSE<span class="highlight">Terminal</span></span>
             </div>
@@ -36,7 +36,7 @@
                 <a href="#" class="nav-item" data-view="dalal" id="navDalal">
                     <span class="nav-icon">🔥</span> Dalal Signals
                 </a>
-                <a href="#" class="nav-item" data-view="strategy" id="navStrategy" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; border-left: 3px solid #818cf8; font-weight: 700;">
+                <a href="#" class="nav-item" data-view="strategy" id="navStrategy">
                     <span class="nav-icon">🎯</span> Strategy Signals
                 </a>
                 <a href="#" class="nav-item" data-view="curatedCollections" id="navCuratedCollections">
@@ -117,29 +117,29 @@
         <!-- Main Content Area -->
         <main class="main-content">
             <!-- Top Header -->
-            <header class="main-header" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 28px; background: var(--bg-app); border-bottom: 1px solid var(--border-color);">
-                <div class="header-title-container" style="min-width: 220px;">
-                    <h1 class="header-title" id="pageTitle" style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;">Market Overview</h1>
-                    <div class="header-metadata" style="display: flex; align-items: center; gap: 10px; margin-top: 4px;">
-                        <span class="meta-badge date-badge" style="font-size: 0.76rem; background: var(--bg-card); border: 1px solid var(--border-color); padding: 2px 8px; border-radius: 6px;">
-                            <span class="badge-label" style="color: var(--text-muted);">Date:</span>
-                            <span class="badge-value" id="tradeDate" style="color: var(--text-primary); font-weight: 600;">Loading...</span>
+            <header class="main-header">
+                <div class="header-title-container">
+                    <h1 class="header-title" id="pageTitle">Market Overview & All Scrips</h1>
+                    <div class="header-metadata">
+                        <span class="meta-badge date-badge">
+                            <span class="badge-label">Date:</span>
+                            <span class="badge-value" id="tradeDate">Loading...</span>
                         </span>
-                        <span class="meta-badge status-badge" id="marketStatusBadge" style="font-size: 0.76rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 2px 8px; border-radius: 6px; color: #10b981;">
-                            <span class="badge-dot" style="display: inline-block; width: 6px; height: 6px; background: #10b981; border-radius: 50%; margin-right: 4px;"></span>
+                        <span class="meta-badge status-badge" id="marketStatusBadge">
+                            <span class="badge-dot"></span>
                             <span class="badge-text" id="marketStatus">NEPSE Online</span>
                         </span>
                     </div>
                 </div>
 
                 <!-- Global Quick Ticker Search -->
-                <div class="header-search-box" style="position: relative; flex: 1; max-width: 420px;">
-                    <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); opacity: 0.6; font-size: 0.88rem;">🔍</span>
-                    <input type="text" id="globalQuickSearch" class="search-input" placeholder="Search scrip symbol or company name (Press '/' to focus)..." style="width: 100%; padding-left: 36px; padding-right: 42px; height: 38px; font-size: 0.84rem; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px;">
-                    <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 0.72rem; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-muted); padding: 1px 6px; border-radius: 4px; font-family: monospace;">/</span>
+                <div class="header-search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="globalQuickSearch" class="search-input" placeholder="Search scrip symbol or company name (Press '/' to focus)...">
+                    <span class="search-shortcut">/</span>
                 </div>
 
-                <div class="header-actions" style="display: flex; align-items: center; gap: 10px;">
+                <div class="header-actions">
                     <button class="btn btn-secondary" id="btnOpen360Intel" style="height: 38px; padding: 0 14px; font-size: 0.84rem; font-weight: 600; border-radius: 8px; background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35);">
                         <span class="btn-icon">📊</span> 360° Stock Intel
                     </button>
@@ -149,213 +149,7 @@
                     <button class="btn btn-primary refresh-btn" id="refreshBtn" style="height: 38px; padding: 0 16px; font-size: 0.85rem; font-weight: 600; border-radius: 8px;">
                         <span class="btn-icon">🔄</span> Sync Live Data
                     </button>
-                </div>
             </header>
-
-            <!-- VIEW 0: FUTURISTIC LIGHT THEME LANDING PAGE & PLATFORM OVERVIEW -->
-            <div id="landingView" class="view-section">
-                <div class="landing-view-container">
-                    
-                    <!-- 1. Header Navbar -->
-                    <header class="landing-header">
-                        <a href="#" onclick="switchView('dashboard'); return false;" class="logo-container-landing">
-                            <span style="font-size: 1.5rem; display: flex; align-items: center; justify-content: center;">📊</span>
-                            <span>NEPSE<span class="highlight">Terminal</span></span>
-                        </a>
-
-                        <!-- Actions -->
-                        <div class="landing-header-actions">
-                            <button class="landing-action-btn" onclick="switchView('bankRates'); return false;" title="Settings">⚙️</button>
-                            <button class="btn-sync-landing" id="btnSyncLanding" onclick="triggerLandingSync()">
-                                <span>🔄</span> Sync Live Data
-                            </button>
-                        </div>
-                    </header>
-
-                    <!-- 2. Hero Section -->
-                    <section class="new-hero-section">
-                        <div class="hero-pill">
-                            <span class="hero-pill-dot"></span>
-                            <span>NEPSE Live Data Integrated</span>
-                        </div>
-                        <h1 class="hero-main-title">
-                            Master the NEPSE with <span>Analytical Precision</span>.
-                        </h1>
-                        <p class="hero-main-subtitle">
-                            Customized stock journaling, real-time analytics, and risk management for the modern Nepali investor. Transform your trading data into actionable insights.
-                        </p>
-                        <div class="hero-cta-buttons">
-                            <button class="btn-cta-primary" onclick="switchView('portfolio'); return false;">Start Journaling for Free</button>
-                            <button class="btn-cta-secondary" onclick="showToast('Demo video is loading...', 'info'); return false;">
-                                <span style="font-size: 1.1rem;">▶</span> Watch Demo
-                            </button>
-                        </div>
-                    </section>
-
-                    <!-- 3. Market Overview Widget Container -->
-                    <section class="landing-widget-container">
-                        <div class="landing-widget">
-                            <div class="widget-header">
-                                <div class="widget-title">
-                                    <span>📊</span> Market Overview
-                                </div>
-                                <div class="widget-status">
-                                    <span class="widget-status-dot"></span>
-                                    <span>Live updates: Connected</span>
-                                </div>
-                            </div>
-                            <div class="widget-grid">
-                                <!-- Card 1: NEPSE Index -->
-                                <div class="widget-card">
-                                    <div>
-                                        <p class="widget-card-title">NEPSE Index</p>
-                                        <h3 class="widget-card-value" id="landingNepseValue">2,145.67</h3>
-                                        <span class="widget-card-change" id="landingNepseChange">+ 12.45 (0.58%)</span>
-                                    </div>
-                                    <svg class="sparkline-svg" viewBox="0 0 200 40" preserveAspectRatio="none">
-                                        <path id="landingSparkline" d="M 0 35 Q 25 32, 50 30 T 100 22 T 150 15 T 200 8" fill="none" stroke="var(--color-up)" stroke-width="2.5" stroke-linecap="round"></path>
-                                    </svg>
-                                </div>
-
-                                <!-- Card 2: Top Gainers -->
-                                <div class="widget-card" style="height: auto; justify-content: flex-start; gap: 12px;">
-                                    <p class="widget-card-title">Top Gainers</p>
-                                    <div id="landingGainersList" style="display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 8px;">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; padding: 4px 0; border-bottom: 1px dashed var(--border-color);">
-                                            <span style="font-weight: 700;">NABIL</span>
-                                            <span style="font-weight: 700; color: var(--color-up);">+4.2%</span>
-                                        </div>
-                                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; padding: 4px 0; border-bottom: 1px dashed var(--border-color);">
-                                            <span style="font-weight: 700;">CIT</span>
-                                            <span style="font-weight: 700; color: var(--color-up);">+3.8%</span>
-                                        </div>
-                                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; padding: 4px 0;">
-                                            <span style="font-weight: 700;">SHIVM</span>
-                                            <span style="font-weight: 700; color: var(--color-up);">+2.1%</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Card 3: Market Sentiment -->
-                                <div class="widget-card" style="height: auto; align-items: center; justify-content: center; padding: 16px;">
-                                    <div class="sentiment-chart-container">
-                                        <svg class="donut-svg" width="120" height="120" viewBox="0 0 42 42">
-                                            <circle class="donut-ring" cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--border-color)" stroke-width="4"></circle>
-                                            <circle class="donut-segment" id="landingSentimentCircle" cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--color-up)" stroke-width="4" stroke-dasharray="65 35" stroke-dashoffset="0" stroke-linecap="round"></circle>
-                                        </svg>
-                                        <div class="donut-text">
-                                            <span class="donut-text-val" id="landingSentimentValue">65%</span>
-                                            <span class="donut-text-lbl" id="landingSentimentLabel">Bullish</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- 4. Features Section Title Block -->
-                    <div class="features-section-title-block" id="features-anchor">
-                        <h2 class="features-section-title">Engineered for the Analytical Investor</h2>
-                        <p class="features-section-subtitle">
-                            Stop relying on spreadsheets. NEPSE Terminal brings institutional-grade analytics to your personal portfolio.
-                        </p>
-                    </div>
-
-                    <!-- 5. Features Grid (Top 3 Cards) -->
-                    <div class="new-features-grid">
-                        <!-- Card 1: Customized Journaling -->
-                        <div class="new-feature-card" onclick="switchView('portfolio')">
-                            <div class="feature-card-header">
-                                <div class="feature-icon-badge">📓</div>
-                                <span class="feature-access-badge" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: var(--color-warning);">Signup Required</span>
-                            </div>
-                            <h3 class="feature-card-title">Customized Journaling</h3>
-                            <p class="feature-card-description">
-                                Sync trades directly from your broker. Set custom SL and TP alerts to maintain your discipline. Create your account to unlock professional journaling tools.
-                            </p>
-                        </div>
-
-                        <!-- Card 2: Heat Bubble Maps -->
-                        <div class="new-feature-card" onclick="switchView('heatbubble')">
-                            <div class="feature-card-header">
-                                <div class="feature-icon-badge">🫧</div>
-                                <span class="feature-access-badge">Free Access</span>
-                            </div>
-                            <h3 class="feature-card-title">Heat Bubble Maps</h3>
-                            <p class="feature-card-description">
-                                Visualize market liquidity and momentum at a glance. Spot sector rotations and volume anomalies before they hit the traditional scanners.
-                            </p>
-                        </div>
-
-                        <!-- Card 3: Risk Analytics -->
-                        <div class="new-feature-card" onclick="switchView('strategy')">
-                            <div class="feature-card-header">
-                                <div class="feature-icon-badge">🛡️</div>
-                                <span class="feature-access-badge">Free Access</span>
-                            </div>
-                            <h3 class="feature-card-title">Risk Analytics</h3>
-                            <p class="feature-card-description">
-                                Advanced position size calculators and risk-of-ruin models. Ensure your portfolio exposure aligns with your strict risk parameters.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Features Grid (Bottom 2 Cards) -->
-                    <div class="new-features-grid-bottom">
-                        <!-- Card 4: Banking & Margin Lending -->
-                        <div class="new-feature-card" onclick="switchView('bankRates')">
-                            <div class="feature-card-header">
-                                <div class="feature-icon-badge">🏛️</div>
-                                <span class="feature-access-badge">Free Access</span>
-                            </div>
-                            <h3 class="feature-card-title">Banking & Margin Lending</h3>
-                            <p class="feature-card-description">
-                                Compare live commercial bank interest rates in Nepal and calculate share margin loan limits according to NRB regulations.
-                            </p>
-                        </div>
-
-                        <!-- Card 5: Position Size & Risk -->
-                        <div class="new-feature-card" onclick="switchView('strategy')">
-                            <div class="feature-card-header">
-                                <div class="feature-icon-badge">🧮</div>
-                                <span class="feature-access-badge">Free Access</span>
-                            </div>
-                            <h3 class="feature-card-title">Position Size & Risk</h3>
-                            <p class="feature-card-description">
-                                Automatic position sizing based on your capital and risk management rules. Plan your trades with mathematical precision.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- 6. Partners -->
-                    <section class="partners-section">
-                        <div class="partners-title">Trusted by Active Traders Across Top Brokers</div>
-                        <div class="partners-grid">
-                            <span class="partner-logo">Broker A</span>
-                            <span class="partner-logo">Broker B</span>
-                            <span class="partner-logo">Investment Co.</span>
-                            <span class="partner-logo">Capital Markets</span>
-                        </div>
-                    </section>
-
-                    <!-- 7. Footer -->
-                    <footer class="new-footer">
-                        <div class="footer-top">
-                            <div class="footer-logo">NEPSE Terminal</div>
-                            <div class="footer-links">
-                                <a href="#" class="footer-link" onclick="showToast('Privacy Policy is placeholder.', 'info'); return false;">Privacy Policy</a>
-                                <a href="#" class="footer-link" onclick="showToast('Terms of Service is placeholder.', 'info'); return false;">Terms of Service</a>
-                                <a href="#" class="footer-link" onclick="showToast('API access is restricted to corporate partners.', 'info'); return false;">API Documentation</a>
-                                <a href="#" class="footer-link" onclick="showToast('Support is available for registered users.', 'info'); return false;">Support</a>
-                            </div>
-                        </div>
-                        <div class="footer-bottom">
-                            <span>© 2026 NEPSE Terminal. All rights reserved.</span>
-                            <span>NEPSE Green and Analytical Precision.</span>
-                        </div>
-                    </footer>
-                </div>
-            </div>
 
             <!-- VIEW: MOCK LOGIN GATE -->
             <div id="loginView" class="view-section hidden">
@@ -562,7 +356,7 @@
             </div>
 
             <!-- VIEW 1: MARKET OVERVIEW & ALL SCRIPS -->
-            <div id="dashboardView" class="view-section hidden">
+            <div id="dashboardView" class="view-section">
                 <!-- DASHBOARD HERO BANNER -->
                 <section class="dashboard-hero-banner" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(11, 15, 25, 0.98)); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 16px; padding: 22px 28px; margin-bottom: 24px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 24px; align-items: center; position: relative; overflow: hidden;">
                     <div style="position: absolute; right: -50px; top: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0,0,0,0) 70%); pointer-events: none;"></div>
@@ -2854,7 +2648,7 @@
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase_client.js"></script>
-    <script src="app.js?v=20260814_v999"></script>
+    <script type="module" src="app.js?v=20260814_v999"></script>
 
 
 

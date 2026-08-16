@@ -30,6 +30,9 @@ jobs:
       run: pip install requests || true
 
     - name: Run NEPSE Price Scraper
+      env:
+        NPSTOCKS_USERNAME: ${{ secrets.NPSTOCKS_USERNAME }}
+        NPSTOCKS_PASSWORD: ${{ secrets.NPSTOCKS_PASSWORD }}
       run: python3 scrape.py
 
     - name: Run Fundamentals Scraper

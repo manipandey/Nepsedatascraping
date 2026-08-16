@@ -14,6 +14,7 @@ import os
 import json
 import urllib.request
 import urllib.parse
+import urllib.error
 from datetime import datetime, timezone
 
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
@@ -39,13 +40,31 @@ load_env()
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://your-project-id.supabase.co")
 SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or os.environ.get("SUPABASE_ANON_KEY", "YOUR_SERVICE_ROLE_KEY")
 
-def post_to_supabase(table, data):
+def post_to_supabase(table, data, on_conflict=None):
     """Upsert data into Supabase PostgreSQL table via REST API"""
     if "your-project-id" in SUPABASE_URL or "YOUR_SERVICE_ROLE_KEY" in SUPABASE_KEY:
         print(f"[Supabase Sync] Warning: Environment variables SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY not configured. Skipping remote sync for '{table}'.")
         return False
 
-    url = f"{SUPABASE_URL.rstrip('/')}/rest/v1/{table}"
+    import math
+    def clean_val(v):
+        if isinstance(v, float):
+            if math.isnan(v) or math.isinf(v):
+                return 0.0
+            return v
+        elif isinstance(v, dict):
+            return {k: clean_val(val) for k, val in v.items()}
+        elif isinstance(v, list):
+            return [clean_val(val) for val in v]
+        return v
+
+    cleaned_data = clean_val(data)
+
+    import ssl as _ssl
+    ctx = _ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = _ssl.CERT_NONE
+
     headers = {
         "apikey": SUPABASE_KEY,
         "Authorization": f"Bearer {SUPABASE_KEY}",
@@ -53,19 +72,47 @@ def post_to_supabase(table, data):
         "Prefer": "resolution=merge-duplicates,return=minimal"
     }
 
+    # Clear table if it is lockin_tracker to prevent duplicate accumulation
+    if table == "lockin_tracker":
+        del_url = f"{SUPABASE_URL.rstrip('/')}/rest/v1/{table}?id=gt.0"
+        del_headers = {
+            "apikey": SUPABASE_KEY,
+            "Authorization": f"Bearer {SUPABASE_KEY}"
+        }
+        try:
+            del_req = urllib.request.Request(del_url, headers=del_headers, method="DELETE")
+            with urllib.request.urlopen(del_req, context=ctx) as _:
+                print(f"[Supabase Sync] Cleared existing records in '{table}' before insert.")
+        except Exception as de:
+            if isinstance(de, urllib.error.HTTPError):
+                try:
+                    err_body = de.read().decode("utf-8")
+                    print(f"[Supabase Sync] Warning: Failed to clear '{table}': {de} - Response: {err_body}")
+                except Exception:
+                    print(f"[Supabase Sync] Warning: Failed to clear '{table}': {de}")
+            else:
+                print(f"[Supabase Sync] Warning: Failed to clear '{table}': {de}")
+
+    url = f"{SUPABASE_URL.rstrip('/')}/rest/v1/{table}"
+    if on_conflict:
+        url += f"?on_conflict={on_conflict}"
+
     try:
-        import ssl as _ssl
-        ctx = _ssl.create_default_context()
-        ctx.check_hostname = False
-        ctx.verify_mode = _ssl.CERT_NONE
-        req_data = json.dumps(data).encode("utf-8")
+        req_data = json.dumps(cleaned_data).encode("utf-8")
         req = urllib.request.Request(url, data=req_data, headers=headers, method="POST")
         with urllib.request.urlopen(req, context=ctx) as resp:
             status = resp.status
-            print(f"[Supabase Sync] Successfully synced {len(data)} records to table '{table}' (HTTP {status})")
+            print(f"[Supabase Sync] Successfully synced {len(cleaned_data)} records to table '{table}' (HTTP {status})")
             return True
     except Exception as e:
-        print(f"[Supabase Sync] Error syncing to table '{table}': {e}")
+        if isinstance(e, urllib.error.HTTPError):
+            try:
+                err_body = e.read().decode("utf-8")
+                print(f"[Supabase Sync] Error syncing to table '{table}': {e} - Response: {err_body}")
+            except Exception:
+                print(f"[Supabase Sync] Error syncing to table '{table}': {e}")
+        else:
+            print(f"[Supabase Sync] Error syncing to table '{table}': {e}")
         return False
 
 def sync_all_to_supabase():
@@ -75,12 +122,14 @@ def sync_all_to_supabase():
 
     # 1. Sync Companies Master & Today's Prices
     today_file = os.path.join(DIRECTORY, "data", "nepse_today.json")
+    valid_symbols = set()
     if os.path.exists(today_file):
         with open(today_file, "r", encoding="utf-8") as f:
             today_data = json.load(f)
         
         today_date = today_data.get("date", datetime.now().strftime("%Y-%m-%d"))
         stocks = today_data.get("stocks", [])
+        valid_symbols = {s["symbol"].upper().strip() for s in stocks}
 
         companies_batch = []
         prices_batch = []
@@ -109,10 +158,10 @@ def sync_all_to_supabase():
             })
 
         print(f"[Sync] Preparing {len(companies_batch)} companies master records...")
-        post_to_supabase("companies", companies_batch)
+        post_to_supabase("companies", companies_batch, on_conflict="symbol")
 
         print(f"[Sync] Preparing {len(prices_batch)} daily prices records for date {today_date}...")
-        post_to_supabase("daily_prices", prices_batch)
+        post_to_supabase("daily_prices", prices_batch, on_conflict="symbol,date")
 
         # Sync Market (NEPSE) Summary History
         # nepse_today.json uses 'title'/'value'/'change'/'change_percent' format
@@ -135,7 +184,7 @@ def sync_all_to_supabase():
             "unchanged": int(summary.get("unchanged", 0))
         }
         print(f"[Sync] Preparing NEPSE market history record for date {today_date}...")
-        post_to_supabase("market_history", [market_rec])
+        post_to_supabase("market_history", [market_rec], on_conflict="date")
 
     # 2. Sync Real Live Fundamentals
     fund_file = os.path.join(DIRECTORY, "data", "nepse_fundamentals_live.json")
@@ -145,7 +194,10 @@ def sync_all_to_supabase():
 
         fund_batch = []
         for symbol, f_rec in fund_data.items():
-            ltp_rec = next((s for s in stocks if s.get("symbol", "").upper() == symbol.upper()), {})
+            sym = symbol.upper().strip()
+            if valid_symbols and sym not in valid_symbols:
+                continue
+            ltp_rec = next((s for s in stocks if s.get("symbol", "").upper() == sym), {})
             ltp = float(ltp_rec.get("ltp") or ltp_rec.get("close") or 0.0)
             eps = float(f_rec.get("eps", 0.0))
             bv = float(f_rec.get("book_value", 0.0))
@@ -154,15 +206,30 @@ def sync_all_to_supabase():
             # fair_value: 15% upside if PE < 15, else 8%, else -5%
             fair_val = round(ltp * (1.15 if pe > 0 and pe <= 15 else (1.08 if pe <= 28 else 0.95)), 2) if ltp > 0 else 0.0
             upside = round(((fair_val - ltp) / ltp) * 100, 2) if ltp > 0 and fair_val > 0 else 0.0
+            roe = float(f_rec.get("roe") or f_rec.get("roe_pct") or 0.0)
+
+            # Cap values to prevent numeric field overflow (precision 10, scale 2 -> max absolute value < 10^8)
+            if pe > 9999999.99: pe = 9999999.99
+            if pb > 9999999.99: pb = 9999999.99
+            if eps > 9999999.99: eps = 9999999.99
+            if bv > 9999999.99: bv = 9999999.99
+
+            # roe_pct has precision 8, scale 2 -> max absolute value < 10^6
+            if roe > 99999.99: roe = 99999.99
+            if roe < -99999.99: roe = -99999.99
+
+            # upside_pct has precision 8, scale 2 -> max absolute value < 10^6
+            if upside > 99999.99: upside = 99999.99
+            if upside < -99999.99: upside = -99999.99
+
             fund_batch.append({
-                "symbol": symbol.upper().strip(),
+                "symbol": sym,
                 "quarter": f_rec.get("quarter", "Q3 2081/82"),
                 "eps": eps,
                 "book_value": bv,
                 "pe_ratio": pe,
                 "pb_ratio": pb,
-                # JSON stores field as 'roe', not 'roe_pct'
-                "roe_pct": float(f_rec.get("roe") or f_rec.get("roe_pct") or 0.0),
+                "roe_pct": roe,
                 "market_cap": float(f_rec.get("market_cap", 0.0)),
                 "fair_value": fair_val,
                 "upside_pct": upside,
@@ -171,7 +238,7 @@ def sync_all_to_supabase():
             })
 
         print(f"[Sync] Preparing {len(fund_batch)} real fundamental records...")
-        post_to_supabase("company_fundamentals", fund_batch)
+        post_to_supabase("company_fundamentals", fund_batch, on_conflict="symbol")
 
     # 3. Sync Share Structure & Lock-in Tracker
     share_file = os.path.join(DIRECTORY, "data", "nepse_share_structure_live.json")
@@ -184,6 +251,8 @@ def sync_all_to_supabase():
 
         for symbol, s_rec in share_data.items():
             sym = symbol.upper().strip()
+            if valid_symbols and sym not in valid_symbols:
+                continue
             total_shares = int(s_rec.get("total_shares", 0))
             # JSON uses 'promoter_shares_count' and 'public_shares_count'
             promoter_shares = int(s_rec.get("promoter_shares_count") or s_rec.get("promoter_shares") or 0)
@@ -224,7 +293,7 @@ def sync_all_to_supabase():
                 })
 
         print(f"[Sync] Preparing {len(share_batch)} share structure records...")
-        post_to_supabase("share_structures", share_batch)
+        post_to_supabase("share_structures", share_batch, on_conflict="symbol")
 
         print(f"[Sync] Preparing {len(lockin_batch)} lock-in tracker records...")
         post_to_supabase("lockin_tracker", lockin_batch)
