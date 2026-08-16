@@ -278,25 +278,92 @@ window.onMobileSectorSelect = function(val) {
     renderMobileLiveData();
 };
 
-// -------------------------------------------------------------
-// 3. Mobile Heat Map
-// -------------------------------------------------------------
+let mobileHeatFilter = "all";
+
+window.setMobileHeatFilter = function(filterName, btnEl) {
+    mobileHeatFilter = filterName;
+    document.querySelectorAll(".m-heat-tab").forEach(b => b.classList.remove("active"));
+    if (btnEl) btnEl.classList.add("active");
+    renderMobileHeatmap();
+};
+
 function renderMobileHeatmap() {
     const stocks = state.stocksData || [];
     const gridEl = document.getElementById("mHeatmapGrid");
     if (!gridEl || !stocks.length) return;
 
-    gridEl.innerHTML = stocks.slice(0, 48).map(s => {
+    // Populate sector select if empty
+    const sectorSel = document.getElementById("mHeatSectorSelect");
+    if (sectorSel && sectorSel.children.length <= 1) {
+        const sectors = Array.from(new Set(stocks.map(s => inferNepseSector(s.symbol, s.sector)))).sort();
+        sectorSel.innerHTML = `<option value="all">All Sectors</option>` + sectors.map(sec => `<option value="${sec}">${sec}</option>`).join("");
+    }
+
+    const selectedSec = sectorSel ? sectorSel.value : "all";
+    const sizeMode = (document.getElementById("mHeatSizeMode")?.value) || "turnover";
+
+    let filtered = [...stocks];
+    if (selectedSec !== "all") {
+        filtered = filtered.filter(s => inferNepseSector(s.symbol, s.sector).toLowerCase() === selectedSec.toLowerCase());
+    }
+
+    if (mobileHeatFilter === "top50") {
+        filtered.sort((a, b) => (b.turnover || 0) - (a.turnover || 0));
+        filtered = filtered.slice(0, 50);
+    } else if (mobileHeatFilter === "gainers") {
+        filtered = filtered.filter(s => (s.diff_percent || s.diff || 0) > 0).sort((a, b) => (b.diff_percent || 0) - (a.diff_percent || 0));
+    } else if (mobileHeatFilter === "decliners") {
+        filtered = filtered.filter(s => (s.diff_percent || s.diff || 0) < 0).sort((a, b) => (a.diff_percent || 0) - (b.diff_percent || 0));
+    }
+
+    if (!filtered.length) {
+        gridEl.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: var(--mobile-text-sub); padding: 24px;">No stocks match selected heat map filter.</div>`;
+        return;
+    }
+
+    // Determine max value for dynamic scaling
+    const maxVal = Math.max(...filtered.map(s => sizeMode === "volume" ? (s.volume || 1) : (s.turnover || 1)));
+
+    gridEl.innerHTML = filtered.map(s => {
         const pct = s.diff_percent || 0;
         const isUp = pct >= 0;
-        const bg = isUp
-            ? `rgba(16, 185, 129, ${Math.min(0.85, 0.25 + Math.abs(pct) * 0.1)})`
-            : `rgba(239, 68, 68, ${Math.min(0.85, 0.25 + Math.abs(pct) * 0.1)})`;
+        const val = sizeMode === "volume" ? (s.volume || 0) : (s.turnover || 0);
+
+        // Tile background intensity
+        let bg, textColor, border;
+        if (pct >= 5.0) {
+            bg = "rgba(16, 185, 129, 0.95)";
+            textColor = "#ffffff";
+            border = "2px solid #059669";
+        } else if (pct > 0.0) {
+            const intensity = Math.min(0.85, 0.25 + Math.abs(pct) * 0.12);
+            bg = `rgba(16, 185, 129, ${intensity})`;
+            textColor = "#ffffff";
+            border = "1px solid rgba(16, 185, 129, 0.4)";
+        } else if (pct === 0.0) {
+            bg = "#e2e8f0";
+            textColor = "#475569";
+            border = "1px solid #cbd5e1";
+        } else if (pct <= -5.0) {
+            bg = "rgba(239, 68, 68, 0.95)";
+            textColor = "#ffffff";
+            border = "2px solid #dc2626";
+        } else {
+            const intensity = Math.min(0.85, 0.25 + Math.abs(pct) * 0.12);
+            bg = `rgba(239, 68, 68, ${intensity})`;
+            textColor = "#ffffff";
+            border = "1px solid rgba(239, 68, 68, 0.4)";
+        }
+
+        // Font scaling based on turnover weight
+        const weight = maxVal > 0 ? (val / maxVal) : 0.5;
+        const flexGrow = Math.max(1, Math.round(weight * 3));
 
         return `
-            <div style="background: ${bg}; padding: 10px 6px; border-radius: 8px; text-align: center; border: 1px solid rgba(255,255,255,0.1);">
-                <div style="font-family: var(--font-mono); font-weight: 800; font-size: 0.85rem; color: #fff;">${s.symbol}</div>
-                <div style="font-size: 0.72rem; font-weight: 700; color: #fff;">${isUp ? '+' : ''}${pct.toFixed(1)}%</div>
+            <div style="background: ${bg}; padding: 12px 6px; border-radius: 10px; text-align: center; border: ${border}; cursor: pointer; flex-grow: ${flexGrow}; box-shadow: 0 2px 6px rgba(0,0,0,0.06);" onclick="switchMobileTab('liveData')">
+                <div style="font-family: var(--font-mono); font-weight: 800; font-size: 0.9rem; color: ${textColor};">${s.symbol}</div>
+                <div style="font-size: 0.76rem; font-weight: 700; color: ${textColor}; margin-top: 2px;">${isUp ? '▲ +' : '▼ '}${pct.toFixed(2)}%</div>
+                <div style="font-size: 0.65rem; color: ${textColor}; opacity: 0.9; margin-top: 2px;">NPR ${(s.ltp || 0).toFixed(0)}</div>
             </div>
         `;
     }).join("");
