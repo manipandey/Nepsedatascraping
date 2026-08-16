@@ -129,7 +129,7 @@ function renderMobilePortfolio() {
                     <div class="mobile-card" style="border-left: 4px solid ${isUp ? '#10b981' : '#ef4444'};">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
                             <div>
-                                <span style="font-family: var(--font-mono); font-weight: 800; font-size: 1.05rem; color: #fff;">${h.symbol}</span>
+                                <span style="font-family: var(--font-mono); font-weight: 800; font-size: 1.05rem; color: var(--mobile-text);">${h.symbol}</span>
                                 <span style="font-size: 0.72rem; color: var(--mobile-text-sub); margin-left: 6px;">${h.shares} Shares</span>
                             </div>
                             <span class="mobile-badge ${isUp ? 'up' : 'down'}">
@@ -138,7 +138,7 @@ function renderMobilePortfolio() {
                         </div>
                         <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--mobile-text-sub); margin-bottom: 8px;">
                             <span>Entry: <strong>NPR ${h.buyPrice.toFixed(2)}</strong></span>
-                            <span>LTP: <strong style="color: #fff;">NPR ${ltp.toFixed(2)}</strong></span>
+                            <span>LTP: <strong style="color: var(--mobile-text);">NPR ${ltp.toFixed(2)}</strong></span>
                         </div>
                         ${visualBar}
                     </div>
@@ -242,14 +242,14 @@ function renderMobileLiveData() {
 
     const listEl = document.getElementById("mLiveStockList");
     if (listEl) {
-        listEl.innerHTML = filtered.slice(0, 50).map(s => {
+        listEl.innerHTML = filtered.map(s => {
             const isUp = (s.diff || s.diff_percent || 0) >= 0;
             const sec = inferNepseSector(s.symbol, s.sector);
             return `
                 <div class="mobile-card" style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <div style="display: flex; align-items: center; gap: 8px;">
-                            <span style="font-family: var(--font-mono); font-weight: 800; font-size: 1rem; color: #fff;">${s.symbol}</span>
+                            <span style="font-family: var(--font-mono); font-weight: 800; font-size: 1rem; color: var(--mobile-text);">${s.symbol}</span>
                             <span style="font-size: 0.72rem; color: var(--mobile-text-sub);">${sec}</span>
                         </div>
                         <div style="font-size: 0.75rem; color: var(--mobile-text-sub); margin-top: 2px;">
@@ -257,7 +257,7 @@ function renderMobileLiveData() {
                         </div>
                     </div>
                     <div class="text-right">
-                        <div style="font-family: var(--font-mono); font-weight: 800; font-size: 0.95rem; color: #fff;">NPR ${(s.ltp || 0).toFixed(2)}</div>
+                        <div style="font-family: var(--font-mono); font-weight: 800; font-size: 0.95rem; color: var(--mobile-text);">NPR ${(s.ltp || 0).toFixed(2)}</div>
                         <span class="mobile-badge ${isUp ? 'up' : 'down'}">
                             ${isUp ? '▲ +' : '▼ '}${Math.abs(s.diff_percent || 0).toFixed(2)}%
                         </span>
