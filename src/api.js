@@ -6,43 +6,41 @@ import { state } from './state.js';
 export async function fetchData() {
     try {
         const timestamp = Date.now();
-        const res = await fetch(`data/nepse_today.json?t=${timestamp}`);
-        const data = await res.json();
+        const [resToday, resSx] = await Promise.allSettled([
+            fetch(`data/nepse_today.json?t=${timestamp}`).then(r => r.ok ? r.json() : null),
+            fetch(`data/systemx_scraped.json?t=${timestamp}`).then(r => r.ok ? r.json() : null)
+        ]);
+
+        const data = resToday.status === "fulfilled" && resToday.value ? resToday.value : {};
+        const systemxData = resSx.status === "fulfilled" && resSx.value ? resSx.value : {};
 
         state.stocksData = data.stocks || [];
         state.indicesData = data.indices || [];
+        state.systemxData = systemxData;
 
-        try {
-            const resSx = await fetch(`data/systemx_scraped.json?t=${timestamp}`);
-            const systemxData = await resSx.json();
-            state.systemxData = systemxData;
+        if (systemxData && systemxData.stock_live && systemxData.stock_live.length) {
+            const sxMap = {};
+            systemxData.stock_live.forEach(s => { sxMap[s.symbol] = s; });
 
-            if (systemxData && systemxData.stock_live && systemxData.stock_live.length) {
-                const sxMap = {};
-                systemxData.stock_live.forEach(s => { sxMap[s.symbol] = s; });
-
-                if (!state.stocksData || !state.stocksData.length) {
-                    state.stocksData = systemxData.stock_live;
-                } else {
-                    state.stocksData.forEach(s => {
-                        const sx = sxMap[s.symbol];
-                        if (sx) {
-                            if (sx.ltp) s.ltp = sx.ltp;
-                            if (sx.close) s.close = sx.close;
-                            if (sx.diff !== undefined) s.diff = sx.diff;
-                            if (sx.diff_percent !== undefined) s.diff_percent = sx.diff_percent;
-                            if (sx.volume) s.volume = sx.volume;
-                            if (sx.turnover) s.turnover = sx.turnover;
-                        }
-                    });
-                }
+            if (!state.stocksData || !state.stocksData.length) {
+                state.stocksData = systemxData.stock_live;
+            } else {
+                state.stocksData.forEach(s => {
+                    const sx = sxMap[s.symbol];
+                    if (sx) {
+                        if (sx.ltp) s.ltp = sx.ltp;
+                        if (sx.close) s.close = sx.close;
+                        if (sx.diff !== undefined) s.diff = sx.diff;
+                        if (sx.diff_percent !== undefined) s.diff_percent = sx.diff_percent;
+                        if (sx.volume) s.volume = sx.volume;
+                        if (sx.turnover) s.turnover = sx.turnover;
+                    }
+                });
             }
+        }
 
-            if (systemxData && systemxData.indices && systemxData.indices.length) {
-                state.indicesData = systemxData.indices;
-            }
-        } catch (e) {
-            console.log("systemx_scraped fetch notice:", e);
+        if (systemxData && systemxData.indices && systemxData.indices.length) {
+            state.indicesData = systemxData.indices;
         }
 
         const todayStr = new Date().toISOString().split("T")[0];

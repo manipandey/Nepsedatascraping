@@ -935,54 +935,37 @@ async function fetchData() {
         const mStatus = document.getElementById("marketStatus");
         if (mStatus) mStatus.textContent = "LIVE MARKET FEED";
 
-        // Concurrently pre-fetch fundamental, share structure, and corporate datasets
-        await Promise.allSettled([
-            fetch(`data/nepse_fundamentals_live.json?t=${Date.now()}`)
-                .then(r => r.ok ? r.json() : fetch(`/api/fundamentals?t=${Date.now()}`).then(res => res.json()))
-                .then(fd => {
-                    if (Array.isArray(fd)) {
-                        fundamentalData = fd;
-                    } else if (fd && typeof fd === 'object' && !fd.error) {
-                        fundamentalData = Object.values(fd);
-                    }
-                }).catch(e => console.warn("Fundamentals fetch fallback:", e)),
-
-            fetch(`data/nepse_share_structure_live.json?t=${Date.now()}`)
-                .then(r => r.ok ? r.json() : fetch(`/api/share-structure?t=${Date.now()}`).then(res => res.json()))
-                .then(ss => {
-                    if (Array.isArray(ss)) {
-                        shareStructureData = ss;
-                    } else if (ss && typeof ss === 'object' && !ss.error) {
-                        shareStructureData = Object.values(ss);
-                    }
-                }).catch(e => console.warn("Share structure fetch fallback:", e)),
-
-            fetch(`data/nepse_corporate_live.json?t=${Date.now()}`)
-                .then(r => r.ok ? r.json() : fetch(`/api/corporate?t=${Date.now()}`).then(res => res.json()))
-                .then(cd => {
-                    if (Array.isArray(cd)) {
-                        corporateData = cd;
-                        calendarEventsData = cd;
-                    } else if (cd && typeof cd === 'object' && !cd.error) {
-                        corporateData = Object.values(cd);
-                        calendarEventsData = corporateData;
-                    }
-                }).catch(e => console.warn("Corporate fetch fallback:", e))
-        ]);
-
+        // Render active Market Overview dashboard instantly
         try { renderSummaryGrid(data); } catch(e) { console.error("renderSummaryGrid error:", e); }
-        try { renderLandingWidget(data); } catch(e) { console.error("renderLandingWidget error:", e); }
         try { renderIndicesGrid(); } catch(e) { console.error("renderIndicesGrid error:", e); }
         try { populateSectorDropdown(); } catch(e) { console.error("populateSectorDropdown error:", e); }
         try { populateTickerDropdowns(); } catch(e) { console.error("populateTickerDropdowns error:", e); }
         try { renderStocksTable(); } catch(e) { console.error("renderStocksTable error:", e); }
         try { updateSmartCollections(); } catch(e) { console.error("updateSmartCollections error:", e); }
-        try { renderStrategyView(); } catch(e) { console.error("renderStrategyView error:", e); }
-        try { renderDalalView(); } catch(e) { console.error("renderDalalView error:", e); }
-        try { renderPortfolioView(); } catch(e) { console.error("renderPortfolioView error:", e); }
-        try { renderJournalView(); } catch(e) { console.error("renderJournalView error:", e); }
-        try { renderWatchlistView(); } catch(e) { console.error("renderWatchlistView error:", e); }
-        try { renderFloorsheetView(); } catch(e) { console.error("renderFloorsheetView error:", e); }
+
+        // Non-blocking background pre-fetch for secondary datasets
+        Promise.allSettled([
+            fetch(`data/nepse_fundamentals_live.json?t=${Date.now()}`)
+                .then(r => r.ok ? r.json() : fetch(`/api/fundamentals?t=${Date.now()}`).then(res => res.json()))
+                .then(fd => {
+                    if (Array.isArray(fd)) fundamentalData = fd;
+                    else if (fd && typeof fd === 'object' && !fd.error) fundamentalData = Object.values(fd);
+                }).catch(e => console.warn("Fundamentals fetch fallback:", e)),
+
+            fetch(`data/nepse_share_structure_live.json?t=${Date.now()}`)
+                .then(r => r.ok ? r.json() : fetch(`/api/share-structure?t=${Date.now()}`).then(res => res.json()))
+                .then(ss => {
+                    if (Array.isArray(ss)) shareStructureData = ss;
+                    else if (ss && typeof ss === 'object' && !ss.error) shareStructureData = Object.values(ss);
+                }).catch(e => console.warn("Share structure fetch fallback:", e)),
+
+            fetch(`data/nepse_corporate_live.json?t=${Date.now()}`)
+                .then(r => r.ok ? r.json() : fetch(`/api/corporate?t=${Date.now()}`).then(res => res.json()))
+                .then(cd => {
+                    if (Array.isArray(cd)) { corporateData = cd; calendarEventsData = cd; }
+                    else if (cd && typeof cd === 'object' && !cd.error) { corporateData = Object.values(cd); calendarEventsData = corporateData; }
+                }).catch(e => console.warn("Corporate fetch fallback:", e))
+        ]);
         try { renderHeatbubbleView(); } catch(e) { console.error("renderHeatbubbleView error:", e); }
     } catch (err) {
         console.error("Error loading data:", err);
