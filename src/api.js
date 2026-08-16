@@ -6,16 +6,38 @@ import { state } from './state.js';
 export async function fetchData() {
     try {
         const timestamp = Date.now();
+        const fetchJSON = async (path) => {
+            try {
+                const r = await fetch(`${path}?t=${timestamp}`);
+                if (r.ok) return await r.json();
+            } catch(e) {}
+            try {
+                const r = await fetch(`/${path}?t=${timestamp}`);
+                if (r.ok) return await r.json();
+            } catch(e) {}
+            return null;
+        };
+
         const [resToday, resSx] = await Promise.allSettled([
-            fetch(`data/nepse_today.json?t=${timestamp}`).then(r => r.ok ? r.json() : null),
-            fetch(`data/systemx_scraped.json?t=${timestamp}`).then(r => r.ok ? r.json() : null)
+            fetchJSON('data/nepse_today.json'),
+            fetchJSON('data/systemx_scraped.json')
         ]);
 
-        const data = resToday.status === "fulfilled" && resToday.value ? resToday.value : {};
-        const systemxData = resSx.status === "fulfilled" && resSx.value ? resSx.value : {};
+        const data = (resToday.status === "fulfilled" && resToday.value) ? resToday.value : {};
+        const systemxData = (resSx.status === "fulfilled" && resSx.value) ? resSx.value : {};
 
-        state.stocksData = data.stocks || [];
-        state.indicesData = data.indices || [];
+        let stocks = data.stocks || [];
+        let indices = data.indices || [];
+
+        if (!stocks.length && systemxData && systemxData.stock_live) {
+            stocks = systemxData.stock_live;
+        }
+        if (!indices.length && systemxData && systemxData.indices) {
+            indices = systemxData.indices;
+        }
+
+        state.stocksData = stocks;
+        state.indicesData = indices;
         state.systemxData = systemxData;
 
         if (systemxData && systemxData.stock_live && systemxData.stock_live.length) {
