@@ -50,6 +50,8 @@ export async function fetchData() {
                 state.stocksData.forEach(s => {
                     const sx = sxMap[s.symbol];
                     if (sx) {
+                        if (sx.sector) s.sector = sx.sector;
+                        if (sx.fullName) s.fullName = sx.fullName;
                         if (sx.ltp) s.ltp = sx.ltp;
                         if (sx.close) s.close = sx.close;
                         if (sx.diff !== undefined) s.diff = sx.diff;

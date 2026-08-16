@@ -1441,10 +1441,11 @@ function renderStocksTable() {
 
         const sweepBadge = s.is_ema_fractal_match ? '<span style="background: rgba(99,102,241,0.2); color: #818cf8; border: 1px solid rgba(99,102,241,0.4); padding: 1px 6px; border-radius: 4px; font-size: 0.72rem; font-weight: 700; margin-left: 6px;">🎯 SWEEP</span>' : '';
 
+        const secName = inferNepseSector(s.symbol, s.sector);
         return `
             <tr onclick="openStockDetail('${s.symbol}')" style="cursor: pointer;">
                 <td class="font-bold monospace">${s.symbol}${sweepBadge}</td>
-                <td style="color: var(--text-muted); font-size: 0.85rem;">${s.sector || '-'}</td>
+                <td style="color: var(--text-secondary); font-size: 0.82rem; font-weight: 600;">${secName}</td>
                 <td class="text-right font-bold monospace">${s.ltp ? s.ltp.toFixed(2) : '0.00'}</td>
                 <td class="text-right monospace ${isUp ? 'text-up' : 'text-down'}">${pctText}</td>
                 <td class="text-right">${rsiCell}</td>
