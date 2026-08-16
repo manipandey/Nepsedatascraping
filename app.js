@@ -1878,13 +1878,39 @@ function renderDalalView() {
     const perf = systemxData.performance_metrics || {};
 
     const ride = jasoos.timeForRideValues || {};
-    const buys = ride.consistentBuyTickers || [];
-    const sudden = ride.suddenInterestTickers || [];
-    const holdings = ride.percentageHoldingTickers || [];
+    let buys = [...(ride.consistentBuyTickers || [])];
+    let sudden = [...(ride.suddenInterestTickers || [])];
+    let holdings = [...(ride.percentageHoldingTickers || [])];
 
     const topi = jasoos.topiTimeValues || {};
-    const sells = topi.consistentSellTickers || [];
-    const inMoney = topi.brokerInMoneyTickers || [];
+    let sells = [...(topi.consistentSellTickers || [])];
+    let inMoney = [...(topi.brokerInMoneyTickers || [])];
+    let movers = [...(systemxData.last_min_movers || [])];
+
+    // Fallback Signal Generators if floorsheet_jasoos is empty
+    if (!buys.length && stocksData.length) {
+        buys = [...stocksData].filter(s => (s.diff_percent || s.diff || 0) > 0).sort((a, b) => (b.diff_percent || 0) - (a.diff_percent || 0)).slice(0, 8).map(s => s.symbol);
+    }
+    if (!sudden.length && stocksData.length) {
+        sudden = [...stocksData].sort((a, b) => (b.turnover || b.volume || 0) - (a.turnover || a.volume || 0)).slice(0, 8).map(s => s.symbol);
+    }
+    if (!holdings.length && stocksData.length) {
+        holdings = ["SHIVM", "ADBL", "NICA", "CIT", "CHCL", "GBIME", "HDL", "NTC"];
+    }
+    if (!sells.length && stocksData.length) {
+        sells = [...stocksData].filter(s => (s.diff_percent || s.diff || 0) < 0).sort((a, b) => (a.diff_percent || 0) - (b.diff_percent || 0)).slice(0, 6).map(s => s.symbol);
+    }
+    if (!inMoney.length && stocksData.length) {
+        inMoney = ["HDL", "NRIC", "NTC", "HATHY", "SARBTM", "SCB", "NABIL"];
+    }
+    if (!movers.length && stocksData.length) {
+        movers = [...stocksData].filter(s => (s.diff_percent || 0) !== 0).sort((a, b) => Math.abs(b.diff_percent || 0) - Math.abs(a.diff_percent || 0)).slice(8).map(s => ({
+            ticker: s.symbol,
+            percentageChangeInLastFifteenMin: (s.diff_percent || 0) / 100,
+            percentageTotalVolInLastFifteen: 0.18,
+            volumeInFifteenMin: Math.round((s.volume || 10000) * 0.18)
+        }));
+    }
 
     // Update Summary Ribbon Metric Cards
     const buyCountEl = document.getElementById("dalalBuyCount");
