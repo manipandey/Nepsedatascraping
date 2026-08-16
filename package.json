@@ -1,0 +1,17 @@
+{
+  "name": "nepse-terminal",
+  "version": "1.0.0",
+  "description": "NEPSE Terminal Native Mobile & Web App",
+  "main": "mobile.html",
+  "scripts": {
+    "start": "python3 run.py",
+    "cap:init": "npx cap init 'NEPSE Terminal' 'com.nepseterminal.app'",
+    "cap:sync": "npx cap sync",
+    "cap:android": "npx cap add android && npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/core": "^6.0.0"
+  }
+}

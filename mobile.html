@@ -10,6 +10,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#090d16">
+    <link rel="apple-touch-icon" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(err => console.log('SW reg fail:', err));
+            });
+        }
+    </script>
     <link rel="stylesheet" href="mobile.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -21,7 +31,8 @@
                 <span>📈</span> NEPSE<span class="accent">Mobile</span>
             </div>
             <div class="mobile-header-actions">
-                <button class="mobile-icon-btn" onclick="openMobileSearchModal()" title="Search Scrips">🔍</button>
+                <button id="mInstallAppBtn" class="mobile-badge up" style="cursor: pointer; display: none; padding: 4px 8px; font-size: 0.72rem;" onclick="triggerMobileAppInstall()">📲 Install App</button>
+                <button class="mobile-icon-btn" onclick="switchMobileTab('liveData')" title="Search Scrips">🔍</button>
                 <a href="index.html" class="mobile-icon-btn" title="Switch to Desktop Terminal" style="text-decoration: none;">💻</a>
             </div>
         </header>

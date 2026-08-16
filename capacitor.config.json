@@ -1,0 +1,17 @@
+{
+  "appId": "com.nepseterminal.app",
+  "appName": "NEPSE Terminal",
+  "webDir": ".",
+  "bundledWebRuntime": false,
+  "server": {
+    "url": "https://nepseterminal.vercel.app/mobile.html",
+    "cleartext": true
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "backgroundColor": "#090d16",
+      "showSpinner": false
+    }
+  }
+}

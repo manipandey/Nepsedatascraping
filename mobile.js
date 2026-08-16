@@ -13,6 +13,25 @@ import {
 let activeMobileTab = "portfolio";
 let mobileSearchQuery = "";
 let mobileSelectedSector = "all";
+let deferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const btn = document.getElementById("mInstallAppBtn");
+    if (btn) btn.style.display = "inline-flex";
+});
+
+window.triggerMobileAppInstall = async function() {
+    if (!deferredPrompt) return alert("To install NEPSE App on your phone: Tap your browser menu (⋮ or Share) and select 'Add to Home Screen'!");
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+        const btn = document.getElementById("mInstallAppBtn");
+        if (btn) btn.style.display = "none";
+    }
+    deferredPrompt = null;
+};
 
 // Initialize Mobile Web App
 document.addEventListener("DOMContentLoaded", async () => {
