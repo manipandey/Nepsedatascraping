@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>NEPSE Terminal Mobile App</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="mobile-app-shell">
+        <!-- Top App Bar -->
+        <header class="mobile-header">
+            <div class="mobile-logo" onclick="switchMobileTab('portfolio')">
+                <span>📈</span> NEPSE<span class="accent">Mobile</span>
+            </div>
+            <div class="mobile-header-actions">
+                <button class="mobile-icon-btn" onclick="openMobileSearchModal()" title="Search Scrips">🔍</button>
+                <a href="index.html" class="mobile-icon-btn" title="Switch to Desktop Terminal" style="text-decoration: none;">💻</a>
+            </div>
+        </header>
+
+        <!-- -------------------------------------------------------------
+             Tab 1: Portfolio Tracker & Journal (DEFAULT HOME VIEW)
+             ------------------------------------------------------------- -->
+        <section id="mobilePortfolioView" class="mobile-view active">
+            <!-- Portfolio Hero Banner -->
+            <div class="mobile-hero-card">
+                <div class="mobile-hero-title">Total Portfolio Value</div>
+                <div class="mobile-hero-val" id="mPortTotalVal">NPR 0.00</div>
+                <div class="mobile-hero-sub">
+                    <span>Invested: <strong id="mPortInvested">NPR 0</strong></span>
+                    <span id="mPortTotalPL" class="mobile-badge up">📈 +NPR 0.00 (+0.0%)</span>
+                </div>
+            </div>
+
+            <!-- Action Bar -->
+            <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+                <button class="mobile-btn mobile-btn-accent" onclick="openMobileAddHoldingModal()">
+                    ➕ Add Position
+                </button>
+                <button class="mobile-btn mobile-btn-outline" onclick="openMobileRiskCalcModal()" style="flex: 0 0 110px;">
+                    🧮 Risk Sizing
+                </button>
+            </div>
+
+            <!-- Holdings List Header -->
+            <div class="mobile-section-header">
+                <span class="mobile-section-title">💼 Active Positions (<span id="mHoldingsCount">0</span>)</span>
+            </div>
+
+            <!-- Holdings List Container -->
+            <div id="mHoldingsList">
+                <div class="mobile-card text-center" style="color: var(--mobile-text-sub); padding: 24px;">
+                    No portfolio holdings logged yet.<br>Tap <strong>"Add Position"</strong> to start tracking!
+                </div>
+            </div>
+        </section>
+
+        <!-- -------------------------------------------------------------
+             Tab 2: Live Market Data (Market Today & Sub-Indices)
+             ------------------------------------------------------------- -->
+        <section id="mobileLiveDataView" class="mobile-view">
+            <!-- Market Status Banner -->
+            <div class="mobile-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%); border-color: rgba(16, 185, 129, 0.3);">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-size: 0.72rem; color: #34d399; font-weight: 700; text-transform: uppercase;">NEPSE Index Today</div>
+                        <div style="font-family: var(--font-mono); font-size: 1.35rem; font-weight: 800; color: #fff;" id="mLiveNepseVal">2,748.12</div>
+                    </div>
+                    <div id="mLiveNepseBadge" class="mobile-badge up" style="font-size: 0.85rem; padding: 4px 10px;">
+                        ▲ +12.45 (+0.46%)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-Indices Horizontal Scroll -->
+            <div class="mobile-section-header">
+                <span class="mobile-section-title">📊 Sub-Indices (17)</span>
+            </div>
+            <div class="mobile-indices-scroll" id="mIndicesScroll">
+                <div class="mobile-index-chip">
+                    <span class="mobile-index-chip-name">🏦 Commercial Banks</span>
+                    <span class="mobile-index-chip-val">1,480.20</span>
+                </div>
+            </div>
+
+            <!-- Search & Filter Controls -->
+            <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                <input type="text" id="mLiveSearchInput" class="mobile-input" placeholder="🔍 Search scrip or sector..." oninput="onMobileSearchInput(this.value)">
+                <select id="mLiveSectorSelect" class="mobile-input" style="flex: 0 0 110px;" onchange="onMobileSectorSelect(this.value)">
+                    <option value="all">All Sectors</option>
+                </select>
+            </div>
+
+            <!-- Live Stock Cards List -->
+            <div class="mobile-section-header">
+                <span class="mobile-section-title">📈 Listed Securities (<span id="mLiveCount">344</span>)</span>
+            </div>
+            <div id="mLiveStockList">
+                <div class="mobile-card text-center" style="color: var(--mobile-text-sub); padding: 24px;">
+                    Loading live market feed...
+                </div>
+            </div>
+        </section>
+
+        <!-- -------------------------------------------------------------
+             Tab 3: Heat Map Visualization
+             ------------------------------------------------------------- -->
+        <section id="mobileHeatmapView" class="mobile-view">
+            <div class="mobile-section-header">
+                <span class="mobile-section-title">🫧 Market Heat Bubble Map</span>
+            </div>
+            <div class="mobile-card" style="padding: 12px;">
+                <div style="font-size: 0.76rem; color: var(--mobile-text-sub); margin-bottom: 10px;">
+                    Green = Gainers | Red = Decliners | Size = Turnover
+                </div>
+                <div id="mHeatmapGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 8px;">
+                    <!-- Heat map tiles rendered by mobile.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- -------------------------------------------------------------
+             Tab 4: Calculators (Position Risk Sizing & Share Margin Loan)
+             ------------------------------------------------------------- -->
+        <section id="mobileCalculatorsView" class="mobile-view">
+            <!-- Sub-tab switcher -->
+            <div style="display: flex; background: rgba(255,255,255,0.06); padding: 3px; border-radius: 10px; margin-bottom: 14px;">
+                <button id="mTabRiskCalcBtn" class="mobile-btn" style="flex:1; padding: 8px; font-size: 0.78rem; background: var(--mobile-accent); color:#fff;" onclick="switchMobileCalcSubtab('risk')">
+                    🧮 Position Risk Sizing
+                </button>
+                <button id="mTabMarginCalcBtn" class="mobile-btn" style="flex:1; padding: 8px; font-size: 0.78rem; background: transparent; color: var(--mobile-text-sub);" onclick="switchMobileCalcSubtab('margin')">
+                    🏛️ Share Margin Loan
+                </button>
+            </div>
+
+            <!-- Subtab A: Position Risk Calculator -->
+            <div id="mCalcRiskSubtab">
+                <div class="mobile-card">
+                    <h4 style="color:#a5b4fc; font-size:0.9rem; margin-bottom:12px;">🧮 Position Size & Risk Calculator</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div>
+                            <label style="font-size:0.75rem; color:var(--mobile-text-sub);">Account Capital (NPR)</label>
+                            <input type="number" id="mRiskCapital" class="mobile-input" value="500000" oninput="calculateMobileRiskSize()">
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <div style="flex:1;">
+                                <label style="font-size:0.75rem; color:var(--mobile-text-sub);">Risk % per Trade</label>
+                                <input type="number" id="mRiskPct" class="mobile-input" value="2.0" step="0.5" oninput="calculateMobileRiskSize()">
+                            </div>
+                            <div style="flex:1;">
+                                <label style="font-size:0.75rem; color:var(--mobile-text-sub);">Entry Price (NPR)</label>
+                                <input type="number" id="mRiskEntry" class="mobile-input" value="450" oninput="calculateMobileRiskSize()">
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <div style="flex:1;">
+                                <label style="font-size:0.75rem; color:var(--mobile-text-sub);">Stop Loss (SL)</label>
+                                <input type="number" id="mRiskSL" class="mobile-input" value="420" oninput="calculateMobileRiskSize()">
+                            </div>
+                            <div style="flex:1;">
+                                <label style="font-size:0.75rem; color:var(--mobile-text-sub);">Target (TP)</label>
+                                <input type="number" id="mRiskTP" class="mobile-input" value="520" oninput="calculateMobileRiskSize()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculation Output Card -->
+                <div class="mobile-hero-card">
+                    <div class="mobile-hero-title">Max Recommended Shares</div>
+                    <div class="mobile-hero-val" id="mRiskSharesVal" style="color: #34d399;">333 Shares</div>
+                    <div class="mobile-hero-sub">
+                        <span>Total Position: <strong id="mRiskTotalVal">NPR 149,850</strong></span>
+                        <span>Max Risk: <strong id="mRiskAmtVal" style="color:#f87171;">NPR 10,000</strong></span>
+                    </div>
+                    <div style="margin-top: 8px; font-size: 0.78rem; text-align: center; color: #a5b4fc; font-family: var(--font-mono);" id="mRiskRRVal">
+                        Risk:Reward Ratio 1:2.33
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subtab B: Share Margin Loan Calculator -->
+            <div id="mCalcMarginSubtab" style="display: none;">
+                <div class="mobile-card">
+                    <h4 style="color:#f59e0b; font-size:0.9rem; margin-bottom:12px;">🏛️ Share Margin Loan & Collateral Calculator</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div>
+                            <label style="font-size:0.75rem; color:var(--mobile-text-sub);">Pledged Portfolio Collateral (NPR)</label>
+                            <input type="number" id="mMarginCollateral" class="mobile-input" value="1000000" oninput="calculateMobileMarginLoan()">
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <div style="flex:1;">
+                                <label style="font-size:0.75rem; color:var(--mobile-text-sub);">NRB LTV Ratio %</label>
+                                <input type="number" id="mMarginLTV" class="mobile-input" value="70" step="5" oninput="calculateMobileMarginLoan()">
+                            </div>
+                            <div style="flex:1;">
+                                <label style="font-size:0.75rem; color:var(--mobile-text-sub);">Interest Rate %</label>
+                                <input type="number" id="mMarginRate" class="mobile-input" value="10.5" step="0.25" oninput="calculateMobileMarginLoan()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Margin Calculation Output -->
+                <div class="mobile-hero-card" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(245, 158, 11, 0.08) 100%); border-color: rgba(245, 158, 11, 0.35);">
+                    <div class="mobile-hero-title">Max Eligible Margin Loan</div>
+                    <div class="mobile-hero-val" id="mMarginLoanVal" style="color: #fbbf24;">NPR 700,000</div>
+                    <div class="mobile-hero-sub">
+                        <span>Annual Interest: <strong id="mMarginInterestVal">NPR 73,500</strong></span>
+                        <span>Margin Call at: <strong id="mMarginCallVal" style="color:#f87171;">-28.5% drop</strong></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- -------------------------------------------------------------
+             Tab 5: Rates & NRB Macro Indicators
+             ------------------------------------------------------------- -->
+        <section id="mobileRatesView" class="mobile-view">
+            <!-- NRB Macroeconomic Indicators -->
+            <div class="mobile-section-header">
+                <span class="mobile-section-title">🏛️ NRB Central Bank Indicators</span>
+            </div>
+            <div id="mNrbGrid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;">
+                <div class="mobile-card">
+                    <div style="font-size:0.72rem; color:var(--mobile-text-sub);">Inflation (CPI)</div>
+                    <div style="font-family:var(--font-mono); font-size:1.15rem; font-weight:800; color:#34d399;">4.85%</div>
+                </div>
+                <div class="mobile-card">
+                    <div style="font-size:0.72rem; color:var(--mobile-text-sub);">Forex Reserve</div>
+                    <div style="font-family:var(--font-mono); font-size:1.15rem; font-weight:800; color:#60a5fa;">$15.42B</div>
+                </div>
+            </div>
+
+            <!-- Commercial Bank Rates -->
+            <div class="mobile-section-header">
+                <span class="mobile-section-title">🏦 Commercial Bank Interest Rates</span>
+            </div>
+            <div id="mBankRatesList">
+                <div class="mobile-card text-center" style="color: var(--mobile-text-sub); padding: 20px;">
+                    Loading bank interest rates...
+                </div>
+            </div>
+        </section>
+
+        <!-- -------------------------------------------------------------
+             Tab 6: Watchlist & Price Target Alerts
+             ------------------------------------------------------------- -->
+        <section id="mobileWatchlistView" class="mobile-view">
+            <div class="mobile-section-header">
+                <span class="mobile-section-title">⭐ Scrip Watchlist & Alerts</span>
+                <button class="mobile-badge up" onclick="openMobileAddWatchlistModal()" style="cursor: pointer;">+ Add Symbol</button>
+            </div>
+            <div id="mWatchlistList">
+                <div class="mobile-card text-center" style="color: var(--mobile-text-sub); padding: 24px;">
+                    No scrips in watchlist.<br>Tap <strong>"+ Add Symbol"</strong> to monitor scrips!
+                </div>
+            </div>
+        </section>
+
+        <!-- -------------------------------------------------------------
+             Bottom Navigation Bar (FIXED AT BOTTOM)
+             ------------------------------------------------------------- -->
+        <nav class="mobile-bottom-nav">
+            <div class="nav-tab active" data-tab="portfolio" onclick="switchMobileTab('portfolio')">
+                <span class="tab-icon">💼</span>
+                <span>Portfolio</span>
+            </div>
+            <div class="nav-tab" data-tab="liveData" onclick="switchMobileTab('liveData')">
+                <span class="tab-icon">📈</span>
+                <span>Live Data</span>
+            </div>
+            <div class="nav-tab" data-tab="heatmap" onclick="switchMobileTab('heatmap')">
+                <span class="tab-icon">🫧</span>
+                <span>Heat Map</span>
+            </div>
+            <div class="nav-tab" data-tab="calculators" onclick="switchMobileTab('calculators')">
+                <span class="tab-icon">🧮</span>
+                <span>Calculators</span>
+            </div>
+            <div class="nav-tab" data-tab="rates" onclick="switchMobileTab('rates')">
+                <span class="tab-icon">🏦</span>
+                <span>Rates/NRB</span>
+            </div>
+            <div class="nav-tab" data-tab="watchlist" onclick="switchMobileTab('watchlist')">
+                <span class="tab-icon">⭐</span>
+                <span>Watchlist</span>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Modals -->
+    <!-- Modal 1: Add Holding -->
+    <div id="mAddHoldingModal" class="mobile-modal-overlay" onclick="if(event.target===this) closeMobileModal('mAddHoldingModal')">
+        <div class="mobile-modal-sheet">
+            <div class="mobile-modal-handle"></div>
+            <h3 style="color:#fff; margin-bottom:14px;">💼 Add Portfolio Holding</h3>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+                <div>
+                    <label style="font-size:0.75rem; color:var(--mobile-text-sub);">Stock Symbol</label>
+                    <input type="text" id="mAddSymbol" class="mobile-input" placeholder="e.g. ADBL, SHIVM, CHCL">
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <div style="flex:1;">
+                        <label style="font-size:0.75rem; color:var(--mobile-text-sub);">Quantity (Shares)</label>
+                        <input type="number" id="mAddShares" class="mobile-input" value="100">
+                    </div>
+                    <div style="flex:1;">
+                        <label style="font-size:0.75rem; color:var(--mobile-text-sub);">Buy Price (NPR)</label>
+                        <input type="number" id="mAddBuyPrice" class="mobile-input" value="300">
+                    </div>
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <div style="flex:1;">
+                        <label style="font-size:0.75rem; color:var(--mobile-text-sub);">Target (TP)</label>
+                        <input type="number" id="mAddTP" class="mobile-input" placeholder="e.g. 360">
+                    </div>
+                    <div style="flex:1;">
+                        <label style="font-size:0.75rem; color:var(--mobile-text-sub);">Stop Loss (SL)</label>
+                        <input type="number" id="mAddSL" class="mobile-input" placeholder="e.g. 280">
+                    </div>
+                </div>
+                <button class="mobile-btn mobile-btn-accent" style="margin-top:10px;" onclick="saveMobileHolding()">Save Position</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="mobile.js"></script>
+</body>
+</html>
