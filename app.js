@@ -1856,7 +1856,6 @@ function renderDalalView() {
     const leadersContainer = document.getElementById("leadersContainer");
 
     const jasoos = systemxData.floorsheet_jasoos || {};
-    const movers = systemxData.last_min_movers || [];
     const popular = systemxData.popular_stocks || {};
     const perf = systemxData.performance_metrics || {};
 
