@@ -1316,10 +1316,10 @@ def start_server(ready_event):
 
     for try_port in range(8085, 8100):
         try:
-            httpd = ThreadedHTTPServer(("", try_port), Handler)
+            httpd = ThreadedHTTPServer(("0.0.0.0", try_port), Handler)
             PORT = try_port
-            print(f"\n[Server] Threaded Dashboard server started at http://localhost:{PORT}/")
-            print("[Server] Press Ctrl+C in this terminal to stop the server.")
+            print(f"\n[Server] Dashboard server running at http://127.0.0.1:{PORT}/index.html")
+            print(f"[Server] Dashboard server running at http://localhost:{PORT}/index.html")
             ready_event.set()
             try:
                 httpd.serve_forever()
@@ -1389,14 +1389,7 @@ def main():
     # Wait for server to bind port
     server_ready.wait(timeout=10)
 
-    # 2. Fetch initial market prices asynchronously or synchronously
-    print("\n[2/3] Fetching latest NEPSE share prices...")
-    try:
-        scrape_nepse()
-    except Exception as ex:
-        print(f"[Warning] Initial scrape error: {ex}")
-    
-    # 3. Start 30-second continuous background auto-scraper thread
+    # 2. Start 30-second continuous background auto-scraper thread
     autoscrape_thread = threading.Thread(target=background_autoscrape)
     autoscrape_thread.daemon = True
     autoscrape_thread.start()
