@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-08-18T06:05:35.249972Z",
+  "scraped_at": "2026-08-18T06:06:17.642588Z",
   "user_id": 12764,
   "indices": [
     {
@@ -7,144 +7,144 @@
       "value": 2631.89,
       "pointChange": -9.93,
       "percentageChange": -0.37,
-      "turnover": 797553343.83,
-      "sharesTraded": 1903618,
-      "advancers": 66,
+      "turnover": 807393731.33,
+      "sharesTraded": 1921956,
+      "advancers": 64,
       "decliners": 212,
-      "unchanged": 26,
-      "timestamp": "2026-08-18 11:50:21"
+      "unchanged": 28,
+      "timestamp": "2026-08-18 11:51:01"
     },
     {
       "indicesName": "Microfinance",
-      "value": 4526.66,
-      "pointChange": -19.41,
-      "percentageChange": -0.42,
-      "turnover": 19697885.8,
-      "sharesTraded": 18930,
+      "value": 4525.51,
+      "pointChange": -20.57,
+      "percentageChange": -0.45,
+      "turnover": 20159843.3,
+      "sharesTraded": 19427,
       "advancers": 8,
       "decliners": 33,
       "unchanged": 4,
-      "timestamp": "2026-08-18 11:50:21"
+      "timestamp": "2026-08-18 11:51:01"
     },
     {
       "indicesName": "HydroPower",
-      "value": 3738.09,
-      "pointChange": -6.87,
-      "percentageChange": -0.18,
-      "turnover": 494095172.9,
-      "sharesTraded": 1029018,
-      "advancers": 27,
-      "decliners": 75,
-      "unchanged": 9,
-      "timestamp": "2026-08-18 11:50:21"
+      "value": 3738.87,
+      "pointChange": -6.09,
+      "percentageChange": -0.16,
+      "turnover": 498910841.4,
+      "sharesTraded": 1038031,
+      "advancers": 26,
+      "decliners": 77,
+      "unchanged": 8,
+      "timestamp": "2026-08-18 11:51:01"
     },
     {
       "indicesName": "Hotels And Tourism",
-      "value": 7264.41,
-      "pointChange": -51.8,
-      "percentageChange": -0.7,
-      "turnover": 6070775.5,
-      "sharesTraded": 9578,
+      "value": 7268.32,
+      "pointChange": -47.9,
+      "percentageChange": -0.65,
+      "turnover": 6084545.5,
+      "sharesTraded": 9598,
       "advancers": 1,
       "decliners": 6,
       "unchanged": 0,
-      "timestamp": "2026-08-18 11:50:21"
+      "timestamp": "2026-08-18 11:51:01"
     },
     {
       "indicesName": "Development Bank",
       "value": 5547.22,
       "pointChange": -19.84,
       "percentageChange": -0.35,
-      "turnover": 20683560.4,
-      "sharesTraded": 35262,
+      "turnover": 20944135.4,
+      "sharesTraded": 35583,
       "advancers": 1,
       "decliners": 10,
       "unchanged": 2,
-      "timestamp": "2026-08-18 11:50:21"
+      "timestamp": "2026-08-18 11:51:01"
     },
     {
       "indicesName": "Manu.& Pro.",
-      "value": 10437.57,
-      "pointChange": -40.22,
-      "percentageChange": -0.38,
-      "turnover": 121277588.5,
-      "sharesTraded": 74553,
-      "advancers": 5,
+      "value": 10432.43,
+      "pointChange": -45.35,
+      "percentageChange": -0.43,
+      "turnover": 121489519.5,
+      "sharesTraded": 74873,
+      "advancers": 4,
       "decliners": 9,
-      "unchanged": 1,
-      "timestamp": "2026-08-18 11:50:21"
+      "unchanged": 2,
+      "timestamp": "2026-08-18 11:51:01"
     },
     {
       "indicesName": "Others",
-      "value": 1924.1,
-      "pointChange": -14.85,
+      "value": 1924.04,
+      "pointChange": -14.91,
       "percentageChange": -0.76,
-      "turnover": 7269102.6,
-      "sharesTraded": 9955,
+      "turnover": 7395771.6,
+      "sharesTraded": 10114,
       "advancers": 1,
       "decliners": 6,
       "unchanged": 1,
-      "timestamp": "2026-08-18 11:50:21"
+      "timestamp": "2026-08-18 11:51:01"
     },
     {
       "indicesName": "Banking",
-      "value": 1446.67,
-      "pointChange": -5.01,
+      "value": 1446.66,
+      "pointChange": -5.02,
       "percentageChange": -0.34,
-      "turnover": 52433731.7,
-      "sharesTraded": 213809,
+      "turnover": 53484128.9,
+      "sharesTraded": 218066,
       "advancers": 6,
       "decliners": 12,
       "unchanged": 2,
-      "timestamp": "2026-08-18 11:50:21"
+      "timestamp": "2026-08-18 11:51:01"
     },
     {
       "indicesName": "Non Life Insurance",
       "value": 10457.44,
       "pointChange": -62.74,
       "percentageChange": -0.59,
-      "turnover": 4320471.15,
-      "sharesTraded": 7144,
+      "turnover": 4333344.15,
+      "sharesTraded": 7165,
       "advancers": 2,
       "decliners": 8,
       "unchanged": 1,
-      "timestamp": "2026-08-18 11:50:21"
+      "timestamp": "2026-08-18 11:51:01"
     },
     {
       "indicesName": "Mutual Fund",
-      "value": 20.88,
+      "value": 20.89,
       "pointChange": -0.13,
       "percentageChange": -0.62,
       "turnover": 604473,
       "sharesTraded": 56685,
       "advancers": 7,
-      "decliners": 23,
-      "unchanged": 3,
-      "timestamp": "2026-08-18 11:50:21"
+      "decliners": 22,
+      "unchanged": 4,
+      "timestamp": "2026-08-18 11:51:01"
     },
     {
       "indicesName": "Life Insurance",
       "value": 11704.73,
       "pointChange": -56.27,
       "percentageChange": -0.47,
-      "turnover": 13374373.3,
-      "sharesTraded": 22503,
+      "turnover": 13843478.8,
+      "sharesTraded": 23176,
       "advancers": 1,
       "decliners": 12,
       "unchanged": 1,
-      "timestamp": "2026-08-18 11:50:21"
+      "timestamp": "2026-08-18 11:51:01"
     },
     {
       "indicesName": "Finance",
-      "value": 2338.4,
-      "pointChange": -9.17,
-      "percentageChange": -0.39,
-      "turnover": 28225875.2,
-      "sharesTraded": 48985,
+      "value": 2337.52,
+      "pointChange": -10.05,
+      "percentageChange": -0.42,
+      "turnover": 28472788.2,
+      "sharesTraded": 49396,
       "advancers": 3,
       "decliners": 7,
       "unchanged": 1,
-      "timestamp": "2026-08-18 11:50:21"
+      "timestamp": "2026-08-18 11:51:01"
     },
     {
       "indicesName": "Trading",
@@ -156,19 +156,19 @@
       "advancers": 1,
       "decliners": 1,
       "unchanged": 0,
-      "timestamp": "2026-08-18 11:50:21"
+      "timestamp": "2026-08-18 11:51:01"
     },
     {
       "indicesName": "Investment",
-      "value": 96.43,
-      "pointChange": -0.31,
-      "percentageChange": -0.32,
-      "turnover": 15273849.6,
-      "sharesTraded": 36593,
+      "value": 96.45,
+      "pointChange": -0.29,
+      "percentageChange": -0.3,
+      "turnover": 16065425.6,
+      "sharesTraded": 37488,
       "advancers": 1,
-      "decliners": 6,
-      "unchanged": 1,
-      "timestamp": "2026-08-18 11:50:21"
+      "decliners": 5,
+      "unchanged": 2,
+      "timestamp": "2026-08-18 11:51:01"
     }
   ],
   "stock_live": [
@@ -201,7 +201,7 @@
       "diff": -2.7,
       "diff_percent": -0.89,
       "volume": 10167,
-      "turnover": 2988572.4,
+      "turnover": 3039187.9,
       "transactions": 0
     },
     {
@@ -265,7 +265,7 @@
       "diff": -1.0,
       "diff_percent": -0.4,
       "volume": 12345,
-      "turnover": 3070609.6,
+      "turnover": 3093199.6,
       "transactions": 0
     },
     {
@@ -329,7 +329,7 @@
       "diff": -3.0,
       "diff_percent": -0.38,
       "volume": 8718,
-      "turnover": 6698241.5,
+      "turnover": 6796395.5,
       "transactions": 0
     },
     {
@@ -345,7 +345,7 @@
       "diff": -1.6,
       "diff_percent": -0.48,
       "volume": 15095,
-      "turnover": 4977200.0,
+      "turnover": 5013610.0,
       "transactions": 0
     },
     {
@@ -377,7 +377,7 @@
       "diff": -3.8,
       "diff_percent": -0.54,
       "volume": 2803,
-      "turnover": 1969355.0,
+      "turnover": 1976325.0,
       "transactions": 0
     },
     {
@@ -441,7 +441,7 @@
       "diff": -0.5,
       "diff_percent": -0.1,
       "volume": 5789,
-      "turnover": 2799096.6,
+      "turnover": 2804409.6,
       "transactions": 0
     },
     {
@@ -457,23 +457,23 @@
       "diff": 1.0,
       "diff_percent": 0.19,
       "volume": 782,
-      "turnover": 394505.0,
+      "turnover": 412705.0,
       "transactions": 0
     },
     {
       "symbol": "BHCL",
       "fullName": "Bikash Hydropower Company Limited",
       "sector": "HydroPower",
-      "ltp": 570.0,
-      "close": 570.0,
-      "open": 570.0,
-      "high": 570.0,
-      "low": 570.0,
+      "ltp": 570.2,
+      "close": 570.2,
+      "open": 570.2,
+      "high": 570.2,
+      "low": 570.2,
       "prev_close": 554.0,
-      "diff": 16.0,
-      "diff_percent": 2.89,
+      "diff": 16.2,
+      "diff_percent": 2.92,
       "volume": 39563,
-      "turnover": 22162949.8,
+      "turnover": 22355677.4,
       "transactions": 0
     },
     {
@@ -505,7 +505,7 @@
       "diff": -0.7,
       "diff_percent": -0.34,
       "volume": 6207,
-      "turnover": 1291575.5,
+      "turnover": 1293652.5,
       "transactions": 0
     },
     {
@@ -537,7 +537,7 @@
       "diff": 2.9,
       "diff_percent": 0.39,
       "volume": 4469,
-      "turnover": 3277615.0,
+      "turnover": 3285014.0,
       "transactions": 0
     },
     {
@@ -569,7 +569,7 @@
       "diff": -3.9,
       "diff_percent": -0.61,
       "volume": 1115,
-      "turnover": 700559.0,
+      "turnover": 716561.5,
       "transactions": 0
     },
     {
@@ -585,7 +585,7 @@
       "diff": -1.0,
       "diff_percent": -0.17,
       "volume": 7442,
-      "turnover": 4338859.5,
+      "turnover": 4520359.5,
       "transactions": 0
     },
     {
@@ -608,16 +608,16 @@
       "symbol": "CFCL",
       "fullName": "Central Finance",
       "sector": "Finance",
-      "ltp": 607.0,
-      "close": 607.0,
-      "open": 607.0,
-      "high": 607.0,
-      "low": 607.0,
+      "ltp": 604.0,
+      "close": 604.0,
+      "open": 604.0,
+      "high": 604.0,
+      "low": 604.0,
       "prev_close": 610.0,
-      "diff": -3.0,
-      "diff_percent": -0.49,
+      "diff": -6.0,
+      "diff_percent": -0.98,
       "volume": 31743,
-      "turnover": 19011722.4,
+      "turnover": 19253322.4,
       "transactions": 0
     },
     {
@@ -745,7 +745,7 @@
       "diff": -4.6,
       "diff_percent": -0.77,
       "volume": 320,
-      "turnover": 184290.0,
+      "turnover": 190210.0,
       "transactions": 0
     },
     {
@@ -761,7 +761,7 @@
       "diff": -3.7,
       "diff_percent": -0.84,
       "volume": 870,
-      "turnover": 373260.3,
+      "turnover": 378924.4,
       "transactions": 0
     },
     {
@@ -777,7 +777,7 @@
       "diff": -13.0,
       "diff_percent": -1.25,
       "volume": 2665,
-      "turnover": 2551094.0,
+      "turnover": 2756494.0,
       "transactions": 0
     },
     {
@@ -793,7 +793,7 @@
       "diff": -14.7,
       "diff_percent": -1.26,
       "volume": 370,
-      "turnover": 299779.0,
+      "turnover": 426829.0,
       "transactions": 0
     },
     {
@@ -825,7 +825,7 @@
       "diff": 40.0,
       "diff_percent": 2.74,
       "volume": 4057,
-      "turnover": 5964470.8,
+      "turnover": 6027470.8,
       "transactions": 0
     },
     {
@@ -873,7 +873,7 @@
       "diff": -3.6,
       "diff_percent": -0.6,
       "volume": 1390,
-      "turnover": 833490.0,
+      "turnover": 839494.0,
       "transactions": 0
     },
     {
@@ -1001,7 +1001,7 @@
       "diff": -26.7,
       "diff_percent": -1.77,
       "volume": 2421,
-      "turnover": 3557598.0,
+      "turnover": 3572431.0,
       "transactions": 0
     },
     {
@@ -1097,7 +1097,7 @@
       "diff": 0.3,
       "diff_percent": 0.12,
       "volume": 19216,
-      "turnover": 4630097.4,
+      "turnover": 4767960.3,
       "transactions": 0
     },
     {
@@ -1168,16 +1168,16 @@
       "symbol": "GHL",
       "fullName": "Ghalemdi Hydro Limited",
       "sector": "HydroPower",
-      "ltp": 238.3,
-      "close": 238.3,
-      "open": 238.3,
-      "high": 238.3,
-      "low": 238.3,
+      "ltp": 241.9,
+      "close": 241.9,
+      "open": 241.9,
+      "high": 241.9,
+      "low": 241.9,
       "prev_close": 242.5,
-      "diff": -4.2,
-      "diff_percent": -1.73,
+      "diff": -0.6,
+      "diff_percent": -0.25,
       "volume": 58841,
-      "turnover": 13987052.6,
+      "turnover": 14223446.2,
       "transactions": 0
     },
     {
@@ -1209,7 +1209,7 @@
       "diff": 8.0,
       "diff_percent": 0.72,
       "volume": 357,
-      "turnover": 122980.0,
+      "turnover": 335400.0,
       "transactions": 0
     },
     {
@@ -1241,7 +1241,7 @@
       "diff": -4.8,
       "diff_percent": -1.85,
       "volume": 7355,
-      "turnover": 1877822.5,
+      "turnover": 1880373.5,
       "transactions": 0
     },
     {
@@ -1353,7 +1353,7 @@
       "diff": 1.9,
       "diff_percent": 0.4,
       "volume": 2127,
-      "turnover": 841656.4,
+      "turnover": 1007556.4,
       "transactions": 0
     },
     {
@@ -1385,7 +1385,7 @@
       "diff": -16.6,
       "diff_percent": -2.54,
       "volume": 11012,
-      "turnover": 7046009.4,
+      "turnover": 7053005.4,
       "transactions": 0
     },
     {
@@ -1401,7 +1401,7 @@
       "diff": -1.9,
       "diff_percent": -0.98,
       "volume": 1098,
-      "turnover": 206834.5,
+      "turnover": 210674.5,
       "transactions": 0
     },
     {
@@ -1433,7 +1433,7 @@
       "diff": 0.0,
       "diff_percent": 0.0,
       "volume": 2611,
-      "turnover": 3067336.4,
+      "turnover": 3085021.4,
       "transactions": 0
     },
     {
@@ -1456,16 +1456,16 @@
       "symbol": "HFIN",
       "fullName": "Hotel Forest Inn Limited",
       "sector": "Hotels And Tourism",
-      "ltp": 676.1,
-      "close": 676.1,
-      "open": 676.1,
-      "high": 676.1,
-      "low": 676.1,
+      "ltp": 680.0,
+      "close": 680.0,
+      "open": 680.0,
+      "high": 680.0,
+      "low": 680.0,
       "prev_close": 670.1,
-      "diff": 6.0,
-      "diff_percent": 0.9,
+      "diff": 9.9,
+      "diff_percent": 1.48,
       "volume": 3982,
-      "turnover": 2679412.1,
+      "turnover": 2686212.1,
       "transactions": 0
     },
     {
@@ -1545,7 +1545,7 @@
       "diff": -1.0,
       "diff_percent": -0.31,
       "volume": 270,
-      "turnover": 81787.0,
+      "turnover": 85591.0,
       "transactions": 0
     },
     {
@@ -1584,16 +1584,16 @@
       "symbol": "HRL",
       "fullName": "Himalayan Reinsurance Limited",
       "sector": "Others",
-      "ltp": 581.8,
-      "close": 581.8,
-      "open": 581.8,
-      "high": 581.8,
-      "low": 581.8,
+      "ltp": 580.0,
+      "close": 580.0,
+      "open": 580.0,
+      "high": 580.0,
+      "low": 580.0,
       "prev_close": 585.0,
-      "diff": -3.2,
-      "diff_percent": -0.55,
+      "diff": -5.0,
+      "diff_percent": -0.85,
       "volume": 4852,
-      "turnover": 2795269.7,
+      "turnover": 2824269.7,
       "transactions": 0
     },
     {
@@ -1696,14 +1696,14 @@
       "symbol": "JBLB",
       "fullName": "Jeevan Bikas Laghubitta Bittya Sanstha Ltd",
       "sector": "Microfinance",
-      "ltp": 1275.0,
-      "close": 1275.0,
-      "open": 1275.0,
-      "high": 1275.0,
-      "low": 1275.0,
+      "ltp": 1270.0,
+      "close": 1270.0,
+      "open": 1270.0,
+      "high": 1270.0,
+      "low": 1270.0,
       "prev_close": 1276.0,
-      "diff": -1.0,
-      "diff_percent": -0.08,
+      "diff": -6.0,
+      "diff_percent": -0.47,
       "volume": 520,
       "turnover": 663237.0,
       "transactions": 0
@@ -1776,16 +1776,16 @@
       "symbol": "KAHL",
       "fullName": "Kalanga Hydro Limited ",
       "sector": "HydroPower",
-      "ltp": 554.1,
-      "close": 554.1,
-      "open": 554.1,
-      "high": 554.1,
-      "low": 554.1,
+      "ltp": 554.2,
+      "close": 554.2,
+      "open": 554.2,
+      "high": 554.2,
+      "low": 554.2,
       "prev_close": 550.0,
-      "diff": 4.1,
-      "diff_percent": 0.75,
+      "diff": 4.2,
+      "diff_percent": 0.76,
       "volume": 15322,
-      "turnover": 8265905.1,
+      "turnover": 8509753.1,
       "transactions": 0
     },
     {
@@ -1801,7 +1801,7 @@
       "diff": -0.6,
       "diff_percent": -0.28,
       "volume": 22915,
-      "turnover": 4724987.6,
+      "turnover": 4939987.6,
       "transactions": 0
     },
     {
@@ -1881,7 +1881,7 @@
       "diff": 0.0,
       "diff_percent": 0.0,
       "volume": 297,
-      "turnover": 206029.7,
+      "turnover": 237949.7,
       "transactions": 0
     },
     {
@@ -2089,7 +2089,7 @@
       "diff": 1.0,
       "diff_percent": 0.16,
       "volume": 1118,
-      "turnover": 687259.8,
+      "turnover": 693459.8,
       "transactions": 0
     },
     {
@@ -2121,7 +2121,7 @@
       "diff": -9.9,
       "diff_percent": -1.21,
       "volume": 135,
-      "turnover": 88987.0,
+      "turnover": 110049.6,
       "transactions": 0
     },
     {
@@ -2153,7 +2153,7 @@
       "diff": -0.9,
       "diff_percent": -0.34,
       "volume": 1060,
-      "turnover": 290461.0,
+      "turnover": 293102.0,
       "transactions": 0
     },
     {
@@ -2601,7 +2601,7 @@
       "diff": 1.5,
       "diff_percent": 0.27,
       "volume": 5959,
-      "turnover": 3276123.5,
+      "turnover": 3292713.5,
       "transactions": 0
     },
     {
@@ -2649,7 +2649,7 @@
       "diff": 0.6,
       "diff_percent": 0.22,
       "volume": 28243,
-      "turnover": 7389011.6,
+      "turnover": 7792046.6,
       "transactions": 0
     },
     {
@@ -2713,7 +2713,7 @@
       "diff": -2.9,
       "diff_percent": -0.71,
       "volume": 27210,
-      "turnover": 10708573.2,
+      "turnover": 11116673.2,
       "transactions": 0
     },
     {
@@ -2729,7 +2729,7 @@
       "diff": -2.1,
       "diff_percent": -0.79,
       "volume": 13980,
-      "turnover": 3644446.2,
+      "turnover": 3697226.2,
       "transactions": 0
     },
     {
@@ -2768,14 +2768,14 @@
       "symbol": "NIBSF2",
       "fullName": "NIBL Samriddhi Fund -2",
       "sector": "Mutual Fund",
-      "ltp": 8.8,
-      "close": 8.8,
-      "open": 8.8,
-      "high": 8.8,
-      "low": 8.8,
+      "ltp": 8.82,
+      "close": 8.82,
+      "open": 8.82,
+      "high": 8.82,
+      "low": 8.82,
       "prev_close": 8.82,
-      "diff": -0.02,
-      "diff_percent": -0.23,
+      "diff": 0.0,
+      "diff_percent": 0.0,
       "volume": 0,
       "turnover": 0.0,
       "transactions": 0
@@ -2793,7 +2793,7 @@
       "diff": -2.0,
       "diff_percent": -0.62,
       "volume": 7972,
-      "turnover": 2489217.4,
+      "turnover": 2539461.4,
       "transactions": 0
     },
     {
@@ -2857,7 +2857,7 @@
       "diff": -2.0,
       "diff_percent": -0.81,
       "volume": 10715,
-      "turnover": 2535320.6,
+      "turnover": 2629400.6,
       "transactions": 0
     },
     {
@@ -2889,7 +2889,7 @@
       "diff": -1.9,
       "diff_percent": -1.01,
       "volume": 34238,
-      "turnover": 6417393.2,
+      "turnover": 6530528.2,
       "transactions": 0
     },
     {
@@ -2937,7 +2937,7 @@
       "diff": -5.0,
       "diff_percent": -0.69,
       "volume": 10310,
-      "turnover": 7518402.8,
+      "turnover": 7662080.8,
       "transactions": 0
     },
     {
@@ -2953,7 +2953,7 @@
       "diff": 0.0,
       "diff_percent": 0.0,
       "volume": 330,
-      "turnover": 0.0,
+      "turnover": 172800.0,
       "transactions": 0
     },
     {
@@ -2969,7 +2969,7 @@
       "diff": -0.1,
       "diff_percent": -0.04,
       "volume": 1321,
-      "turnover": 304389.4,
+      "turnover": 316864.2,
       "transactions": 0
     },
     {
@@ -3049,7 +3049,7 @@
       "diff": 0.0,
       "diff_percent": 0.0,
       "volume": 297,
-      "turnover": 133356.0,
+      "turnover": 148918.0,
       "transactions": 0
     },
     {
@@ -3065,7 +3065,7 @@
       "diff": 0.0,
       "diff_percent": 0.0,
       "volume": 2216,
-      "turnover": 1943718.7,
+      "turnover": 2006646.7,
       "transactions": 0
     },
     {
@@ -3097,7 +3097,7 @@
       "diff": -4.0,
       "diff_percent": -0.29,
       "volume": 2052,
-      "turnover": 2142346.0,
+      "turnover": 2832846.0,
       "transactions": 0
     },
     {
@@ -3145,7 +3145,7 @@
       "diff": -12.0,
       "diff_percent": -1.34,
       "volume": 1409,
-      "turnover": 1221724.0,
+      "turnover": 1248214.0,
       "transactions": 0
     },
     {
@@ -3216,16 +3216,16 @@
       "symbol": "PCIL",
       "fullName": "Palpa Cement Industries Limited",
       "sector": "Manu.& Pro.",
-      "ltp": 639.0,
-      "close": 639.0,
-      "open": 639.0,
-      "high": 639.0,
-      "low": 639.0,
+      "ltp": 632.0,
+      "close": 632.0,
+      "open": 632.0,
+      "high": 632.0,
+      "low": 632.0,
       "prev_close": 632.0,
-      "diff": 7.0,
-      "diff_percent": 1.11,
+      "diff": 0.0,
+      "diff_percent": 0.0,
       "volume": 18347,
-      "turnover": 11714729.2,
+      "turnover": 11746329.2,
       "transactions": 0
     },
     {
@@ -3241,7 +3241,7 @@
       "diff": 1.5,
       "diff_percent": 0.5,
       "volume": 8238,
-      "turnover": 2576325.5,
+      "turnover": 2579350.5,
       "transactions": 0
     },
     {
@@ -3328,16 +3328,16 @@
       "symbol": "PRVU",
       "fullName": "Prabhu Bank",
       "sector": "Banking",
-      "ltp": 181.6,
-      "close": 181.6,
-      "open": 181.6,
-      "high": 181.6,
-      "low": 181.6,
+      "ltp": 181.5,
+      "close": 181.5,
+      "open": 181.5,
+      "high": 181.5,
+      "low": 181.5,
       "prev_close": 183.8,
-      "diff": -2.2,
-      "diff_percent": -1.2,
+      "diff": -2.3,
+      "diff_percent": -1.25,
       "volume": 56070,
-      "turnover": 10179195.5,
+      "turnover": 10210975.5,
       "transactions": 0
     },
     {
@@ -3369,7 +3369,7 @@
       "diff": -2.4,
       "diff_percent": -0.29,
       "volume": 330,
-      "turnover": 262550.0,
+      "turnover": 270801.0,
       "transactions": 0
     },
     {
@@ -3545,7 +3545,7 @@
       "diff": -2.0,
       "diff_percent": -0.47,
       "volume": 2096,
-      "turnover": 886988.0,
+      "turnover": 892078.4,
       "transactions": 0
     },
     {
@@ -3641,7 +3641,7 @@
       "diff": -2.8,
       "diff_percent": -0.3,
       "volume": 2231,
-      "turnover": 2059657.5,
+      "turnover": 2068878.5,
       "transactions": 0
     },
     {
@@ -3705,7 +3705,7 @@
       "diff": -1.0,
       "diff_percent": -0.15,
       "volume": 22360,
-      "turnover": 15150864.2,
+      "turnover": 15304539.2,
       "transactions": 0
     },
     {
@@ -3760,14 +3760,14 @@
       "symbol": "SANVI",
       "fullName": "Sanvi Energy Limited",
       "sector": "HydroPower",
-      "ltp": 604.0,
-      "close": 604.0,
-      "open": 604.0,
-      "high": 604.0,
-      "low": 604.0,
+      "ltp": 607.0,
+      "close": 607.0,
+      "open": 607.0,
+      "high": 607.0,
+      "low": 607.0,
       "prev_close": 614.0,
-      "diff": -10.0,
-      "diff_percent": -1.63,
+      "diff": -7.0,
+      "diff_percent": -1.14,
       "volume": 312,
       "turnover": 190368.0,
       "transactions": 0
@@ -3833,7 +3833,7 @@
       "diff": -3.5,
       "diff_percent": -0.88,
       "volume": 226,
-      "turnover": 55327.9,
+      "turnover": 71147.9,
       "transactions": 0
     },
     {
@@ -3856,14 +3856,14 @@
       "symbol": "SBL",
       "fullName": "Siddhartha Bank",
       "sector": "Banking",
-      "ltp": 409.0,
-      "close": 409.0,
-      "open": 409.0,
-      "high": 409.0,
-      "low": 409.0,
+      "ltp": 409.1,
+      "close": 409.1,
+      "open": 409.1,
+      "high": 409.1,
+      "low": 409.1,
       "prev_close": 409.2,
-      "diff": -0.2,
-      "diff_percent": -0.05,
+      "diff": -0.1,
+      "diff_percent": -0.02,
       "volume": 5104,
       "turnover": 2089500.7,
       "transactions": 0
@@ -3936,16 +3936,16 @@
       "symbol": "SGHL",
       "fullName": "Sanigad Hydro Limited",
       "sector": "HydroPower",
-      "ltp": 543.6,
-      "close": 543.6,
-      "open": 543.6,
-      "high": 543.6,
-      "low": 543.6,
+      "ltp": 543.5,
+      "close": 543.5,
+      "open": 543.5,
+      "high": 543.5,
+      "low": 543.5,
       "prev_close": 537.6,
-      "diff": 6.0,
-      "diff_percent": 1.12,
+      "diff": 5.9,
+      "diff_percent": 1.1,
       "volume": 25403,
-      "turnover": 13682257.6,
+      "turnover": 13774652.6,
       "transactions": 0
     },
     {
@@ -3993,7 +3993,7 @@
       "diff": 0.0,
       "diff_percent": 0.0,
       "volume": 1150,
-      "turnover": 346942.0,
+      "turnover": 392896.0,
       "transactions": 0
     },
     {
@@ -4009,7 +4009,7 @@
       "diff": 3.2,
       "diff_percent": 0.51,
       "volume": 4050,
-      "turnover": 2540568.6,
+      "turnover": 2553226.6,
       "transactions": 0
     },
     {
@@ -4073,7 +4073,7 @@
       "diff": 2.6,
       "diff_percent": 0.43,
       "volume": 66,
-      "turnover": 0.0,
+      "turnover": 12873.0,
       "transactions": 0
     },
     {
@@ -4153,7 +4153,7 @@
       "diff": -3.0,
       "diff_percent": -0.46,
       "volume": 1630,
-      "turnover": 887128.0,
+      "turnover": 1063978.0,
       "transactions": 0
     },
     {
@@ -4185,7 +4185,7 @@
       "diff": -2.0,
       "diff_percent": -0.49,
       "volume": 1377,
-      "turnover": 557974.7,
+      "turnover": 562074.7,
       "transactions": 0
     },
     {
@@ -4201,7 +4201,7 @@
       "diff": 0.1,
       "diff_percent": 0.01,
       "volume": 951,
-      "turnover": 579542.0,
+      "turnover": 713792.0,
       "transactions": 0
     },
     {
@@ -4313,23 +4313,23 @@
       "diff": 2.4,
       "diff_percent": 0.47,
       "volume": 1499,
-      "turnover": 735081.6,
+      "turnover": 760581.6,
       "transactions": 0
     },
     {
       "symbol": "SMHL",
       "fullName": "Super Madi Hydropower Limited",
       "sector": "HydroPower",
-      "ltp": 498.2,
-      "close": 498.2,
-      "open": 498.2,
-      "high": 498.2,
-      "low": 498.2,
+      "ltp": 498.0,
+      "close": 498.0,
+      "open": 498.0,
+      "high": 498.0,
+      "low": 498.0,
       "prev_close": 498.8,
-      "diff": -0.6,
-      "diff_percent": -0.12,
+      "diff": -0.8,
+      "diff_percent": -0.16,
       "volume": 14805,
-      "turnover": 7648733.3,
+      "turnover": 7654213.5,
       "transactions": 0
     },
     {
@@ -4377,7 +4377,7 @@
       "diff": -1.3,
       "diff_percent": -0.32,
       "volume": 1171,
-      "turnover": 471313.8,
+      "turnover": 478232.8,
       "transactions": 0
     },
     {
@@ -4393,39 +4393,39 @@
       "diff": -4.0,
       "diff_percent": -0.44,
       "volume": 1520,
-      "turnover": 1355120.0,
+      "turnover": 1382300.0,
       "transactions": 0
     },
     {
       "symbol": "SOHL",
       "fullName": "Solu Hydropower Limited",
       "sector": "HydroPower",
-      "ltp": 718.1,
-      "close": 718.1,
-      "open": 718.1,
-      "high": 718.1,
-      "low": 718.1,
+      "ltp": 718.0,
+      "close": 718.0,
+      "open": 718.0,
+      "high": 718.0,
+      "low": 718.0,
       "prev_close": 709.0,
-      "diff": 9.1,
-      "diff_percent": 1.28,
+      "diff": 9.0,
+      "diff_percent": 1.27,
       "volume": 210813,
-      "turnover": 150921499.1,
+      "turnover": 151696939.1,
       "transactions": 0
     },
     {
       "symbol": "SONA",
       "fullName": "Sonapur Minerals And Oil Limited",
       "sector": "Manu.& Pro.",
-      "ltp": 402.0,
-      "close": 402.0,
-      "open": 402.0,
-      "high": 402.0,
-      "low": 402.0,
+      "ltp": 403.0,
+      "close": 403.0,
+      "open": 403.0,
+      "high": 403.0,
+      "low": 403.0,
       "prev_close": 400.5,
-      "diff": 1.5,
-      "diff_percent": 0.37,
+      "diff": 2.5,
+      "diff_percent": 0.62,
       "volume": 3364,
-      "turnover": 1277843.0,
+      "turnover": 1346353.0,
       "transactions": 0
     },
     {
@@ -4441,7 +4441,7 @@
       "diff": -3.0,
       "diff_percent": -0.38,
       "volume": 2968,
-      "turnover": 2345892.6,
+      "turnover": 2353812.6,
       "transactions": 0
     },
     {
@@ -4601,7 +4601,7 @@
       "diff": -4.9,
       "diff_percent": -0.73,
       "volume": 2955,
-      "turnover": 1951120.0,
+      "turnover": 1981274.5,
       "transactions": 0
     },
     {
@@ -4633,7 +4633,7 @@
       "diff": 9.0,
       "diff_percent": 0.69,
       "volume": 4385,
-      "turnover": 5649028.0,
+      "turnover": 5707753.0,
       "transactions": 0
     },
     {
@@ -4649,7 +4649,7 @@
       "diff": -4.9,
       "diff_percent": -1.04,
       "volume": 15645,
-      "turnover": 7260708.0,
+      "turnover": 7274631.0,
       "transactions": 0
     },
     {
@@ -4681,7 +4681,7 @@
       "diff": 2.9,
       "diff_percent": 0.53,
       "volume": 4280,
-      "turnover": 2281693.0,
+      "turnover": 2314873.0,
       "transactions": 0
     },
     {
@@ -4768,16 +4768,16 @@
       "symbol": "UHEWA",
       "fullName": "Upper Hewakhola Hydropower Company Limited",
       "sector": "HydroPower",
-      "ltp": 620.0,
-      "close": 620.0,
-      "open": 620.0,
-      "high": 620.0,
-      "low": 620.0,
+      "ltp": 619.9,
+      "close": 619.9,
+      "open": 619.9,
+      "high": 619.9,
+      "low": 619.9,
       "prev_close": 620.0,
-      "diff": 0.0,
-      "diff_percent": 0.0,
+      "diff": -0.1,
+      "diff_percent": -0.02,
       "volume": 5264,
-      "turnover": 1607714.9,
+      "turnover": 3256648.9,
       "transactions": 0
     },
     {
@@ -4857,7 +4857,7 @@
       "diff": 3.0,
       "diff_percent": 0.81,
       "volume": 235,
-      "turnover": 7431.0,
+      "turnover": 87626.0,
       "transactions": 0
     },
     {
@@ -4905,21 +4905,21 @@
       "diff": 2.5,
       "diff_percent": 0.72,
       "volume": 562,
-      "turnover": 178039.0,
+      "turnover": 195489.0,
       "transactions": 0
     },
     {
       "symbol": "UPPER",
       "fullName": "Upper Tamakoshi Hydropower Ltd",
       "sector": "HydroPower",
-      "ltp": 191.2,
-      "close": 191.2,
-      "open": 191.2,
-      "high": 191.2,
-      "low": 191.2,
+      "ltp": 191.5,
+      "close": 191.5,
+      "open": 191.5,
+      "high": 191.5,
+      "low": 191.5,
       "prev_close": 192.5,
-      "diff": -1.3,
-      "diff_percent": -0.68,
+      "diff": -1.0,
+      "diff_percent": -0.52,
       "volume": 7297,
       "turnover": 1396966.3,
       "transactions": 0
@@ -4985,7 +4985,7 @@
       "diff": -1.8,
       "diff_percent": -0.27,
       "volume": 215,
-      "turnover": 135938.2,
+      "turnover": 142509.2,
       "transactions": 0
     },
     {
@@ -5001,7 +5001,7 @@
       "diff": -3.9,
       "diff_percent": -0.95,
       "volume": 174,
-      "turnover": 66740.0,
+      "turnover": 70801.0,
       "transactions": 0
     },
     {
@@ -5024,14 +5024,14 @@
       "symbol": "YMHL",
       "fullName": "Yambaling Hydropower Limited",
       "sector": "HydroPower",
-      "ltp": 645.1,
-      "close": 645.1,
-      "open": 645.1,
-      "high": 645.1,
-      "low": 645.1,
+      "ltp": 649.7,
+      "close": 649.7,
+      "open": 649.7,
+      "high": 649.7,
+      "low": 649.7,
       "prev_close": 637.0,
-      "diff": 8.1,
-      "diff_percent": 1.27,
+      "diff": 12.7,
+      "diff_percent": 1.99,
       "volume": 22634,
       "turnover": 14528345.4,
       "transactions": 0
