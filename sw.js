@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nepse-terminal-v1';
+const CACHE_NAME = 'nepse-terminal-v4';
 const ASSETS_TO_CACHE = [
     '/',
     '/mobile.html',
