@@ -3279,19 +3279,22 @@ function renderHeatbubbleView() {
         .attr("class", "treemap-tile-text-symbol")
         .attr("x", d => (d.x1 - d.x0) / 2)
         .attr("y", d => {
+            const w = d.x1 - d.x0;
             const h = d.y1 - d.y0;
-            return h >= 50 ? (h / 2) - 8 : (h >= 36 ? (h / 2) - 4 : (h / 2) + 3);
+            if (h >= 54 && w >= 54) return (h / 2) - 10;
+            if (h >= 36 && w >= 36) return (h / 2) - 4;
+            return (h / 2) + 4;
         })
         .style("font-size", d => {
             const w = d.x1 - d.x0;
             const h = d.y1 - d.y0;
-            const size = Math.min(w * 0.24, h * 0.32);
-            return `${Math.max(9, Math.min(22, Math.round(size)))}px`;
+            const size = Math.min(w * 0.25, h * 0.33);
+            return `${Math.max(10, Math.min(22, Math.round(size)))}px`;
         })
         .style("display", d => {
             const w = d.x1 - d.x0;
             const h = d.y1 - d.y0;
-            return (w >= 26 && h >= 18) ? "block" : "none";
+            return (w >= 28 && h >= 20) ? "block" : "none";
         })
         .text(d => d.data.symbol);
 
@@ -3300,19 +3303,21 @@ function renderHeatbubbleView() {
         .attr("class", "treemap-tile-text-change")
         .attr("x", d => (d.x1 - d.x0) / 2)
         .attr("y", d => {
+            const w = d.x1 - d.x0;
             const h = d.y1 - d.y0;
-            return h >= 50 ? (d.y1 - d.y0) / 2 + 7 : (d.y1 - d.y0) / 2 + 10;
+            if (h >= 54 && w >= 54) return (h / 2) + 6;
+            return (h / 2) + 12;
         })
         .style("font-size", d => {
             const w = d.x1 - d.x0;
             const h = d.y1 - d.y0;
-            const size = Math.min(w * 0.18, h * 0.26);
-            return `${Math.max(8, Math.min(15, Math.round(size)))}px`;
+            const size = Math.min(w * 0.19, h * 0.26);
+            return `${Math.max(9, Math.min(16, Math.round(size)))}px`;
         })
         .style("display", d => {
             const w = d.x1 - d.x0;
             const h = d.y1 - d.y0;
-            return (w >= 34 && h >= 34) ? "block" : "none";
+            return (w >= 36 && h >= 34) ? "block" : "none";
         })
         .text(d => `${d.data.diffPct > 0 ? '+' : ''}${d.data.diffPct.toFixed(2)}%`);
 
@@ -3324,8 +3329,8 @@ function renderHeatbubbleView() {
         .style("font-size", d => {
             const w = d.x1 - d.x0;
             const h = d.y1 - d.y0;
-            const size = Math.min(w * 0.14, h * 0.20);
-            return `${Math.max(7, Math.min(12, Math.round(size)))}px`;
+            const size = Math.min(w * 0.14, h * 0.18);
+            return `${Math.max(8, Math.min(13, Math.round(size)))}px`;
         })
         .style("display", d => {
             const w = d.x1 - d.x0;

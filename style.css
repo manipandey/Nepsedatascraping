@@ -2464,12 +2464,13 @@ dialog::backdrop {
 
 .treemap-sector-label {
     font-family: var(--font-heading);
-    font-size: 0.76rem;
+    font-size: 0.78rem;
     font-weight: 800;
-    fill: #94a3b8;
-    letter-spacing: 0.06em;
+    fill: #f1f5f9;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     pointer-events: none;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
 }
 
 .treemap-node {
@@ -2478,12 +2479,12 @@ dialog::backdrop {
 }
 
 .treemap-node:hover {
-    filter: brightness(1.25) drop-shadow(0 6px 16px rgba(0,0,0,0.5));
+    filter: brightness(1.28) drop-shadow(0 6px 16px rgba(0,0,0,0.6));
 }
 
 .treemap-node:hover .treemap-tile {
     stroke: #ffffff;
-    stroke-width: 2px;
+    stroke-width: 2.5px;
 }
 
 .treemap-tile {
@@ -2500,26 +2501,26 @@ dialog::backdrop {
     fill: #ffffff;
     text-anchor: middle;
     pointer-events: none;
-    letter-spacing: 0.04em;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+    letter-spacing: 0.05em;
+    text-shadow: 0 1px 4px #000000, 0 0 2px #000000;
 }
 
 .treemap-tile-text-change {
     font-family: var(--font-mono);
-    font-weight: 700;
-    fill: rgba(255, 255, 255, 0.95);
+    font-weight: 800;
+    fill: #ffffff;
     text-anchor: middle;
     pointer-events: none;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+    text-shadow: 0 1px 4px #000000, 0 0 2px #000000;
 }
 
 .treemap-tile-text-price {
     font-family: var(--font-mono);
-    font-weight: 600;
-    fill: rgba(255, 255, 255, 0.85);
+    font-weight: 700;
+    fill: rgba(255, 255, 255, 0.9);
     text-anchor: middle;
     pointer-events: none;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+    text-shadow: 0 1px 3px #000000;
 }
 
 
