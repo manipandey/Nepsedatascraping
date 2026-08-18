@@ -1338,6 +1338,11 @@ def background_autoscrape():
         try:
             print(f"\n[AutoScraper 30s] [{time.strftime('%H:%M:%S')}] Scraping live NEPSE prices...")
             scrape_nepse()
+            try:
+                from sync_to_supabase import sync_all_to_supabase
+                sync_all_to_supabase()
+            except Exception as se:
+                print(f"[AutoScraper 30s] Supabase sync notice: {se}")
         except Exception as e:
             print(f"[AutoScraper 30s] Error during auto-scrape: {e}")
         time.sleep(30)

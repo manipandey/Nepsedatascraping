@@ -1157,3 +1157,9 @@ if __name__ == "__main__":
     scrape_live_official_share_structure_and_lockin()
     scrape_live_official_fundamentals()
     scrape_systemx_and_npstocks()
+    try:
+        from sync_to_supabase import sync_all_to_supabase
+        sync_all_to_supabase()
+    except Exception as se:
+        print(f"[Scraper] Supabase sync notice: {se}")
+

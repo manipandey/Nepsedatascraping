@@ -314,19 +314,28 @@ export async function fetchLiveTick() {
     }
 
     if (staticData && staticData.stocks && staticData.stocks.length) {
-        if (!sbData || !sbData.date || (staticData.date && staticData.date >= sbData.date)) {
+        // Only prioritize static JSON over Supabase if static JSON date is strictly newer than Supabase date
+        if (!sbData || !sbData.date || (staticData.date && staticData.date > sbData.date)) {
             return staticData;
         }
     }
 
     if (sbData && sbData.stocks && sbData.stocks.length) {
-        // Merge static indices and summary into Supabase payload if missing
+        // Merge static metadata (indices, summary, sector, 52w high/low, etc.) into Supabase payload
         if (staticData) {
             if (staticData.indices && (!sbData.indices || !sbData.indices.length)) {
                 sbData.indices = staticData.indices;
             }
             if (!sbData.summary && staticData.summary) {
                 sbData.summary = staticData.summary;
+            }
+            if (staticData.stocks && staticData.stocks.length) {
+                const staticMap = {};
+                staticData.stocks.forEach(s => { staticMap[s.symbol] = s; });
+                sbData.stocks = sbData.stocks.map(s => {
+                    const st = staticMap[s.symbol];
+                    return st ? { ...st, ...s } : s;
+                });
             }
         }
         return sbData;
