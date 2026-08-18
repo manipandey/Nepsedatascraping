@@ -5067,18 +5067,29 @@ function updateUserProfileUI() {
     const userRoleEl = document.getElementById("sidebarUserRole");
     const avatarEl = document.getElementById("sidebarAvatar");
 
+    const headerIcon = document.getElementById("headerUserIcon");
+    const headerLabel = document.getElementById("headerUserLabel");
+    const username = localStorage.getItem("nepse_portfolio_username") ||
+                     localStorage.getItem("nepse_user_email") || "User";
+
+    if (headerLabel) {
+        if (isLoggedIn) {
+            headerLabel.textContent = `👤 ${username}`;
+            if (headerIcon) headerIcon.textContent = "🟢";
+        } else {
+            headerLabel.textContent = "Sign In / Profile";
+            if (headerIcon) headerIcon.textContent = "🔐";
+        }
+    }
+
     if (profileSection) {
         if (isLoggedIn) {
             profileSection.style.display = "flex";
-            // Use the stored username directly (not email — no .split('@') needed)
-            const username = localStorage.getItem("nepse_portfolio_username") ||
-                             localStorage.getItem("nepse_user_email") || "User";
             const role = localStorage.getItem("nepse_user_role") || "Verified Trader";
 
             if (usernameEl) usernameEl.textContent = username;
             if (userRoleEl) userRoleEl.textContent = role;
 
-            // Use first letter of username for avatar
             if (avatarEl) avatarEl.textContent = username.charAt(0).toUpperCase();
         } else {
             profileSection.style.display = "none";
