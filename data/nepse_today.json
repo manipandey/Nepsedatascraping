@@ -1,6 +1,6 @@
 {
   "date": "2026-08-17",
-  "scraped_at": "2026-08-18T02:47:23.485857Z",
+  "scraped_at": "2026-08-18T02:50:27.911291Z",
   "summary": {
     "total_turnover": 5525511872.75,
     "total_volume": 11932035,
@@ -27,9 +27,18 @@
       "fifty_two_week_high": 1157.0,
       "fifty_two_week_low": 827.9,
       "confidence": 38.36,
-      "dma20": 932.22,
-      "diff_20dma": -1.42,
-      "below_20dma": true
+      "avg180d": 967.14,
+      "dma20": 935.65,
+      "ema20": 935.65,
+      "diff_20dma": -1.78,
+      "below_20dma": true,
+      "ema50": 942.17,
+      "ema100": 954.47,
+      "is_ema_aligned": false,
+      "fractal_low": 900.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "ADBL",
@@ -47,9 +56,18 @@
       "fifty_two_week_high": 340.0,
       "fifty_two_week_low": 285.2,
       "confidence": 33.19,
-      "dma20": 312.83,
-      "diff_20dma": -3.4,
-      "below_20dma": true
+      "avg180d": 308.35,
+      "dma20": 314.45,
+      "ema20": 314.45,
+      "diff_20dma": -3.9,
+      "below_20dma": true,
+      "ema50": 312.09,
+      "ema100": 311.02,
+      "is_ema_aligned": true,
+      "fractal_low": 306.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "ADBLD83",
@@ -67,9 +85,18 @@
       "fifty_two_week_high": 1132.9,
       "fifty_two_week_low": 1015.0,
       "confidence": 34.57,
-      "dma20": 1061.85,
-      "diff_20dma": -3.0,
-      "below_20dma": true
+      "avg180d": 1087.17,
+      "dma20": 1053.28,
+      "ema20": 1053.28,
+      "diff_20dma": -2.21,
+      "below_20dma": true,
+      "ema50": 1062.84,
+      "ema100": 1072.35,
+      "is_ema_aligned": false,
+      "fractal_low": 1015.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "AHL",
@@ -87,9 +114,18 @@
       "fifty_two_week_high": 699.0,
       "fifty_two_week_low": 405.0,
       "confidence": 36.09,
-      "dma20": 421.74,
-      "diff_20dma": -0.65,
-      "below_20dma": true
+      "avg180d": 526.01,
+      "dma20": 426.99,
+      "ema20": 426.99,
+      "diff_20dma": -1.87,
+      "below_20dma": true,
+      "ema50": 450.36,
+      "ema100": 481.15,
+      "is_ema_aligned": false,
+      "fractal_low": 410.4,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "AHPC",
@@ -107,9 +143,18 @@
       "fifty_two_week_high": 323.3,
       "fifty_two_week_low": 250.1,
       "confidence": 32.28,
-      "dma20": 268.4,
-      "diff_20dma": -1.86,
-      "below_20dma": true
+      "avg180d": 278.87,
+      "dma20": 269.15,
+      "ema20": 269.15,
+      "diff_20dma": -2.14,
+      "below_20dma": true,
+      "ema50": 271.46,
+      "ema100": 275.41,
+      "is_ema_aligned": false,
+      "fractal_low": 270.2,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "AKJCL",
@@ -127,9 +172,18 @@
       "fifty_two_week_high": 461.4,
       "fifty_two_week_low": 172.9,
       "confidence": 20.97,
-      "dma20": 361.1,
-      "diff_20dma": -1.55,
-      "below_20dma": true
+      "avg180d": 319.39,
+      "dma20": 365.1,
+      "ema20": 365.1,
+      "diff_20dma": -2.63,
+      "below_20dma": true,
+      "ema50": 369.3,
+      "ema100": 359.61,
+      "is_ema_aligned": false,
+      "fractal_low": 326.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "AKPL",
@@ -147,9 +201,18 @@
       "fifty_two_week_high": 317.0,
       "fifty_two_week_low": 227.5,
       "confidence": 32.47,
-      "dma20": 257.69,
-      "diff_20dma": -2.21,
-      "below_20dma": true
+      "avg180d": 262.69,
+      "dma20": 258.96,
+      "ema20": 258.96,
+      "diff_20dma": -2.69,
+      "below_20dma": true,
+      "ema50": 261.4,
+      "ema100": 263.68,
+      "is_ema_aligned": false,
+      "fractal_low": 255.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "ALBSL",
@@ -167,9 +230,18 @@
       "fifty_two_week_high": 1334.0,
       "fifty_two_week_low": 930.0,
       "confidence": 30.94,
-      "dma20": 1080.3,
-      "diff_20dma": 1.31,
-      "below_20dma": false
+      "avg180d": 1118.94,
+      "dma20": 1088.84,
+      "ema20": 1088.84,
+      "diff_20dma": 0.52,
+      "below_20dma": false,
+      "ema50": 1093.25,
+      "ema100": 1101.69,
+      "is_ema_aligned": false,
+      "fractal_low": 1050.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "ALICL",
@@ -187,9 +259,18 @@
       "fifty_two_week_high": 507.0,
       "fifty_two_week_low": 413.4,
       "confidence": 42.01,
-      "dma20": 430.57,
-      "diff_20dma": -2.08,
-      "below_20dma": true
+      "avg180d": 459.26,
+      "dma20": 433.0,
+      "ema20": 433.0,
+      "diff_20dma": -2.63,
+      "below_20dma": true,
+      "ema50": 439.24,
+      "ema100": 448.89,
+      "is_ema_aligned": false,
+      "fractal_low": 413.4,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "ANLB",
@@ -207,9 +288,18 @@
       "fifty_two_week_high": 7560.0,
       "fifty_two_week_low": 5200.0,
       "confidence": 27.72,
-      "dma20": 6069.09,
-      "diff_20dma": -12.51,
-      "below_20dma": true
+      "avg180d": 6172.63,
+      "dma20": 5919.9,
+      "ema20": 5919.9,
+      "diff_20dma": -10.3,
+      "below_20dma": true,
+      "ema50": 6045.13,
+      "ema100": 6095.57,
+      "is_ema_aligned": false,
+      "fractal_low": 5550.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "APHL",
@@ -227,9 +317,16 @@
       "fifty_two_week_high": 1053.4,
       "fifty_two_week_low": 299.7,
       "confidence": 17.41,
-      "dma20": 848.85,
-      "diff_20dma": -7.88,
-      "below_20dma": true
+      "avg180d": 808.23,
+      "dma20": 833.82,
+      "ema20": 833.82,
+      "diff_20dma": -6.21,
+      "below_20dma": true,
+      "is_ema_aligned": false,
+      "fractal_low": 809.4,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "API",
@@ -247,9 +344,18 @@
       "fifty_two_week_high": 370.0,
       "fifty_two_week_low": 258.8,
       "confidence": 39.07,
-      "dma20": 333.78,
-      "diff_20dma": -0.35,
-      "below_20dma": true
+      "avg180d": 320.4,
+      "dma20": 335.61,
+      "ema20": 335.61,
+      "diff_20dma": -0.9,
+      "below_20dma": true,
+      "ema50": 337.36,
+      "ema100": 334.16,
+      "is_ema_aligned": false,
+      "fractal_low": 325.4,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "AVYAN",
@@ -267,9 +373,18 @@
       "fifty_two_week_high": 1366.0,
       "fifty_two_week_low": 906.0,
       "confidence": 37.91,
-      "dma20": 1050.9,
-      "diff_20dma": 1.72,
-      "below_20dma": false
+      "avg180d": 1045.01,
+      "dma20": 1050.7,
+      "ema20": 1050.7,
+      "diff_20dma": 1.74,
+      "below_20dma": false,
+      "ema50": 1064.34,
+      "ema100": 1068.07,
+      "is_ema_aligned": false,
+      "fractal_low": 971.9,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BANDIPUR",
@@ -287,9 +402,18 @@
       "fifty_two_week_high": 1233.0,
       "fifty_two_week_low": 285.0,
       "confidence": 35.46,
-      "dma20": 716.0,
-      "diff_20dma": -2.12,
-      "below_20dma": true
+      "avg180d": 828.24,
+      "dma20": 728.2,
+      "ema20": 728.2,
+      "diff_20dma": -3.76,
+      "below_20dma": true,
+      "ema50": 759.11,
+      "ema100": 788.4,
+      "is_ema_aligned": false,
+      "fractal_low": 723.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BARUN",
@@ -307,9 +431,18 @@
       "fifty_two_week_high": 401.5,
       "fifty_two_week_low": 292.1,
       "confidence": 33.84,
-      "dma20": 323.86,
-      "diff_20dma": -2.37,
-      "below_20dma": true
+      "avg180d": 342.09,
+      "dma20": 325.27,
+      "ema20": 325.27,
+      "diff_20dma": -2.79,
+      "below_20dma": true,
+      "ema50": 330.23,
+      "ema100": 337.53,
+      "is_ema_aligned": false,
+      "fractal_low": 318.3,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BBC",
@@ -327,9 +460,18 @@
       "fifty_two_week_high": 5600.0,
       "fifty_two_week_low": 3825.0,
       "confidence": 21.53,
-      "dma20": 4231.34,
-      "diff_20dma": -3.36,
-      "below_20dma": true
+      "avg180d": 4715.04,
+      "dma20": 4252.51,
+      "ema20": 4252.51,
+      "diff_20dma": -3.85,
+      "below_20dma": true,
+      "ema50": 4346.35,
+      "ema100": 4507.76,
+      "is_ema_aligned": false,
+      "fractal_low": 3825.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BEDC",
@@ -347,9 +489,18 @@
       "fifty_two_week_high": 774.9,
       "fifty_two_week_low": 303.1,
       "confidence": 30.54,
-      "dma20": 322.06,
-      "diff_20dma": -1.6,
-      "below_20dma": true
+      "avg180d": 460.83,
+      "dma20": 326.01,
+      "ema20": 326.01,
+      "diff_20dma": -2.79,
+      "below_20dma": true,
+      "ema50": 344.97,
+      "ema100": 387.6,
+      "is_ema_aligned": false,
+      "fractal_low": 313.5,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BFC",
@@ -367,9 +518,18 @@
       "fifty_two_week_high": 562.0,
       "fifty_two_week_low": 411.5,
       "confidence": 29.26,
-      "dma20": 517.38,
-      "diff_20dma": -6.55,
-      "below_20dma": true
+      "avg180d": 482.12,
+      "dma20": 513.18,
+      "ema20": 513.18,
+      "diff_20dma": -5.78,
+      "below_20dma": true,
+      "ema50": 506.11,
+      "ema100": 495.88,
+      "is_ema_aligned": true,
+      "fractal_low": 485.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BGWT",
@@ -387,9 +547,18 @@
       "fifty_two_week_high": 944.0,
       "fifty_two_week_low": 514.1,
       "confidence": 19.48,
-      "dma20": 572.45,
-      "diff_20dma": -9.34,
-      "below_20dma": true
+      "avg180d": 713.29,
+      "dma20": 581.47,
+      "ema20": 581.47,
+      "diff_20dma": -10.74,
+      "below_20dma": true,
+      "ema50": 608.41,
+      "ema100": 653.17,
+      "is_ema_aligned": false,
+      "fractal_low": 516.1,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BHCL",
@@ -407,9 +576,18 @@
       "fifty_two_week_high": 699.0,
       "fifty_two_week_low": 292.1,
       "confidence": 50.52,
-      "dma20": 491.72,
-      "diff_20dma": 12.67,
-      "below_20dma": false
+      "avg180d": 537.17,
+      "dma20": 506.58,
+      "ema20": 506.58,
+      "diff_20dma": 9.36,
+      "below_20dma": false,
+      "ema50": 520.43,
+      "ema100": 528.28,
+      "is_ema_aligned": false,
+      "fractal_low": 435.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BHDC",
@@ -427,9 +605,18 @@
       "fifty_two_week_high": 616.0,
       "fifty_two_week_low": 412.0,
       "confidence": 38.95,
-      "dma20": 434.11,
-      "diff_20dma": -1.64,
-      "below_20dma": true
+      "avg180d": 472.4,
+      "dma20": 436.15,
+      "ema20": 436.15,
+      "diff_20dma": -2.1,
+      "below_20dma": true,
+      "ema50": 444.35,
+      "ema100": 457.09,
+      "is_ema_aligned": false,
+      "fractal_low": 424.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BHL",
@@ -447,9 +634,18 @@
       "fifty_two_week_high": 264.4,
       "fifty_two_week_low": 164.0,
       "confidence": 39.32,
-      "dma20": 210.61,
-      "diff_20dma": -1.05,
-      "below_20dma": true
+      "avg180d": 206.1,
+      "dma20": 211.89,
+      "ema20": 211.89,
+      "diff_20dma": -1.65,
+      "below_20dma": true,
+      "ema50": 213.32,
+      "ema100": 213.67,
+      "is_ema_aligned": false,
+      "fractal_low": 211.2,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BHPL",
@@ -467,9 +663,18 @@
       "fifty_two_week_high": 820.0,
       "fifty_two_week_low": 449.0,
       "confidence": 39.04,
-      "dma20": 482.16,
-      "diff_20dma": 0.8,
-      "below_20dma": false
+      "avg180d": 558.82,
+      "dma20": 485.88,
+      "ema20": 485.88,
+      "diff_20dma": 0.02,
+      "below_20dma": false,
+      "ema50": 501.8,
+      "ema100": 527.15,
+      "is_ema_aligned": false,
+      "fractal_low": 465.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BJHL",
@@ -487,9 +692,17 @@
       "fifty_two_week_high": 1305.0,
       "fifty_two_week_low": 270.1,
       "confidence": 39.22,
-      "dma20": 736.34,
-      "diff_20dma": 0.09,
-      "below_20dma": false
+      "avg180d": 855.63,
+      "dma20": 752.82,
+      "ema20": 752.82,
+      "diff_20dma": -2.1,
+      "below_20dma": true,
+      "ema50": 795.6,
+      "is_ema_aligned": false,
+      "fractal_low": 688.3,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BNHC",
@@ -507,9 +720,18 @@
       "fifty_two_week_high": 613.8,
       "fifty_two_week_low": 261.3,
       "confidence": 33.31,
-      "dma20": 288.89,
-      "diff_20dma": -2.28,
-      "below_20dma": true
+      "avg180d": 381.68,
+      "dma20": 291.38,
+      "ema20": 291.38,
+      "diff_20dma": -3.12,
+      "below_20dma": true,
+      "ema50": 306.92,
+      "ema100": 333.69,
+      "is_ema_aligned": false,
+      "fractal_low": 278.4,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BNL",
@@ -526,7 +748,13 @@
       "transactions": 1,
       "fifty_two_week_high": 16921.0,
       "fifty_two_week_low": 13872.8,
-      "confidence": 33.71
+      "confidence": 33.71,
+      "avg180d": 14900.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BNT",
@@ -543,7 +771,13 @@
       "transactions": 1,
       "fifty_two_week_high": 12760.0,
       "fifty_two_week_low": 10660.0,
-      "confidence": 32.72
+      "confidence": 32.72,
+      "avg180d": 11552.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BPCL",
@@ -561,9 +795,18 @@
       "fifty_two_week_high": 874.0,
       "fifty_two_week_low": 612.0,
       "confidence": 31.09,
-      "dma20": 658.08,
-      "diff_20dma": -2.14,
-      "below_20dma": true
+      "avg180d": 707.94,
+      "dma20": 658.57,
+      "ema20": 658.57,
+      "diff_20dma": -2.21,
+      "below_20dma": true,
+      "ema50": 666.36,
+      "ema100": 681.27,
+      "is_ema_aligned": false,
+      "fractal_low": 645.1,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "BUNGAL",
@@ -581,9 +824,18 @@
       "fifty_two_week_high": 895.0,
       "fifty_two_week_low": 302.4,
       "confidence": 41.12,
-      "dma20": 608.31,
-      "diff_20dma": -0.38,
-      "below_20dma": true
+      "avg180d": 638.24,
+      "dma20": 618.5,
+      "ema20": 618.5,
+      "diff_20dma": -2.02,
+      "below_20dma": true,
+      "ema50": 640.24,
+      "ema100": 643.93,
+      "is_ema_aligned": false,
+      "fractal_low": 555.8,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "C30MF",
@@ -601,9 +853,18 @@
       "fifty_two_week_high": 10.5,
       "fifty_two_week_low": 8.7,
       "confidence": 31.5,
+      "avg180d": 9.74,
       "dma20": 10.04,
+      "ema20": 10.04,
       "diff_20dma": -0.4,
-      "below_20dma": true
+      "below_20dma": true,
+      "ema50": 10.03,
+      "ema100": 9.97,
+      "is_ema_aligned": true,
+      "fractal_low": 9.69,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CBBL",
@@ -621,9 +882,18 @@
       "fifty_two_week_high": 1124.0,
       "fifty_two_week_low": 882.0,
       "confidence": 42.5,
-      "dma20": 927.63,
-      "diff_20dma": 0.79,
-      "below_20dma": false
+      "avg180d": 944.44,
+      "dma20": 929.13,
+      "ema20": 929.13,
+      "diff_20dma": 0.63,
+      "below_20dma": false,
+      "ema50": 923.84,
+      "ema100": 927.26,
+      "is_ema_aligned": false,
+      "fractal_low": 907.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CCBD88",
@@ -640,7 +910,13 @@
       "transactions": 2,
       "fifty_two_week_high": 1326.0,
       "fifty_two_week_low": 1126.0,
-      "confidence": 38.04
+      "confidence": 38.04,
+      "avg180d": 1205.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CFCL",
@@ -658,9 +934,18 @@
       "fifty_two_week_high": 699.0,
       "fifty_two_week_low": 445.1,
       "confidence": 23.11,
-      "dma20": 633.15,
-      "diff_20dma": -3.66,
-      "below_20dma": true
+      "avg180d": 543.35,
+      "dma20": 636.92,
+      "ema20": 636.92,
+      "diff_20dma": -4.23,
+      "below_20dma": true,
+      "ema50": 613.36,
+      "ema100": 585.18,
+      "is_ema_aligned": true,
+      "fractal_low": 611.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": true
     },
     {
       "symbol": "CGH",
@@ -678,9 +963,18 @@
       "fifty_two_week_high": 1104.0,
       "fifty_two_week_low": 748.0,
       "confidence": 21.14,
-      "dma20": 778.91,
-      "diff_20dma": 0.02,
-      "below_20dma": false
+      "avg180d": 833.81,
+      "dma20": 781.51,
+      "ema20": 781.51,
+      "diff_20dma": -0.31,
+      "below_20dma": true,
+      "ema50": 785.67,
+      "ema100": 803.29,
+      "is_ema_aligned": false,
+      "fractal_low": 776.5,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CHCL",
@@ -698,9 +992,18 @@
       "fifty_two_week_high": 529.0,
       "fifty_two_week_low": 450.3,
       "confidence": 23.17,
-      "dma20": 487.6,
-      "diff_20dma": -1.56,
-      "below_20dma": true
+      "avg180d": 485.6,
+      "dma20": 489.22,
+      "ema20": 489.22,
+      "diff_20dma": -1.88,
+      "below_20dma": true,
+      "ema50": 486.35,
+      "ema100": 486.24,
+      "is_ema_aligned": true,
+      "fractal_low": 477.4,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": true
     },
     {
       "symbol": "CHDC",
@@ -718,9 +1021,18 @@
       "fifty_two_week_high": 2717.0,
       "fifty_two_week_low": 1967.0,
       "confidence": 36.26,
-      "dma20": 2178.39,
-      "diff_20dma": 1.59,
-      "below_20dma": false
+      "avg180d": 2318.39,
+      "dma20": 2202.74,
+      "ema20": 2202.74,
+      "diff_20dma": 0.47,
+      "below_20dma": false,
+      "ema50": 2212.93,
+      "ema100": 2259.48,
+      "is_ema_aligned": false,
+      "fractal_low": 1967.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CHL",
@@ -738,9 +1050,18 @@
       "fifty_two_week_high": 332.5,
       "fifty_two_week_low": 223.4,
       "confidence": 21.78,
-      "dma20": 263.19,
-      "diff_20dma": 1.26,
-      "below_20dma": false
+      "avg180d": 278.18,
+      "dma20": 265.83,
+      "ema20": 265.83,
+      "diff_20dma": 0.25,
+      "below_20dma": false,
+      "ema50": 271.43,
+      "ema100": 277.73,
+      "is_ema_aligned": false,
+      "fractal_low": 256.5,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CIT",
@@ -758,9 +1079,18 @@
       "fifty_two_week_high": 1973.0,
       "fifty_two_week_low": 1630.3,
       "confidence": 32.11,
-      "dma20": 1704.11,
-      "diff_20dma": -0.18,
-      "below_20dma": true
+      "avg180d": 1781.7,
+      "dma20": 1711.3,
+      "ema20": 1711.3,
+      "diff_20dma": -0.6,
+      "below_20dma": true,
+      "ema50": 1722.4,
+      "ema100": 1747.38,
+      "is_ema_aligned": false,
+      "fractal_low": 1706.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CITY",
@@ -778,9 +1108,18 @@
       "fifty_two_week_high": 649.0,
       "fifty_two_week_low": 327.8,
       "confidence": 28.19,
-      "dma20": 367.77,
-      "diff_20dma": -1.3,
-      "below_20dma": true
+      "avg180d": 457.98,
+      "dma20": 373.86,
+      "ema20": 373.86,
+      "diff_20dma": -2.9,
+      "below_20dma": true,
+      "ema50": 389.43,
+      "ema100": 419.86,
+      "is_ema_aligned": false,
+      "fractal_low": 327.8,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CIZBD90",
@@ -797,7 +1136,13 @@
       "transactions": 5,
       "fifty_two_week_high": 1303.0,
       "fifty_two_week_low": 1010.0,
-      "confidence": 31.15
+      "confidence": 31.15,
+      "avg180d": 1253.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CKHL",
@@ -815,9 +1160,18 @@
       "fifty_two_week_high": 804.0,
       "fifty_two_week_low": 525.0,
       "confidence": 33.79,
-      "dma20": 596.72,
-      "diff_20dma": -0.02,
-      "below_20dma": true
+      "avg180d": 660.09,
+      "dma20": 603.41,
+      "ema20": 603.41,
+      "diff_20dma": -1.13,
+      "below_20dma": true,
+      "ema50": 620.66,
+      "ema100": 640.79,
+      "is_ema_aligned": false,
+      "fractal_low": 525.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CLI",
@@ -835,9 +1189,18 @@
       "fifty_two_week_high": 526.0,
       "fifty_two_week_low": 411.0,
       "confidence": 34.04,
-      "dma20": 446.66,
-      "diff_20dma": -1.63,
-      "below_20dma": true
+      "avg180d": 467.01,
+      "dma20": 447.77,
+      "ema20": 447.77,
+      "diff_20dma": -1.87,
+      "below_20dma": true,
+      "ema50": 450.74,
+      "ema100": 456.64,
+      "is_ema_aligned": false,
+      "fractal_low": 425.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CORBL",
@@ -855,9 +1218,18 @@
       "fifty_two_week_high": 3183.0,
       "fifty_two_week_low": 965.0,
       "confidence": 26.06,
-      "dma20": 1450.46,
-      "diff_20dma": -28.3,
-      "below_20dma": true
+      "avg180d": 1773.94,
+      "dma20": 1406.4,
+      "ema20": 1406.4,
+      "diff_20dma": -26.05,
+      "below_20dma": true,
+      "ema50": 1619.84,
+      "ema100": 1734.99,
+      "is_ema_aligned": false,
+      "fractal_low": 1282.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CREST",
@@ -875,9 +1247,18 @@
       "fifty_two_week_high": 1588.0,
       "fifty_two_week_low": 985.2,
       "confidence": 31.23,
-      "dma20": 1198.88,
-      "diff_20dma": -2.43,
-      "below_20dma": true
+      "avg180d": 1274.71,
+      "dma20": 1202.14,
+      "ema20": 1202.14,
+      "diff_20dma": -2.7,
+      "below_20dma": true,
+      "ema50": 1216.53,
+      "ema100": 1238.29,
+      "is_ema_aligned": false,
+      "fractal_low": 1143.8,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CSY",
@@ -895,9 +1276,18 @@
       "fifty_two_week_high": 10.0,
       "fifty_two_week_low": 8.2,
       "confidence": 36.76,
-      "dma20": 9.11,
-      "diff_20dma": -2.41,
-      "below_20dma": true
+      "avg180d": 9.33,
+      "dma20": 9.13,
+      "ema20": 9.13,
+      "diff_20dma": -2.63,
+      "below_20dma": true,
+      "ema50": 9.2,
+      "ema100": 9.31,
+      "is_ema_aligned": false,
+      "fractal_low": 9.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CYCL",
@@ -915,9 +1305,18 @@
       "fifty_two_week_high": 1879.0,
       "fifty_two_week_low": 1216.0,
       "confidence": 46.35,
-      "dma20": 1351.52,
-      "diff_20dma": 8.03,
-      "below_20dma": false
+      "avg180d": 1510.02,
+      "dma20": 1363.9,
+      "ema20": 1363.9,
+      "diff_20dma": 7.05,
+      "below_20dma": false,
+      "ema50": 1402.83,
+      "ema100": 1451.72,
+      "is_ema_aligned": false,
+      "fractal_low": 1280.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "CZBIL",
@@ -935,9 +1334,18 @@
       "fifty_two_week_high": 238.6,
       "fifty_two_week_low": 183.0,
       "confidence": 41.28,
-      "dma20": 202.25,
-      "diff_20dma": -0.32,
-      "below_20dma": true
+      "avg180d": 201.04,
+      "dma20": 203.64,
+      "ema20": 203.64,
+      "diff_20dma": -1.0,
+      "below_20dma": true,
+      "ema50": 202.42,
+      "ema100": 202.79,
+      "is_ema_aligned": false,
+      "fractal_low": 196.6,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "DDBL",
@@ -955,9 +1363,18 @@
       "fifty_two_week_high": 941.0,
       "fifty_two_week_low": 793.0,
       "confidence": 42.98,
-      "dma20": 837.48,
-      "diff_20dma": 1.26,
-      "below_20dma": false
+      "avg180d": 846.75,
+      "dma20": 839.06,
+      "ema20": 839.06,
+      "diff_20dma": 1.07,
+      "below_20dma": false,
+      "ema50": 838.71,
+      "ema100": 841.62,
+      "is_ema_aligned": false,
+      "fractal_low": 811.8,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "DHEL",
@@ -975,9 +1392,18 @@
       "fifty_two_week_high": 918.9,
       "fifty_two_week_low": 402.2,
       "confidence": 30.21,
-      "dma20": 585.35,
-      "diff_20dma": 3.19,
-      "below_20dma": false
+      "avg180d": 633.21,
+      "dma20": 591.51,
+      "ema20": 591.51,
+      "diff_20dma": 2.11,
+      "below_20dma": false,
+      "ema50": 600.61,
+      "ema100": 612.55,
+      "is_ema_aligned": false,
+      "fractal_low": 540.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "DHPL",
@@ -995,9 +1421,18 @@
       "fifty_two_week_high": 345.0,
       "fifty_two_week_low": 254.0,
       "confidence": 38.64,
-      "dma20": 287.96,
-      "diff_20dma": 0.88,
-      "below_20dma": false
+      "avg180d": 300.18,
+      "dma20": 291.16,
+      "ema20": 291.16,
+      "diff_20dma": -0.23,
+      "below_20dma": true,
+      "ema50": 292.63,
+      "ema100": 296.72,
+      "is_ema_aligned": false,
+      "fractal_low": 283.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "DLBS",
@@ -1015,9 +1450,18 @@
       "fifty_two_week_high": 1595.0,
       "fifty_two_week_low": 1083.8,
       "confidence": 26.72,
-      "dma20": 1207.3,
-      "diff_20dma": -4.75,
-      "below_20dma": true
+      "avg180d": 1315.66,
+      "dma20": 1216.15,
+      "ema20": 1216.15,
+      "diff_20dma": -5.44,
+      "below_20dma": true,
+      "ema50": 1246.91,
+      "ema100": 1278.52,
+      "is_ema_aligned": false,
+      "fractal_low": 1133.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "DOLTI",
@@ -1035,9 +1479,18 @@
       "fifty_two_week_high": 619.0,
       "fifty_two_week_low": 300.1,
       "confidence": 30.42,
-      "dma20": 324.7,
-      "diff_20dma": -1.94,
-      "below_20dma": true
+      "avg180d": 446.09,
+      "dma20": 327.86,
+      "ema20": 327.86,
+      "diff_20dma": -2.89,
+      "below_20dma": true,
+      "ema50": 344.79,
+      "ema100": 381.13,
+      "is_ema_aligned": false,
+      "fractal_low": 312.7,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "DORDI",
@@ -1055,9 +1508,18 @@
       "fifty_two_week_high": 327.4,
       "fifty_two_week_low": 213.1,
       "confidence": 39.4,
-      "dma20": 254.91,
-      "diff_20dma": -1.53,
-      "below_20dma": true
+      "avg180d": 272.08,
+      "dma20": 256.09,
+      "ema20": 256.09,
+      "diff_20dma": -1.99,
+      "below_20dma": true,
+      "ema50": 260.59,
+      "ema100": 267.5,
+      "is_ema_aligned": false,
+      "fractal_low": 240.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "EBL",
@@ -1075,9 +1537,18 @@
       "fifty_two_week_high": 780.6,
       "fifty_two_week_low": 619.0,
       "confidence": 42.12,
-      "dma20": 713.52,
-      "diff_20dma": 2.03,
-      "below_20dma": false
+      "avg180d": 682.91,
+      "dma20": 717.42,
+      "ema20": 717.42,
+      "diff_20dma": 1.47,
+      "below_20dma": false,
+      "ema50": 709.0,
+      "ema100": 701.28,
+      "is_ema_aligned": true,
+      "fractal_low": 717.5,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "EBLD85",
@@ -1095,9 +1566,18 @@
       "fifty_two_week_high": 1250.0,
       "fifty_two_week_low": 1091.8,
       "confidence": 32.8,
-      "dma20": 1132.71,
-      "diff_20dma": -3.61,
-      "below_20dma": true
+      "avg180d": 1155.97,
+      "dma20": 1134.36,
+      "ema20": 1134.36,
+      "diff_20dma": -3.75,
+      "below_20dma": true,
+      "ema50": 1145.16,
+      "ema100": 1151.94,
+      "is_ema_aligned": false,
+      "fractal_low": 1102.1,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "EBLD91",
@@ -1115,9 +1595,18 @@
       "fifty_two_week_high": 1142.4,
       "fifty_two_week_low": 994.4,
       "confidence": 27.7,
-      "dma20": 1088.36,
-      "diff_20dma": -1.69,
-      "below_20dma": true
+      "avg180d": 1088.46,
+      "dma20": 1083.35,
+      "ema20": 1083.35,
+      "diff_20dma": -1.23,
+      "below_20dma": true,
+      "ema50": 1086.41,
+      "ema100": 1085.24,
+      "is_ema_aligned": false,
+      "fractal_low": 1058.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "ECL",
@@ -1135,9 +1624,12 @@
       "fifty_two_week_high": 1980.0,
       "fifty_two_week_low": 296.6,
       "confidence": 28.79,
-      "dma20": 838.27,
-      "diff_20dma": 80.13,
-      "below_20dma": false
+      "avg180d": 838.27,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "EDBL",
@@ -1155,9 +1647,18 @@
       "fifty_two_week_high": 683.4,
       "fifty_two_week_low": 545.0,
       "confidence": 35.51,
-      "dma20": 573.16,
-      "diff_20dma": 1.54,
-      "below_20dma": false
+      "avg180d": 588.08,
+      "dma20": 575.65,
+      "ema20": 575.65,
+      "diff_20dma": 1.1,
+      "below_20dma": false,
+      "ema50": 575.29,
+      "ema100": 580.21,
+      "is_ema_aligned": false,
+      "fractal_low": 570.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "EHPL",
@@ -1175,9 +1676,18 @@
       "fifty_two_week_high": 625.5,
       "fifty_two_week_low": 318.3,
       "confidence": 26.9,
-      "dma20": 347.4,
-      "diff_20dma": -3.89,
-      "below_20dma": true
+      "avg180d": 403.88,
+      "dma20": 350.72,
+      "ema20": 350.72,
+      "diff_20dma": -4.8,
+      "below_20dma": true,
+      "ema50": 365.54,
+      "ema100": 385.58,
+      "is_ema_aligned": false,
+      "fractal_low": 318.3,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "ENL",
@@ -1195,9 +1705,18 @@
       "fifty_two_week_high": 1091.5,
       "fifty_two_week_low": 762.0,
       "confidence": 38.55,
-      "dma20": 814.98,
-      "diff_20dma": -1.22,
-      "below_20dma": true
+      "avg180d": 894.58,
+      "dma20": 820.37,
+      "ema20": 820.37,
+      "diff_20dma": -1.87,
+      "below_20dma": true,
+      "ema50": 840.79,
+      "ema100": 867.85,
+      "is_ema_aligned": false,
+      "fractal_low": 810.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "FMDBL",
@@ -1215,9 +1734,18 @@
       "fifty_two_week_high": 982.0,
       "fifty_two_week_low": 730.0,
       "confidence": 25.42,
-      "dma20": 771.81,
+      "avg180d": 805.44,
+      "dma20": 771.8,
+      "ema20": 771.8,
       "diff_20dma": 0.41,
-      "below_20dma": false
+      "below_20dma": false,
+      "ema50": 777.75,
+      "ema100": 788.72,
+      "is_ema_aligned": false,
+      "fractal_low": 750.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "FOWAD",
@@ -1235,9 +1763,18 @@
       "fifty_two_week_high": 1364.0,
       "fifty_two_week_low": 920.0,
       "confidence": 31.09,
-      "dma20": 973.99,
-      "diff_20dma": -3.49,
-      "below_20dma": true
+      "avg180d": 1071.5,
+      "dma20": 973.84,
+      "ema20": 973.84,
+      "diff_20dma": -3.47,
+      "below_20dma": true,
+      "ema50": 1001.22,
+      "ema100": 1034.09,
+      "is_ema_aligned": false,
+      "fractal_low": 970.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GBBD85",
@@ -1255,9 +1792,18 @@
       "fifty_two_week_high": 1135.0,
       "fifty_two_week_low": 1033.0,
       "confidence": 37.02,
-      "dma20": 1084.33,
-      "diff_20dma": -1.78,
-      "below_20dma": true
+      "avg180d": 1084.62,
+      "dma20": 1080.49,
+      "ema20": 1080.49,
+      "diff_20dma": -1.43,
+      "below_20dma": true,
+      "ema50": 1085.71,
+      "ema100": 1085.3,
+      "is_ema_aligned": false,
+      "fractal_low": 1065.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GBBL",
@@ -1275,9 +1821,18 @@
       "fifty_two_week_high": 449.4,
       "fifty_two_week_low": 367.4,
       "confidence": 36.99,
-      "dma20": 413.04,
-      "diff_20dma": 2.41,
-      "below_20dma": false
+      "avg180d": 403.04,
+      "dma20": 415.76,
+      "ema20": 415.76,
+      "diff_20dma": 1.74,
+      "below_20dma": false,
+      "ema50": 412.56,
+      "ema100": 410.82,
+      "is_ema_aligned": true,
+      "fractal_low": 400.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GBILD86/87",
@@ -1294,7 +1849,13 @@
       "transactions": 3,
       "fifty_two_week_high": 1202.0,
       "fifty_two_week_low": 1025.1,
-      "confidence": 20.1
+      "confidence": 20.1,
+      "avg180d": 1084.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GBIME",
@@ -1312,9 +1873,18 @@
       "fifty_two_week_high": 270.6,
       "fifty_two_week_low": 218.9,
       "confidence": 24.87,
-      "dma20": 248.2,
-      "diff_20dma": 0.32,
-      "below_20dma": false
+      "avg180d": 235.03,
+      "dma20": 250.41,
+      "ema20": 250.41,
+      "diff_20dma": -0.56,
+      "below_20dma": true,
+      "ema50": 244.96,
+      "ema100": 241.24,
+      "is_ema_aligned": true,
+      "fractal_low": 244.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GBIMESY2",
@@ -1332,9 +1902,18 @@
       "fifty_two_week_high": 10.78,
       "fifty_two_week_low": 8.5,
       "confidence": 23.93,
-      "dma20": 9.34,
-      "diff_20dma": -4.07,
-      "below_20dma": true
+      "avg180d": 9.27,
+      "dma20": 9.29,
+      "ema20": 9.29,
+      "diff_20dma": -3.55,
+      "below_20dma": true,
+      "ema50": 9.35,
+      "ema100": 9.34,
+      "is_ema_aligned": false,
+      "fractal_low": 8.95,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GBLBS",
@@ -1352,9 +1931,18 @@
       "fifty_two_week_high": 868.0,
       "fifty_two_week_low": 698.0,
       "confidence": 30.15,
-      "dma20": 746.51,
-      "diff_20dma": -4.29,
-      "below_20dma": true
+      "avg180d": 772.75,
+      "dma20": 748.63,
+      "ema20": 748.63,
+      "diff_20dma": -4.56,
+      "below_20dma": true,
+      "ema50": 756.06,
+      "ema100": 764.62,
+      "is_ema_aligned": false,
+      "fractal_low": 723.2,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GCIL",
@@ -1372,9 +1960,18 @@
       "fifty_two_week_high": 510.0,
       "fifty_two_week_low": 315.5,
       "confidence": 31.43,
-      "dma20": 350.25,
-      "diff_20dma": -2.61,
-      "below_20dma": true
+      "avg180d": 414.78,
+      "dma20": 356.12,
+      "ema20": 356.12,
+      "diff_20dma": -4.22,
+      "below_20dma": true,
+      "ema50": 370.65,
+      "ema100": 391.26,
+      "is_ema_aligned": false,
+      "fractal_low": 345.8,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GFCL",
@@ -1392,9 +1989,18 @@
       "fifty_two_week_high": 738.0,
       "fifty_two_week_low": 528.3,
       "confidence": 31.15,
-      "dma20": 613.56,
-      "diff_20dma": -2.62,
-      "below_20dma": true
+      "avg180d": 628.95,
+      "dma20": 616.22,
+      "ema20": 616.22,
+      "diff_20dma": -3.04,
+      "below_20dma": true,
+      "ema50": 623.12,
+      "ema100": 628.88,
+      "is_ema_aligned": false,
+      "fractal_low": 615.1,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GHL",
@@ -1412,9 +2018,18 @@
       "fifty_two_week_high": 290.0,
       "fifty_two_week_low": 197.1,
       "confidence": 46.6,
-      "dma20": 225.79,
-      "diff_20dma": 7.4,
-      "below_20dma": false
+      "avg180d": 231.81,
+      "dma20": 228.18,
+      "ema20": 228.18,
+      "diff_20dma": 6.28,
+      "below_20dma": false,
+      "ema50": 229.44,
+      "ema100": 232.39,
+      "is_ema_aligned": false,
+      "fractal_low": 228.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GIBF1",
@@ -1432,9 +2047,18 @@
       "fifty_two_week_high": 11.67,
       "fifty_two_week_low": 9.3,
       "confidence": 19.79,
-      "dma20": 10.57,
-      "diff_20dma": 1.89,
-      "below_20dma": false
+      "avg180d": 10.63,
+      "dma20": 10.65,
+      "ema20": 10.65,
+      "diff_20dma": 1.13,
+      "below_20dma": false,
+      "ema50": 10.68,
+      "ema100": 10.71,
+      "is_ema_aligned": false,
+      "fractal_low": 10.53,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GILB",
@@ -1452,9 +2076,18 @@
       "fifty_two_week_high": 1350.0,
       "fifty_two_week_low": 1020.1,
       "confidence": 40.34,
-      "dma20": 1098.33,
-      "diff_20dma": 1.06,
-      "below_20dma": false
+      "avg180d": 1159.01,
+      "dma20": 1103.14,
+      "ema20": 1103.14,
+      "diff_20dma": 0.62,
+      "below_20dma": false,
+      "ema50": 1108.85,
+      "ema100": 1126.21,
+      "is_ema_aligned": false,
+      "fractal_low": 1076.3,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GLBSL",
@@ -1472,9 +2105,18 @@
       "fifty_two_week_high": 2310.0,
       "fifty_two_week_low": 1705.2,
       "confidence": 24.43,
-      "dma20": 1783.32,
-      "diff_20dma": -2.43,
-      "below_20dma": true
+      "avg180d": 1893.88,
+      "dma20": 1789.55,
+      "ema20": 1789.55,
+      "diff_20dma": -2.77,
+      "below_20dma": true,
+      "ema50": 1798.44,
+      "ema100": 1835.03,
+      "is_ema_aligned": false,
+      "fractal_low": 1720.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GLH",
@@ -1492,9 +2134,18 @@
       "fifty_two_week_high": 328.2,
       "fifty_two_week_low": 227.4,
       "confidence": 29.45,
-      "dma20": 253.46,
-      "diff_20dma": 2.54,
-      "below_20dma": false
+      "avg180d": 264.49,
+      "dma20": 255.63,
+      "ema20": 255.63,
+      "diff_20dma": 1.67,
+      "below_20dma": false,
+      "ema50": 258.38,
+      "ema100": 262.24,
+      "is_ema_aligned": false,
+      "fractal_low": 252.9,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GMFBS",
@@ -1512,9 +2163,18 @@
       "fifty_two_week_high": 1688.0,
       "fifty_two_week_low": 1115.0,
       "confidence": 27.45,
-      "dma20": 1212.35,
-      "diff_20dma": -5.55,
-      "below_20dma": true
+      "avg180d": 1398.38,
+      "dma20": 1217.92,
+      "ema20": 1217.92,
+      "diff_20dma": -5.98,
+      "below_20dma": true,
+      "ema50": 1246.8,
+      "ema100": 1301.81,
+      "is_ema_aligned": false,
+      "fractal_low": 1186.1,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GMFIL",
@@ -1532,9 +2192,18 @@
       "fifty_two_week_high": 540.0,
       "fifty_two_week_low": 393.1,
       "confidence": 23.04,
-      "dma20": 462.76,
-      "diff_20dma": -3.41,
-      "below_20dma": true
+      "avg180d": 471.52,
+      "dma20": 465.38,
+      "ema20": 465.38,
+      "diff_20dma": -3.95,
+      "below_20dma": true,
+      "ema50": 468.17,
+      "ema100": 470.72,
+      "is_ema_aligned": false,
+      "fractal_low": 440.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GMLI",
@@ -1552,9 +2221,18 @@
       "fifty_two_week_high": 2200.0,
       "fifty_two_week_low": 1011.0,
       "confidence": 30.37,
-      "dma20": 1172.11,
-      "diff_20dma": -9.05,
-      "below_20dma": true
+      "avg180d": 1551.95,
+      "dma20": 1168.48,
+      "ema20": 1168.48,
+      "diff_20dma": -8.77,
+      "below_20dma": true,
+      "ema50": 1229.02,
+      "ema100": 1347.97,
+      "is_ema_aligned": false,
+      "fractal_low": 1148.5,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GRDBL",
@@ -1572,9 +2250,18 @@
       "fifty_two_week_high": 1320.0,
       "fifty_two_week_low": 949.0,
       "confidence": 24.36,
-      "dma20": 1060.95,
-      "diff_20dma": -1.14,
-      "below_20dma": true
+      "avg180d": 1094.52,
+      "dma20": 1065.89,
+      "ema20": 1065.89,
+      "diff_20dma": -1.59,
+      "below_20dma": true,
+      "ema50": 1065.51,
+      "ema100": 1076.38,
+      "is_ema_aligned": false,
+      "fractal_low": 1024.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GSY",
@@ -1592,9 +2279,18 @@
       "fifty_two_week_high": 10.46,
       "fifty_two_week_low": 8.7,
       "confidence": 27.38,
-      "dma20": 9.92,
-      "diff_20dma": -6.25,
-      "below_20dma": true
+      "avg180d": 9.59,
+      "dma20": 9.85,
+      "ema20": 9.85,
+      "diff_20dma": -5.58,
+      "below_20dma": true,
+      "ema50": 9.9,
+      "ema100": 9.83,
+      "is_ema_aligned": false,
+      "fractal_low": 9.5,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GUFL",
@@ -1612,9 +2308,18 @@
       "fifty_two_week_high": 644.0,
       "fifty_two_week_low": 460.6,
       "confidence": 26.72,
-      "dma20": 559.4,
-      "diff_20dma": -3.83,
-      "below_20dma": true
+      "avg180d": 541.67,
+      "dma20": 562.07,
+      "ema20": 562.07,
+      "diff_20dma": -4.28,
+      "below_20dma": true,
+      "ema50": 555.75,
+      "ema100": 550.81,
+      "is_ema_aligned": true,
+      "fractal_low": 550.1,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GVL",
@@ -1632,9 +2337,18 @@
       "fifty_two_week_high": 602.0,
       "fifty_two_week_low": 461.0,
       "confidence": 29.0,
-      "dma20": 481.5,
-      "diff_20dma": -1.95,
-      "below_20dma": true
+      "avg180d": 500.52,
+      "dma20": 482.56,
+      "ema20": 482.56,
+      "diff_20dma": -2.17,
+      "below_20dma": true,
+      "ema50": 483.93,
+      "ema100": 489.1,
+      "is_ema_aligned": false,
+      "fractal_low": 476.1,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "GWFD83",
@@ -1651,7 +2365,13 @@
       "transactions": 1,
       "fifty_two_week_high": 1239.0,
       "fifty_two_week_low": 1030.2,
-      "confidence": 28.1
+      "confidence": 28.1,
+      "avg180d": 1065.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "H8020",
@@ -1669,9 +2389,18 @@
       "fifty_two_week_high": 12.56,
       "fifty_two_week_low": 10.0,
       "confidence": 26.08,
-      "dma20": 11.82,
-      "diff_20dma": 1.52,
-      "below_20dma": false
+      "avg180d": 11.45,
+      "dma20": 11.81,
+      "ema20": 11.81,
+      "diff_20dma": 1.61,
+      "below_20dma": false,
+      "ema50": 11.8,
+      "ema100": 11.72,
+      "is_ema_aligned": true,
+      "fractal_low": 11.35,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HATHY",
@@ -1689,9 +2418,18 @@
       "fifty_two_week_high": 1287.0,
       "fifty_two_week_low": 646.0,
       "confidence": 27.56,
-      "dma20": 715.26,
-      "diff_20dma": -8.76,
-      "below_20dma": true
+      "avg180d": 855.05,
+      "dma20": 717.7,
+      "ema20": 717.7,
+      "diff_20dma": -9.07,
+      "below_20dma": true,
+      "ema50": 743.27,
+      "ema100": 792.12,
+      "is_ema_aligned": false,
+      "fractal_low": 660.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HBL",
@@ -1709,9 +2447,18 @@
       "fifty_two_week_high": 237.0,
       "fifty_two_week_low": 184.0,
       "confidence": 35.82,
-      "dma20": 198.17,
-      "diff_20dma": -2.15,
-      "below_20dma": true
+      "avg180d": 198.57,
+      "dma20": 198.96,
+      "ema20": 198.96,
+      "diff_20dma": -2.54,
+      "below_20dma": true,
+      "ema50": 199.18,
+      "ema100": 200.34,
+      "is_ema_aligned": false,
+      "fractal_low": 188.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HDHPC",
@@ -1729,9 +2476,18 @@
       "fifty_two_week_high": 274.0,
       "fifty_two_week_low": 162.0,
       "confidence": 36.32,
-      "dma20": 212.34,
-      "diff_20dma": -1.9,
-      "below_20dma": true
+      "avg180d": 207.02,
+      "dma20": 213.15,
+      "ema20": 213.15,
+      "diff_20dma": -2.28,
+      "below_20dma": true,
+      "ema50": 214.67,
+      "ema100": 214.58,
+      "is_ema_aligned": false,
+      "fractal_low": 192.8,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HDL",
@@ -1749,9 +2505,18 @@
       "fifty_two_week_high": 1474.0,
       "fifty_two_week_low": 1097.6,
       "confidence": 41.36,
-      "dma20": 1161.57,
-      "diff_20dma": 1.5,
-      "below_20dma": false
+      "avg180d": 1165.28,
+      "dma20": 1164.13,
+      "ema20": 1164.13,
+      "diff_20dma": 1.28,
+      "below_20dma": false,
+      "ema50": 1160.55,
+      "ema100": 1165.3,
+      "is_ema_aligned": false,
+      "fractal_low": 1125.8,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HEI",
@@ -1769,9 +2534,18 @@
       "fifty_two_week_high": 610.0,
       "fifty_two_week_low": 458.0,
       "confidence": 35.6,
-      "dma20": 530.27,
-      "diff_20dma": -0.13,
-      "below_20dma": true
+      "avg180d": 522.4,
+      "dma20": 535.62,
+      "ema20": 535.62,
+      "diff_20dma": -1.12,
+      "below_20dma": true,
+      "ema50": 536.57,
+      "ema100": 534.9,
+      "is_ema_aligned": false,
+      "fractal_low": 489.9,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HEIP",
@@ -1789,9 +2563,18 @@
       "fifty_two_week_high": 386.0,
       "fifty_two_week_low": 293.1,
       "confidence": 40.72,
-      "dma20": 335.38,
-      "diff_20dma": 1.23,
-      "below_20dma": false
+      "avg180d": 327.33,
+      "dma20": 335.94,
+      "ema20": 335.94,
+      "diff_20dma": 1.06,
+      "below_20dma": false,
+      "ema50": 332.79,
+      "ema100": 331.47,
+      "is_ema_aligned": true,
+      "fractal_low": 328.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HFIN",
@@ -1809,9 +2592,17 @@
       "fifty_two_week_high": 1450.6,
       "fifty_two_week_low": 101.7,
       "confidence": 18.02,
-      "dma20": 696.12,
-      "diff_20dma": -3.74,
-      "below_20dma": true
+      "avg180d": 761.13,
+      "dma20": 716.28,
+      "ema20": 716.28,
+      "diff_20dma": -6.45,
+      "below_20dma": true,
+      "ema50": 738.45,
+      "is_ema_aligned": false,
+      "fractal_low": 680.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HHL",
@@ -1829,9 +2620,18 @@
       "fifty_two_week_high": 416.6,
       "fifty_two_week_low": 309.0,
       "confidence": 36.92,
-      "dma20": 339.42,
-      "diff_20dma": -0.71,
-      "below_20dma": true
+      "avg180d": 350.18,
+      "dma20": 341.4,
+      "ema20": 341.4,
+      "diff_20dma": -1.29,
+      "below_20dma": true,
+      "ema50": 347.67,
+      "ema100": 352.99,
+      "is_ema_aligned": false,
+      "fractal_low": 309.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HIDCL",
@@ -1849,9 +2649,18 @@
       "fifty_two_week_high": 307.0,
       "fifty_two_week_low": 245.0,
       "confidence": 36.84,
-      "dma20": 257.42,
-      "diff_20dma": -1.37,
-      "below_20dma": true
+      "avg180d": 267.01,
+      "dma20": 258.53,
+      "ema20": 258.53,
+      "diff_20dma": -1.79,
+      "below_20dma": true,
+      "ema50": 260.25,
+      "ema100": 263.84,
+      "is_ema_aligned": false,
+      "fractal_low": 245.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HIDCLP",
@@ -1869,9 +2678,18 @@
       "fifty_two_week_high": 230.6,
       "fifty_two_week_low": 174.4,
       "confidence": 34.74,
-      "dma20": 191.07,
-      "diff_20dma": -1.61,
-      "below_20dma": true
+      "avg180d": 195.28,
+      "dma20": 191.91,
+      "ema20": 191.91,
+      "diff_20dma": -2.04,
+      "below_20dma": true,
+      "ema50": 194.2,
+      "ema100": 196.4,
+      "is_ema_aligned": false,
+      "fractal_low": 182.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HIMSTAR",
@@ -1889,9 +2707,18 @@
       "fifty_two_week_high": 1264.0,
       "fifty_two_week_low": 252.2,
       "confidence": 28.17,
-      "dma20": 713.35,
-      "diff_20dma": -2.99,
-      "below_20dma": true
+      "avg180d": 869.98,
+      "dma20": 733.6,
+      "ema20": 733.6,
+      "diff_20dma": -5.67,
+      "below_20dma": true,
+      "ema50": 772.43,
+      "ema100": 806.01,
+      "is_ema_aligned": false,
+      "fractal_low": 717.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HLBSL",
@@ -1909,9 +2736,18 @@
       "fifty_two_week_high": 1028.1,
       "fifty_two_week_low": 830.0,
       "confidence": 42.47,
-      "dma20": 882.27,
-      "diff_20dma": 1.43,
-      "below_20dma": false
+      "avg180d": 906.61,
+      "dma20": 885.3,
+      "ema20": 885.3,
+      "diff_20dma": 1.08,
+      "below_20dma": false,
+      "ema50": 886.12,
+      "ema100": 894.88,
+      "is_ema_aligned": false,
+      "fractal_low": 873.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HLI",
@@ -1929,9 +2765,18 @@
       "fifty_two_week_high": 416.0,
       "fifty_two_week_low": 313.1,
       "confidence": 39.74,
-      "dma20": 325.52,
-      "diff_20dma": -2.31,
-      "below_20dma": true
+      "avg180d": 357.66,
+      "dma20": 326.49,
+      "ema20": 326.49,
+      "diff_20dma": -2.6,
+      "below_20dma": true,
+      "ema50": 331.61,
+      "ema100": 341.84,
+      "is_ema_aligned": false,
+      "fractal_low": 313.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HLICF",
@@ -1949,9 +2794,18 @@
       "fifty_two_week_high": 10.55,
       "fifty_two_week_low": 8.25,
       "confidence": 18.18,
-      "dma20": 8.71,
-      "diff_20dma": -3.56,
-      "below_20dma": true
+      "avg180d": 9.14,
+      "dma20": 8.68,
+      "ema20": 8.68,
+      "diff_20dma": -3.23,
+      "below_20dma": true,
+      "ema50": 8.83,
+      "ema100": 8.96,
+      "is_ema_aligned": false,
+      "fractal_low": 8.25,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HPPL",
@@ -1969,9 +2823,18 @@
       "fifty_two_week_high": 605.0,
       "fifty_two_week_low": 340.1,
       "confidence": 21.21,
-      "dma20": 370.13,
-      "diff_20dma": 2.67,
-      "below_20dma": false
+      "avg180d": 427.72,
+      "dma20": 374.46,
+      "ema20": 374.46,
+      "diff_20dma": 1.48,
+      "below_20dma": false,
+      "ema50": 374.97,
+      "ema100": 391.66,
+      "is_ema_aligned": false,
+      "fractal_low": 340.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HRL",
@@ -1989,9 +2852,18 @@
       "fifty_two_week_high": 1074.8,
       "fifty_two_week_low": 545.0,
       "confidence": 33.21,
-      "dma20": 592.03,
-      "diff_20dma": -1.19,
-      "below_20dma": true
+      "avg180d": 749.7,
+      "dma20": 598.99,
+      "ema20": 598.99,
+      "diff_20dma": -2.34,
+      "below_20dma": true,
+      "ema50": 618.09,
+      "ema100": 667.19,
+      "is_ema_aligned": false,
+      "fractal_low": 595.1,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "HURJA",
@@ -2009,9 +2881,18 @@
       "fifty_two_week_high": 312.1,
       "fifty_two_week_low": 204.6,
       "confidence": 38.15,
-      "dma20": 234.58,
-      "diff_20dma": 2.74,
-      "below_20dma": false
+      "avg180d": 247.59,
+      "dma20": 236.71,
+      "ema20": 236.71,
+      "diff_20dma": 1.81,
+      "below_20dma": false,
+      "ema50": 241.21,
+      "ema100": 246.35,
+      "is_ema_aligned": false,
+      "fractal_low": 219.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "ICFC",
@@ -2029,9 +2910,18 @@
       "fifty_two_week_high": 715.0,
       "fifty_two_week_low": 580.0,
       "confidence": 31.03,
-      "dma20": 608.84,
-      "diff_20dma": -2.27,
-      "below_20dma": true
+      "avg180d": 637.35,
+      "dma20": 611.75,
+      "ema20": 611.75,
+      "diff_20dma": -2.74,
+      "below_20dma": true,
+      "ema50": 617.52,
+      "ema100": 625.8,
+      "is_ema_aligned": false,
+      "fractal_low": 580.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "ICFCD83",
@@ -2048,7 +2938,13 @@
       "transactions": 2,
       "fifty_two_week_high": 1337.8,
       "fifty_two_week_low": 1032.0,
-      "confidence": 19.08
+      "confidence": 19.08,
+      "avg180d": 1040.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "ICFCD89",
@@ -2066,9 +2962,17 @@
       "fifty_two_week_high": 1140.0,
       "fifty_two_week_low": 1020.0,
       "confidence": 35.18,
-      "dma20": 1103.62,
-      "diff_20dma": -1.96,
-      "below_20dma": true
+      "avg180d": 1095.23,
+      "dma20": 1099.29,
+      "ema20": 1099.29,
+      "diff_20dma": -1.57,
+      "below_20dma": true,
+      "ema50": 1098.6,
+      "is_ema_aligned": true,
+      "fractal_low": 1086.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "IGI",
@@ -2086,9 +2990,18 @@
       "fifty_two_week_high": 543.9,
       "fifty_two_week_low": 392.0,
       "confidence": 35.54,
-      "dma20": 438.72,
-      "diff_20dma": -1.99,
-      "below_20dma": true
+      "avg180d": 434.94,
+      "dma20": 439.31,
+      "ema20": 439.31,
+      "diff_20dma": -2.12,
+      "below_20dma": true,
+      "ema50": 440.11,
+      "ema100": 441.54,
+      "is_ema_aligned": false,
+      "fractal_low": 417.2,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "IHL",
@@ -2106,9 +3019,18 @@
       "fifty_two_week_high": 638.0,
       "fifty_two_week_low": 329.0,
       "confidence": 35.48,
-      "dma20": 353.32,
-      "diff_20dma": -4.05,
-      "below_20dma": true
+      "avg180d": 478.08,
+      "dma20": 356.96,
+      "ema20": 356.96,
+      "diff_20dma": -5.03,
+      "below_20dma": true,
+      "ema50": 377.46,
+      "ema100": 413.91,
+      "is_ema_aligned": false,
+      "fractal_low": 345.2,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "ILBS",
@@ -2126,9 +3048,18 @@
       "fifty_two_week_high": 1311.0,
       "fifty_two_week_low": 815.0,
       "confidence": 29.27,
-      "dma20": 874.55,
-      "diff_20dma": -0.06,
-      "below_20dma": true
+      "avg180d": 975.0,
+      "dma20": 883.11,
+      "ema20": 883.11,
+      "diff_20dma": -1.03,
+      "below_20dma": true,
+      "ema50": 896.92,
+      "ema100": 924.64,
+      "is_ema_aligned": false,
+      "fractal_low": 842.7,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "ILI",
@@ -2146,9 +3077,18 @@
       "fifty_two_week_high": 489.6,
       "fifty_two_week_low": 399.0,
       "confidence": 38.02,
-      "dma20": 417.81,
-      "diff_20dma": -0.34,
-      "below_20dma": true
+      "avg180d": 442.64,
+      "dma20": 419.55,
+      "ema20": 419.55,
+      "diff_20dma": -0.75,
+      "below_20dma": true,
+      "ema50": 424.63,
+      "ema100": 431.63,
+      "is_ema_aligned": false,
+      "fractal_low": 415.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "JBBL",
@@ -2166,9 +3106,18 @@
       "fifty_two_week_high": 395.0,
       "fifty_two_week_low": 295.0,
       "confidence": 33.34,
-      "dma20": 345.62,
-      "diff_20dma": -2.49,
-      "below_20dma": true
+      "avg180d": 345.06,
+      "dma20": 346.28,
+      "ema20": 346.28,
+      "diff_20dma": -2.68,
+      "below_20dma": true,
+      "ema50": 348.35,
+      "ema100": 349.53,
+      "is_ema_aligned": false,
+      "fractal_low": 335.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "JBLB",
@@ -2186,9 +3135,18 @@
       "fifty_two_week_high": 1644.0,
       "fifty_two_week_low": 1219.9,
       "confidence": 45.22,
-      "dma20": 1265.29,
-      "diff_20dma": 0.85,
-      "below_20dma": false
+      "avg180d": 1343.07,
+      "dma20": 1269.16,
+      "ema20": 1269.16,
+      "diff_20dma": 0.54,
+      "below_20dma": false,
+      "ema50": 1273.44,
+      "ema100": 1293.79,
+      "is_ema_aligned": false,
+      "fractal_low": 1220.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "JFL",
@@ -2206,9 +3164,18 @@
       "fifty_two_week_high": 495.0,
       "fifty_two_week_low": 375.0,
       "confidence": 30.45,
-      "dma20": 393.29,
-      "diff_20dma": -2.36,
-      "below_20dma": true
+      "avg180d": 421.3,
+      "dma20": 395.89,
+      "ema20": 395.89,
+      "diff_20dma": -3.0,
+      "below_20dma": true,
+      "ema50": 401.23,
+      "ema100": 410.5,
+      "is_ema_aligned": false,
+      "fractal_low": 391.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "JHAPA",
@@ -2226,9 +3193,18 @@
       "fifty_two_week_high": 1929.0,
       "fifty_two_week_low": 293.4,
       "confidence": 33.47,
-      "dma20": 1111.9,
-      "diff_20dma": -2.87,
-      "below_20dma": true
+      "avg180d": 1316.1,
+      "dma20": 1145.5,
+      "ema20": 1145.5,
+      "diff_20dma": -5.72,
+      "below_20dma": true,
+      "ema50": 1232.76,
+      "ema100": 1284.2,
+      "is_ema_aligned": false,
+      "fractal_low": 1000.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "JOSHI",
@@ -2246,9 +3222,18 @@
       "fifty_two_week_high": 388.6,
       "fifty_two_week_low": 246.0,
       "confidence": 31.83,
-      "dma20": 265.75,
-      "diff_20dma": 6.49,
-      "below_20dma": false
+      "avg180d": 292.47,
+      "dma20": 270.22,
+      "ema20": 270.22,
+      "diff_20dma": 4.73,
+      "below_20dma": false,
+      "ema50": 272.0,
+      "ema100": 279.71,
+      "is_ema_aligned": false,
+      "fractal_low": 260.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "JSLBB",
@@ -2266,9 +3251,18 @@
       "fifty_two_week_high": 1365.0,
       "fifty_two_week_low": 941.0,
       "confidence": 39.26,
-      "dma20": 1006.29,
-      "diff_20dma": -1.34,
-      "below_20dma": true
+      "avg180d": 1127.02,
+      "dma20": 1012.28,
+      "ema20": 1012.28,
+      "diff_20dma": -1.92,
+      "below_20dma": true,
+      "ema50": 1037.46,
+      "ema100": 1076.21,
+      "is_ema_aligned": false,
+      "fractal_low": 941.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "KAHL",
@@ -2286,9 +3280,16 @@
       "fifty_two_week_high": 613.0,
       "fifty_two_week_low": 295.4,
       "confidence": 36.17,
-      "dma20": 525.83,
-      "diff_20dma": 4.6,
-      "below_20dma": false
+      "avg180d": 508.85,
+      "dma20": 515.45,
+      "ema20": 515.45,
+      "diff_20dma": 6.7,
+      "below_20dma": false,
+      "is_ema_aligned": false,
+      "fractal_low": 527.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "KBL",
@@ -2306,9 +3307,18 @@
       "fifty_two_week_high": 256.0,
       "fifty_two_week_low": 175.5,
       "confidence": 36.14,
-      "dma20": 217.78,
-      "diff_20dma": -1.0,
-      "below_20dma": true
+      "avg180d": 203.81,
+      "dma20": 218.96,
+      "ema20": 218.96,
+      "diff_20dma": -1.53,
+      "below_20dma": true,
+      "ema50": 216.52,
+      "ema100": 213.66,
+      "is_ema_aligned": true,
+      "fractal_low": 210.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "KBSH",
@@ -2326,9 +3336,18 @@
       "fifty_two_week_high": 1963.0,
       "fifty_two_week_low": 888.7,
       "confidence": 32.21,
-      "dma20": 1125.54,
-      "diff_20dma": -18.25,
-      "below_20dma": true
+      "avg180d": 1595.71,
+      "dma20": 1099.42,
+      "ema20": 1099.42,
+      "diff_20dma": -16.31,
+      "below_20dma": true,
+      "ema50": 1273.88,
+      "ema100": 1420.29,
+      "is_ema_aligned": false,
+      "fractal_low": 888.7,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "KDBY",
@@ -2346,9 +3365,18 @@
       "fifty_two_week_high": 12.54,
       "fifty_two_week_low": 8.67,
       "confidence": 33.8,
-      "dma20": 10.95,
-      "diff_20dma": 1.37,
-      "below_20dma": false
+      "avg180d": 10.45,
+      "dma20": 11.04,
+      "ema20": 11.04,
+      "diff_20dma": 0.54,
+      "below_20dma": false,
+      "ema50": 11.05,
+      "ema100": 10.92,
+      "is_ema_aligned": false,
+      "fractal_low": 10.31,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "KDL",
@@ -2366,9 +3394,18 @@
       "fifty_two_week_high": 1185.0,
       "fifty_two_week_low": 730.0,
       "confidence": 34.9,
-      "dma20": 788.24,
-      "diff_20dma": -1.82,
-      "below_20dma": true
+      "avg180d": 849.52,
+      "dma20": 788.66,
+      "ema20": 788.66,
+      "diff_20dma": -1.87,
+      "below_20dma": true,
+      "ema50": 800.47,
+      "ema100": 824.25,
+      "is_ema_aligned": false,
+      "fractal_low": 730.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "KEF",
@@ -2386,9 +3423,18 @@
       "fifty_two_week_high": 11.3,
       "fifty_two_week_low": 8.31,
       "confidence": 33.03,
-      "dma20": 10.5,
-      "diff_20dma": 4.76,
-      "below_20dma": false
+      "avg180d": 9.94,
+      "dma20": 10.53,
+      "ema20": 10.53,
+      "diff_20dma": 4.46,
+      "below_20dma": false,
+      "ema50": 10.55,
+      "ema100": 10.4,
+      "is_ema_aligned": false,
+      "fractal_low": 10.11,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "KHPL",
@@ -2406,9 +3452,16 @@
       "fifty_two_week_high": 1324.8,
       "fifty_two_week_low": 300.0,
       "confidence": 26.98,
-      "dma20": 929.71,
-      "diff_20dma": -14.17,
-      "below_20dma": true
+      "avg180d": 884.78,
+      "dma20": 913.55,
+      "ema20": 913.55,
+      "diff_20dma": -12.65,
+      "below_20dma": true,
+      "is_ema_aligned": false,
+      "fractal_low": 870.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "KKHC",
@@ -2426,9 +3479,18 @@
       "fifty_two_week_high": 362.0,
       "fifty_two_week_low": 208.0,
       "confidence": 31.27,
-      "dma20": 271.02,
-      "diff_20dma": 22.13,
-      "below_20dma": false
+      "avg180d": 259.3,
+      "dma20": 279.12,
+      "ema20": 279.12,
+      "diff_20dma": 18.59,
+      "below_20dma": false,
+      "ema50": 268.89,
+      "ema100": 266.52,
+      "is_ema_aligned": true,
+      "fractal_low": 240.2,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "KMCDB",
@@ -2446,9 +3508,18 @@
       "fifty_two_week_high": 1189.3,
       "fifty_two_week_low": 735.0,
       "confidence": 19.65,
-      "dma20": 785.96,
-      "diff_20dma": -2.03,
-      "below_20dma": true
+      "avg180d": 926.25,
+      "dma20": 790.73,
+      "ema20": 790.73,
+      "diff_20dma": -2.62,
+      "below_20dma": true,
+      "ema50": 818.41,
+      "ema100": 858.36,
+      "is_ema_aligned": false,
+      "fractal_low": 756.6,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "KPCL",
@@ -2466,9 +3537,18 @@
       "fifty_two_week_high": 658.0,
       "fifty_two_week_low": 450.0,
       "confidence": 27.72,
-      "dma20": 469.48,
-      "diff_20dma": -1.76,
-      "below_20dma": true
+      "avg180d": 517.89,
+      "dma20": 471.73,
+      "ema20": 471.73,
+      "diff_20dma": -2.23,
+      "below_20dma": true,
+      "ema50": 478.37,
+      "ema100": 492.42,
+      "is_ema_aligned": false,
+      "fractal_low": 467.1,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "KSBBL",
@@ -2486,9 +3566,18 @@
       "fifty_two_week_high": 555.3,
       "fifty_two_week_low": 404.1,
       "confidence": 38.07,
-      "dma20": 479.21,
-      "diff_20dma": -0.67,
-      "below_20dma": true
+      "avg180d": 466.45,
+      "dma20": 480.04,
+      "ema20": 480.04,
+      "diff_20dma": -0.84,
+      "below_20dma": true,
+      "ema50": 480.09,
+      "ema100": 478.2,
+      "is_ema_aligned": false,
+      "fractal_low": 472.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "KSBBLD87",
@@ -2506,9 +3595,18 @@
       "fifty_two_week_high": 1229.0,
       "fifty_two_week_low": 1052.1,
       "confidence": 35.71,
-      "dma20": 1131.05,
-      "diff_20dma": -2.75,
-      "below_20dma": true
+      "avg180d": 1091.36,
+      "dma20": 1137.58,
+      "ema20": 1137.58,
+      "diff_20dma": -3.3,
+      "below_20dma": true,
+      "ema50": 1132.4,
+      "ema100": 1116.82,
+      "is_ema_aligned": true,
+      "fractal_low": 1078.4,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "KSY",
@@ -2526,9 +3624,18 @@
       "fifty_two_week_high": 10.26,
       "fifty_two_week_low": 8.21,
       "confidence": 23.87,
-      "dma20": 9.77,
-      "diff_20dma": -5.32,
-      "below_20dma": true
+      "avg180d": 9.43,
+      "dma20": 9.75,
+      "ema20": 9.75,
+      "diff_20dma": -5.13,
+      "below_20dma": true,
+      "ema50": 9.73,
+      "ema100": 9.65,
+      "is_ema_aligned": true,
+      "fractal_low": 9.48,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": true
     },
     {
       "symbol": "LBBL",
@@ -2546,9 +3653,18 @@
       "fifty_two_week_high": 580.0,
       "fifty_two_week_low": 433.0,
       "confidence": 31.76,
-      "dma20": 490.81,
-      "diff_20dma": -1.61,
-      "below_20dma": true
+      "avg180d": 483.8,
+      "dma20": 492.15,
+      "ema20": 492.15,
+      "diff_20dma": -1.88,
+      "below_20dma": true,
+      "ema50": 490.04,
+      "ema100": 489.17,
+      "is_ema_aligned": true,
+      "fractal_low": 469.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "LEC",
@@ -2566,9 +3682,18 @@
       "fifty_two_week_high": 276.0,
       "fifty_two_week_low": 180.0,
       "confidence": 40.43,
-      "dma20": 217.81,
-      "diff_20dma": 4.68,
-      "below_20dma": false
+      "avg180d": 217.93,
+      "dma20": 221.01,
+      "ema20": 221.01,
+      "diff_20dma": 3.16,
+      "below_20dma": false,
+      "ema50": 220.23,
+      "ema100": 221.3,
+      "is_ema_aligned": false,
+      "fractal_low": 216.2,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "LICN",
@@ -2586,9 +3711,18 @@
       "fifty_two_week_high": 969.0,
       "fifty_two_week_low": 763.0,
       "confidence": 39.13,
-      "dma20": 788.69,
-      "diff_20dma": -0.98,
-      "below_20dma": true
+      "avg180d": 841.15,
+      "dma20": 791.37,
+      "ema20": 791.37,
+      "diff_20dma": -1.31,
+      "below_20dma": true,
+      "ema50": 799.18,
+      "ema100": 814.25,
+      "is_ema_aligned": false,
+      "fractal_low": 778.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "LLBS",
@@ -2606,9 +3740,18 @@
       "fifty_two_week_high": 1082.0,
       "fifty_two_week_low": 819.4,
       "confidence": 37.36,
-      "dma20": 913.99,
-      "diff_20dma": -2.95,
-      "below_20dma": true
+      "avg180d": 963.39,
+      "dma20": 912.7,
+      "ema20": 912.7,
+      "diff_20dma": -2.82,
+      "below_20dma": true,
+      "ema50": 927.61,
+      "ema100": 944.83,
+      "is_ema_aligned": false,
+      "fractal_low": 876.1,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "LSH12",
@@ -2625,7 +3768,13 @@
       "transactions": 25,
       "fifty_two_week_high": 10.0,
       "fifty_two_week_low": 8.85,
-      "confidence": 23.66
+      "confidence": 23.66,
+      "avg180d": 9.13,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "LSL",
@@ -2643,9 +3792,18 @@
       "fifty_two_week_high": 244.0,
       "fifty_two_week_low": 203.0,
       "confidence": 36.26,
-      "dma20": 222.83,
-      "diff_20dma": -1.09,
-      "below_20dma": true
+      "avg180d": 220.0,
+      "dma20": 224.07,
+      "ema20": 224.07,
+      "diff_20dma": -1.64,
+      "below_20dma": true,
+      "ema50": 221.72,
+      "ema100": 220.73,
+      "is_ema_aligned": true,
+      "fractal_low": 214.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": true
     },
     {
       "symbol": "LUK",
@@ -2663,9 +3821,18 @@
       "fifty_two_week_high": 11.97,
       "fifty_two_week_low": 8.97,
       "confidence": 42.6,
-      "dma20": 10.23,
-      "diff_20dma": 3.62,
-      "below_20dma": false
+      "avg180d": 9.8,
+      "dma20": 10.28,
+      "ema20": 10.28,
+      "diff_20dma": 3.11,
+      "below_20dma": false,
+      "ema50": 10.18,
+      "ema100": 10.07,
+      "is_ema_aligned": true,
+      "fractal_low": 9.9,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "LVF2",
@@ -2683,9 +3850,18 @@
       "fifty_two_week_high": 10.3,
       "fifty_two_week_low": 8.76,
       "confidence": 34.1,
-      "dma20": 9.74,
-      "diff_20dma": -3.39,
-      "below_20dma": true
+      "avg180d": 9.86,
+      "dma20": 9.71,
+      "ema20": 9.71,
+      "diff_20dma": -3.09,
+      "below_20dma": true,
+      "ema50": 9.8,
+      "ema100": 9.85,
+      "is_ema_aligned": false,
+      "fractal_low": 9.01,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MABEL",
@@ -2703,9 +3879,18 @@
       "fifty_two_week_high": 927.0,
       "fifty_two_week_low": 317.7,
       "confidence": 40.08,
-      "dma20": 599.06,
-      "diff_20dma": 3.33,
-      "below_20dma": false
+      "avg180d": 692.28,
+      "dma20": 613.32,
+      "ema20": 613.32,
+      "diff_20dma": 0.93,
+      "below_20dma": false,
+      "ema50": 639.14,
+      "ema100": 662.37,
+      "is_ema_aligned": false,
+      "fractal_low": 582.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MAKAR",
@@ -2723,9 +3908,18 @@
       "fifty_two_week_high": 630.0,
       "fifty_two_week_low": 408.0,
       "confidence": 31.23,
-      "dma20": 453.23,
-      "diff_20dma": -8.9,
-      "below_20dma": true
+      "avg180d": 520.04,
+      "dma20": 450.72,
+      "ema20": 450.72,
+      "diff_20dma": -8.39,
+      "below_20dma": true,
+      "ema50": 469.09,
+      "ema100": 490.27,
+      "is_ema_aligned": false,
+      "fractal_low": 427.5,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MANDU",
@@ -2743,9 +3937,18 @@
       "fifty_two_week_high": 909.0,
       "fifty_two_week_low": 766.0,
       "confidence": 40.84,
-      "dma20": 813.21,
-      "diff_20dma": 0.83,
-      "below_20dma": false
+      "avg180d": 815.5,
+      "dma20": 817.64,
+      "ema20": 817.64,
+      "diff_20dma": 0.29,
+      "below_20dma": false,
+      "ema50": 817.17,
+      "ema100": 819.1,
+      "is_ema_aligned": false,
+      "fractal_low": 780.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MATRI",
@@ -2763,9 +3966,18 @@
       "fifty_two_week_high": 1184.9,
       "fifty_two_week_low": 786.3,
       "confidence": 29.03,
-      "dma20": 838.58,
-      "diff_20dma": -4.55,
-      "below_20dma": true
+      "avg180d": 936.19,
+      "dma20": 841.4,
+      "ema20": 841.4,
+      "diff_20dma": -4.87,
+      "below_20dma": true,
+      "ema50": 862.37,
+      "ema100": 894.77,
+      "is_ema_aligned": false,
+      "fractal_low": 786.3,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MBJC",
@@ -2783,9 +3995,18 @@
       "fifty_two_week_high": 333.0,
       "fifty_two_week_low": 252.9,
       "confidence": 39.06,
-      "dma20": 271.28,
-      "diff_20dma": -2.31,
-      "below_20dma": true
+      "avg180d": 286.4,
+      "dma20": 271.64,
+      "ema20": 271.64,
+      "diff_20dma": -2.44,
+      "below_20dma": true,
+      "ema50": 276.42,
+      "ema100": 281.98,
+      "is_ema_aligned": false,
+      "fractal_low": 270.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MBL",
@@ -2803,9 +4024,18 @@
       "fifty_two_week_high": 284.0,
       "fifty_two_week_low": 205.0,
       "confidence": 37.05,
-      "dma20": 253.2,
-      "diff_20dma": -1.26,
-      "below_20dma": true
+      "avg180d": 238.5,
+      "dma20": 254.28,
+      "ema20": 254.28,
+      "diff_20dma": -1.68,
+      "below_20dma": true,
+      "ema50": 251.14,
+      "ema100": 247.73,
+      "is_ema_aligned": true,
+      "fractal_low": 246.1,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": true
     },
     {
       "symbol": "MBLEF",
@@ -2823,9 +4053,18 @@
       "fifty_two_week_high": 10.89,
       "fifty_two_week_low": 8.63,
       "confidence": 32.11,
-      "dma20": 10.09,
-      "diff_20dma": 3.57,
-      "below_20dma": false
+      "avg180d": 9.86,
+      "dma20": 10.11,
+      "ema20": 10.11,
+      "diff_20dma": 3.36,
+      "below_20dma": false,
+      "ema50": 10.09,
+      "ema100": 10.03,
+      "is_ema_aligned": true,
+      "fractal_low": 9.82,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MCHL",
@@ -2843,9 +4082,18 @@
       "fifty_two_week_high": 553.0,
       "fifty_two_week_low": 262.0,
       "confidence": 37.0,
-      "dma20": 283.19,
-      "diff_20dma": -1.83,
-      "below_20dma": true
+      "avg180d": 387.89,
+      "dma20": 286.22,
+      "ema20": 286.22,
+      "diff_20dma": -2.87,
+      "below_20dma": true,
+      "ema50": 301.07,
+      "ema100": 332.29,
+      "is_ema_aligned": false,
+      "fractal_low": 272.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MDB",
@@ -2863,9 +4111,18 @@
       "fifty_two_week_high": 705.8,
       "fifty_two_week_low": 530.5,
       "confidence": 27.31,
-      "dma20": 585.51,
-      "diff_20dma": -2.31,
-      "below_20dma": true
+      "avg180d": 603.45,
+      "dma20": 587.3,
+      "ema20": 587.3,
+      "diff_20dma": -2.61,
+      "below_20dma": true,
+      "ema50": 592.28,
+      "ema100": 599.11,
+      "is_ema_aligned": false,
+      "fractal_low": 558.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MDBPO",
@@ -2882,7 +4139,13 @@
       "transactions": 1,
       "fifty_two_week_high": 318.0,
       "fifty_two_week_low": 318.0,
-      "confidence": 25.87
+      "confidence": 25.87,
+      "avg180d": 318.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MEHL",
@@ -2900,9 +4163,18 @@
       "fifty_two_week_high": 519.0,
       "fifty_two_week_low": 266.8,
       "confidence": 34.28,
-      "dma20": 306.73,
-      "diff_20dma": -11.97,
-      "below_20dma": true
+      "avg180d": 406.55,
+      "dma20": 309.33,
+      "ema20": 309.33,
+      "diff_20dma": -12.71,
+      "below_20dma": true,
+      "ema50": 334.13,
+      "ema100": 364.27,
+      "is_ema_aligned": false,
+      "fractal_low": 290.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MEL",
@@ -2920,9 +4192,18 @@
       "fifty_two_week_high": 328.0,
       "fifty_two_week_low": 198.7,
       "confidence": 36.58,
-      "dma20": 217.66,
-      "diff_20dma": -3.15,
-      "below_20dma": true
+      "avg180d": 262.66,
+      "dma20": 219.19,
+      "ema20": 219.19,
+      "diff_20dma": -3.83,
+      "below_20dma": true,
+      "ema50": 227.29,
+      "ema100": 241.28,
+      "is_ema_aligned": false,
+      "fractal_low": 210.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MEN",
@@ -2940,9 +4221,18 @@
       "fifty_two_week_high": 683.4,
       "fifty_two_week_low": 535.0,
       "confidence": 39.01,
-      "dma20": 585.78,
-      "diff_20dma": 5.06,
-      "below_20dma": false
+      "avg180d": 596.35,
+      "dma20": 592.35,
+      "ema20": 592.35,
+      "diff_20dma": 3.89,
+      "below_20dma": false,
+      "ema50": 590.23,
+      "ema100": 592.68,
+      "is_ema_aligned": false,
+      "fractal_low": 590.5,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MEPDL",
@@ -2959,7 +4249,13 @@
       "transactions": 46,
       "fifty_two_week_high": 524.6,
       "fifty_two_week_low": 300.0,
-      "confidence": 21.35
+      "confidence": 21.35,
+      "avg180d": 524.6,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MERO",
@@ -2977,9 +4273,18 @@
       "fifty_two_week_high": 873.5,
       "fifty_two_week_low": 655.0,
       "confidence": 31.94,
-      "dma20": 685.0,
-      "diff_20dma": -4.36,
-      "below_20dma": true
+      "avg180d": 733.62,
+      "dma20": 685.36,
+      "ema20": 685.36,
+      "diff_20dma": -4.42,
+      "below_20dma": true,
+      "ema50": 699.44,
+      "ema100": 714.71,
+      "is_ema_aligned": false,
+      "fractal_low": 655.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MFIL",
@@ -2997,9 +4302,18 @@
       "fifty_two_week_high": 938.0,
       "fifty_two_week_low": 545.0,
       "confidence": 29.73,
-      "dma20": 783.48,
-      "diff_20dma": -4.78,
-      "below_20dma": true
+      "avg180d": 759.23,
+      "dma20": 782.99,
+      "ema20": 782.99,
+      "diff_20dma": -4.72,
+      "below_20dma": true,
+      "ema50": 784.72,
+      "ema100": 780.58,
+      "is_ema_aligned": false,
+      "fractal_low": 770.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MHCL",
@@ -3017,9 +4331,18 @@
       "fifty_two_week_high": 472.0,
       "fifty_two_week_low": 301.0,
       "confidence": 31.66,
-      "dma20": 317.98,
-      "diff_20dma": -3.74,
-      "below_20dma": true
+      "avg180d": 367.53,
+      "dma20": 320.56,
+      "ema20": 320.56,
+      "diff_20dma": -4.51,
+      "below_20dma": true,
+      "ema50": 331.07,
+      "ema100": 346.14,
+      "is_ema_aligned": false,
+      "fractal_low": 311.1,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MHL",
@@ -3037,9 +4360,18 @@
       "fifty_two_week_high": 580.0,
       "fifty_two_week_low": 445.0,
       "confidence": 34.18,
-      "dma20": 477.06,
-      "diff_20dma": -1.9,
-      "below_20dma": true
+      "avg180d": 501.12,
+      "dma20": 477.59,
+      "ema20": 477.59,
+      "diff_20dma": -2.01,
+      "below_20dma": true,
+      "ema50": 484.61,
+      "ema100": 494.73,
+      "is_ema_aligned": false,
+      "fractal_low": 455.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MHNL",
@@ -3057,9 +4389,18 @@
       "fifty_two_week_high": 324.0,
       "fifty_two_week_low": 223.0,
       "confidence": 44.29,
-      "dma20": 239.48,
-      "diff_20dma": 1.8,
-      "below_20dma": false
+      "avg180d": 260.63,
+      "dma20": 242.49,
+      "ema20": 242.49,
+      "diff_20dma": 0.54,
+      "below_20dma": false,
+      "ema50": 248.49,
+      "ema100": 255.42,
+      "is_ema_aligned": false,
+      "fractal_low": 235.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MKCL",
@@ -3077,9 +4418,18 @@
       "fifty_two_week_high": 1671.0,
       "fifty_two_week_low": 991.0,
       "confidence": 30.29,
-      "dma20": 1113.93,
-      "diff_20dma": -8.79,
-      "below_20dma": true
+      "avg180d": 1312.83,
+      "dma20": 1118.58,
+      "ema20": 1118.58,
+      "diff_20dma": -9.17,
+      "below_20dma": true,
+      "ema50": 1159.22,
+      "ema100": 1224.87,
+      "is_ema_aligned": false,
+      "fractal_low": 1043.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MKHC",
@@ -3097,9 +4447,18 @@
       "fifty_two_week_high": 483.0,
       "fifty_two_week_low": 263.0,
       "confidence": 34.66,
-      "dma20": 291.42,
-      "diff_20dma": -7.97,
-      "below_20dma": true
+      "avg180d": 337.47,
+      "dma20": 291.4,
+      "ema20": 291.4,
+      "diff_20dma": -7.96,
+      "below_20dma": true,
+      "ema50": 302.1,
+      "ema100": 316.64,
+      "is_ema_aligned": false,
+      "fractal_low": 291.9,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MKHL",
@@ -3117,9 +4476,18 @@
       "fifty_two_week_high": 915.0,
       "fifty_two_week_low": 457.0,
       "confidence": 39.32,
-      "dma20": 500.66,
-      "diff_20dma": -0.13,
-      "below_20dma": true
+      "avg180d": 686.72,
+      "dma20": 503.41,
+      "ema20": 503.41,
+      "diff_20dma": -0.68,
+      "below_20dma": true,
+      "ema50": 521.18,
+      "ema100": 576.71,
+      "is_ema_aligned": false,
+      "fractal_low": 487.3,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MKJC",
@@ -3137,9 +4505,18 @@
       "fifty_two_week_high": 635.0,
       "fifty_two_week_low": 434.1,
       "confidence": 22.52,
-      "dma20": 459.98,
-      "diff_20dma": -3.69,
-      "below_20dma": true
+      "avg180d": 512.42,
+      "dma20": 463.83,
+      "ema20": 463.83,
+      "diff_20dma": -4.49,
+      "below_20dma": true,
+      "ema50": 473.05,
+      "ema100": 488.62,
+      "is_ema_aligned": false,
+      "fractal_low": 462.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MLBBL",
@@ -3157,9 +4534,18 @@
       "fifty_two_week_high": 1661.0,
       "fifty_two_week_low": 1045.0,
       "confidence": 23.41,
-      "dma20": 1135.87,
-      "diff_20dma": -7.12,
-      "below_20dma": true
+      "avg180d": 1310.73,
+      "dma20": 1136.95,
+      "ema20": 1136.95,
+      "diff_20dma": -7.21,
+      "below_20dma": true,
+      "ema50": 1162.65,
+      "ema100": 1213.91,
+      "is_ema_aligned": false,
+      "fractal_low": 1076.7,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MLBL",
@@ -3177,9 +4563,18 @@
       "fifty_two_week_high": 418.0,
       "fifty_two_week_low": 330.7,
       "confidence": 32.8,
-      "dma20": 354.29,
-      "diff_20dma": -1.3,
-      "below_20dma": true
+      "avg180d": 371.49,
+      "dma20": 355.73,
+      "ema20": 355.73,
+      "diff_20dma": -1.7,
+      "below_20dma": true,
+      "ema50": 358.66,
+      "ema100": 364.13,
+      "is_ema_aligned": false,
+      "fractal_low": 355.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MLBLD89",
@@ -3197,9 +4592,18 @@
       "fifty_two_week_high": 1350.0,
       "fifty_two_week_low": 1196.5,
       "confidence": 15.44,
-      "dma20": 1279.59,
-      "diff_20dma": -2.31,
-      "below_20dma": true
+      "avg180d": 1207.23,
+      "dma20": 1279.49,
+      "ema20": 1279.49,
+      "diff_20dma": -2.3,
+      "below_20dma": true,
+      "ema50": 1269.19,
+      "ema100": 1239.47,
+      "is_ema_aligned": true,
+      "fractal_low": 1221.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MLBS",
@@ -3217,9 +4621,18 @@
       "fifty_two_week_high": 1666.0,
       "fifty_two_week_low": 1100.0,
       "confidence": 32.61,
-      "dma20": 1164.46,
-      "diff_20dma": -5.53,
-      "below_20dma": true
+      "avg180d": 1376.16,
+      "dma20": 1165.05,
+      "ema20": 1165.05,
+      "diff_20dma": -5.57,
+      "below_20dma": true,
+      "ema50": 1202.67,
+      "ema100": 1268.64,
+      "is_ema_aligned": false,
+      "fractal_low": 1116.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MLBSL",
@@ -3237,9 +4650,18 @@
       "fifty_two_week_high": 2272.5,
       "fifty_two_week_low": 1195.0,
       "confidence": 26.25,
-      "dma20": 1690.33,
-      "diff_20dma": -29.3,
-      "below_20dma": true
+      "avg180d": 1867.06,
+      "dma20": 1662.62,
+      "ema20": 1662.62,
+      "diff_20dma": -28.13,
+      "below_20dma": true,
+      "ema50": 1724.05,
+      "ema100": 1784.21,
+      "is_ema_aligned": false,
+      "fractal_low": 1691.1,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MMF1",
@@ -3257,9 +4679,18 @@
       "fifty_two_week_high": 10.16,
       "fifty_two_week_low": 8.22,
       "confidence": 31.23,
-      "dma20": 9.49,
-      "diff_20dma": -5.27,
-      "below_20dma": true
+      "avg180d": 9.22,
+      "dma20": 9.38,
+      "ema20": 9.38,
+      "diff_20dma": -4.16,
+      "below_20dma": true,
+      "ema50": 9.48,
+      "ema100": 9.45,
+      "is_ema_aligned": false,
+      "fractal_low": 9.14,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MMKJL",
@@ -3277,9 +4708,18 @@
       "fifty_two_week_high": 699.9,
       "fifty_two_week_low": 429.1,
       "confidence": 21.6,
-      "dma20": 464.89,
-      "diff_20dma": -5.57,
-      "below_20dma": true
+      "avg180d": 547.59,
+      "dma20": 472.01,
+      "ema20": 472.01,
+      "diff_20dma": -6.99,
+      "below_20dma": true,
+      "ema50": 482.73,
+      "ema100": 505.55,
+      "is_ema_aligned": false,
+      "fractal_low": 429.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MNBBL",
@@ -3297,9 +4737,18 @@
       "fifty_two_week_high": 477.0,
       "fifty_two_week_low": 340.1,
       "confidence": 30.84,
-      "dma20": 368.83,
-      "diff_20dma": -1.58,
-      "below_20dma": true
+      "avg180d": 367.1,
+      "dma20": 369.75,
+      "ema20": 369.75,
+      "diff_20dma": -1.83,
+      "below_20dma": true,
+      "ema50": 370.19,
+      "ema100": 371.73,
+      "is_ema_aligned": false,
+      "fractal_low": 365.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MNMF1",
@@ -3317,9 +4766,18 @@
       "fifty_two_week_high": 10.4,
       "fifty_two_week_low": 8.53,
       "confidence": 38.92,
-      "dma20": 9.76,
-      "diff_20dma": -0.31,
-      "below_20dma": true
+      "avg180d": 9.55,
+      "dma20": 9.75,
+      "ema20": 9.75,
+      "diff_20dma": -0.21,
+      "below_20dma": true,
+      "ema50": 9.8,
+      "ema100": 9.76,
+      "is_ema_aligned": false,
+      "fractal_low": 9.51,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MPFL",
@@ -3337,9 +4795,18 @@
       "fifty_two_week_high": 744.0,
       "fifty_two_week_low": 491.0,
       "confidence": 40.02,
-      "dma20": 615.56,
-      "diff_20dma": 1.86,
-      "below_20dma": false
+      "avg180d": 617.52,
+      "dma20": 618.56,
+      "ema20": 618.56,
+      "diff_20dma": 1.36,
+      "below_20dma": false,
+      "ema50": 620.25,
+      "ema100": 622.57,
+      "is_ema_aligned": false,
+      "fractal_low": 600.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MSHL",
@@ -3357,9 +4824,18 @@
       "fifty_two_week_high": 955.0,
       "fifty_two_week_low": 576.0,
       "confidence": 31.98,
-      "dma20": 616.25,
-      "diff_20dma": -4.1,
-      "below_20dma": true
+      "avg180d": 769.52,
+      "dma20": 619.28,
+      "ema20": 619.28,
+      "diff_20dma": -4.57,
+      "below_20dma": true,
+      "ema50": 644.87,
+      "ema100": 689.65,
+      "is_ema_aligned": false,
+      "fractal_low": 602.5,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "MSLB",
@@ -3377,9 +4853,18 @@
       "fifty_two_week_high": 1634.0,
       "fifty_two_week_low": 1089.9,
       "confidence": 18.91,
-      "dma20": 1232.09,
-      "diff_20dma": 0.24,
-      "below_20dma": false
+      "avg180d": 1309.33,
+      "dma20": 1236.14,
+      "ema20": 1236.14,
+      "diff_20dma": -0.09,
+      "below_20dma": true,
+      "ema50": 1242.18,
+      "ema100": 1263.07,
+      "is_ema_aligned": false,
+      "fractal_low": 1197.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NABBC",
@@ -3397,9 +4882,16 @@
       "fifty_two_week_high": 1835.0,
       "fifty_two_week_low": 662.0,
       "confidence": 32.81,
-      "dma20": 772.56,
-      "diff_20dma": 4.47,
-      "below_20dma": false
+      "avg180d": 773.62,
+      "dma20": 781.83,
+      "ema20": 781.83,
+      "diff_20dma": 3.23,
+      "below_20dma": false,
+      "is_ema_aligned": false,
+      "fractal_low": 772.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NABIL",
@@ -3417,9 +4909,18 @@
       "fifty_two_week_high": 568.0,
       "fifty_two_week_low": 471.0,
       "confidence": 30.08,
-      "dma20": 545.0,
-      "diff_20dma": 1.19,
-      "below_20dma": false
+      "avg180d": 518.27,
+      "dma20": 547.4,
+      "ema20": 547.4,
+      "diff_20dma": 0.75,
+      "below_20dma": false,
+      "ema50": 538.79,
+      "ema100": 531.23,
+      "is_ema_aligned": true,
+      "fractal_low": 545.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NADEP",
@@ -3437,9 +4938,18 @@
       "fifty_two_week_high": 883.0,
       "fifty_two_week_low": 696.0,
       "confidence": 31.58,
-      "dma20": 734.02,
-      "diff_20dma": -3.26,
-      "below_20dma": true
+      "avg180d": 770.19,
+      "dma20": 734.48,
+      "ema20": 734.48,
+      "diff_20dma": -3.32,
+      "below_20dma": true,
+      "ema50": 740.22,
+      "ema100": 753.27,
+      "is_ema_aligned": false,
+      "fractal_low": 725.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NBF2",
@@ -3457,9 +4967,18 @@
       "fifty_two_week_high": 10.95,
       "fifty_two_week_low": 8.89,
       "confidence": 24.88,
-      "dma20": 9.98,
-      "diff_20dma": -1.8,
-      "below_20dma": true
+      "avg180d": 9.76,
+      "dma20": 10.0,
+      "ema20": 10.0,
+      "diff_20dma": -2.0,
+      "below_20dma": true,
+      "ema50": 10.0,
+      "ema100": 9.96,
+      "is_ema_aligned": false,
+      "fractal_low": 9.61,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NBF3",
@@ -3477,9 +4996,18 @@
       "fifty_two_week_high": 10.67,
       "fifty_two_week_low": 8.35,
       "confidence": 38.15,
-      "dma20": 9.95,
-      "diff_20dma": -2.01,
-      "below_20dma": true
+      "avg180d": 9.62,
+      "dma20": 9.93,
+      "ema20": 9.93,
+      "diff_20dma": -1.81,
+      "below_20dma": true,
+      "ema50": 9.95,
+      "ema100": 9.88,
+      "is_ema_aligned": false,
+      "fractal_low": 9.33,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NBL",
@@ -3497,9 +5025,18 @@
       "fifty_two_week_high": 302.9,
       "fifty_two_week_low": 225.4,
       "confidence": 46.35,
-      "dma20": 267.66,
-      "diff_20dma": 3.27,
-      "below_20dma": false
+      "avg180d": 257.91,
+      "dma20": 269.32,
+      "ema20": 269.32,
+      "diff_20dma": 2.63,
+      "below_20dma": false,
+      "ema50": 267.74,
+      "ema100": 265.57,
+      "is_ema_aligned": true,
+      "fractal_low": 258.4,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NBLD87",
@@ -3516,7 +5053,13 @@
       "transactions": 1,
       "fifty_two_week_high": 1225.0,
       "fifty_two_week_low": 1015.5,
-      "confidence": 29.23
+      "confidence": 29.23,
+      "avg180d": 1080.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NESDO",
@@ -3534,9 +5077,18 @@
       "fifty_two_week_high": 1715.0,
       "fifty_two_week_low": 1380.1,
       "confidence": 33.06,
-      "dma20": 1497.9,
-      "diff_20dma": -5.47,
-      "below_20dma": true
+      "avg180d": 1532.97,
+      "dma20": 1499.03,
+      "ema20": 1499.03,
+      "diff_20dma": -5.54,
+      "below_20dma": true,
+      "ema50": 1518.82,
+      "ema100": 1533.16,
+      "is_ema_aligned": false,
+      "fractal_low": 1465.3,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NFS",
@@ -3554,9 +5106,18 @@
       "fifty_two_week_high": 744.6,
       "fifty_two_week_low": 550.0,
       "confidence": 31.95,
-      "dma20": 574.14,
-      "diff_20dma": -2.46,
-      "below_20dma": true
+      "avg180d": 618.74,
+      "dma20": 577.97,
+      "ema20": 577.97,
+      "diff_20dma": -3.11,
+      "below_20dma": true,
+      "ema50": 585.55,
+      "ema100": 598.22,
+      "is_ema_aligned": false,
+      "fractal_low": 571.5,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NGPL",
@@ -3574,9 +5135,18 @@
       "fifty_two_week_high": 502.0,
       "fifty_two_week_low": 343.0,
       "confidence": 40.34,
-      "dma20": 411.13,
-      "diff_20dma": -0.03,
-      "below_20dma": true
+      "avg180d": 422.72,
+      "dma20": 412.59,
+      "ema20": 412.59,
+      "diff_20dma": -0.39,
+      "below_20dma": true,
+      "ema50": 419.69,
+      "ema100": 424.36,
+      "is_ema_aligned": false,
+      "fractal_low": 404.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NHDL",
@@ -3594,9 +5164,18 @@
       "fifty_two_week_high": 796.0,
       "fifty_two_week_low": 606.3,
       "confidence": 22.82,
-      "dma20": 639.72,
-      "diff_20dma": -0.74,
-      "below_20dma": true
+      "avg180d": 660.42,
+      "dma20": 639.42,
+      "ema20": 639.42,
+      "diff_20dma": -0.69,
+      "below_20dma": true,
+      "ema50": 639.47,
+      "ema100": 645.45,
+      "is_ema_aligned": false,
+      "fractal_low": 620.1,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NHPC",
@@ -3614,9 +5193,18 @@
       "fifty_two_week_high": 340.0,
       "fifty_two_week_low": 178.6,
       "confidence": 22.58,
-      "dma20": 265.51,
-      "diff_20dma": 0.18,
-      "below_20dma": false
+      "avg180d": 246.84,
+      "dma20": 268.77,
+      "ema20": 268.77,
+      "diff_20dma": -1.03,
+      "below_20dma": true,
+      "ema50": 271.18,
+      "ema100": 267.53,
+      "is_ema_aligned": false,
+      "fractal_low": 240.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NIBD84",
@@ -3634,9 +5222,18 @@
       "fifty_two_week_high": 1130.0,
       "fifty_two_week_low": 1030.0,
       "confidence": 28.3,
-      "dma20": 1060.86,
-      "diff_20dma": -2.44,
-      "below_20dma": true
+      "avg180d": 1050.73,
+      "dma20": 1054.34,
+      "ema20": 1054.34,
+      "diff_20dma": -1.83,
+      "below_20dma": true,
+      "ema50": 1057.98,
+      "ema100": 1055.36,
+      "is_ema_aligned": false,
+      "fractal_low": 1034.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NIBLGF",
@@ -3654,9 +5251,18 @@
       "fifty_two_week_high": 11.81,
       "fifty_two_week_low": 8.24,
       "confidence": 30.33,
-      "dma20": 9.47,
-      "diff_20dma": -6.55,
-      "below_20dma": true
+      "avg180d": 9.22,
+      "dma20": 9.4,
+      "ema20": 9.4,
+      "diff_20dma": -5.85,
+      "below_20dma": true,
+      "ema50": 9.44,
+      "ema100": 9.41,
+      "is_ema_aligned": false,
+      "fractal_low": 9.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NIBLSTF",
@@ -3674,9 +5280,18 @@
       "fifty_two_week_high": 10.85,
       "fifty_two_week_low": 8.02,
       "confidence": 34.62,
-      "dma20": 8.79,
-      "diff_20dma": -4.1,
-      "below_20dma": true
+      "avg180d": 8.97,
+      "dma20": 8.81,
+      "ema20": 8.81,
+      "diff_20dma": -4.31,
+      "below_20dma": true,
+      "ema50": 8.97,
+      "ema100": 9.04,
+      "is_ema_aligned": false,
+      "fractal_low": 8.56,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NIBSF2",
@@ -3694,9 +5309,18 @@
       "fifty_two_week_high": 11.13,
       "fifty_two_week_low": 8.1,
       "confidence": 15.58,
-      "dma20": 8.88,
-      "diff_20dma": -0.68,
-      "below_20dma": true
+      "avg180d": 9.01,
+      "dma20": 8.9,
+      "ema20": 8.9,
+      "diff_20dma": -0.9,
+      "below_20dma": true,
+      "ema50": 9.03,
+      "ema100": 9.09,
+      "is_ema_aligned": false,
+      "fractal_low": 8.54,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NICA",
@@ -3714,9 +5338,18 @@
       "fifty_two_week_high": 411.0,
       "fifty_two_week_low": 304.5,
       "confidence": 33.31,
-      "dma20": 334.69,
-      "diff_20dma": -4.39,
-      "below_20dma": true
+      "avg180d": 340.5,
+      "dma20": 335.76,
+      "ema20": 335.76,
+      "diff_20dma": -4.69,
+      "below_20dma": true,
+      "ema50": 338.99,
+      "ema100": 342.55,
+      "is_ema_aligned": false,
+      "fractal_low": 324.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NICBF",
@@ -3734,9 +5367,18 @@
       "fifty_two_week_high": 11.2,
       "fifty_two_week_low": 8.45,
       "confidence": 15.68,
-      "dma20": 9.22,
-      "diff_20dma": -0.11,
-      "below_20dma": true
+      "avg180d": 9.31,
+      "dma20": 9.26,
+      "ema20": 9.26,
+      "diff_20dma": -0.54,
+      "below_20dma": true,
+      "ema50": 9.34,
+      "ema100": 9.39,
+      "is_ema_aligned": false,
+      "fractal_low": 9.07,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NICD83/84",
@@ -3753,7 +5395,13 @@
       "transactions": 3,
       "fifty_two_week_high": 1142.0,
       "fifty_two_week_low": 1005.0,
-      "confidence": 20.47
+      "confidence": 20.47,
+      "avg180d": 1011.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NICD88",
@@ -3771,9 +5419,18 @@
       "fifty_two_week_high": 1153.0,
       "fifty_two_week_low": 1019.2,
       "confidence": 24.8,
-      "dma20": 1099.25,
-      "diff_20dma": 0.07,
-      "below_20dma": false
+      "avg180d": 1063.4,
+      "dma20": 1098.69,
+      "ema20": 1098.69,
+      "diff_20dma": 0.12,
+      "below_20dma": false,
+      "ema50": 1093.51,
+      "ema100": 1081.57,
+      "is_ema_aligned": true,
+      "fractal_low": 1085.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NICFC",
@@ -3791,9 +5448,18 @@
       "fifty_two_week_high": 9.89,
       "fifty_two_week_low": 8.37,
       "confidence": 27.91,
-      "dma20": 9.24,
-      "diff_20dma": -1.52,
-      "below_20dma": true
+      "avg180d": 9.19,
+      "dma20": 9.23,
+      "ema20": 9.23,
+      "diff_20dma": -1.41,
+      "below_20dma": true,
+      "ema50": 9.28,
+      "ema100": 9.29,
+      "is_ema_aligned": false,
+      "fractal_low": 9.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NICGF2",
@@ -3811,9 +5477,18 @@
       "fifty_two_week_high": 10.13,
       "fifty_two_week_low": 8.33,
       "confidence": 28.63,
+      "avg180d": 9.23,
       "dma20": 9.25,
+      "ema20": 9.25,
       "diff_20dma": -0.32,
-      "below_20dma": true
+      "below_20dma": true,
+      "ema50": 9.31,
+      "ema100": 9.32,
+      "is_ema_aligned": false,
+      "fractal_low": 9.0,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NICL",
@@ -3830,7 +5505,13 @@
       "transactions": 42,
       "fifty_two_week_high": 620.2,
       "fifty_two_week_low": 475.0,
-      "confidence": 27.38
+      "confidence": 27.38,
+      "avg180d": 496.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NICLBSL",
@@ -3847,7 +5528,13 @@
       "transactions": 129,
       "fifty_two_week_high": 679.0,
       "fifty_two_week_low": 527.0,
-      "confidence": 40.92
+      "confidence": 40.92,
+      "avg180d": 547.7,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NICSF",
@@ -3864,7 +5551,13 @@
       "transactions": 4,
       "fifty_two_week_high": 9.97,
       "fifty_two_week_low": 8.04,
-      "confidence": 31.76
+      "confidence": 31.76,
+      "avg180d": 8.73,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NIFRA",
@@ -3881,7 +5574,13 @@
       "transactions": 273,
       "fifty_two_week_high": 299.0,
       "fifty_two_week_low": 233.9,
-      "confidence": 38.16
+      "confidence": 38.16,
+      "avg180d": 247.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NIL",
@@ -3898,7 +5597,13 @@
       "transactions": 59,
       "fifty_two_week_high": 725.0,
       "fifty_two_week_low": 562.0,
-      "confidence": 34.87
+      "confidence": 34.87,
+      "avg180d": 606.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NIMB",
@@ -3915,7 +5620,13 @@
       "transactions": 903,
       "fifty_two_week_high": 232.5,
       "fifty_two_week_low": 183.3,
-      "confidence": 30.4
+      "confidence": 30.4,
+      "avg180d": 188.9,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NIMBPO",
@@ -3932,7 +5643,13 @@
       "transactions": 21,
       "fifty_two_week_high": 174.9,
       "fifty_two_week_low": 139.0,
-      "confidence": 25.19
+      "confidence": 25.19,
+      "avg180d": 139.1,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NLG",
@@ -3949,7 +5666,13 @@
       "transactions": 38,
       "fifty_two_week_high": 867.0,
       "fifty_two_week_low": 546.0,
-      "confidence": 22.93
+      "confidence": 22.93,
+      "avg180d": 563.9,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NLIC",
@@ -3966,7 +5689,13 @@
       "transactions": 252,
       "fifty_two_week_high": 872.0,
       "fifty_two_week_low": 702.0,
-      "confidence": 32.11
+      "confidence": 32.11,
+      "avg180d": 727.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NLICL",
@@ -3983,7 +5712,13 @@
       "transactions": 52,
       "fifty_two_week_high": 644.0,
       "fifty_two_week_low": 539.0,
-      "confidence": 43.35
+      "confidence": 43.35,
+      "avg180d": 576.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NMB",
@@ -4000,7 +5735,13 @@
       "transactions": 260,
       "fifty_two_week_high": 278.0,
       "fifty_two_week_low": 230.0,
-      "confidence": 28.57
+      "confidence": 28.57,
+      "avg180d": 240.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NMB50",
@@ -4017,7 +5758,13 @@
       "transactions": 33,
       "fifty_two_week_high": 11.62,
       "fifty_two_week_low": 9.75,
-      "confidence": 30.58
+      "confidence": 30.58,
+      "avg180d": 10.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NMBD87/88",
@@ -4034,7 +5781,13 @@
       "transactions": 1,
       "fifty_two_week_high": 1249.0,
       "fifty_two_week_low": 1040.0,
-      "confidence": 29.47
+      "confidence": 29.47,
+      "avg180d": 1117.6,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NMBHF2",
@@ -4051,7 +5804,13 @@
       "transactions": 19,
       "fifty_two_week_high": 10.2,
       "fifty_two_week_low": 8.57,
-      "confidence": 42.3
+      "confidence": 42.3,
+      "avg180d": 9.75,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NMBMF",
@@ -4068,7 +5827,13 @@
       "transactions": 23,
       "fifty_two_week_high": 750.0,
       "fifty_two_week_low": 582.0,
-      "confidence": 35.88
+      "confidence": 35.88,
+      "avg180d": 600.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NMFBS",
@@ -4085,7 +5850,13 @@
       "transactions": 48,
       "fifty_two_week_high": 1370.0,
       "fifty_two_week_low": 1051.9,
-      "confidence": 42.0
+      "confidence": 42.0,
+      "avg180d": 1128.5,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NMIC",
@@ -4102,7 +5873,13 @@
       "transactions": 92,
       "fifty_two_week_high": 1525.0,
       "fifty_two_week_low": 860.0,
-      "confidence": 33.79
+      "confidence": 33.79,
+      "avg180d": 890.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NMLBBL",
@@ -4119,7 +5896,13 @@
       "transactions": 89,
       "fifty_two_week_high": 718.0,
       "fifty_two_week_low": 494.7,
-      "confidence": 30.56
+      "confidence": 30.56,
+      "avg180d": 502.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NRIC",
@@ -4136,7 +5919,13 @@
       "transactions": 221,
       "fifty_two_week_high": 1842.0,
       "fifty_two_week_low": 865.0,
-      "confidence": 24.65
+      "confidence": 24.65,
+      "avg180d": 912.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NRM",
@@ -4153,7 +5942,13 @@
       "transactions": 89,
       "fifty_two_week_high": 590.0,
       "fifty_two_week_low": 295.1,
-      "confidence": 34.69
+      "confidence": 34.69,
+      "avg180d": 304.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NRN",
@@ -4170,7 +5965,13 @@
       "transactions": 282,
       "fifty_two_week_high": 2280.0,
       "fifty_two_week_low": 1280.0,
-      "confidence": 35.5
+      "confidence": 35.5,
+      "avg180d": 1385.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NSIF2",
@@ -4187,7 +5988,13 @@
       "transactions": 26,
       "fifty_two_week_high": 11.48,
       "fifty_two_week_low": 9.75,
-      "confidence": 44.08
+      "confidence": 44.08,
+      "avg180d": 10.98,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NSY",
@@ -4204,7 +6011,13 @@
       "transactions": 25,
       "fifty_two_week_high": 10.19,
       "fifty_two_week_low": 8.93,
-      "confidence": 23.96
+      "confidence": 23.96,
+      "avg180d": 9.17,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NTC",
@@ -4221,7 +6034,13 @@
       "transactions": 314,
       "fifty_two_week_high": 942.5,
       "fifty_two_week_low": 762.5,
-      "confidence": 44.89
+      "confidence": 44.89,
+      "avg180d": 895.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NUBL",
@@ -4238,7 +6057,13 @@
       "transactions": 19,
       "fifty_two_week_high": 815.0,
       "fifty_two_week_low": 582.2,
-      "confidence": 29.98
+      "confidence": 29.98,
+      "avg180d": 600.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NWCL",
@@ -4255,7 +6080,13 @@
       "transactions": 66,
       "fifty_two_week_high": 1045.0,
       "fifty_two_week_low": 670.1,
-      "confidence": 35.86
+      "confidence": 35.86,
+      "avg180d": 687.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "NYADI",
@@ -4272,7 +6103,13 @@
       "transactions": 37,
       "fifty_two_week_high": 482.0,
       "fifty_two_week_low": 341.0,
-      "confidence": 31.83
+      "confidence": 31.83,
+      "avg180d": 362.2,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "OHL",
@@ -4289,7 +6126,13 @@
       "transactions": 43,
       "fifty_two_week_high": 916.0,
       "fifty_two_week_low": 633.1,
-      "confidence": 39.39
+      "confidence": 39.39,
+      "avg180d": 650.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "OMPL",
@@ -4306,7 +6149,13 @@
       "transactions": 54,
       "fifty_two_week_high": 1575.9,
       "fifty_two_week_low": 848.0,
-      "confidence": 30.26
+      "confidence": 30.26,
+      "avg180d": 896.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PBD85",
@@ -4323,7 +6172,13 @@
       "transactions": 1,
       "fifty_two_week_high": 1150.0,
       "fifty_two_week_low": 1034.1,
-      "confidence": 34.85
+      "confidence": 34.85,
+      "avg180d": 1100.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PBD88",
@@ -4340,7 +6195,13 @@
       "transactions": 4,
       "fifty_two_week_high": 1284.0,
       "fifty_two_week_low": 1101.0,
-      "confidence": 33.95
+      "confidence": 33.95,
+      "avg180d": 1200.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PCBL",
@@ -4357,7 +6218,13 @@
       "transactions": 157,
       "fifty_two_week_high": 275.9,
       "fifty_two_week_low": 225.0,
-      "confidence": 42.82
+      "confidence": 42.82,
+      "avg180d": 244.6,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PCIL",
@@ -4374,7 +6241,13 @@
       "transactions": 652,
       "fifty_two_week_high": 1280.0,
       "fifty_two_week_low": 300.0,
-      "confidence": 33.75
+      "confidence": 33.75,
+      "avg180d": 632.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PHCL",
@@ -4391,7 +6264,13 @@
       "transactions": 268,
       "fifty_two_week_high": 497.6,
       "fifty_two_week_low": 249.7,
-      "confidence": 41.47
+      "confidence": 41.47,
+      "avg180d": 301.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PMHPL",
@@ -4408,7 +6287,13 @@
       "transactions": 32,
       "fifty_two_week_high": 468.0,
       "fifty_two_week_low": 287.0,
-      "confidence": 25.0
+      "confidence": 25.0,
+      "avg180d": 312.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PMLI",
@@ -4425,7 +6310,13 @@
       "transactions": 89,
       "fifty_two_week_high": 543.6,
       "fifty_two_week_low": 421.0,
-      "confidence": 32.75
+      "confidence": 32.75,
+      "avg180d": 428.5,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PPCL",
@@ -4442,7 +6333,13 @@
       "transactions": 35,
       "fifty_two_week_high": 462.0,
       "fifty_two_week_low": 284.1,
-      "confidence": 32.38
+      "confidence": 32.38,
+      "avg180d": 338.3,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PPL",
@@ -4459,7 +6356,13 @@
       "transactions": 125,
       "fifty_two_week_high": 425.0,
       "fifty_two_week_low": 263.2,
-      "confidence": 31.19
+      "confidence": 31.19,
+      "avg180d": 320.3,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PRIN",
@@ -4476,7 +6379,13 @@
       "transactions": 27,
       "fifty_two_week_high": 796.0,
       "fifty_two_week_low": 630.0,
-      "confidence": 26.54
+      "confidence": 26.54,
+      "avg180d": 658.1,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PROFL",
@@ -4493,7 +6402,13 @@
       "transactions": 73,
       "fifty_two_week_high": 522.0,
       "fifty_two_week_low": 408.0,
-      "confidence": 34.99
+      "confidence": 34.99,
+      "avg180d": 414.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PRSF",
@@ -4510,7 +6425,13 @@
       "transactions": 11,
       "fifty_two_week_high": 13.61,
       "fifty_two_week_low": 9.85,
-      "confidence": 29.68
+      "confidence": 29.68,
+      "avg180d": 12.75,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PRVU",
@@ -4527,7 +6448,13 @@
       "transactions": 929,
       "fifty_two_week_high": 235.6,
       "fifty_two_week_low": 179.9,
-      "confidence": 32.8
+      "confidence": 32.8,
+      "avg180d": 183.8,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PSF",
@@ -4544,7 +6471,13 @@
       "transactions": 21,
       "fifty_two_week_high": 13.0,
       "fifty_two_week_low": 9.91,
-      "confidence": 41.07
+      "confidence": 41.07,
+      "avg180d": 12.05,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "PURE",
@@ -4561,7 +6494,13 @@
       "transactions": 88,
       "fifty_two_week_high": 1262.0,
       "fifty_two_week_low": 706.2,
-      "confidence": 37.13
+      "confidence": 37.13,
+      "avg180d": 827.5,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RADHI",
@@ -4578,7 +6517,13 @@
       "transactions": 101,
       "fifty_two_week_high": 940.0,
       "fifty_two_week_low": 618.8,
-      "confidence": 40.4
+      "confidence": 40.4,
+      "avg180d": 717.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RAWA",
@@ -4595,7 +6540,13 @@
       "transactions": 74,
       "fifty_two_week_high": 851.7,
       "fifty_two_week_low": 399.0,
-      "confidence": 37.21
+      "confidence": 37.21,
+      "avg180d": 426.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RBBF40",
@@ -4612,7 +6563,13 @@
       "transactions": 6,
       "fifty_two_week_high": 10.36,
       "fifty_two_week_low": 8.93,
-      "confidence": 22.64
+      "confidence": 22.64,
+      "avg180d": 9.01,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RBCL",
@@ -4629,7 +6586,13 @@
       "transactions": 7,
       "fifty_two_week_high": 16261.0,
       "fifty_two_week_low": 14000.0,
-      "confidence": 29.26
+      "confidence": 29.26,
+      "avg180d": 14100.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RFPL",
@@ -4646,7 +6609,13 @@
       "transactions": 118,
       "fifty_two_week_high": 464.2,
       "fifty_two_week_low": 306.0,
-      "confidence": 34.99
+      "confidence": 34.99,
+      "avg180d": 334.9,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RHGCL",
@@ -4663,7 +6632,13 @@
       "transactions": 116,
       "fifty_two_week_high": 353.0,
       "fifty_two_week_low": 217.2,
-      "confidence": 37.59
+      "confidence": 37.59,
+      "avg180d": 257.9,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RHPL",
@@ -4680,7 +6655,13 @@
       "transactions": 78,
       "fifty_two_week_high": 350.0,
       "fifty_two_week_low": 244.4,
-      "confidence": 24.03
+      "confidence": 24.03,
+      "avg180d": 253.5,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RIDI",
@@ -4697,7 +6678,13 @@
       "transactions": 756,
       "fifty_two_week_high": 415.0,
       "fifty_two_week_low": 203.5,
-      "confidence": 22.55
+      "confidence": 22.55,
+      "avg180d": 361.6,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RLEL",
@@ -4714,7 +6701,13 @@
       "transactions": 170,
       "fifty_two_week_high": 1592.3,
       "fifty_two_week_low": 300.0,
-      "confidence": 33.35
+      "confidence": 33.35,
+      "avg180d": 899.7,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RLFL",
@@ -4731,7 +6724,13 @@
       "transactions": 66,
       "fifty_two_week_high": 514.9,
       "fifty_two_week_low": 398.0,
-      "confidence": 30.1
+      "confidence": 30.1,
+      "avg180d": 442.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RMF1",
@@ -4748,7 +6747,13 @@
       "transactions": 20,
       "fifty_two_week_high": 11.4,
       "fifty_two_week_low": 8.65,
-      "confidence": 41.35
+      "confidence": 41.35,
+      "avg180d": 10.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RMF2",
@@ -4765,7 +6770,13 @@
       "transactions": 1,
       "fifty_two_week_high": 10.71,
       "fifty_two_week_low": 8.78,
-      "confidence": 38.08
+      "confidence": 38.08,
+      "avg180d": 10.1,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RNLI",
@@ -4782,7 +6793,13 @@
       "transactions": 204,
       "fifty_two_week_high": 520.2,
       "fifty_two_week_low": 416.0,
-      "confidence": 36.25
+      "confidence": 36.25,
+      "avg180d": 426.2,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RSDC",
@@ -4799,7 +6816,13 @@
       "transactions": 32,
       "fifty_two_week_high": 763.0,
       "fifty_two_week_low": 578.7,
-      "confidence": 20.94
+      "confidence": 20.94,
+      "avg180d": 632.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RSML",
@@ -4817,9 +6840,16 @@
       "fifty_two_week_high": 5049.0,
       "fifty_two_week_low": 300.0,
       "confidence": 42.18,
-      "dma20": 3160.97,
-      "diff_20dma": -10.1,
-      "below_20dma": true
+      "avg180d": 3175.6,
+      "dma20": 3139.38,
+      "ema20": 3139.38,
+      "diff_20dma": -9.49,
+      "below_20dma": true,
+      "is_ema_aligned": false,
+      "fractal_low": 2940.0,
+      "is_fractal_sweep": true,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RSY",
@@ -4836,7 +6866,13 @@
       "transactions": 20,
       "fifty_two_week_high": 10.7,
       "fifty_two_week_low": 8.63,
-      "confidence": 35.63
+      "confidence": 35.63,
+      "avg180d": 10.45,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RSY2",
@@ -4853,7 +6889,13 @@
       "transactions": 51,
       "fifty_two_week_high": 10.0,
       "fifty_two_week_low": 8.5,
-      "confidence": 29.68
+      "confidence": 29.68,
+      "avg180d": 9.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "RURU",
@@ -4870,7 +6912,13 @@
       "transactions": 35,
       "fifty_two_week_high": 830.0,
       "fifty_two_week_low": 591.0,
-      "confidence": 39.12
+      "confidence": 39.12,
+      "avg180d": 610.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SABBL",
@@ -4887,7 +6935,13 @@
       "transactions": 262,
       "fifty_two_week_high": 2000.0,
       "fifty_two_week_low": 300.0,
-      "confidence": 18.69
+      "confidence": 18.69,
+      "avg180d": 924.9,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SADBL",
@@ -4904,7 +6958,13 @@
       "transactions": 41,
       "fifty_two_week_high": 463.0,
       "fifty_two_week_low": 376.0,
-      "confidence": 36.9
+      "confidence": 36.9,
+      "avg180d": 410.9,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SAEF2",
@@ -4921,7 +6981,13 @@
       "transactions": 48,
       "fifty_two_week_high": 10.0,
       "fifty_two_week_low": 8.76,
-      "confidence": 25.33
+      "confidence": 25.33,
+      "avg180d": 9.09,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SAGAR",
@@ -4938,7 +7004,13 @@
       "transactions": 136,
       "fifty_two_week_high": 2439.0,
       "fifty_two_week_low": 319.5,
-      "confidence": 22.5
+      "confidence": 22.5,
+      "avg180d": 1610.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SAGF",
@@ -4955,7 +7027,13 @@
       "transactions": 2,
       "fifty_two_week_high": 11.31,
       "fifty_two_week_low": 8.79,
-      "confidence": 24.91
+      "confidence": 24.91,
+      "avg180d": 9.92,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SAHAS",
@@ -4972,7 +7050,13 @@
       "transactions": 524,
       "fifty_two_week_high": 716.6,
       "fifty_two_week_low": 535.3,
-      "confidence": 39.84
+      "confidence": 39.84,
+      "avg180d": 684.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SAIL",
@@ -4989,7 +7073,13 @@
       "transactions": 283,
       "fifty_two_week_high": 1690.0,
       "fifty_two_week_low": 301.7,
-      "confidence": 23.7
+      "confidence": 23.7,
+      "avg180d": 1075.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SALICO",
@@ -5006,7 +7096,13 @@
       "transactions": 24,
       "fifty_two_week_high": 712.0,
       "fifty_two_week_low": 570.0,
-      "confidence": 37.93
+      "confidence": 37.93,
+      "avg180d": 588.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SANIMA",
@@ -5023,7 +7119,13 @@
       "transactions": 228,
       "fifty_two_week_high": 390.6,
       "fifty_two_week_low": 295.0,
-      "confidence": 27.45
+      "confidence": 27.45,
+      "avg180d": 370.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SANVI",
@@ -5040,7 +7142,13 @@
       "transactions": 253,
       "fifty_two_week_high": 1060.0,
       "fifty_two_week_low": 536.0,
-      "confidence": 38.48
+      "confidence": 38.48,
+      "avg180d": 614.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SAPDBL",
@@ -5057,7 +7165,13 @@
       "transactions": 164,
       "fifty_two_week_high": 1065.7,
       "fifty_two_week_low": 686.0,
-      "confidence": 17.39
+      "confidence": 17.39,
+      "avg180d": 782.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SAPIL",
@@ -5074,7 +7188,13 @@
       "transactions": 16,
       "fifty_two_week_high": 456.2,
       "fifty_two_week_low": 300.0,
-      "confidence": 21.35
+      "confidence": 21.35,
+      "avg180d": 456.2,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SARBTM",
@@ -5091,7 +7211,13 @@
       "transactions": 58,
       "fifty_two_week_high": 950.6,
       "fifty_two_week_low": 750.0,
-      "confidence": 39.61
+      "confidence": 39.61,
+      "avg180d": 793.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SBCF",
@@ -5108,7 +7234,13 @@
       "transactions": 22,
       "fifty_two_week_high": 11.16,
       "fifty_two_week_low": 8.82,
-      "confidence": 44.61
+      "confidence": 44.61,
+      "avg180d": 10.15,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SBD87",
@@ -5125,7 +7257,13 @@
       "transactions": 1,
       "fifty_two_week_high": 1210.0,
       "fifty_two_week_low": 1050.0,
-      "confidence": 29.0
+      "confidence": 29.0,
+      "avg180d": 1090.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SBI",
@@ -5142,7 +7280,13 @@
       "transactions": 50,
       "fifty_two_week_high": 441.0,
       "fifty_two_week_low": 363.0,
-      "confidence": 23.1
+      "confidence": 23.1,
+      "avg180d": 399.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SBL",
@@ -5159,7 +7303,13 @@
       "transactions": 169,
       "fifty_two_week_high": 424.7,
       "fifty_two_week_low": 320.5,
-      "confidence": 36.78
+      "confidence": 36.78,
+      "avg180d": 409.2,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SBLD89",
@@ -5176,7 +7326,13 @@
       "transactions": 2,
       "fifty_two_week_high": 1450.0,
       "fifty_two_week_low": 1190.0,
-      "confidence": 38.02
+      "confidence": 38.02,
+      "avg180d": 1230.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SCB",
@@ -5193,7 +7349,13 @@
       "transactions": 78,
       "fifty_two_week_high": 712.6,
       "fifty_two_week_low": 594.9,
-      "confidence": 39.65
+      "confidence": 39.65,
+      "avg180d": 649.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SDBD87",
@@ -5210,7 +7372,13 @@
       "transactions": 4,
       "fifty_two_week_high": 1241.0,
       "fifty_two_week_low": 1047.0,
-      "confidence": 21.57
+      "confidence": 21.57,
+      "avg180d": 1155.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SEF",
@@ -5227,7 +7395,13 @@
       "transactions": 23,
       "fifty_two_week_high": 11.53,
       "fifty_two_week_low": 8.6,
-      "confidence": 46.25
+      "confidence": 46.25,
+      "avg180d": 10.23,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SEF2",
@@ -5244,7 +7418,13 @@
       "transactions": 43,
       "fifty_two_week_high": 10.0,
       "fifty_two_week_low": 8.75,
-      "confidence": 24.31
+      "confidence": 24.31,
+      "avg180d": 9.1,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SFEF",
@@ -5261,7 +7441,13 @@
       "transactions": 1,
       "fifty_two_week_high": 10.65,
       "fifty_two_week_low": 8.82,
-      "confidence": 23.82
+      "confidence": 23.82,
+      "avg180d": 9.85,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SFMF",
@@ -5278,7 +7464,13 @@
       "transactions": 7,
       "fifty_two_week_high": 11.13,
       "fifty_two_week_low": 9.4,
-      "confidence": 36.93
+      "confidence": 36.93,
+      "avg180d": 10.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SGHC",
@@ -5295,7 +7487,13 @@
       "transactions": 267,
       "fifty_two_week_high": 487.6,
       "fifty_two_week_low": 296.0,
-      "confidence": 29.96
+      "confidence": 29.96,
+      "avg180d": 300.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SGHL",
@@ -5312,7 +7510,13 @@
       "transactions": 3729,
       "fifty_two_week_high": 587.0,
       "fifty_two_week_low": 299.3,
-      "confidence": 37.62
+      "confidence": 37.62,
+      "avg180d": 537.6,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SGIC",
@@ -5329,7 +7533,13 @@
       "transactions": 72,
       "fifty_two_week_high": 579.9,
       "fifty_two_week_low": 430.0,
-      "confidence": 37.69
+      "confidence": 37.69,
+      "avg180d": 452.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SHEL",
@@ -5346,7 +7556,13 @@
       "transactions": 141,
       "fifty_two_week_high": 361.0,
       "fifty_two_week_low": 262.0,
-      "confidence": 34.82
+      "confidence": 34.82,
+      "avg180d": 303.9,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SHINE",
@@ -5363,7 +7579,13 @@
       "transactions": 80,
       "fifty_two_week_high": 449.7,
       "fifty_two_week_low": 382.0,
-      "confidence": 41.94
+      "confidence": 41.94,
+      "avg180d": 414.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SHIVM",
@@ -5380,7 +7602,13 @@
       "transactions": 273,
       "fifty_two_week_high": 730.0,
       "fifty_two_week_low": 524.0,
-      "confidence": 33.82
+      "confidence": 33.82,
+      "avg180d": 629.7,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SHL",
@@ -5397,7 +7625,13 @@
       "transactions": 45,
       "fifty_two_week_high": 579.0,
       "fifty_two_week_low": 464.0,
-      "confidence": 39.41
+      "confidence": 39.41,
+      "avg180d": 505.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SHLB",
@@ -5414,7 +7648,13 @@
       "transactions": 13,
       "fifty_two_week_high": 2055.3,
       "fifty_two_week_low": 1390.0,
-      "confidence": 37.76
+      "confidence": 37.76,
+      "avg180d": 1425.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SHPC",
@@ -5431,7 +7671,13 @@
       "transactions": 73,
       "fifty_two_week_high": 588.0,
       "fifty_two_week_low": 475.0,
-      "confidence": 35.47
+      "confidence": 35.47,
+      "avg180d": 495.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SICL",
@@ -5448,7 +7694,13 @@
       "transactions": 44,
       "fifty_two_week_high": 757.0,
       "fifty_two_week_low": 588.8,
-      "confidence": 38.71
+      "confidence": 38.71,
+      "avg180d": 610.4,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SIFC",
@@ -5465,7 +7717,13 @@
       "transactions": 31,
       "fifty_two_week_high": 687.4,
       "fifty_two_week_low": 459.0,
-      "confidence": 38.26
+      "confidence": 38.26,
+      "avg180d": 506.9,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SIGS2",
@@ -5482,7 +7740,13 @@
       "transactions": 5,
       "fifty_two_week_high": 11.7,
       "fifty_two_week_low": 8.9,
-      "confidence": 44.22
+      "confidence": 44.22,
+      "avg180d": 11.02,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SIGS3",
@@ -5499,7 +7763,13 @@
       "transactions": 4,
       "fifty_two_week_high": 11.58,
       "fifty_two_week_low": 8.5,
-      "confidence": 22.98
+      "confidence": 22.98,
+      "avg180d": 10.87,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SIKLES",
@@ -5516,7 +7786,13 @@
       "transactions": 66,
       "fifty_two_week_high": 958.0,
       "fifty_two_week_low": 536.3,
-      "confidence": 42.78
+      "confidence": 42.78,
+      "avg180d": 560.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SINDU",
@@ -5533,7 +7809,13 @@
       "transactions": 78,
       "fifty_two_week_high": 919.9,
       "fifty_two_week_low": 608.0,
-      "confidence": 27.7
+      "confidence": 27.7,
+      "avg180d": 680.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SIPD",
@@ -5550,7 +7832,13 @@
       "transactions": 339,
       "fifty_two_week_high": 1216.8,
       "fifty_two_week_low": 284.3,
-      "confidence": 26.61
+      "confidence": 26.61,
+      "avg180d": 658.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SJCL",
@@ -5567,7 +7855,13 @@
       "transactions": 75,
       "fifty_two_week_high": 365.0,
       "fifty_two_week_low": 263.0,
-      "confidence": 34.45
+      "confidence": 34.45,
+      "avg180d": 268.7,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SJLIC",
@@ -5584,7 +7878,13 @@
       "transactions": 92,
       "fifty_two_week_high": 489.9,
       "fifty_two_week_low": 390.0,
-      "confidence": 36.54
+      "confidence": 36.54,
+      "avg180d": 412.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SKBBL",
@@ -5601,7 +7901,13 @@
       "transactions": 66,
       "fifty_two_week_high": 954.8,
       "fifty_two_week_low": 740.0,
-      "confidence": 42.78
+      "confidence": 42.78,
+      "avg180d": 749.9,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SKHEL",
@@ -5618,7 +7924,13 @@
       "transactions": 68,
       "fifty_two_week_high": 2069.4,
       "fifty_two_week_low": 284.3,
-      "confidence": 25.01
+      "confidence": 25.01,
+      "avg180d": 970.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SKHL",
@@ -5635,7 +7947,13 @@
       "transactions": 599,
       "fifty_two_week_high": 1360.0,
       "fifty_two_week_low": 300.0,
-      "confidence": 25.12
+      "confidence": 25.12,
+      "avg180d": 834.1,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SLBBL",
@@ -5652,7 +7970,13 @@
       "transactions": 117,
       "fifty_two_week_high": 998.0,
       "fifty_two_week_low": 761.9,
-      "confidence": 46.35
+      "confidence": 46.35,
+      "avg180d": 807.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SLBSL",
@@ -5669,7 +7993,13 @@
       "transactions": 15,
       "fifty_two_week_high": 1612.0,
       "fifty_two_week_low": 925.0,
-      "confidence": 26.99
+      "confidence": 26.99,
+      "avg180d": 927.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SLCF",
@@ -5686,7 +8016,13 @@
       "transactions": 26,
       "fifty_two_week_high": 11.77,
       "fifty_two_week_low": 8.6,
-      "confidence": 44.94
+      "confidence": 44.94,
+      "avg180d": 10.4,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SMATA",
@@ -5703,7 +8039,13 @@
       "transactions": 37,
       "fifty_two_week_high": 1055.0,
       "fifty_two_week_low": 713.5,
-      "confidence": 32.17
+      "confidence": 32.17,
+      "avg180d": 724.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SMB",
@@ -5720,7 +8062,13 @@
       "transactions": 9,
       "fifty_two_week_high": 2373.5,
       "fifty_two_week_low": 1699.0,
-      "confidence": 22.25
+      "confidence": 22.25,
+      "avg180d": 1801.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SMFBS",
@@ -5737,7 +8085,13 @@
       "transactions": 28,
       "fifty_two_week_high": 1930.0,
       "fifty_two_week_low": 1420.0,
-      "confidence": 29.29
+      "confidence": 29.29,
+      "avg180d": 1422.1,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SMH",
@@ -5754,7 +8108,13 @@
       "transactions": 42,
       "fifty_two_week_high": 1024.8,
       "fifty_two_week_low": 482.6,
-      "confidence": 33.09
+      "confidence": 33.09,
+      "avg180d": 507.6,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SMHL",
@@ -5771,7 +8131,13 @@
       "transactions": 213,
       "fifty_two_week_high": 989.0,
       "fifty_two_week_low": 443.0,
-      "confidence": 42.33
+      "confidence": 42.33,
+      "avg180d": 498.8,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SMJC",
@@ -5788,7 +8154,13 @@
       "transactions": 162,
       "fifty_two_week_high": 596.7,
       "fifty_two_week_low": 418.0,
-      "confidence": 38.95
+      "confidence": 38.95,
+      "avg180d": 480.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SMPDA",
@@ -5805,7 +8177,13 @@
       "transactions": 35,
       "fifty_two_week_high": 1064.0,
       "fifty_two_week_low": 730.0,
-      "confidence": 37.95
+      "confidence": 37.95,
+      "avg180d": 748.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SNLI",
@@ -5822,7 +8200,13 @@
       "transactions": 200,
       "fifty_two_week_high": 528.3,
       "fifty_two_week_low": 406.0,
-      "confidence": 33.92
+      "confidence": 33.92,
+      "avg180d": 408.3,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SNORL",
@@ -5839,7 +8223,13 @@
       "transactions": 589,
       "fifty_two_week_high": 1017.1,
       "fifty_two_week_low": 298.7,
-      "confidence": 30.57
+      "confidence": 30.57,
+      "avg180d": 910.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SOHL",
@@ -5856,7 +8246,13 @@
       "transactions": 2489,
       "fifty_two_week_high": 875.5,
       "fifty_two_week_low": 300.0,
-      "confidence": 36.54
+      "confidence": 36.54,
+      "avg180d": 709.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SONA",
@@ -5873,7 +8269,13 @@
       "transactions": 246,
       "fifty_two_week_high": 510.0,
       "fifty_two_week_low": 398.0,
-      "confidence": 30.57
+      "confidence": 30.57,
+      "avg180d": 400.5,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SOPL",
@@ -5890,7 +8292,13 @@
       "transactions": 865,
       "fifty_two_week_high": 1217.0,
       "fifty_two_week_low": 276.5,
-      "confidence": 30.75
+      "confidence": 30.75,
+      "avg180d": 795.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SPC",
@@ -5907,7 +8315,13 @@
       "transactions": 41,
       "fifty_two_week_high": 577.0,
       "fifty_two_week_low": 400.0,
-      "confidence": 31.87
+      "confidence": 31.87,
+      "avg180d": 414.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SPDL",
@@ -5924,7 +8338,13 @@
       "transactions": 82,
       "fifty_two_week_high": 474.0,
       "fifty_two_week_low": 345.0,
-      "confidence": 28.48
+      "confidence": 28.48,
+      "avg180d": 368.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SPHL",
@@ -5941,7 +8361,13 @@
       "transactions": 44,
       "fifty_two_week_high": 708.0,
       "fifty_two_week_low": 477.1,
-      "confidence": 39.21
+      "confidence": 39.21,
+      "avg180d": 526.5,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SPIL",
@@ -5958,7 +8384,13 @@
       "transactions": 20,
       "fifty_two_week_high": 844.1,
       "fifty_two_week_low": 625.0,
-      "confidence": 32.04
+      "confidence": 32.04,
+      "avg180d": 685.1,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SPL",
@@ -5975,7 +8407,13 @@
       "transactions": 10,
       "fifty_two_week_high": 1000.0,
       "fifty_two_week_low": 606.4,
-      "confidence": 37.98
+      "confidence": 37.98,
+      "avg180d": 656.5,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SRLI",
@@ -5992,7 +8430,13 @@
       "transactions": 162,
       "fifty_two_week_high": 437.7,
       "fifty_two_week_low": 363.9,
-      "confidence": 35.51
+      "confidence": 35.51,
+      "avg180d": 369.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SSHL",
@@ -6009,7 +8453,13 @@
       "transactions": 166,
       "fifty_two_week_high": 251.0,
       "fifty_two_week_low": 151.0,
-      "confidence": 37.8
+      "confidence": 37.8,
+      "avg180d": 203.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "STC",
@@ -6026,7 +8476,13 @@
       "transactions": 14,
       "fifty_two_week_high": 6335.9,
       "fifty_two_week_low": 4832.0,
-      "confidence": 36.88
+      "confidence": 36.88,
+      "avg180d": 5170.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SWASTIK",
@@ -6043,7 +8499,13 @@
       "transactions": 19,
       "fifty_two_week_high": 3400.0,
       "fifty_two_week_low": 391.7,
-      "confidence": 28.83
+      "confidence": 28.83,
+      "avg180d": 1971.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SWBBL",
@@ -6060,7 +8522,13 @@
       "transactions": 61,
       "fifty_two_week_high": 928.0,
       "fifty_two_week_low": 630.5,
-      "confidence": 39.86
+      "confidence": 39.86,
+      "avg180d": 675.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SWMF",
@@ -6077,7 +8545,13 @@
       "transactions": 16,
       "fifty_two_week_high": 774.6,
       "fifty_two_week_low": 586.2,
-      "confidence": 23.17
+      "confidence": 23.17,
+      "avg180d": 605.3,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "SYPNL",
@@ -6094,7 +8568,13 @@
       "transactions": 442,
       "fifty_two_week_high": 2255.9,
       "fifty_two_week_low": 319.8,
-      "confidence": 18.46
+      "confidence": 18.46,
+      "avg180d": 1296.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "TAMOR",
@@ -6111,7 +8591,13 @@
       "transactions": 485,
       "fifty_two_week_high": 526.0,
       "fifty_two_week_low": 396.4,
-      "confidence": 46.35
+      "confidence": 46.35,
+      "avg180d": 469.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "TPC",
@@ -6128,7 +8614,13 @@
       "transactions": 66,
       "fifty_two_week_high": 450.0,
       "fifty_two_week_low": 270.1,
-      "confidence": 38.59
+      "confidence": 38.59,
+      "avg180d": 365.6,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "TPKHL",
@@ -6145,7 +8637,13 @@
       "transactions": 1168,
       "fifty_two_week_high": 772.5,
       "fifty_two_week_low": 300.0,
-      "confidence": 28.33
+      "confidence": 28.33,
+      "avg180d": 550.1,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "TRH",
@@ -6162,7 +8660,13 @@
       "transactions": 61,
       "fifty_two_week_high": 992.0,
       "fifty_two_week_low": 681.1,
-      "confidence": 45.9
+      "confidence": 45.9,
+      "avg180d": 825.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "TSHL",
@@ -6179,7 +8683,13 @@
       "transactions": 50,
       "fifty_two_week_high": 900.0,
       "fifty_two_week_low": 308.1,
-      "confidence": 32.74
+      "confidence": 32.74,
+      "avg180d": 362.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "TTL",
@@ -6196,7 +8706,13 @@
       "transactions": 221,
       "fifty_two_week_high": 1173.0,
       "fifty_two_week_low": 670.0,
-      "confidence": 20.06
+      "confidence": 20.06,
+      "avg180d": 710.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "TVCL",
@@ -6213,7 +8729,13 @@
       "transactions": 31,
       "fifty_two_week_high": 689.0,
       "fifty_two_week_low": 377.6,
-      "confidence": 35.18
+      "confidence": 35.18,
+      "avg180d": 465.4,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "UAIL",
@@ -6230,7 +8752,13 @@
       "transactions": 115,
       "fifty_two_week_high": 550.0,
       "fifty_two_week_low": 421.0,
-      "confidence": 36.7
+      "confidence": 36.7,
+      "avg180d": 428.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "UHEWA",
@@ -6247,7 +8775,13 @@
       "transactions": 272,
       "fifty_two_week_high": 692.6,
       "fifty_two_week_low": 521.0,
-      "confidence": 32.48
+      "confidence": 32.48,
+      "avg180d": 620.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "ULBSL",
@@ -6264,7 +8798,13 @@
       "transactions": 29,
       "fifty_two_week_high": 4325.0,
       "fifty_two_week_low": 2625.0,
-      "confidence": 32.3
+      "confidence": 32.3,
+      "avg180d": 2710.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "ULHC",
@@ -6281,7 +8821,13 @@
       "transactions": 135,
       "fifty_two_week_high": 599.0,
       "fifty_two_week_low": 332.0,
-      "confidence": 22.93
+      "confidence": 22.93,
+      "avg180d": 340.5,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "UMHL",
@@ -6298,7 +8844,13 @@
       "transactions": 196,
       "fifty_two_week_high": 706.0,
       "fifty_two_week_low": 495.0,
-      "confidence": 42.68
+      "confidence": 42.68,
+      "avg180d": 588.8,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "UMRH",
@@ -6315,7 +8867,13 @@
       "transactions": 37,
       "fifty_two_week_high": 666.5,
       "fifty_two_week_low": 512.0,
-      "confidence": 31.6
+      "confidence": 31.6,
+      "avg180d": 524.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "UNHPL",
@@ -6332,7 +8890,13 @@
       "transactions": 128,
       "fifty_two_week_high": 571.0,
       "fifty_two_week_low": 368.0,
-      "confidence": 35.13
+      "confidence": 35.13,
+      "avg180d": 370.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "UNLB",
@@ -6349,7 +8913,13 @@
       "transactions": 11,
       "fifty_two_week_high": 2320.0,
       "fifty_two_week_low": 1213.0,
-      "confidence": 33.88
+      "confidence": 33.88,
+      "avg180d": 1269.8,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "UPCL",
@@ -6366,7 +8936,13 @@
       "transactions": 102,
       "fifty_two_week_high": 430.4,
       "fifty_two_week_low": 326.9,
-      "confidence": 34.1
+      "confidence": 34.1,
+      "avg180d": 346.5,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": false,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "UPPER",
@@ -6383,7 +8959,13 @@
       "transactions": 302,
       "fifty_two_week_high": 242.6,
       "fifty_two_week_low": 166.0,
-      "confidence": 38.25
+      "confidence": 38.25,
+      "avg180d": 192.5,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "USHEC",
@@ -6400,7 +8982,13 @@
       "transactions": 83,
       "fifty_two_week_high": 539.1,
       "fifty_two_week_low": 432.0,
-      "confidence": 44.44
+      "confidence": 44.44,
+      "avg180d": 505.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "USHL",
@@ -6417,7 +9005,13 @@
       "transactions": 38,
       "fifty_two_week_high": 945.0,
       "fifty_two_week_low": 468.1,
-      "confidence": 31.29
+      "confidence": 31.29,
+      "avg180d": 544.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "USLB",
@@ -6434,7 +9028,13 @@
       "transactions": 25,
       "fifty_two_week_high": 2420.0,
       "fifty_two_week_low": 1090.0,
-      "confidence": 35.02
+      "confidence": 35.02,
+      "avg180d": 1115.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "VLBS",
@@ -6451,7 +9051,13 @@
       "transactions": 51,
       "fifty_two_week_high": 890.0,
       "fifty_two_week_low": 640.0,
-      "confidence": 30.77
+      "confidence": 30.77,
+      "avg180d": 658.9,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "VLUCL",
@@ -6468,7 +9074,13 @@
       "transactions": 75,
       "fifty_two_week_high": 652.0,
       "fifty_two_week_low": 405.2,
-      "confidence": 35.87
+      "confidence": 35.87,
+      "avg180d": 410.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "WNLB",
@@ -6485,7 +9097,13 @@
       "transactions": 20,
       "fifty_two_week_high": 2255.0,
       "fifty_two_week_low": 1242.1,
-      "confidence": 33.79
+      "confidence": 33.79,
+      "avg180d": 1312.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     },
     {
       "symbol": "YMHL",
@@ -6502,7 +9120,13 @@
       "transactions": 1023,
       "fifty_two_week_high": 797.6,
       "fifty_two_week_low": 300.0,
-      "confidence": 37.95
+      "confidence": 37.95,
+      "avg180d": 637.0,
+      "is_ema_aligned": false,
+      "fractal_low": null,
+      "is_fractal_sweep": false,
+      "is_bullish_candle": true,
+      "is_ema_fractal_match": false
     }
   ],
   "indices": [

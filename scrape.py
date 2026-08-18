@@ -561,11 +561,10 @@ def scrape_nepse():
     os.makedirs("data", exist_ok=True)
     
     def compute_ema(series, n):
-        if not series: return None
-        if len(series) < n:
-            return round(sum(series) / len(series), 2)
+        if not series or len(series) < n:
+            return None
         k = 2.0 / (n + 1)
-        val = sum(series[:n]) / n
+        val = sum(series[:n]) / float(n)
         for price in series[n:]:
             val = (price * k) + (val * (1.0 - k))
         return round(val, 2)
@@ -588,9 +587,9 @@ def scrape_nepse():
         if ltp > 0:
             closes.append(ltp)
 
-        e20 = compute_ema(closes, 20) if closes else None
-        e50 = compute_ema(closes, 50) if closes else None
-        e100 = compute_ema(closes, 100) if closes else None
+        e20 = compute_ema(closes, 20)
+        e50 = compute_ema(closes, 50)
+        e100 = compute_ema(closes, 100)
 
         if closes:
             subset_180 = closes[-180:]
@@ -606,7 +605,14 @@ def scrape_nepse():
         if e50: s["ema50"] = e50
         if e100: s["ema100"] = e100
 
-        is_ema_aligned = bool(e20 and e50 and e100 and (e20 >= e50 >= e100))
+        # Strict EMA Alignment: EMA 20 > EMA 50 > EMA 100
+        if e20 and e50 and e100:
+            is_ema_aligned = bool(e20 > e50 and e50 > e100)
+        elif e20 and e50:
+            is_ema_aligned = bool(e20 > e50)
+        else:
+            is_ema_aligned = False
+
         s["is_ema_aligned"] = is_ema_aligned
 
         # Williams Fractal Low calculation

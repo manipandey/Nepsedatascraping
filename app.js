@@ -3533,33 +3533,32 @@ function renderStrategyView() {
     // 3. Confirmation Green Candle (Bullish reversal candle: Close >= Open / % Change >= 0)
     const evaluatedStocks = stocksData.map(s => {
         const ltp = s.ltp || s.close || 0;
-        const e20 = s.ema20 || s.sma20 || s.dma20 || (ltp ? ltp * 0.985 : null);
-        const e50 = s.ema50 || s.sma50 || (e20 ? e20 * 0.96 : null);
-        const e100 = s.ema100 || (e50 ? e50 * 0.95 : null);
+        const e20 = s.ema20 || s.sma20 || s.dma20 || null;
+        const e50 = s.ema50 || s.sma50 || null;
+        const e100 = s.ema100 || null;
 
+        // Strict EMA Alignment: EMA 20 > EMA 50 > EMA 100
         const isEmaAligned = Boolean(
-            s.is_ema_aligned ||
-            (e20 && e50 && e100 && e20 >= e50 && e50 >= e100) ||
-            (e20 && e50 && e20 >= e50)
+            s.is_ema_aligned !== undefined ? s.is_ema_aligned :
+            (e20 && e50 && e100 ? (e20 > e50 && e50 > e100) : (e20 && e50 ? e20 > e50 : false))
         );
 
-        const fracLow = s.fractal_low || s.fifty_two_week_low || (e50 ? e50 * 0.94 : null);
+        const fracLow = s.fractal_low || null;
         const currLow = s.low || ltp;
-        const prevLow = s.prev_low || currLow;
 
-        // Check if price touched or swept below the fractal low level
+        // Strict Liquidity Sweep: Price low touched or swept below recent Williams Fractal Low
         const isFractalSwept = Boolean(
-            s.is_fractal_sweep ||
-            (fracLow && (currLow <= fracLow || prevLow <= fracLow || (ltp > 0 && Math.abs(ltp - fracLow) / fracLow <= 0.035)))
+            s.is_fractal_sweep !== undefined ? s.is_fractal_sweep :
+            (fracLow && fracLow > 0 && currLow <= fracLow)
         );
 
-        // Check green confirmation candle
+        // Strict Bullish Confirmation: Close >= Open or Price Change >= 0
         const isGreenCandle = Boolean(
-            s.is_bullish_candle ||
+            s.is_bullish_candle !== undefined ? s.is_bullish_candle :
             (s.open && s.close ? s.close >= s.open : (s.diff !== undefined ? s.diff >= 0 : (s.diff_percent || 0) >= 0))
         );
 
-        // 3/3 Full Strategy Setup match
+        // Full 3/3 Bullish Setup Match
         const fullMatch = Boolean(
             s.is_ema_fractal_match ||
             (isEmaAligned && isFractalSwept && isGreenCandle)
