@@ -5239,6 +5239,7 @@ function handleMarginSymbolChange() {
     const symbol = select.value;
     const ltpInput = document.getElementById("marginLTP");
     const avgInput = document.getElementById("marginAvgPrice");
+    const loanInput = document.getElementById("marginLoanAmount");
     
     if (!symbol) {
         if (ltpInput) ltpInput.value = "0";
@@ -5252,9 +5253,19 @@ function handleMarginSymbolChange() {
         const ltp = stock.ltp || stock.close || 0;
         if (ltpInput) ltpInput.value = ltp ? ltp.toFixed(2) : "0.00";
         
-        // Exact 180-day historical average price or fallback SMA
+        // Exact 180-day historical average price or fallback calculation
         const avgPrice = stock.avg180d || stock.sma180 || stock.sma200 || (ltp > 0 ? ltp * 0.95 : 0);
         if (avgInput) avgInput.value = avgPrice ? Number(avgPrice).toFixed(2) : "0.00";
+
+        // Calculate max eligible loan and set default desired loan amount
+        const valPrice = (ltp > 0 && avgPrice > 0) ? Math.min(ltp, avgPrice) : (ltp || avgPrice || 0);
+        const qty = parseFloat(document.getElementById("marginQuantity")?.value) || 1000;
+        const ltvPct = parseFloat(document.getElementById("marginLTVPct")?.value) || 70;
+        const maxLoan = qty * valPrice * (ltvPct / 100);
+
+        if (loanInput && (!loanInput.value || parseFloat(loanInput.value) <= 0 || parseFloat(loanInput.value) > maxLoan)) {
+            loanInput.value = Math.floor(maxLoan);
+        }
     }
     
     calculateMarginLoan();
@@ -5265,16 +5276,26 @@ function updateMarginLoanLive() {
     const select = document.getElementById("marginSymbolSelect");
     if (select && select.value) {
         handleMarginSymbolChange();
+    } else {
+        calculateMarginLoan();
     }
 }
 
 function setMarginMaxLoan() {
-    const ltp = parseFloat(document.getElementById("marginLTP").value) || 0;
-    const avgPrice = parseFloat(document.getElementById("marginAvgPrice").value) || 0;
-    const qty = parseFloat(document.getElementById("marginQuantity").value) || 0;
-    const ltvPct = parseFloat(document.getElementById("marginLTVPct").value) || 70;
+    const ltp = parseFloat(document.getElementById("marginLTP")?.value) || 0;
+    const avgPrice = parseFloat(document.getElementById("marginAvgPrice")?.value) || 0;
+    const qty = parseFloat(document.getElementById("marginQuantity")?.value) || 0;
+    const ltvPct = parseFloat(document.getElementById("marginLTVPct")?.value) || 70;
     
-    const valuationPrice = Math.min(ltp, avgPrice);
+    let valuationPrice = 0;
+    if (ltp > 0 && avgPrice > 0) {
+        valuationPrice = Math.min(ltp, avgPrice);
+    } else if (ltp > 0) {
+        valuationPrice = ltp;
+    } else if (avgPrice > 0) {
+        valuationPrice = avgPrice;
+    }
+
     const valuation = qty * valuationPrice;
     const maxLoan = valuation * (ltvPct / 100);
     
@@ -5287,47 +5308,73 @@ function setMarginMaxLoan() {
 }
 
 function calculateMarginLoan() {
-    const ltp = parseFloat(document.getElementById("marginLTP").value) || 0;
-    const avgPrice = parseFloat(document.getElementById("marginAvgPrice").value) || 0;
-    const qty = parseFloat(document.getElementById("marginQuantity").value) || 0;
-    const ltvPct = parseFloat(document.getElementById("marginLTVPct").value) || 70;
+    const ltp = parseFloat(document.getElementById("marginLTP")?.value) || 0;
+    const avgPrice = parseFloat(document.getElementById("marginAvgPrice")?.value) || 0;
+    const qty = parseFloat(document.getElementById("marginQuantity")?.value) || 0;
+    const ltvPct = parseFloat(document.getElementById("marginLTVPct")?.value) || 70;
     const loanAmountInput = document.getElementById("marginLoanAmount");
-    
-    const valuationPrice = Math.min(ltp, avgPrice);
+
+    // Proper valuation price handling (Math.min only when both > 0)
+    let valuationPrice = 0;
+    if (ltp > 0 && avgPrice > 0) {
+        valuationPrice = Math.min(ltp, avgPrice);
+    } else if (ltp > 0) {
+        valuationPrice = ltp;
+    } else if (avgPrice > 0) {
+        valuationPrice = avgPrice;
+    }
+
     const valuation = qty * valuationPrice;
     const maxLoan = valuation * (ltvPct / 100);
-    
+
     let loanAmount = parseFloat(loanAmountInput ? loanAmountInput.value : 0) || 0;
-    if (loanAmount > maxLoan) {
+
+    // Only cap loanAmount if maxLoan > 0
+    if (maxLoan > 0 && loanAmount > maxLoan) {
         loanAmount = maxLoan;
         if (loanAmountInput) loanAmountInput.value = Math.floor(maxLoan);
     }
-    
+
     const effectiveLTV = valuation > 0 ? (loanAmount / valuation) * 100 : 0;
-    
-    // Nepal Rastra Bank standard: Margin Call occurs when the LTV ratio rises to 115% or 120% of the loan amount
-    // Or in other words, if asset valuation drops below 115% of the loan amount.
-    const marginCallValuation = loanAmount * 1.15;
-    const marginCallPrice = qty > 0 ? marginCallValuation / qty : 0;
-    const dropPct = ltp > 0 ? ((ltp - marginCallPrice) / ltp) * 100 : 0;
-    
-    // Update labels
-    document.getElementById("valMarginAssetValuation").textContent = `NPR ${valuation.toLocaleString('en-IN', {maximumFractionDigits: 2})}`;
-    document.getElementById("valMarginMaxLoan").textContent = `NPR ${maxLoan.toLocaleString('en-IN', {maximumFractionDigits: 2})}`;
-    document.getElementById("valMarginEffectiveLTV").textContent = `${effectiveLTV.toFixed(2)}%`;
-    document.getElementById("valMarginCallPrice").textContent = `NPR ${marginCallPrice.toLocaleString('en-IN', {maximumFractionDigits: 2})}`;
-    document.getElementById("valMarginDropPct").textContent = ltp <= marginCallPrice ? "0.00% (Triggered)" : `${dropPct.toFixed(2)}%`;
-    
+
+    // Nepal Rastra Bank standard: Margin Call occurs when LTV reaches 85% limit
+    const marginCallValuation = loanAmount > 0 ? (loanAmount / 0.85) : 0;
+    const marginCallPrice = qty > 0 ? (marginCallValuation / qty) : 0;
+    const dropPct = (ltp > 0 && marginCallPrice > 0) ? (((ltp - marginCallPrice) / ltp) * 100) : 0;
+
+    // Update UI elements safely
+    const assetValEl = document.getElementById("valMarginAssetValuation");
+    if (assetValEl) assetValEl.textContent = `NPR ${valuation.toLocaleString('en-IN', {maximumFractionDigits: 2})}`;
+
+    const maxLoanEl = document.getElementById("valMarginMaxLoan");
+    if (maxLoanEl) maxLoanEl.textContent = `NPR ${maxLoan.toLocaleString('en-IN', {maximumFractionDigits: 2})}`;
+
+    const effLtvEl = document.getElementById("valMarginEffectiveLTV");
+    if (effLtvEl) effLtvEl.textContent = `${effectiveLTV.toFixed(2)}%`;
+
+    const callPriceEl = document.getElementById("valMarginCallPrice");
+    if (callPriceEl) callPriceEl.textContent = `NPR ${marginCallPrice.toLocaleString('en-IN', {maximumFractionDigits: 2})}`;
+
+    const dropPctEl = document.getElementById("valMarginDropPct");
+    if (dropPctEl) {
+        if (loanAmount <= 0 || valuation <= 0) {
+            dropPctEl.textContent = "0.00%";
+        } else if (ltp <= marginCallPrice) {
+            dropPctEl.textContent = "0.00% (Triggered)";
+        } else {
+            dropPctEl.textContent = `${dropPct.toFixed(2)}%`;
+        }
+    }
+
     // Update status badge
     const statusContainer = document.getElementById("marginStatusContainer");
     const statusTitle = document.getElementById("marginStatusTitle");
     const statusValue = document.getElementById("marginStatusValue");
-    
+
     if (statusContainer && statusValue && statusTitle) {
-        // Reset classes/styles
         statusContainer.className = "";
         statusContainer.style.animation = "";
-        
+
         if (valuation === 0 || loanAmount === 0) {
             statusValue.textContent = "NO ACTIVE LOAN";
             statusValue.style.color = "var(--text-muted)";
@@ -5338,7 +5385,6 @@ function calculateMarginLoan() {
             statusValue.style.color = "#f87171";
             statusContainer.style.background = "rgba(248,113,113,0.15)";
             statusContainer.style.border = "1px solid rgba(248,113,113,0.3)";
-            // Blinking animation
             statusContainer.style.animation = "pulseDownSlow 1.5s infinite alternate";
         } else if (effectiveLTV > 60) {
             statusValue.textContent = "HIGH RISK WARNING";
