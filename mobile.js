@@ -878,16 +878,34 @@ window.handleMobileLoginSubmit = async function(e) {
     localStorage.setItem("nepse_user_email", username);
     localStorage.setItem("nepse_portfolio_username", username);
 
-    // Sync remote portfolio from Supabase
-    if (typeof syncFromSupabase === "function") {
-        try {
-            const syncRes = await syncFromSupabase(username, state.portfolioHoldings || [], []);
-            if (syncRes) {
-                if (syncRes.holdings) state.portfolioHoldings = syncRes.holdings;
-                if (syncRes.watchlist) state.customWatchlist = syncRes.watchlist;
+    if (authRes.isNew) {
+        // Fresh start for newly created user profile
+        state.portfolioHoldings = [];
+        state.customWatchlist = [];
+        localStorage.setItem("nepse_mobile_watchlist", JSON.stringify([]));
+
+        if (typeof syncToSupabase === "function") {
+            try {
+                await syncToSupabase(username, [], []);
+                if (typeof syncWatchlistToSupabase === "function") {
+                    await syncWatchlistToSupabase(username, []);
+                }
+            } catch (err) {
+                console.warn("Mobile Supabase new user init warning:", err);
             }
-        } catch (err) {
-            console.warn("Mobile Supabase sync error:", err);
+        }
+    } else {
+        // Sync existing portfolio from Supabase
+        if (typeof syncFromSupabase === "function") {
+            try {
+                const syncRes = await syncFromSupabase(username, state.portfolioHoldings || [], []);
+                if (syncRes) {
+                    state.portfolioHoldings = syncRes.holdings || [];
+                    if (syncRes.watchlist) state.customWatchlist = syncRes.watchlist;
+                }
+            } catch (err) {
+                console.warn("Mobile Supabase sync error:", err);
+            }
         }
     }
 

@@ -4957,29 +4957,55 @@ async function handleMockLogin(event) {
     localStorage.setItem("nepse_user_role", roleText);
     localStorage.setItem("nepse_portfolio_username", username);
 
-    // Sync username field and trigger remote portfolio fetch
+    // Sync username field and handle profile initialization/sync
     const userField = document.getElementById("portfolioUsername");
     if (userField) {
         userField.value = username;
     }
-    if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable()) {
-        try {
-            const syncRes = await syncFromSupabase(username, portfolioHoldings, tradeJournal);
-            if (syncRes) {
-                portfolioHoldings = syncRes.holdings;
-                tradeJournal = syncRes.journal;
-                // Restore watchlist from cloud for this user
-                if (syncRes.watchlist && syncRes.watchlist.length > 0) {
-                    customWatchlist = syncRes.watchlist;
-                    localStorage.setItem(getScopedKey(WATCHLIST_STORAGE_KEY_BASE), JSON.stringify(customWatchlist));
+
+    if (authRes.isNew) {
+        // Fresh start for newly created user profile
+        portfolioHoldings = [];
+        tradeJournal = [];
+        customWatchlist = [];
+        localStorage.setItem(getScopedKey(PORTFOLIO_STORAGE_KEY_BASE), JSON.stringify([]));
+        localStorage.setItem(getScopedKey(JOURNAL_STORAGE_KEY_BASE), JSON.stringify([]));
+        localStorage.setItem(getScopedKey(WATCHLIST_STORAGE_KEY_BASE), JSON.stringify([]));
+
+        if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable()) {
+            try {
+                await syncToSupabase(username, [], []);
+                if (typeof syncWatchlistToSupabase === "function") {
+                    await syncWatchlistToSupabase(username, []);
                 }
-                localStorage.setItem(getScopedKey(PORTFOLIO_STORAGE_KEY_BASE), JSON.stringify(portfolioHoldings));
-                localStorage.setItem(getScopedKey(JOURNAL_STORAGE_KEY_BASE), JSON.stringify(tradeJournal));
-                renderPortfolioView();
-                renderJournalView();
+            } catch (e) {
+                console.warn("Supabase new user init warning:", e);
             }
-        } catch (e) {
-            console.log("Supabase fetch failed on login sync:", e);
+        }
+        renderPortfolioView();
+        renderJournalView();
+        try { renderWatchlistView(); } catch(e) {}
+    } else {
+        // Existing user sign-in: fetch cloud portfolio and journal from Supabase
+        if (typeof isSupabaseAvailable !== "undefined" && isSupabaseAvailable()) {
+            try {
+                const syncRes = await syncFromSupabase(username, portfolioHoldings, tradeJournal);
+                if (syncRes) {
+                    portfolioHoldings = syncRes.holdings || [];
+                    tradeJournal = syncRes.journal || [];
+                    if (syncRes.watchlist) customWatchlist = syncRes.watchlist;
+
+                    localStorage.setItem(getScopedKey(PORTFOLIO_STORAGE_KEY_BASE), JSON.stringify(portfolioHoldings));
+                    localStorage.setItem(getScopedKey(JOURNAL_STORAGE_KEY_BASE), JSON.stringify(tradeJournal));
+                    localStorage.setItem(getScopedKey(WATCHLIST_STORAGE_KEY_BASE), JSON.stringify(customWatchlist));
+
+                    renderPortfolioView();
+                    renderJournalView();
+                    try { renderWatchlistView(); } catch(e) {}
+                }
+            } catch (e) {
+                console.log("Supabase fetch failed on login sync:", e);
+            }
         }
     }
 
