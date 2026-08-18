@@ -41,26 +41,7 @@ export async function fetchData() {
         state.systemxData = systemxData;
 
         if (systemxData && systemxData.stock_live && systemxData.stock_live.length) {
-            const sxMap = {};
-            systemxData.stock_live.forEach(s => { sxMap[s.symbol] = s; });
-
-            if (!state.stocksData || !state.stocksData.length) {
-                state.stocksData = systemxData.stock_live;
-            } else {
-                state.stocksData.forEach(s => {
-                    const sx = sxMap[s.symbol];
-                    if (sx) {
-                        if (sx.sector) s.sector = sx.sector;
-                        if (sx.fullName) s.fullName = sx.fullName;
-                        if (sx.ltp) s.ltp = sx.ltp;
-                        if (sx.close) s.close = sx.close;
-                        if (sx.diff !== undefined) s.diff = sx.diff;
-                        if (sx.diff_percent !== undefined) s.diff_percent = sx.diff_percent;
-                        if (sx.volume) s.volume = sx.volume;
-                        if (sx.turnover) s.turnover = sx.turnover;
-                    }
-                });
-            }
+            state.stocksData = systemxData.stock_live;
         }
 
         if (systemxData && systemxData.indices && systemxData.indices.length) {
