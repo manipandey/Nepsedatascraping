@@ -313,13 +313,13 @@ export async function fetchLiveTick() {
         } catch(e) {}
     }
 
-    if (sbData && sbData.stocks && sbData.stocks.length) {
-        if (staticData && staticData.date && sbData.date) {
-            // Compare dates to pick fresher data source
-            if (staticData.date > sbData.date) {
-                return staticData;
-            }
+    if (staticData && staticData.stocks && staticData.stocks.length) {
+        if (!sbData || !sbData.date || (staticData.date && staticData.date >= sbData.date)) {
+            return staticData;
         }
+    }
+
+    if (sbData && sbData.stocks && sbData.stocks.length) {
         // Merge static indices and summary into Supabase payload if missing
         if (staticData) {
             if (staticData.indices && (!sbData.indices || !sbData.indices.length)) {
@@ -330,10 +330,6 @@ export async function fetchLiveTick() {
             }
         }
         return sbData;
-    }
-
-    if (staticData && staticData.stocks && staticData.stocks.length) {
-        return staticData;
     }
 
     throw new Error("Live tick fetch failed across all providers");
