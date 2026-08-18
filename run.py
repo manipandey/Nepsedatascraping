@@ -1379,18 +1379,8 @@ def main():
     print("      NEPSE STOCK MARKET SCRAPER & TERMINAL DASHBOARD         ")
     print("=" * 60)
     
-    # 1. Scrape latest NEPSE data synchronously
-    print("\n[1/3] Fetching latest NEPSE share prices...")
-    success = scrape_nepse()
-
-    if not success:
-        print("\n[Warning] Scraping failed or completed with errors.")
-        print("Starting server anyway to display cached data if available...\n")
-    else:
-        print("\n[2/3] Scraping completed successfully! Data saved to data/ directory.")
-        
-    # 2. Start HTTP server in a separate thread
-    print("\n[3/3] Launching web server...")
+    # 1. Start HTTP server immediately
+    print("\n[1/3] Launching web server...")
     server_ready = threading.Event()
     server_thread = threading.Thread(target=start_server, args=(server_ready,))
     server_thread.daemon = True
@@ -1398,6 +1388,13 @@ def main():
     
     # Wait for server to bind port
     server_ready.wait(timeout=10)
+
+    # 2. Fetch initial market prices asynchronously or synchronously
+    print("\n[2/3] Fetching latest NEPSE share prices...")
+    try:
+        scrape_nepse()
+    except Exception as ex:
+        print(f"[Warning] Initial scrape error: {ex}")
     
     # 3. Start 30-second continuous background auto-scraper thread
     autoscrape_thread = threading.Thread(target=background_autoscrape)
