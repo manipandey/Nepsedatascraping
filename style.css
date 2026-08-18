@@ -2422,4 +2422,104 @@ dialog::backdrop {
 .prv-stat-val.prv-rr-ok   { color: #fbbf24; }
 .prv-stat-val.prv-rr-bad  { color: var(--color-down); }
 
+/* ============================================================
+ * Premium TradingView / Finviz-Grade Heatmap Treemap Engine
+ * ============================================================ */
+.heatmap-tooltip {
+    position: fixed;
+    z-index: 99999;
+    display: none;
+    pointer-events: none;
+    background: rgba(15, 23, 42, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.15);
+    border-radius: 12px;
+    padding: 14px 16px;
+    min-width: 240px;
+    color: #f8fafc;
+    font-family: var(--font-body);
+    transition: left 0.05s ease-out, top 0.05s ease-out;
+}
+
+.treemap-svg {
+    border-radius: 10px;
+    background: var(--bg-card);
+    overflow: hidden;
+    user-select: none;
+}
+
+.treemap-sector-group {
+    font-family: var(--font-heading);
+}
+
+.sector-bg {
+    fill: rgba(15, 23, 42, 0.45);
+    stroke: rgba(255, 255, 255, 0.08);
+    stroke-width: 1px;
+    rx: 6px;
+    ry: 6px;
+}
+
+.treemap-sector-label {
+    font-family: var(--font-heading);
+    font-size: 0.76rem;
+    font-weight: 800;
+    fill: #94a3b8;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+
+.treemap-node {
+    cursor: pointer;
+    transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.treemap-node:hover {
+    filter: brightness(1.25) drop-shadow(0 6px 16px rgba(0,0,0,0.5));
+}
+
+.treemap-node:hover .treemap-tile {
+    stroke: #ffffff;
+    stroke-width: 2px;
+}
+
+.treemap-tile {
+    rx: 4px;
+    ry: 4px;
+    stroke: rgba(15, 23, 42, 0.85);
+    stroke-width: 1.5px;
+    transition: all 0.2s ease;
+}
+
+.treemap-tile-text-symbol {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    fill: #ffffff;
+    text-anchor: middle;
+    pointer-events: none;
+    letter-spacing: 0.04em;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+}
+
+.treemap-tile-text-change {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    fill: rgba(255, 255, 255, 0.95);
+    text-anchor: middle;
+    pointer-events: none;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+}
+
+.treemap-tile-text-price {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    fill: rgba(255, 255, 255, 0.85);
+    text-anchor: middle;
+    pointer-events: none;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+}
+
 

@@ -3164,9 +3164,9 @@ function renderHeatbubbleView() {
 
     d3.treemap()
         .size([width, height])
-        .paddingOuter(3)
-        .paddingTop(22)
-        .paddingInner(2)
+        .paddingOuter(4)
+        .paddingTop(24)
+        .paddingInner(3)
         .tile(d3.treemapBinary)(root);
 
     const svg = d3.select(container)
@@ -3176,17 +3176,17 @@ function renderHeatbubbleView() {
         .attr("height", height)
         .attr("viewBox", `0 0 ${width} ${height}`);
 
-    // Function to pick tile color based on % change
+    // High-Contrast Finviz / TradingView Pro Grade Heatmap Color Palette
     const getTileColor = (pct) => {
-        if (pct >= 5.0) return "#059669";      // Circuit / Strong Gain (+5%+)
+        if (pct >= 5.0) return "#059669";      // Circuit / Strong Rally (+5%+)
         if (pct >= 3.0) return "#10b981";      // Bright Green (+3% to +5%)
         if (pct >= 1.0) return "#047857";      // Medium Green (+1% to +3%)
         if (pct > 0.0) return "#065f46";       // Soft Green (+0.1% to +1%)
-        if (pct === 0.0) return "#374151";      // Neutral Charcoal (0%)
+        if (pct === 0.0) return "#334155";      // Neutral Slate Charcoal (0%)
         if (pct > -1.0) return "#881337";      // Soft Red (-0.1% to -1%)
         if (pct > -3.0) return "#b91c1c";      // Medium Red (-1% to -3%)
         if (pct > -5.0) return "#dc2626";      // Bright Red (-3% to -5%)
-        return "#991b1b";                       // Deep Crimson (-5%+)
+        return "#e11d48";                       // Deep Crimson (-5%+)
     };
 
     // Render Sector Groups (Headers & Bounding Boxes)
@@ -3205,10 +3205,13 @@ function renderHeatbubbleView() {
 
     sectorGroup.append("text")
         .attr("class", "treemap-sector-label")
-        .attr("x", 6)
-        .attr("y", 15)
-        .style("display", d => (d.x1 - d.x0 > 45 && d.y1 - d.y0 > 20) ? "block" : "none")
-        .text(d => d.data.name);
+        .attr("x", 8)
+        .attr("y", 16)
+        .style("display", d => (d.x1 - d.x0 > 55 && d.y1 - d.y0 > 22) ? "block" : "none")
+        .text(d => {
+            const count = d.children ? d.children.length : 0;
+            return `${d.data.name.toUpperCase()} (${count})`;
+        });
 
     // Render Stock Leaf Nodes
     const leafNodes = root.leaves();
@@ -3228,21 +3231,36 @@ function renderHeatbubbleView() {
             const isUp = pct >= 0;
 
             tooltip.style.display = "block";
-            tooltip.style.left = `${Math.min(window.innerWidth - 240, event.clientX + 16)}px`;
-            tooltip.style.top = `${Math.min(window.innerHeight - 200, event.clientY + 16)}px`;
+            tooltip.style.left = `${Math.min(window.innerWidth - 260, event.clientX + 16)}px`;
+            tooltip.style.top = `${Math.min(window.innerHeight - 220, event.clientY + 16)}px`;
 
             tooltip.innerHTML = `
-                <div style="font-weight: 700; font-size: 0.95rem; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 4px; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
-                    <span>${data.symbol}</span>
-                    <span style="font-size: 0.76rem; background: rgba(255,255,255,0.1); padding: 1px 6px; border-radius: 4px;">${data.sector}</span>
+                <div style="font-weight: 800; font-size: 0.98rem; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+                    <span style="color: #ffffff; letter-spacing: 0.5px;">${data.symbol}</span>
+                    <span style="font-size: 0.72rem; background: rgba(255,255,255,0.12); color: #cbd5e1; padding: 2px 8px; border-radius: 4px; font-weight: 600;">${data.sector}</span>
                 </div>
-                <div style="font-size: 0.8rem; color: #e2e8f0; line-height: 1.55;">
-                    <div style="color: #94a3b8; font-size: 0.78rem; margin-bottom: 4px;">${data.fullName}</div>
-                    <div>LTP: <strong>NPR ${data.ltp.toFixed(2)}</strong></div>
-                    <div>Change: <strong style="color: ${isUp ? '#34d399' : '#f87171'};">${isUp ? '+' : ''}${data.diff.toFixed(2)} (${isUp ? '+' : ''}${pct.toFixed(2)}%)</strong></div>
-                    <div>Traded Volume: <strong>${data.volume.toLocaleString()} shares</strong></div>
-                    <div>Turnover: <strong>${formatNPR(data.turnover)}</strong></div>
-                    ${data.sma20 ? `<div>20 SMA: <strong>NPR ${data.sma20.toFixed(2)}</strong> (<span style="color:${data.diffPct20SMA >= 0 ? '#34d399' : '#f87171'}">${data.diffPct20SMA >= 0 ? '+' : ''}${data.diffPct20SMA.toFixed(2)}%</span>)</div>` : ''}
+                <div style="font-size: 0.82rem; color: #e2e8f0; line-height: 1.6;">
+                    <div style="color: #94a3b8; font-size: 0.78rem; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 220px;">${data.fullName}</div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #94a3b8;">LTP:</span>
+                        <strong style="color: #ffffff;">NPR ${data.ltp.toFixed(2)}</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #94a3b8;">Daily Change:</span>
+                        <strong style="color: ${isUp ? '#34d399' : '#f87171'};">${isUp ? '+' : ''}${data.diff.toFixed(2)} (${isUp ? '+' : ''}${pct.toFixed(2)}%)</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #94a3b8;">Volume:</span>
+                        <strong>${data.volume.toLocaleString()} shares</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #94a3b8;">Turnover:</span>
+                        <strong style="color: #fbbf24;">${formatNPR(data.turnover)}</strong>
+                    </div>
+                    ${data.sma20 ? `<div style="display: flex; justify-content: space-between; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 4px; margin-top: 4px;">
+                        <span style="color: #94a3b8;">vs 20 SMA:</span>
+                        <span style="color:${data.diffPct20SMA >= 0 ? '#34d399' : '#f87171'}; font-weight: 700;">${data.diffPct20SMA >= 0 ? '+' : ''}${data.diffPct20SMA.toFixed(2)}%</span>
+                    </div>` : ''}
                 </div>
             `;
         })
@@ -3262,18 +3280,18 @@ function renderHeatbubbleView() {
         .attr("x", d => (d.x1 - d.x0) / 2)
         .attr("y", d => {
             const h = d.y1 - d.y0;
-            return h >= 38 ? (h / 2) - 4 : (h / 2) + 3;
+            return h >= 50 ? (h / 2) - 8 : (h >= 36 ? (h / 2) - 4 : (h / 2) + 3);
         })
         .style("font-size", d => {
             const w = d.x1 - d.x0;
             const h = d.y1 - d.y0;
-            const size = Math.min(w * 0.24, h * 0.35);
+            const size = Math.min(w * 0.24, h * 0.32);
             return `${Math.max(9, Math.min(22, Math.round(size)))}px`;
         })
         .style("display", d => {
             const w = d.x1 - d.x0;
             const h = d.y1 - d.y0;
-            return (w >= 28 && h >= 18) ? "block" : "none";
+            return (w >= 26 && h >= 18) ? "block" : "none";
         })
         .text(d => d.data.symbol);
 
@@ -3281,19 +3299,40 @@ function renderHeatbubbleView() {
     node.append("text")
         .attr("class", "treemap-tile-text-change")
         .attr("x", d => (d.x1 - d.x0) / 2)
-        .attr("y", d => (d.y1 - d.y0) / 2 + 12)
+        .attr("y", d => {
+            const h = d.y1 - d.y0;
+            return h >= 50 ? (d.y1 - d.y0) / 2 + 7 : (d.y1 - d.y0) / 2 + 10;
+        })
         .style("font-size", d => {
             const w = d.x1 - d.x0;
             const h = d.y1 - d.y0;
-            const size = Math.min(w * 0.18, h * 0.28);
-            return `${Math.max(8, Math.min(16, Math.round(size)))}px`;
+            const size = Math.min(w * 0.18, h * 0.26);
+            return `${Math.max(8, Math.min(15, Math.round(size)))}px`;
         })
         .style("display", d => {
             const w = d.x1 - d.x0;
             const h = d.y1 - d.y0;
-            return (w >= 36 && h >= 38) ? "block" : "none";
+            return (w >= 34 && h >= 34) ? "block" : "none";
         })
         .text(d => `${d.data.diffPct > 0 ? '+' : ''}${d.data.diffPct.toFixed(2)}%`);
+
+    // Render LTP Price Text for larger tiles
+    node.append("text")
+        .attr("class", "treemap-tile-text-price")
+        .attr("x", d => (d.x1 - d.x0) / 2)
+        .attr("y", d => (d.y1 - d.y0) / 2 + 20)
+        .style("font-size", d => {
+            const w = d.x1 - d.x0;
+            const h = d.y1 - d.y0;
+            const size = Math.min(w * 0.14, h * 0.20);
+            return `${Math.max(7, Math.min(12, Math.round(size)))}px`;
+        })
+        .style("display", d => {
+            const w = d.x1 - d.x0;
+            const h = d.y1 - d.y0;
+            return (w >= 54 && h >= 54) ? "block" : "none";
+        })
+        .text(d => `NPR ${d.data.ltp.toFixed(1)}`);
 }
 
 // ============================================================
