@@ -171,17 +171,37 @@ def sync_all_to_supabase():
             (idx for idx in indices if "nepse" in idx.get("title", "").lower() or idx.get("indicesName", "") == "NEPSE"),
             None
         )
+        total_turnover_calc = float(summary.get("total_turnover", 0.0))
+        if total_turnover_calc <= 0:
+            total_turnover_calc = sum(float(p.get("turnover", 0.0)) for p in prices_batch)
+
+        total_volume_calc = int(summary.get("total_volume", 0))
+        if total_volume_calc <= 0:
+            total_volume_calc = sum(int(p.get("volume", 0)) for p in prices_batch)
+
+        adv_calc = int(summary.get("advancers", 0))
+        if adv_calc <= 0:
+            adv_calc = sum(1 for p in prices_batch if float(p.get("change_pct", 0.0)) > 0)
+
+        dec_calc = int(summary.get("decliners", 0))
+        if dec_calc <= 0:
+            dec_calc = sum(1 for p in prices_batch if float(p.get("change_pct", 0.0)) < 0)
+
+        unc_calc = int(summary.get("unchanged", 0))
+        if unc_calc <= 0:
+            unc_calc = sum(1 for p in prices_batch if float(p.get("change_pct", 0.0)) == 0)
+
         market_rec = {
             "date": today_date,
-            "nepse_index": float((nepse_idx or {}).get("value", 0.0)),
+            "nepse_index": float((nepse_idx or {}).get("value", (nepse_idx or {}).get("currentPrice", 0.0))),
             "point_change": float((nepse_idx or {}).get("change", (nepse_idx or {}).get("pointChange", 0.0))),
             "percentage_change": float((nepse_idx or {}).get("change_percent", (nepse_idx or {}).get("percentageChange", 0.0))),
-            "total_turnover": float(summary.get("total_turnover", (nepse_idx or {}).get("turnover", 0.0))),
-            "total_volume": int(summary.get("total_volume", 0)),
+            "total_turnover": round(total_turnover_calc, 2),
+            "total_volume": total_volume_calc,
             "total_transactions": int(summary.get("total_transactions", 0)),
-            "advancers": int(summary.get("advancers", 0)),
-            "decliners": int(summary.get("decliners", 0)),
-            "unchanged": int(summary.get("unchanged", 0))
+            "advancers": adv_calc,
+            "decliners": dec_calc,
+            "unchanged": unc_calc
         }
         print(f"[Sync] Preparing NEPSE market history record for date {today_date}...")
         post_to_supabase("market_history", [market_rec], on_conflict="date")
