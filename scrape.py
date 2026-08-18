@@ -1153,13 +1153,18 @@ def scrape_systemx_and_npstocks():
 scrape_live_corporate_announcements = scrape_live_official_corporate_calendar
 
 if __name__ == "__main__":
+    print("====================================================================")
+    print("🚀 NEPSE TERMINAL - STARTING FULL NPSTOCKS & OFFICIAL SCRAPING PIPELINE")
+    print("====================================================================")
+    scrape_systemx_and_npstocks()
     scrape_nepse()
+    scrape_systemx_and_npstocks()
     scrape_live_official_share_structure_and_lockin()
     scrape_live_official_fundamentals()
-    scrape_systemx_and_npstocks()
     try:
         from sync_to_supabase import sync_all_to_supabase
         sync_all_to_supabase()
     except Exception as se:
         print(f"[Scraper] Supabase sync notice: {se}")
+
 

@@ -1332,11 +1332,13 @@ def start_server(ready_event):
             raise e
 
 def background_autoscrape():
-    """Background daemon thread that continuously scrapes live NEPSE prices every 30 seconds."""
+    """Background daemon thread that continuously scrapes live NPStocks & NEPSE prices every 30 seconds."""
     time.sleep(30)
     while True:
         try:
-            print(f"\n[AutoScraper 30s] [{time.strftime('%H:%M:%S')}] Scraping live NEPSE prices...")
+            print(f"\n[AutoScraper 30s] [{time.strftime('%H:%M:%S')}] Scraping live NPStocks API & NEPSE prices...")
+            from scrape import scrape_systemx_and_npstocks
+            scrape_systemx_and_npstocks()
             scrape_nepse()
             try:
                 from sync_to_supabase import sync_all_to_supabase
