@@ -648,25 +648,50 @@ async function renderMobileRates() {
 // 6. Mobile Watchlist & Price Alerts
 // -------------------------------------------------------------
 function renderMobileWatchlist() {
-    const list = state.customWatchlist || ["ADBL", "SHIVM", "CHCL"];
+    if (!state.customWatchlist) {
+        const saved = localStorage.getItem("nepse_mobile_watchlist");
+        if (saved) {
+            try { state.customWatchlist = JSON.parse(saved); } catch(e) {}
+        }
+    }
+    if (!state.customWatchlist || !state.customWatchlist.length) {
+        state.customWatchlist = ["ADBL", "SHIVM", "CHCL"];
+    }
+
+    const list = state.customWatchlist;
     const listEl = document.getElementById("mWatchlistList");
 
     if (listEl) {
+        if (!list.length) {
+            listEl.innerHTML = `
+                <div class="mobile-card text-center" style="color: var(--mobile-text-sub); padding: 24px;">
+                    Your watchlist is empty.<br>Tap <strong style="color: #34d399; cursor: pointer;" onclick="openMobileAddWatchlistModal()">"+ Add Symbol"</strong> to monitor scrips!
+                </div>
+            `;
+            return;
+        }
+
         listEl.innerHTML = list.map(sym => {
             const s = (state.stocksData || []).find(st => st.symbol === sym);
-            const ltp = s ? s.ltp : 350;
-            const pct = s ? (s.diff_percent || 0) : 0.5;
+            const ltp = s ? (s.ltp || s.close || 0) : 0;
+            const pct = s ? (s.diff_percent || 0) : 0;
             const isUp = pct >= 0;
 
             return `
-                <div class="mobile-card" style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <div style="font-family: var(--font-mono); font-weight: 800; font-size: 1.05rem; color: #fff;">${sym}</div>
-                        <div style="font-size: 0.72rem; color: var(--mobile-text-sub);">Alert Target: <strong>NPR ${(ltp * 1.1).toFixed(0)}</strong></div>
+                <div class="mobile-card" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 14px;">
+                    <div style="flex: 1; cursor: pointer;" onclick="switchMobileTab('liveData')">
+                        <div style="font-family: var(--font-mono); font-weight: 800; font-size: 1.05rem; color: #fff; display: flex; align-items: center; gap: 8px;">
+                            <span>${sym}</span>
+                            <span style="font-size: 0.7rem; color: var(--mobile-text-sub); font-family: var(--font-body); font-weight: 500;">${s ? (s.sector || '') : ''}</span>
+                        </div>
+                        <div style="font-size: 0.74rem; color: var(--mobile-text-sub); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">${s ? (s.fullName || sym) : sym}</div>
                     </div>
-                    <div class="text-right">
-                        <div style="font-family: var(--font-mono); font-weight: 800; font-size: 1rem; color: #fff;">NPR ${ltp.toFixed(2)}</div>
-                        <span class="mobile-badge ${isUp ? 'up' : 'down'}">${isUp ? '▲ +' : '▼ '}${Math.abs(pct).toFixed(2)}%</span>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="text-right">
+                            <div style="font-family: var(--font-mono); font-weight: 800; font-size: 1rem; color: #fff;">NPR ${ltp ? ltp.toFixed(2) : '0.00'}</div>
+                            <span class="mobile-badge ${isUp ? 'up' : 'down'}">${isUp ? '▲ +' : '▼ '}${Math.abs(pct).toFixed(2)}%</span>
+                        </div>
+                        <button onclick="removeMobileWatchlistSymbol('${sym}')" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171; border-radius: 6px; padding: 6px 10px; font-size: 0.82rem; cursor: pointer;">🗑️</button>
                     </div>
                 </div>
             `;
@@ -679,8 +704,38 @@ window.openMobileAddHoldingModal = function() {
     document.getElementById("mAddHoldingModal")?.classList.add("active");
 };
 
+window.openMobileAddWatchlistModal = function() {
+    document.getElementById("mAddWatchlistModal")?.classList.add("active");
+};
+
 window.closeMobileModal = function(id) {
     document.getElementById(id)?.classList.remove("active");
+};
+
+window.saveMobileWatchlistSymbol = function() {
+    const input = document.getElementById("mWatchlistSymbolInput");
+    const sym = input?.value ? input.value.trim().toUpperCase() : "";
+    if (!sym) return alert("Please enter a valid NEPSE stock symbol!");
+
+    if (!state.customWatchlist) {
+        state.customWatchlist = ["ADBL", "SHIVM", "CHCL"];
+    }
+
+    if (!state.customWatchlist.includes(sym)) {
+        state.customWatchlist.push(sym);
+        localStorage.setItem("nepse_mobile_watchlist", JSON.stringify(state.customWatchlist));
+    }
+
+    if (input) input.value = "";
+    closeMobileModal("mAddWatchlistModal");
+    renderMobileWatchlist();
+};
+
+window.removeMobileWatchlistSymbol = function(sym) {
+    if (!state.customWatchlist) return;
+    state.customWatchlist = state.customWatchlist.filter(s => s !== sym);
+    localStorage.setItem("nepse_mobile_watchlist", JSON.stringify(state.customWatchlist));
+    renderMobileWatchlist();
 };
 
 window.saveMobileHolding = function() {

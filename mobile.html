@@ -371,6 +371,29 @@
         </div>
     </div>
 
+    <!-- Modal 2: Add Watchlist Symbol -->
+    <div id="mAddWatchlistModal" class="mobile-modal-overlay" onclick="if(event.target===this) closeMobileModal('mAddWatchlistModal')">
+        <div class="mobile-modal-sheet">
+            <div class="mobile-modal-handle"></div>
+            <h3 style="color:var(--mobile-text); margin-bottom:14px;">⭐ Add Symbol to Watchlist</h3>
+            <div style="display:flex; flex-direction:column; gap:12px;">
+                <div>
+                    <label style="font-size:0.75rem; color:var(--mobile-text-sub);">NEPSE Stock Symbol</label>
+                    <input type="text" id="mWatchlistSymbolInput" class="mobile-input" placeholder="e.g. ADBL, SHIVM, NICA, CHCL" style="text-transform: uppercase;">
+                </div>
+                <div>
+                    <label style="font-size:0.75rem; color:var(--mobile-text-sub);">High Price Target Alert (NPR) - Optional</label>
+                    <input type="number" id="mWatchlistHighTargetInput" class="mobile-input" placeholder="Alert when price rises above">
+                </div>
+                <div>
+                    <label style="font-size:0.75rem; color:var(--mobile-text-sub);">Low Stop/Dip Alert (NPR) - Optional</label>
+                    <input type="number" id="mWatchlistLowTargetInput" class="mobile-input" placeholder="Alert when price dips below">
+                </div>
+                <button class="mobile-btn mobile-btn-accent" style="margin-top:8px;" onclick="saveMobileWatchlistSymbol()">⭐ Save to Watchlist</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script type="module" src="mobile.js"></script>
