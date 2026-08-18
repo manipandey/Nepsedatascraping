@@ -42,6 +42,23 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.warn("Mobile initial fetch warning:", e);
     }
 
+    updateMobileUserUI();
+
+    if (localStorage.getItem("nepse_logged_in") === "true") {
+        const username = localStorage.getItem("nepse_user_email");
+        if (username && typeof syncFromSupabase === "function") {
+            try {
+                const syncRes = await syncFromSupabase(username, state.portfolioHoldings || [], []);
+                if (syncRes) {
+                    if (syncRes.holdings) state.portfolioHoldings = syncRes.holdings;
+                    if (syncRes.watchlist) state.customWatchlist = syncRes.watchlist;
+                }
+            } catch(err) {
+                console.warn("Mobile auto sync on load warning:", err);
+            }
+        }
+    }
+
     renderMobileActiveTab();
     setupMobileCalculators();
 });
@@ -772,6 +789,13 @@ window.saveMobileHolding = function() {
         sl
     });
 
+    if (localStorage.getItem("nepse_logged_in") === "true") {
+        const username = localStorage.getItem("nepse_user_email");
+        if (username && typeof syncToSupabase === "function") {
+            syncToSupabase(username, state.portfolioHoldings, []);
+        }
+    }
+
     closeMobileModal("mAddHoldingModal");
     renderMobilePortfolio();
 };
@@ -793,4 +817,142 @@ function enrichMobileTechnicalIndicators(stocks) {
         if (!s.sma50) s.sma50 = Number((sma20 * 0.97).toFixed(2));
         if (s.rsi14 === undefined) s.rsi14 = 52.4;
     });
+}
+
+// -------------------------------------------------------------
+// 7. Mobile User Authentication & Cloud Sync
+// -------------------------------------------------------------
+window.openMobileAuthModal = function() {
+    document.getElementById("mAuthModal")?.classList.add("active");
+};
+
+window.toggleMobileAuthAction = function(e) {
+    if (e) e.preventDefault();
+    const actionInput = document.getElementById("mAuthActionType");
+    const submitBtn = document.getElementById("mAuthSubmitBtn");
+    const toggleBtn = document.getElementById("mAuthToggleBtn");
+
+    if (!actionInput) return;
+
+    if (actionInput.value === "login") {
+        actionInput.value = "signup";
+        if (submitBtn) submitBtn.innerHTML = `<span>✨ Register & Create Profile</span>`;
+        if (toggleBtn) toggleBtn.textContent = "Already registered? Sign in";
+    } else {
+        actionInput.value = "login";
+        if (submitBtn) submitBtn.innerHTML = `<span>🔐 Authenticate & Sync Cloud Portfolio</span>`;
+        if (toggleBtn) toggleBtn.textContent = "Create a new profile";
+    }
+};
+
+window.handleMobileLoginSubmit = async function(e) {
+    if (e) e.preventDefault();
+    const username = document.getElementById("mAuthUsername")?.value.trim().toLowerCase();
+    const password = document.getElementById("mAuthPassword")?.value.trim();
+    const action = document.getElementById("mAuthActionType")?.value || "login";
+    const submitBtn = document.getElementById("mAuthSubmitBtn");
+
+    if (!username || !password) return alert("Please enter both username and 4-digit passcode!");
+    if (!/^\d{4}$/.test(password)) return alert("Passcode must be exactly 4 digits!");
+
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span>⏳ Authenticating with Supabase...</span>`;
+    }
+
+    let authRes = { success: true };
+    if (typeof authenticateOrCreateUser === "function") {
+        authRes = await authenticateOrCreateUser(username, password, action);
+    }
+
+    if (!authRes.success) {
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = action === "signup" ? `<span>✨ Register & Create Profile</span>` : `<span>🔐 Authenticate & Sync Cloud Portfolio</span>`;
+        }
+        return alert(authRes.error || "Authentication failed.");
+    }
+
+    // Save session
+    localStorage.setItem("nepse_logged_in", "true");
+    localStorage.setItem("nepse_user_email", username);
+    localStorage.setItem("nepse_portfolio_username", username);
+
+    // Sync remote portfolio from Supabase
+    if (typeof syncFromSupabase === "function") {
+        try {
+            const syncRes = await syncFromSupabase(username, state.portfolioHoldings || [], []);
+            if (syncRes) {
+                if (syncRes.holdings) state.portfolioHoldings = syncRes.holdings;
+                if (syncRes.watchlist) state.customWatchlist = syncRes.watchlist;
+            }
+        } catch (err) {
+            console.warn("Mobile Supabase sync error:", err);
+        }
+    }
+
+    if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<span>🔐 Authenticate & Sync Cloud Portfolio</span>`;
+    }
+
+    closeMobileModal("mAuthModal");
+    updateMobileUserUI();
+    renderMobilePortfolio();
+    alert(`🎉 Welcome ${username}! Cloud Portfolio Synced Successfully.`);
+};
+
+window.handleMobileLogout = function() {
+    if (confirm("Are you sure you want to sign out? Your local offline session will end.")) {
+        localStorage.removeItem("nepse_logged_in");
+        localStorage.removeItem("nepse_user_email");
+        localStorage.removeItem("nepse_portfolio_username");
+        updateMobileUserUI();
+        renderMobilePortfolio();
+    }
+};
+
+function updateMobileUserUI() {
+    const isLoggedIn = localStorage.getItem("nepse_logged_in") === "true";
+    const username = localStorage.getItem("nepse_user_email") || "Guest User";
+
+    const headerBtn = document.getElementById("mAuthHeaderBtn");
+    const nameEl = document.getElementById("mUserDisplayName");
+    const statusEl = document.getElementById("mUserSyncStatus");
+    const actionBtn = document.getElementById("mUserAuthActionBtn");
+    const avatarEl = document.getElementById("mUserAvatarIcon");
+
+    if (isLoggedIn) {
+        if (headerBtn) {
+            headerBtn.textContent = `👤 ${username}`;
+            headerBtn.style.background = "rgba(16, 185, 129, 0.2)";
+            headerBtn.style.borderColor = "rgba(16, 185, 129, 0.4)";
+            headerBtn.style.color = "#34d399";
+        }
+        if (nameEl) nameEl.textContent = username;
+        if (statusEl) statusEl.textContent = "☁️ Supabase Cloud Synced";
+        if (avatarEl) avatarEl.textContent = "🟢";
+        if (actionBtn) {
+            actionBtn.textContent = "🚪 Sign Out";
+            actionBtn.setAttribute("onclick", "handleMobileLogout()");
+            actionBtn.style.borderColor = "rgba(239, 68, 68, 0.4)";
+            actionBtn.style.color = "#f87171";
+        }
+    } else {
+        if (headerBtn) {
+            headerBtn.textContent = "🔐 Sign In";
+            headerBtn.style.background = "rgba(99, 102, 241, 0.2)";
+            headerBtn.style.borderColor = "rgba(99, 102, 241, 0.4)";
+            headerBtn.style.color = "#a5b4fc";
+        }
+        if (nameEl) nameEl.textContent = "Guest User";
+        if (statusEl) statusEl.textContent = "Local Storage Mode";
+        if (avatarEl) avatarEl.textContent = "👤";
+        if (actionBtn) {
+            actionBtn.textContent = "🔐 Sign In / Sync";
+            actionBtn.setAttribute("onclick", "openMobileAuthModal()");
+            actionBtn.style.borderColor = "rgba(99, 102, 241, 0.4)";
+            actionBtn.style.color = "#a5b4fc";
+        }
+    }
 }

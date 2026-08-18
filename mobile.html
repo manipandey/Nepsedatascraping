@@ -31,6 +31,7 @@
                 <span>📈</span> NEPSE<span class="accent">Mobile</span>
             </div>
             <div class="mobile-header-actions">
+                <button id="mAuthHeaderBtn" class="mobile-badge up" style="cursor: pointer; padding: 4px 8px; font-size: 0.72rem; background: rgba(99, 102, 241, 0.2); border: 1px solid rgba(99, 102, 241, 0.4); color: #a5b4fc;" onclick="openMobileAuthModal()">🔐 Sign In</button>
                 <button id="mInstallAppBtn" class="mobile-badge up" style="cursor: pointer; display: none; padding: 4px 8px; font-size: 0.72rem;" onclick="triggerMobileAppInstall()">📲 Install App</button>
                 <button class="mobile-icon-btn" onclick="switchMobileTab('liveData')" title="Search Scrips">🔍</button>
                 <a href="index.html" class="mobile-icon-btn" title="Switch to Desktop Terminal" style="text-decoration: none;">💻</a>
@@ -41,6 +42,20 @@
              Tab 1: Portfolio Tracker & Journal (DEFAULT HOME VIEW)
              ------------------------------------------------------------- -->
         <section id="mobilePortfolioView" class="mobile-view active">
+            <!-- User Profile Status Bar -->
+            <div id="mUserStatusCard" class="mobile-card" style="margin-bottom: 10px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08);">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.1rem;" id="mUserAvatarIcon">👤</span>
+                    <div>
+                        <div style="font-size: 0.78rem; font-weight: 700; color: #fff;" id="mUserDisplayName">Guest User</div>
+                        <div style="font-size: 0.68rem; color: var(--mobile-text-sub);" id="mUserSyncStatus">Local Storage Mode</div>
+                    </div>
+                </div>
+                <button id="mUserAuthActionBtn" class="mobile-btn mobile-btn-outline" style="padding: 4px 10px; font-size: 0.72rem; border-color: rgba(99, 102, 241, 0.4); color: #a5b4fc;" onclick="openMobileAuthModal()">
+                    🔐 Sign In / Sync
+                </button>
+            </div>
+
             <!-- Portfolio Hero Banner -->
             <div class="mobile-hero-card">
                 <div class="mobile-hero-title">Total Portfolio Value</div>
@@ -407,6 +422,37 @@
                 </div>
                 <button class="mobile-btn mobile-btn-accent" style="margin-top:8px;" onclick="saveMobileWatchlistSymbol()">⭐ Save to Watchlist</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: User Authentication & Cloud Sync -->
+    <div id="mAuthModal" class="mobile-modal-overlay" onclick="if(event.target===this) closeMobileModal('mAuthModal')">
+        <div class="mobile-modal-sheet">
+            <div class="mobile-modal-handle"></div>
+            <div style="text-align: center; margin-bottom: 14px;">
+                <span style="font-size: 2rem;">🔒</span>
+                <h3 style="color:var(--mobile-text); margin: 6px 0 2px;">Portfolio Cloud Profile</h3>
+                <p style="font-size: 0.76rem; color: var(--mobile-text-sub); margin: 0;">Sign in to sync your portfolio & journal across all devices.</p>
+            </div>
+            <form onsubmit="handleMobileLoginSubmit(event)">
+                <input type="hidden" id="mAuthActionType" value="login">
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div>
+                        <label style="font-size:0.75rem; color:var(--mobile-text-sub);">Username</label>
+                        <input type="text" id="mAuthUsername" class="mobile-input" placeholder="e.g. mani, investor_nepal" required style="text-transform: lowercase;">
+                    </div>
+                    <div>
+                        <label style="font-size:0.75rem; color:var(--mobile-text-sub);">4-Digit Passcode</label>
+                        <input type="password" id="mAuthPassword" class="mobile-input" placeholder="••••" required maxlength="4" pattern="\d{4}" inputmode="numeric" style="text-align: center; font-size: 1.3rem; letter-spacing: 0.5rem;">
+                    </div>
+                    <button type="submit" id="mAuthSubmitBtn" class="mobile-btn mobile-btn-accent" style="margin-top:4px;">
+                        <span>🔐 Authenticate & Sync Cloud Portfolio</span>
+                    </button>
+                    <p style="text-align: center; font-size: 0.78rem; color: var(--mobile-text-sub); margin: 4px 0 0;">
+                        First time? <a href="#" id="mAuthToggleBtn" onclick="toggleMobileAuthAction(event)" style="color: #34d399; font-weight: 700; text-decoration: none;">Create a new profile</a>
+                    </p>
+                </div>
+            </form>
         </div>
     </div>
 
