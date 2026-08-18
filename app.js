@@ -3306,11 +3306,12 @@ function openPositionCalcModal(symbol = "", ltp = null, sl = null, tp = null) {
 
     // Populate stock dropdown if needed
     const select = document.getElementById("calcSymbolSelect");
-    if (select && select.options.length <= 1 && stocksData.length) {
+    if (select && stocksData.length) {
+        select.innerHTML = `<option value="">Select Scrip...</option>`;
         stocksData.forEach(s => {
             const opt = document.createElement("option");
             opt.value = s.symbol;
-            opt.textContent = `${s.symbol} - NPR ${(s.ltp || 0).toFixed(2)}`;
+            opt.textContent = `${s.symbol} - NPR ${(s.ltp || s.close || 0).toFixed(2)}`;
             select.appendChild(opt);
         });
     }
@@ -3319,31 +3320,49 @@ function openPositionCalcModal(symbol = "", ltp = null, sl = null, tp = null) {
         select.value = symbol;
     }
 
-    if (ltp !== null) {
-        document.getElementById("calcEntryPrice").value = ltp;
-    } else if (symbol) {
+    // Determine Entry Price
+    let entryPrice = ltp !== null ? Number(ltp) : null;
+    if (!entryPrice || entryPrice <= 0) {
         const stock = stocksData.find(s => s.symbol === symbol);
-        if (stock && stock.ltp) document.getElementById("calcEntryPrice").value = stock.ltp;
+        entryPrice = stock ? (stock.ltp || stock.close || 500) : 500;
     }
+    const entryEl = document.getElementById("calcEntryPrice");
+    if (entryEl) entryEl.value = entryPrice.toFixed(2);
 
-    if (sl !== null) {
-        document.getElementById("calcStopLossPrice").value = sl;
-    } else {
-        const entry = parseFloat(document.getElementById("calcEntryPrice").value) || 500;
-        document.getElementById("calcStopLossPrice").value = (entry * 0.92).toFixed(2); // Default 8% SL
-    }
+    // Determine Stop Loss (Below Liquidity Sweep / Fractal Low)
+    let slPrice = null;
+    const stock = stocksData.find(s => s.symbol === symbol);
+    const fracLow = sl !== null && sl > 0 ? Number(sl) : (stock ? (stock.fractal_low || stock.fifty_two_week_low || stock.low) : null);
 
-    if (tp !== null) {
-        document.getElementById("calcTakeProfitPrice").value = tp;
+    if (fracLow && fracLow > 0 && fracLow < entryPrice) {
+        // Place SL 0.5% below the liquidity sweep level
+        slPrice = (fracLow * 0.995).toFixed(2);
     } else {
-        const entry = parseFloat(document.getElementById("calcEntryPrice").value) || 500;
-        const slVal = parseFloat(document.getElementById("calcStopLossPrice").value) || (entry * 0.92);
-        const risk = entry - slVal;
-        document.getElementById("calcTakeProfitPrice").value = (entry + (risk * 2.0)).toFixed(2); // Default 1:2 RR
+        // Default SL: 5% below entry price
+        slPrice = (entryPrice * 0.95).toFixed(2);
     }
+    const slEl = document.getElementById("calcStopLossPrice");
+    if (slEl) slEl.value = slPrice;
+
+    // Determine Take Profit Target for 1:2 Risk-to-Reward Ratio
+    const slNum = parseFloat(slPrice) || (entryPrice * 0.95);
+    const riskPerShare = Math.max(0.1, entryPrice - slNum);
+    const tpTarget = (entryPrice + (riskPerShare * 2.0)).toFixed(2); // Strict 1:2 Risk-to-Reward ratio
+
+    const tpEl = document.getElementById("calcTakeProfitPrice");
+    if (tpEl) tpEl.value = tpTarget;
 
     recalculatePositionSize();
-    dialog.showModal();
+
+    try {
+        if (typeof dialog.showModal === "function") {
+            dialog.showModal();
+        } else {
+            dialog.classList.remove("hidden");
+        }
+    } catch (e) {
+        dialog.classList.remove("hidden");
+    }
 }
 
 function recalculatePositionSize() {
@@ -5429,4 +5448,6 @@ window.triggerCollectionTab = triggerCollectionTab;
 window.renderCompanyIntelView = renderCompanyIntelView;
 window.openPatternAnalysisModal = typeof openPatternAnalysisModal !== "undefined" ? openPatternAnalysisModal : null;
 window.openTechnicalTechnicalsPanel = typeof openTechnicalTechnicalsPanel !== "undefined" ? openTechnicalTechnicalsPanel : null;
+window.openPositionCalcModal = openPositionCalcModal;
+window.recalculatePositionSize = recalculatePositionSize;
 
