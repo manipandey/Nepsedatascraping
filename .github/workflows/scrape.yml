@@ -2,12 +2,13 @@ name: Daily NEPSE Stock Scraping
 
 on:
   schedule:
-    # Market Trading Hours run: Every 15 minutes from 11:00 AM to 3:30 PM NST (05:15 to 09:45 UTC, Sun-Thu)
-    - cron: '*/15 5-9 * * 0-4'
-    # Primary post-market run: 15:30 NST (09:45 UTC) — 30 min after market close
-    - cron: '45 9 * * *'
-    # Secondary post-market run: 16:15 NST (10:30 UTC) — ensures final closing prices are captured
-    - cron: '30 10 * * *'
+    # Live Trading Hours: Every 15 minutes from 11:00 AM to 3:30 PM NST (Sun-Thu)
+    # (11:00 AM NST = 05:15 UTC, 03:30 PM NST = 09:45 UTC)
+    - cron: '15,30,45 5 * * 0-4'
+    - cron: '*/15 6-8 * * 0-4'
+    - cron: '0,15,30,45 9 * * 0-4'
+    # Post-market final archive run: 04:15 PM NST (10:30 UTC)
+    - cron: '30 10 * * 0-4'
   workflow_dispatch: # Allows manual trigger from GitHub Actions tab
 
 permissions:
