@@ -240,6 +240,7 @@ export async function fetchFromSupabaseLive() {
         }));
 
         let summary = null;
+        let indices = [];
         if (summaryRes.status === "fulfilled" && summaryRes.value.ok) {
             const sumData = await summaryRes.value.json();
             if (Array.isArray(sumData) && sumData.length) {
@@ -252,11 +253,20 @@ export async function fetchFromSupabaseLive() {
                     decliners: Number(m.decliners || 0),
                     unchanged: Number(m.unchanged || 0)
                 };
+                indices = [{
+                    indicesName: "NEPSE",
+                    title: "NEPSE Index",
+                    value: Number(m.nepse_index || 0),
+                    pointChange: Number(m.point_change || 0),
+                    percentageChange: Number(m.percentage_change || 0),
+                    turnover: Number(m.total_turnover || 0)
+                }];
             }
         }
 
         return {
             stocks: stocks,
+            indices: indices,
             summary: summary,
             date: latestDate,
             scraped_at: new Date().toISOString()
