@@ -560,27 +560,69 @@ def scrape_nepse():
     # Save folder path
     os.makedirs("data", exist_ok=True)
     
+    def compute_ema(series, n):
+        if not series: return None
+        if len(series) < n:
+            return round(sum(series) / len(series), 2)
+        k = 2.0 / (n + 1)
+        val = sum(series[:n]) / n
+        for price in series[n:]:
+            val = (price * k) + (val * (1.0 - k))
+        return round(val, 2)
+
     for s in stocks:
         sym = s.get("symbol", "").upper().strip()
         ltp = float(s.get("ltp", 0) or s.get("close", 0) or 0)
+        open_price = float(s.get("open", ltp) or ltp)
         cache_path = os.path.join("data", "history_cache", f"{sym.lower()}.json")
+
+        hist_records = []
         if os.path.exists(cache_path):
             try:
                 with open(cache_path, "r", encoding="utf-8") as hf:
-                    hist = json.load(hf)
-                if hist:
-                    closes = [float(r["close"]) for r in hist[-19:] if "close" in r and r.get("close") is not None]
-                    if ltp > 0:
-                        closes.append(ltp)
-                    elif hist[-1].get("close"):
-                        closes.append(float(hist[-1]["close"]))
-                    if len(closes) >= 3:
-                        dma20 = round(sum(closes) / len(closes), 2)
-                        s["dma20"] = dma20
-                        s["diff_20dma"] = round(((ltp - dma20) / dma20) * 100, 2) if dma20 > 0 else 0.0
-                        s["below_20dma"] = ltp < dma20
+                    hist_records = json.load(hf)
             except Exception:
                 pass
+
+        closes = [float(r["close"]) for r in hist_records if isinstance(r, dict) and "close" in r and r.get("close") is not None]
+        if ltp > 0:
+            closes.append(ltp)
+
+        e20 = compute_ema(closes, 20) if closes else None
+        e50 = compute_ema(closes, 50) if closes else None
+        e100 = compute_ema(closes, 100) if closes else None
+
+        if e20:
+            s["dma20"] = e20
+            s["ema20"] = e20
+            s["diff_20dma"] = round(((ltp - e20) / e20) * 100, 2) if e20 > 0 else 0.0
+            s["below_20dma"] = ltp < e20
+        if e50: s["ema50"] = e50
+        if e100: s["ema100"] = e100
+
+        is_ema_aligned = bool(e20 and e50 and e100 and (e20 >= e50 >= e100))
+        s["is_ema_aligned"] = is_ema_aligned
+
+        # Williams Fractal Low calculation
+        fractal_low_val = None
+        if len(hist_records) >= 5:
+            for i in range(len(hist_records) - 3, 1, -1):
+                rec_i = hist_records[i]
+                if isinstance(rec_i, dict) and rec_i.get("low") is not None and i - 2 >= 0 and i + 2 < len(hist_records):
+                    low_i = float(rec_i["low"])
+                    l_m2 = float(hist_records[i-2].get("low", low_i + 1))
+                    l_m1 = float(hist_records[i-1].get("low", low_i + 1))
+                    l_p1 = float(hist_records[i+1].get("low", low_i + 1))
+                    l_p2 = float(hist_records[i+2].get("low", low_i + 1))
+                    if low_i < l_m2 and low_i < l_m1 and low_i < l_p1 and low_i < l_p2:
+                        fractal_low_val = round(low_i, 2)
+                        break
+
+        s["fractal_low"] = fractal_low_val
+        curr_low = float(s.get("low", ltp) or ltp)
+        s["is_fractal_sweep"] = bool(fractal_low_val and curr_low <= fractal_low_val)
+        s["is_bullish_candle"] = bool(ltp >= open_price or float(s.get("diff", 0) or 0) >= 0)
+        s["is_ema_fractal_match"] = bool(is_ema_aligned and s["is_fractal_sweep"] and s["is_bullish_candle"])
 
     # Save as JSON
     json_path = os.path.join("data", "nepse_today.json")

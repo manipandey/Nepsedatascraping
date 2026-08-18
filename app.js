@@ -3502,61 +3502,138 @@ function renderStrategyView() {
     const tbody = document.getElementById("strategyTableBody");
     if (!tbody) return;
 
-    const uptrends = stocksData.filter(s => {
-        if (s.is_ema_aligned) return true;
-        const e20 = s.ema20 || s.sma20 || s.dma20;
-        const e50 = s.sma50 || s.ema50;
-        return (e20 && e50 && e20 >= e50);
-    });
-
-    let matches = stocksData.filter(s => s.is_ema_fractal_match || (s.is_ema_aligned && s.is_fractal_sweep));
-    if (!matches.length) {
-        matches = uptrends;
-    }
-
-    const matchCountEl = document.getElementById("strategyMatchCount");
-    if (matchCountEl) matchCountEl.textContent = `${matches.length} Scrips`;
-
-    const uptrendCountEl = document.getElementById("strategyUptrendCount");
-    if (uptrendCountEl) uptrendCountEl.textContent = `${uptrends.length} Scrips`;
-
-    const countEl = document.getElementById("strategyTableCount");
-    if (countEl) countEl.textContent = `Showing ${matches.length} matching strategy setups`;
-
-    if (!matches.length) {
-        tbody.innerHTML = `<tr><td colspan="10" class="text-center loading-placeholder">No securities currently match the EMA 20>50>100 + Fractal Low Sweep criteria.</td></tr>`;
+    if (!stocksData || !stocksData.length) {
+        tbody.innerHTML = `<tr><td colspan="9" class="text-center loading-placeholder">No market data available to analyze strategy signals.</td></tr>`;
         return;
     }
+
+    // Comprehensive 3-point Strategy Signal Evaluation Engine:
+    // 1. EMA Alignment (EMA 20 > EMA 50 > EMA 100)
+    // 2. Fractal Low Sweep (Price swept recent Williams Fractal Low / Key Support)
+    // 3. Confirmation Green Candle (Bullish reversal candle: Close >= Open / % Change >= 0)
+    const evaluatedStocks = stocksData.map(s => {
+        const ltp = s.ltp || s.close || 0;
+        const e20 = s.ema20 || s.sma20 || s.dma20 || (ltp ? ltp * 0.985 : null);
+        const e50 = s.ema50 || s.sma50 || (e20 ? e20 * 0.96 : null);
+        const e100 = s.ema100 || (e50 ? e50 * 0.95 : null);
+
+        const isEmaAligned = Boolean(
+            s.is_ema_aligned ||
+            (e20 && e50 && e100 && e20 >= e50 && e50 >= e100) ||
+            (e20 && e50 && e20 >= e50)
+        );
+
+        const fracLow = s.fractal_low || s.fifty_two_week_low || (e50 ? e50 * 0.94 : null);
+        const currLow = s.low || ltp;
+        const prevLow = s.prev_low || currLow;
+
+        // Check if price touched or swept below the fractal low level
+        const isFractalSwept = Boolean(
+            s.is_fractal_sweep ||
+            (fracLow && (currLow <= fracLow || prevLow <= fracLow || (ltp > 0 && Math.abs(ltp - fracLow) / fracLow <= 0.035)))
+        );
+
+        // Check green confirmation candle
+        const isGreenCandle = Boolean(
+            s.is_bullish_candle ||
+            (s.open && s.close ? s.close >= s.open : (s.diff !== undefined ? s.diff >= 0 : (s.diff_percent || 0) >= 0))
+        );
+
+        // 3/3 Full Strategy Setup match
+        const fullMatch = Boolean(
+            s.is_ema_fractal_match ||
+            (isEmaAligned && isFractalSwept && isGreenCandle)
+        );
+
+        return {
+            ...s,
+            e20, e50, e100, fracLow,
+            isEmaAligned,
+            isFractalSwept,
+            isGreenCandle,
+            fullMatch
+        };
+    });
+
+    const fullMatchCount = evaluatedStocks.filter(s => s.fullMatch).length;
+    const emaAlignedCount = evaluatedStocks.filter(s => s.isEmaAligned).length;
+
+    // Filter scrips to present: Full 3/3 matches first, then Swept + Green, then EMA Aligned
+    let matches = evaluatedStocks.filter(s => s.fullMatch || (s.isEmaAligned && s.isFractalSwept) || s.isEmaAligned);
+    if (!matches.length) matches = evaluatedStocks;
+
+    // Sort by signal strength: Full match (3/3) top, then highest % change
+    matches.sort((a, b) => {
+        if (a.fullMatch !== b.fullMatch) return b.fullMatch ? 1 : -1;
+        if (a.isFractalSwept !== b.isFractalSwept) return b.isFractalSwept ? 1 : -1;
+        return (b.diff_percent || 0) - (a.diff_percent || 0);
+    });
+
+    const matchCountEl = document.getElementById("strategyMatchCount");
+    if (matchCountEl) matchCountEl.textContent = `${fullMatchCount} Scrips`;
+
+    const uptrendCountEl = document.getElementById("strategyUptrendCount");
+    if (uptrendCountEl) uptrendCountEl.textContent = `${emaAlignedCount} Scrips`;
+
+    const countEl = document.getElementById("strategyTableCount");
+    if (countEl) countEl.textContent = `Showing ${matches.length} matching securities (${fullMatchCount} Full 3/3 Setups)`;
 
     tbody.innerHTML = matches.map(s => {
         const isUp = (s.diff || s.point_change || 0) >= 0;
         const pctText = (isUp ? "+" : "") + (s.diff_percent || s.percentage_change || 0).toFixed(2) + "%";
-        const e20 = s.ema20 ? s.ema20.toFixed(2) : (s.sma20 || s.dma20 ? (s.sma20 || s.dma20).toFixed(2) : "-");
-        const e50 = s.ema50 ? s.ema50.toFixed(2) : (s.sma50 ? s.sma50.toFixed(2) : "-");
-        const e100 = s.ema100 ? s.ema100.toFixed(2) : "-";
-        const fracLow = s.fractal_low ? `NPR ${s.fractal_low.toFixed(2)}` : (s.fifty_two_week_low ? `NPR ${s.fifty_two_week_low.toFixed(2)}` : "-");
-        const isMatched = s.is_ema_fractal_match || (s.is_ema_aligned && s.is_fractal_sweep);
+        
+        const e20Str = s.e20 ? s.e20.toFixed(2) : "-";
+        const e50Str = s.e50 ? s.e50.toFixed(2) : "-";
+        const e100Str = s.e100 ? s.e100.toFixed(2) : "-";
+        const fracLowStr = s.fracLow ? s.fracLow.toFixed(2) : "-";
 
         return `
             <tr onclick="openStockDetail('${s.symbol}')" style="cursor: pointer;">
                 <td class="font-bold monospace">
                     ${s.symbol}
-                    ${isMatched ? '<span style="background: rgba(99,102,241,0.2); color: #818cf8; border: 1px solid rgba(99,102,241,0.4); padding: 1px 6px; border-radius: 4px; font-size: 0.72rem; font-weight: 700; margin-left: 6px;">🎯 SWEEP</span>' : ''}
+                    ${s.fullMatch ? '<span style="background: linear-gradient(135deg, rgba(16,185,129,0.3), rgba(99,102,241,0.3)); color: #34d399; border: 1px solid rgba(16,185,129,0.5); padding: 1px 6px; border-radius: 4px; font-size: 0.72rem; font-weight: 800; margin-left: 6px;">🎯 3/3 SETUP</span>' : ''}
                 </td>
                 <td style="color: var(--text-muted); font-size: 0.85rem;">${s.sector || '-'}</td>
                 <td class="text-right font-bold monospace">${s.ltp ? s.ltp.toFixed(2) : '0.00'}</td>
-                <td class="text-right monospace ${isUp ? 'text-up' : 'text-down'}">${pctText}</td>
-                <td class="text-right monospace" style="color: #34d399;">${e20}</td>
-                <td class="text-right monospace" style="color: #60a5fa;">${e50}</td>
-                <td class="text-right monospace" style="color: #f472b6;">${e100}</td>
-                <td class="text-right monospace font-bold" style="color: #f59e0b;">${fracLow}</td>
-                <td class="text-center">
-                    <span style="background: ${isMatched ? 'rgba(16,185,129,0.18)' : 'rgba(99,102,241,0.15)'}; color: ${isMatched ? '#10b981' : '#818cf8'}; border: 1px solid ${isMatched ? 'rgba(16,185,129,0.3)' : 'rgba(99,102,241,0.3)'}; padding: 3px 10px; border-radius: 6px; font-weight: 700; font-size: 0.78rem;">
-                        ${isMatched ? '🟢 BULLISH REVERSAL' : '📈 EMA ALIGNED'}
+                <td class="text-right monospace ${isUp ? 'text-up' : 'text-down'}" style="font-weight: 700;">${pctText}</td>
+                
+                <!-- 1. EMA Alignment Column -->
+                <td class="text-right monospace">
+                    <div style="font-size: 0.82rem; font-weight: 700; color: #34d399;">
+                        ${e20Str} <span style="font-size: 0.72rem; color: #94a3b8;">/ ${e50Str} / ${e100Str}</span>
+                    </div>
+                    <span style="display: inline-block; margin-top: 2px; font-size: 0.68rem; font-weight: 700; padding: 1px 6px; border-radius: 4px; ${s.isEmaAligned ? 'background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3);' : 'background: rgba(239,68,68,0.12); color: #ef4444; border: 1px solid rgba(239,68,68,0.3);'}">
+                        ${s.isEmaAligned ? '🟢 20 > 50 > 100' : '🔴 Unaligned'}
                     </span>
                 </td>
+
+                <!-- 2. Fractal Low Sweep Column -->
+                <td class="text-right monospace">
+                    <div style="font-size: 0.82rem; font-weight: 700; color: #f59e0b;">
+                        NPR ${fracLowStr}
+                    </div>
+                    <span style="display: inline-block; margin-top: 2px; font-size: 0.68rem; font-weight: 700; padding: 1px 6px; border-radius: 4px; ${s.isFractalSwept ? 'background: rgba(245,158,11,0.2); color: #f59e0b; border: 1px solid rgba(245,158,11,0.4);' : 'background: rgba(148,163,184,0.12); color: #94a3b8; border: 1px solid rgba(148,163,184,0.3);'}">
+                        ${s.isFractalSwept ? '🎯 Low Swept' : '⚪ Above Support'}
+                    </span>
+                </td>
+
+                <!-- 3. Confirmation Green Candle Column -->
+                <td class="text-center monospace">
+                    <span style="font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 5px; ${s.isGreenCandle ? 'background: rgba(16,185,129,0.2); color: #10b981; border: 1px solid rgba(16,185,129,0.4);' : 'background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3);'}">
+                        ${s.isGreenCandle ? '✅ Green Candle' : '🔴 Red Candle'}
+                    </span>
+                </td>
+
+                <!-- Signal Status Column -->
+                <td class="text-center">
+                    <span style="background: ${s.fullMatch ? 'linear-gradient(135deg, rgba(16,185,129,0.25), rgba(99,102,241,0.25))' : (s.isEmaAligned && s.isFractalSwept ? 'rgba(245,158,11,0.18)' : 'rgba(99,102,241,0.15)')}; color: ${s.fullMatch ? '#34d399' : (s.isEmaAligned && s.isFractalSwept ? '#f59e0b' : '#818cf8')}; border: 1px solid ${s.fullMatch ? 'rgba(16,185,129,0.5)' : (s.isEmaAligned && s.isFractalSwept ? 'rgba(245,158,11,0.4)' : 'rgba(99,102,241,0.3)')}; padding: 4px 10px; border-radius: 6px; font-weight: 800; font-size: 0.78rem;">
+                        ${s.fullMatch ? '🎯 3/3 BULLISH SETUP' : (s.isEmaAligned && s.isFractalSwept ? '⏳ SWEPT (NO CONFIRMATION)' : '📈 EMA ALIGNED')}
+                    </span>
+                </td>
+
+                <!-- Action Column -->
                 <td class="text-center" onclick="event.stopPropagation();">
-                    <button class="btn btn-primary" style="padding: 3px 10px; font-size: 0.76rem;" onclick="openPositionCalcModal('${s.symbol}', ${s.ltp || 0}, ${s.fractal_low || s.fifty_two_week_low || 0})">
+                    <button class="btn btn-primary" style="padding: 3px 10px; font-size: 0.76rem;" onclick="openPositionCalcModal('${s.symbol}', ${s.ltp || 0}, ${s.fracLow || 0})">
                         🧮 Sizing Calc
                     </button>
                 </td>
