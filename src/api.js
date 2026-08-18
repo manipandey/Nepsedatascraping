@@ -217,13 +217,125 @@ export async function fetchNrbIndicators() {
 }
 
 /**
- * Fetch Lightweight Live Stock Ticks & Indices (from run.py server)
+ * Helper to fetch live daily prices directly from Supabase REST API
+ */
+export async function fetchFromSupabaseLive() {
+    try {
+        const config = window.SUPABASE_CONFIG || {};
+        const url = config.url;
+        const key = config.anonKey;
+        if (!url || !key || url.includes('your-project-id')) return null;
+
+        const baseUrl = url.replace(/\/$/, '');
+        const headers = {
+            'apikey': key,
+            'Authorization': `Bearer ${key}`
+        };
+
+        const [pricesRes, summaryRes] = await Promise.allSettled([
+            fetch(`${baseUrl}/rest/v1/daily_prices?select=*&order=date.desc&limit=500`, { headers }),
+            fetch(`${baseUrl}/rest/v1/market_history?select=*&order=date.desc&limit=1`, { headers })
+        ]);
+
+        if (pricesRes.status !== "fulfilled" || !pricesRes.value.ok) return null;
+        const prices = await pricesRes.value.json();
+        if (!Array.isArray(prices) || !prices.length) return null;
+
+        const latestDate = prices[0].date;
+        const todayPrices = prices.filter(p => p.date === latestDate);
+
+        const stocks = todayPrices.map(p => ({
+            symbol: p.symbol,
+            close: Number(p.close),
+            ltp: Number(p.close),
+            open: Number(p.open),
+            high: Number(p.high),
+            low: Number(p.low),
+            diff: Number(p.change_npr || 0),
+            diff_percent: Number(p.change_pct || 0),
+            volume: Number(p.volume || 0),
+            turnover: Number(p.turnover || 0),
+            transactions: Number(p.transactions || 0)
+        }));
+
+        let summary = null;
+        if (summaryRes.status === "fulfilled" && summaryRes.value.ok) {
+            const sumData = await summaryRes.value.json();
+            if (Array.isArray(sumData) && sumData.length) {
+                const m = sumData[0];
+                summary = {
+                    total_turnover: Number(m.total_turnover || 0),
+                    total_volume: Number(m.total_volume || 0),
+                    total_transactions: Number(m.total_transactions || 0),
+                    advancers: Number(m.advancers || 0),
+                    decliners: Number(m.decliners || 0),
+                    unchanged: Number(m.unchanged || 0)
+                };
+            }
+        }
+
+        return {
+            stocks: stocks,
+            summary: summary,
+            date: latestDate,
+            scraped_at: new Date().toISOString()
+        };
+    } catch (e) {
+        console.warn("[Supabase Live Fetch] Error:", e);
+        return null;
+    }
+}
+
+/**
+ * Fetch Lightweight Live Stock Ticks & Indices (from Supabase live database, static JSON fallback, or REST proxy)
  */
 export async function fetchLiveTick() {
-    const res = await fetch(`/api/live-tick?t=${Date.now()}`);
-    if (!res.ok) {
-        throw new Error(`Live tick fetch error: ${res.statusText}`);
+    let sbData = null;
+    let staticData = null;
+
+    try {
+        sbData = await fetchFromSupabaseLive();
+    } catch (e) {
+        console.warn("[Supabase Live] Fetch error:", e);
     }
-    return await res.json();
+
+    try {
+        const resStatic = await fetch(`data/nepse_today.json?t=${Date.now()}`);
+        if (resStatic.ok) {
+            staticData = await resStatic.json();
+        }
+    } catch (e) {}
+
+    if (!staticData && !sbData) {
+        try {
+            const res = await fetch(`/api/live-tick?t=${Date.now()}`);
+            if (res.ok) staticData = await res.json();
+        } catch(e) {}
+    }
+
+    if (sbData && sbData.stocks && sbData.stocks.length) {
+        if (staticData && staticData.date && sbData.date) {
+            // Compare dates to pick fresher data source
+            if (staticData.date > sbData.date) {
+                return staticData;
+            }
+        }
+        // Merge static indices and summary into Supabase payload if missing
+        if (staticData) {
+            if (staticData.indices && (!sbData.indices || !sbData.indices.length)) {
+                sbData.indices = staticData.indices;
+            }
+            if (!sbData.summary && staticData.summary) {
+                sbData.summary = staticData.summary;
+            }
+        }
+        return sbData;
+    }
+
+    if (staticData && staticData.stocks && staticData.stocks.length) {
+        return staticData;
+    }
+
+    throw new Error("Live tick fetch failed across all providers");
 }
 

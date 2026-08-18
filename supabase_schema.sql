@@ -292,8 +292,8 @@ CREATE TABLE IF NOT EXISTS public.trade_journal (
 CREATE INDEX IF NOT EXISTS idx_journal_username ON public.trade_journal(username);
 
 -- ====================================================================
--- DISABLE ROW LEVEL SECURITY (RLS)
--- Disables protection limits to allow easy public CRUD operations
+-- DISABLE ROW LEVEL SECURITY (RLS) & GRANT PUBLIC READ PERMISSIONS
+-- Disables protection limits to allow easy public CRUD & client live price syncing
 -- ====================================================================
 ALTER TABLE public.companies DISABLE ROW LEVEL SECURITY;
 ALTER TABLE public.daily_prices DISABLE ROW LEVEL SECURITY;
@@ -309,3 +309,42 @@ ALTER TABLE public.user_watchlists DISABLE ROW LEVEL SECURITY;
 ALTER TABLE public.user_alerts DISABLE ROW LEVEL SECURITY;
 ALTER TABLE public.alert_notifications DISABLE ROW LEVEL SECURITY;
 ALTER TABLE public.trade_journal DISABLE ROW LEVEL SECURITY;
+
+-- Explicit Schema and Table Read Access Grants for Anonymous Client REST Queries
+GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO anon, authenticated, service_role;
+
+GRANT SELECT ON public.companies TO anon, authenticated;
+GRANT SELECT ON public.daily_prices TO anon, authenticated;
+GRANT SELECT ON public.company_fundamentals TO anon, authenticated;
+GRANT SELECT ON public.share_structures TO anon, authenticated;
+GRANT SELECT ON public.lockin_tracker TO anon, authenticated;
+GRANT SELECT ON public.dividend_history TO anon, authenticated;
+GRANT SELECT ON public.corporate_calendar TO anon, authenticated;
+GRANT SELECT ON public.market_history TO anon, authenticated;
+
+-- Explicit Public Read Access Policies (if RLS is enabled in Supabase settings)
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Public Read Companies') THEN
+        CREATE POLICY "Public Read Companies" ON public.companies FOR SELECT USING (true);
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Public Read Daily Prices') THEN
+        CREATE POLICY "Public Read Daily Prices" ON public.daily_prices FOR SELECT USING (true);
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Public Read Fundamentals') THEN
+        CREATE POLICY "Public Read Fundamentals" ON public.company_fundamentals FOR SELECT USING (true);
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Public Read Share Structures') THEN
+        CREATE POLICY "Public Read Share Structures" ON public.share_structures FOR SELECT USING (true);
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Public Read Lockin Tracker') THEN
+        CREATE POLICY "Public Read Lockin Tracker" ON public.lockin_tracker FOR SELECT USING (true);
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Public Read Market History') THEN
+        CREATE POLICY "Public Read Market History" ON public.market_history FOR SELECT USING (true);
+    END IF;
+END $$;
+
+

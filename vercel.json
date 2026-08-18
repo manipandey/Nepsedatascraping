@@ -3,6 +3,10 @@
   "cleanUrls": true,
   "routes": [
     {
+      "src": "/api/live-tick",
+      "dest": "/data/nepse_today.json"
+    },
+    {
       "src": "/api/live",
       "dest": "/data/nepse_today.json"
     },

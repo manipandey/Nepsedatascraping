@@ -36,6 +36,18 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
     if (event.request.method !== 'GET') return;
+
+    const url = new URL(event.request.url);
+    // Bypass service worker cache for dynamic market data, APIs, and Supabase requests
+    const isDynamic = url.pathname.includes('/data/') ||
+                      url.pathname.includes('/api/') ||
+                      url.hostname.includes('supabase.co');
+
+    if (isDynamic) {
+        event.respondWith(fetch(event.request));
+        return;
+    }
+
     event.respondWith(
         fetch(event.request)
             .then((networkResponse) => {
