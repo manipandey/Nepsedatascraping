@@ -203,6 +203,21 @@ function renderMobileLiveData() {
     const stocks = state.stocksData || [];
     const indices = state.indicesData || [];
 
+    // Calculate total turnover, volume, and market breadth
+    const totalTurnover = stocks.reduce((acc, s) => acc + (s.turnover || 0), 0);
+    const totalVolume = stocks.reduce((acc, s) => acc + (s.volume || 0), 0);
+    const adv = stocks.filter(s => (s.diff || s.diff_percent || 0) > 0).length;
+    const dec = stocks.filter(s => (s.diff || s.diff_percent || 0) < 0).length;
+
+    const elTurnover = document.getElementById("mLiveTurnover");
+    if (elTurnover) elTurnover.textContent = formatNPR(totalTurnover);
+
+    const elVolume = document.getElementById("mLiveVolume");
+    if (elVolume) elVolume.textContent = `${formatNumber(totalVolume)} Shs`;
+
+    const elBreadth = document.getElementById("mLiveBreadth");
+    if (elBreadth) elBreadth.textContent = `🟢 ${adv} / 🔴 ${dec}`;
+
     // Indices Scroll
     const indicesEl = document.getElementById("mIndicesScroll");
     if (indicesEl && indices.length) {

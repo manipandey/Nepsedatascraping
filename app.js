@@ -1010,13 +1010,21 @@ async function fetchData() {
 
 // Render Summary Cards & Market Breadth
 function renderSummaryGrid(data) {
-    document.getElementById("summaryTurnover").textContent = formatNPR(data.total_turnover);
-    document.getElementById("summaryVolume").textContent = formatNumber(data.total_volume);
-    document.getElementById("summaryTradedSecurities").textContent = formatNumber(data.total_traded_companies || stocksData.length);
+    const totalTurnover = (data && data.total_turnover > 0) ? data.total_turnover : (stocksData ? stocksData.reduce((acc, s) => acc + (s.turnover || 0), 0) : 0);
+    const totalVolume = (data && data.total_volume > 0) ? data.total_volume : (stocksData ? stocksData.reduce((acc, s) => acc + (s.volume || 0), 0) : 0);
 
-    const adv = data.advancers || stocksData.filter(s => s.diff > 0).length;
-    const dec = data.decliners || stocksData.filter(s => s.diff < 0).length;
-    const unc = data.unchanged || stocksData.filter(s => s.diff === 0).length;
+    const elTurnover = document.getElementById("summaryTurnover");
+    if (elTurnover) elTurnover.textContent = formatNPR(totalTurnover);
+
+    const elVolume = document.getElementById("summaryVolume");
+    if (elVolume) elVolume.textContent = formatNumber(totalVolume);
+
+    const elSecurities = document.getElementById("summaryTradedSecurities");
+    if (elSecurities) elSecurities.textContent = formatNumber((data && data.total_traded_companies) || stocksData.length);
+
+    const adv = (data && data.advancers) ? data.advancers : stocksData.filter(s => (s.diff || s.diff_percent || 0) > 0).length;
+    const dec = (data && data.decliners) ? data.decliners : stocksData.filter(s => (s.diff || s.diff_percent || 0) < 0).length;
+    const unc = (data && data.unchanged) ? data.unchanged : stocksData.filter(s => (s.diff || s.diff_percent || 0) === 0).length;
     const total = adv + dec + unc || 1;
 
     document.getElementById("breadthAdvancers").textContent = `${adv} ▲`;
