@@ -292,6 +292,7 @@ async function fetchLiveTick() {
         renderStocksTable();
         updateSmartCollections();
         renderStrategyView();
+        updateMarginLoanLive();
 
         // Check real-time price alerts & portfolio TP/SL hits
         checkPriceAlerts();
@@ -5216,15 +5217,19 @@ function filterBankRatesTable() {
 
 function populateMarginSymbolSelect() {
     const select = document.getElementById("marginSymbolSelect");
-    if (!select || select.options.length > 1) return; // already populated
+    if (!select) return;
 
-    const stocks = stocksData || [];
-    stocks.forEach(s => {
-        const opt = document.createElement("option");
-        opt.value = s.symbol;
-        opt.textContent = `${s.symbol} (${s.fullName || s.symbol})`;
-        select.appendChild(opt);
-    });
+    const currentVal = select.value;
+    if (select.options.length <= 1 && stocksData && stocksData.length) {
+        select.innerHTML = `<option value="">-- Choose NEPSE Scrip --</option>`;
+        stocksData.forEach(s => {
+            const opt = document.createElement("option");
+            opt.value = s.symbol;
+            opt.textContent = `${s.symbol} - ${s.fullName || s.symbol} (NPR ${(s.ltp || s.close || 0).toFixed(2)})`;
+            select.appendChild(opt);
+        });
+        if (currentVal) select.value = currentVal;
+    }
 }
 
 function handleMarginSymbolChange() {
@@ -5245,14 +5250,22 @@ function handleMarginSymbolChange() {
     const stock = stocksData.find(s => s.symbol === symbol);
     if (stock) {
         const ltp = stock.ltp || stock.close || 0;
-        if (ltpInput) ltpInput.value = ltp;
+        if (ltpInput) ltpInput.value = ltp ? ltp.toFixed(2) : "0.00";
         
-        // Mock 180-day average as 94% of current market price if not present
-        const avgPrice = stock.sma200 || (ltp * 0.94);
-        if (avgInput) avgInput.value = avgPrice.toFixed(1);
+        // Exact 180-day historical average price or fallback SMA
+        const avgPrice = stock.avg180d || stock.sma180 || stock.sma200 || (ltp > 0 ? ltp * 0.95 : 0);
+        if (avgInput) avgInput.value = avgPrice ? Number(avgPrice).toFixed(2) : "0.00";
     }
     
     calculateMarginLoan();
+}
+
+function updateMarginLoanLive() {
+    populateMarginSymbolSelect();
+    const select = document.getElementById("marginSymbolSelect");
+    if (select && select.value) {
+        handleMarginSymbolChange();
+    }
 }
 
 function setMarginMaxLoan() {
@@ -5450,4 +5463,7 @@ window.openPatternAnalysisModal = typeof openPatternAnalysisModal !== "undefined
 window.openTechnicalTechnicalsPanel = typeof openTechnicalTechnicalsPanel !== "undefined" ? openTechnicalTechnicalsPanel : null;
 window.openPositionCalcModal = openPositionCalcModal;
 window.recalculatePositionSize = recalculatePositionSize;
+window.updateMarginLoanLive = updateMarginLoanLive;
+window.handleMarginSymbolChange = handleMarginSymbolChange;
+window.calculateMarginLoan = calculateMarginLoan;
 

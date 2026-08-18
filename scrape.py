@@ -592,6 +592,12 @@ def scrape_nepse():
         e50 = compute_ema(closes, 50) if closes else None
         e100 = compute_ema(closes, 100) if closes else None
 
+        if closes:
+            subset_180 = closes[-180:]
+            s["avg180d"] = round(sum(subset_180) / len(subset_180), 2)
+        elif ltp > 0:
+            s["avg180d"] = round(ltp * 0.95, 2)
+
         if e20:
             s["dma20"] = e20
             s["ema20"] = e20

@@ -275,12 +275,18 @@
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                                 <!-- Stock LTP -->
                                 <div class="sim-input-group-landing" style="display: flex; flex-direction: column; gap: 6px;">
-                                    <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary);">Current Price (LTP)</label>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary);">Current Price (LTP)</label>
+                                        <span style="font-size: 0.68rem; color: #10b981; font-weight: 700;">🟢 Live Auto</span>
+                                    </div>
                                     <input type="number" id="marginLTP" step="0.1" value="0.0" oninput="calculateMarginLoan()" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-app); color: var(--text-primary); font-size: 0.85rem; outline: none;">
                                 </div>
                                 <!-- 180-Day Average -->
                                 <div class="sim-input-group-landing" style="display: flex; flex-direction: column; gap: 6px;">
-                                    <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary);">180-Day Avg Price</label>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <label style="font-size: 0.78rem; font-weight: 700; color: var(--text-secondary);">180-Day Avg Price</label>
+                                        <span style="font-size: 0.68rem; color: #38bdf8; font-weight: 700;">📊 Auto-Calculated</span>
+                                    </div>
                                     <input type="number" id="marginAvgPrice" step="0.1" value="0.0" oninput="calculateMarginLoan()" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-app); color: var(--text-primary); font-size: 0.85rem; outline: none;">
                                 </div>
                             </div>
