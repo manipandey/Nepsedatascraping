@@ -129,33 +129,38 @@
                 <span class="mobile-section-title">🫧 Market Heat Map</span>
             </div>
 
-            <!-- Heat Map Filter Controls -->
-            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
-                <div style="display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px;">
-                    <button class="mobile-badge up m-heat-tab active" data-heat-filter="all" onclick="setMobileHeatFilter('all', this)" style="cursor: pointer;">All Scrips</button>
-                    <button class="mobile-badge m-heat-tab" data-heat-filter="top50" onclick="setMobileHeatFilter('top50', this)" style="cursor: pointer; background: #e0e7ff; color: #4338ca;">Top 50 Turnover</button>
-                    <button class="mobile-badge m-heat-tab" data-heat-filter="gainers" onclick="setMobileHeatFilter('gainers', this)" style="cursor: pointer; background: rgba(22,163,74,0.12); color: #16a34a;">Gainers ▲</button>
-                    <button class="mobile-badge m-heat-tab" data-heat-filter="decliners" onclick="setMobileHeatFilter('decliners', this)" style="cursor: pointer; background: rgba(220,38,38,0.12); color: #dc2626;">Decliners ▼</button>
+            <div style="margin-bottom: 12px; display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="font-size: 1rem; color: var(--mobile-text); margin: 0;">🫧 NEPSE Heatmap Suite</h3>
+                    <div style="display: flex; background: rgba(255,255,255,0.06); padding: 2px; border-radius: 8px;">
+                        <button id="mHeatModeBubbleBtn" class="mobile-btn" style="padding: 4px 10px; font-size: 0.74rem; background: var(--mobile-accent); color: #fff; font-weight: 700;" onclick="setMobileHeatmapMode('bubble')">🫧 Bubbles</button>
+                        <button id="mHeatModeTreemapBtn" class="mobile-btn" style="padding: 4px 10px; font-size: 0.74rem; background: transparent; color: var(--mobile-text-sub);" onclick="setMobileHeatmapMode('treemap')">🗺️ Treemap</button>
+                    </div>
                 </div>
                 <div style="display: flex; gap: 8px;">
                     <select id="mHeatSectorSelect" class="mobile-input" style="flex: 1;" onchange="renderMobileHeatmap()">
-                        <option value="all">All Sectors</option>
+                        <option value="all">🌐 All Sectors</option>
                     </select>
-                    <select id="mHeatSizeMode" class="mobile-input" style="flex: 0 0 130px;" onchange="renderMobileHeatmap()">
-                        <option value="turnover">Tile: Turnover</option>
-                        <option value="volume">Tile: Volume</option>
+                    <select id="mHeatSizeMode" class="mobile-input" style="flex: 0 0 120px;" onchange="renderMobileHeatmap()">
+                        <option value="turnover">Turnover</option>
+                        <option value="volume">Volume</option>
                     </select>
                 </div>
             </div>
 
-            <div class="mobile-card" style="padding: 12px;">
-                <div style="display: flex; justify-content: space-between; font-size: 0.76rem; color: var(--mobile-text-sub); margin-bottom: 10px;">
-                    <span>🟢 Circuit / Gainers</span>
-                    <span>🔴 Decliners</span>
-                    <span>Tile Size = Value</span>
+            <div class="mobile-card" style="padding: 10px; position: relative; overflow: hidden; min-height: 480px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div id="mHeatmapContainer" style="width: 100%; min-height: 430px; position: relative; overflow: hidden; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                    <p style="color: var(--mobile-text-sub); font-size: 0.85rem;">Rendering NEPSE Heatmap...</p>
                 </div>
-                <div id="mHeatmapGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px;">
-                    <!-- Heat map tiles rendered by mobile.js -->
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 8px; margin-top: 6px; font-size: 0.72rem; color: var(--mobile-text-sub);">
+                    <div style="display: flex; gap: 4px; font-weight: 700; font-family: var(--font-mono);">
+                        <span style="background: #059669; color: #fff; padding: 1px 5px; border-radius: 3px;">+5%</span>
+                        <span style="background: #10b981; color: #fff; padding: 1px 5px; border-radius: 3px;">+3%</span>
+                        <span style="background: #334155; color: #cbd5e1; padding: 1px 5px; border-radius: 3px;">0%</span>
+                        <span style="background: #dc2626; color: #fff; padding: 1px 5px; border-radius: 3px;">-3%</span>
+                        <span style="background: #e11d48; color: #fff; padding: 1px 5px; border-radius: 3px;">-5%</span>
+                    </div>
+                    <span>Tap bubble for details</span>
                 </div>
             </div>
         </section>
@@ -367,6 +372,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script type="module" src="mobile.js"></script>
 </body>
 </html>

@@ -279,6 +279,31 @@ window.onMobileSectorSelect = function(val) {
 };
 
 let mobileHeatFilter = "all";
+let mobileHeatmapViewMode = "bubble";
+
+window.setMobileHeatmapMode = function(mode) {
+    mobileHeatmapViewMode = mode;
+    const bubbleBtn = document.getElementById("mHeatModeBubbleBtn");
+    const treemapBtn = document.getElementById("mHeatModeTreemapBtn");
+    if (bubbleBtn && treemapBtn) {
+        if (mode === "bubble") {
+            bubbleBtn.style.background = "var(--mobile-accent)";
+            bubbleBtn.style.color = "#ffffff";
+            bubbleBtn.style.fontWeight = "700";
+            treemapBtn.style.background = "transparent";
+            treemapBtn.style.color = "var(--mobile-text-sub)";
+            treemapBtn.style.fontWeight = "normal";
+        } else {
+            treemapBtn.style.background = "var(--mobile-accent)";
+            treemapBtn.style.color = "#ffffff";
+            treemapBtn.style.fontWeight = "700";
+            bubbleBtn.style.background = "transparent";
+            bubbleBtn.style.color = "var(--mobile-text-sub)";
+            bubbleBtn.style.fontWeight = "normal";
+        }
+    }
+    renderMobileHeatmap();
+};
 
 window.setMobileHeatFilter = function(filterName, btnEl) {
     mobileHeatFilter = filterName;
@@ -289,84 +314,222 @@ window.setMobileHeatFilter = function(filterName, btnEl) {
 
 function renderMobileHeatmap() {
     const stocks = state.stocksData || [];
-    const gridEl = document.getElementById("mHeatmapGrid");
-    if (!gridEl || !stocks.length) return;
+    const container = document.getElementById("mHeatmapContainer");
+    if (!container || !stocks.length) return;
 
-    // Populate sector select if empty
+    // Populate sector dropdown if empty
     const sectorSel = document.getElementById("mHeatSectorSelect");
     if (sectorSel && sectorSel.children.length <= 1) {
         const sectors = Array.from(new Set(stocks.map(s => inferNepseSector(s.symbol, s.sector)))).sort();
-        sectorSel.innerHTML = `<option value="all">All Sectors</option>` + sectors.map(sec => `<option value="${sec}">${sec}</option>`).join("");
+        sectorSel.innerHTML = `<option value="all">🌐 All Sectors</option>` + sectors.map(sec => `<option value="${sec}">${sec}</option>`).join("");
     }
 
     const selectedSec = sectorSel ? sectorSel.value : "all";
     const sizeMode = (document.getElementById("mHeatSizeMode")?.value) || "turnover";
 
-    let filtered = [...stocks];
+    let items = stocks.map(s => {
+        const turnoverVal = s.turnover || ((s.ltp || 100) * (s.volume || 1000)) || 10000;
+        const volumeVal = s.volume || 100;
+        return {
+            symbol: s.symbol,
+            fullName: s.fullName || s.symbol,
+            sector: inferNepseSector(s.symbol, s.sector),
+            ltp: s.ltp || 0,
+            diff: s.diff || 0,
+            diffPct: s.diff_percent || 0,
+            volume: volumeVal,
+            turnover: turnoverVal,
+            sizeVal: sizeMode === "volume" ? volumeVal : turnoverVal
+        };
+    });
+
     if (selectedSec !== "all") {
-        filtered = filtered.filter(s => inferNepseSector(s.symbol, s.sector).toLowerCase() === selectedSec.toLowerCase());
+        items = items.filter(i => i.sector && i.sector.toLowerCase() === selectedSec.toLowerCase());
     }
 
-    if (mobileHeatFilter === "top50") {
-        filtered.sort((a, b) => (b.turnover || 0) - (a.turnover || 0));
-        filtered = filtered.slice(0, 50);
-    } else if (mobileHeatFilter === "gainers") {
-        filtered = filtered.filter(s => (s.diff_percent || s.diff || 0) > 0).sort((a, b) => (b.diff_percent || 0) - (a.diff_percent || 0));
-    } else if (mobileHeatFilter === "decliners") {
-        filtered = filtered.filter(s => (s.diff_percent || s.diff || 0) < 0).sort((a, b) => (a.diff_percent || 0) - (b.diff_percent || 0));
-    }
-
-    if (!filtered.length) {
-        gridEl.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: var(--mobile-text-sub); padding: 24px;">No stocks match selected heat map filter.</div>`;
+    if (!items.length) {
+        container.innerHTML = `<div style="text-align: center; color: var(--mobile-text-sub); padding: 30px;">No stocks found for selected filter.</div>`;
         return;
     }
 
-    // Determine max value for dynamic scaling
-    const maxVal = Math.max(...filtered.map(s => sizeMode === "volume" ? (s.volume || 1) : (s.turnover || 1)));
+    // Sort and take top 55 for crisp mobile performance
+    items.sort((a, b) => b.sizeVal - a.sizeVal);
+    items = items.slice(0, 55);
 
-    gridEl.innerHTML = filtered.map(s => {
-        const pct = s.diff_percent || 0;
-        const isUp = pct >= 0;
-        const val = sizeMode === "volume" ? (s.volume || 0) : (s.turnover || 0);
+    const width = container.clientWidth || 360;
+    const height = 430;
 
-        // Tile background intensity
-        let bg, textColor, border;
-        if (pct >= 5.0) {
-            bg = "rgba(16, 185, 129, 0.95)";
-            textColor = "#ffffff";
-            border = "2px solid #059669";
-        } else if (pct > 0.0) {
-            const intensity = Math.min(0.85, 0.25 + Math.abs(pct) * 0.12);
-            bg = `rgba(16, 185, 129, ${intensity})`;
-            textColor = "#ffffff";
-            border = "1px solid rgba(16, 185, 129, 0.4)";
-        } else if (pct === 0.0) {
-            bg = "#e2e8f0";
-            textColor = "#475569";
-            border = "1px solid #cbd5e1";
-        } else if (pct <= -5.0) {
-            bg = "rgba(239, 68, 68, 0.95)";
-            textColor = "#ffffff";
-            border = "2px solid #dc2626";
-        } else {
-            const intensity = Math.min(0.85, 0.25 + Math.abs(pct) * 0.12);
-            bg = `rgba(239, 68, 68, ${intensity})`;
-            textColor = "#ffffff";
-            border = "1px solid rgba(239, 68, 68, 0.4)";
-        }
+    container.innerHTML = "";
 
-        // Font scaling based on turnover weight
-        const weight = maxVal > 0 ? (val / maxVal) : 0.5;
-        const flexGrow = Math.max(1, Math.round(weight * 3));
+    const getTileColor = (pct) => {
+        if (pct >= 5.0) return "#059669";      // Circuit / Strong Gain (+5%+)
+        if (pct >= 3.0) return "#10b981";      // Bright Green (+3% to +5%)
+        if (pct >= 1.0) return "#047857";      // Medium Green (+1% to +3%)
+        if (pct > 0.0) return "#065f46";       // Soft Green (+0.1% to +1%)
+        if (pct === 0.0) return "#334155";      // Neutral Slate (0%)
+        if (pct > -1.0) return "#881337";      // Soft Red (-0.1% to -1%)
+        if (pct > -3.0) return "#b91c1c";      // Medium Red (-1% to -3%)
+        if (pct > -5.0) return "#dc2626";      // Bright Red (-3% to -5%)
+        return "#e11d48";                       // Deep Crimson (-5%+)
+    };
 
-        return `
-            <div style="background: ${bg}; padding: 12px 6px; border-radius: 10px; text-align: center; border: ${border}; cursor: pointer; flex-grow: ${flexGrow}; box-shadow: 0 2px 6px rgba(0,0,0,0.06);" onclick="switchMobileTab('liveData')">
-                <div style="font-family: var(--font-mono); font-weight: 800; font-size: 0.9rem; color: ${textColor};">${s.symbol}</div>
-                <div style="font-size: 0.76rem; font-weight: 700; color: ${textColor}; margin-top: 2px;">${isUp ? '▲ +' : '▼ '}${pct.toFixed(2)}%</div>
-                <div style="font-size: 0.65rem; color: ${textColor}; opacity: 0.9; margin-top: 2px;">NPR ${(s.ltp || 0).toFixed(0)}</div>
-            </div>
-        `;
-    }).join("");
+    if (typeof d3 === "undefined") {
+        container.innerHTML = `<p style="color: var(--mobile-text-sub); padding: 30px; text-align: center;">Loading D3 bubble engine...</p>`;
+        return;
+    }
+
+    if (mobileHeatmapViewMode === "bubble") {
+        // D3 Pack Layout for actual circular Heat Bubbles!
+        const hierarchyData = {
+            name: "NEPSE",
+            children: items
+        };
+
+        const root = d3.hierarchy(hierarchyData)
+            .sum(d => d.sizeVal ? Math.max(10, d.sizeVal) : 0)
+            .sort((a, b) => b.value - a.value);
+
+        d3.pack()
+            .size([width, height])
+            .padding(4)(root);
+
+        const svg = d3.select(container)
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .attr("viewBox", `0 0 ${width} ${height}`)
+            .style("overflow", "hidden");
+
+        const node = svg.selectAll(".m-bubble-node")
+            .data(root.leaves())
+            .enter()
+            .append("g")
+            .attr("class", "m-bubble-node")
+            .attr("transform", d => `translate(${d.x},${d.y})`)
+            .style("cursor", "pointer")
+            .on("click", (event, d) => {
+                const s = d.data;
+                const isUp = s.diffPct >= 0;
+                alert(`📌 ${s.symbol} (${s.fullName})\n• Sector: ${s.sector}\n• LTP: NPR ${s.ltp.toFixed(2)}\n• Change: ${isUp ? '+' : ''}${s.diff.toFixed(2)} (${isUp ? '+' : ''}${s.diffPct.toFixed(2)}%)\n• Volume: ${s.volume.toLocaleString()} shares\n• Turnover: NPR ${s.turnover.toLocaleString()}`);
+            });
+
+        // Bubble Circle
+        node.append("circle")
+            .attr("r", d => Math.max(12, d.r))
+            .attr("fill", d => getTileColor(d.data.diffPct))
+            .attr("stroke", "rgba(15, 23, 42, 0.8)")
+            .attr("stroke-width", "1.5px")
+            .style("transition", "transform 0.15s ease");
+
+        // Symbol Label
+        node.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", d => (d.r >= 22) ? "-0.2em" : "0.3em")
+            .style("font-family", "var(--font-heading)")
+            .style("font-weight", "800")
+            .style("fill", "#ffffff")
+            .style("font-size", d => `${Math.max(9, Math.min(16, Math.round(d.r * 0.45)))}px`)
+            .style("text-shadow", "0 1px 3px #000000")
+            .text(d => d.data.symbol);
+
+        // Change % Label
+        node.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "1.0em")
+            .style("font-family", "var(--font-mono)")
+            .style("font-weight", "800")
+            .style("fill", "#ffffff")
+            .style("font-size", d => `${Math.max(8, Math.min(13, Math.round(d.r * 0.35)))}px`)
+            .style("display", d => d.r >= 22 ? "block" : "none")
+            .style("text-shadow", "0 1px 3px #000000")
+            .text(d => `${d.data.diffPct > 0 ? '+' : ''}${d.data.diffPct.toFixed(1)}%`);
+
+    } else {
+        // D3 Treemap Layout for Treemap Tiles
+        const sectorGroups = {};
+        items.forEach(item => {
+            const sec = item.sector || "Others";
+            if (!sectorGroups[sec]) sectorGroups[sec] = [];
+            sectorGroups[sec].push(item);
+        });
+
+        const hierarchyData = {
+            name: "NEPSE",
+            children: Object.keys(sectorGroups).map(sec => ({
+                name: sec,
+                children: sectorGroups[sec]
+            }))
+        };
+
+        const root = d3.hierarchy(hierarchyData)
+            .sum(d => d.sizeVal ? Math.max(10, d.sizeVal) : 0)
+            .sort((a, b) => b.value - a.value);
+
+        d3.treemap()
+            .size([width, height])
+            .paddingOuter(3)
+            .paddingTop(18)
+            .paddingInner(2)(root);
+
+        const svg = d3.select(container)
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .attr("viewBox", `0 0 ${width} ${height}`);
+
+        const sectorNodes = root.children || [];
+        const sectorGroup = svg.selectAll(".m-treemap-sector")
+            .data(sectorNodes)
+            .enter()
+            .append("g")
+            .attr("transform", d => `translate(${d.x0},${d.y0})`);
+
+        sectorGroup.append("rect")
+            .attr("width", d => Math.max(0, d.x1 - d.x0))
+            .attr("height", d => Math.max(0, d.y1 - d.y0))
+            .attr("fill", "rgba(15, 23, 42, 0.4)")
+            .attr("stroke", "rgba(255,255,255,0.08)");
+
+        sectorGroup.append("text")
+            .attr("x", 4)
+            .attr("y", 13)
+            .style("font-size", "0.68rem")
+            .style("font-weight", "800")
+            .style("fill", "#f1f5f9")
+            .style("text-transform", "uppercase")
+            .style("display", d => (d.x1 - d.x0 > 45 && d.y1 - d.y0 > 16) ? "block" : "none")
+            .text(d => d.data.name);
+
+        const node = svg.selectAll(".m-treemap-node")
+            .data(root.leaves())
+            .enter()
+            .append("g")
+            .attr("transform", d => `translate(${d.x0},${d.y0})`)
+            .on("click", (event, d) => {
+                const s = d.data;
+                const isUp = s.diffPct >= 0;
+                alert(`📌 ${s.symbol} (${s.fullName})\n• Sector: ${s.sector}\n• LTP: NPR ${s.ltp.toFixed(2)}\n• Change: ${isUp ? '+' : ''}${s.diff.toFixed(2)} (${isUp ? '+' : ''}${s.diffPct.toFixed(2)}%)\n• Volume: ${s.volume.toLocaleString()} shares\n• Turnover: NPR ${s.turnover.toLocaleString()}`);
+            });
+
+        node.append("rect")
+            .attr("width", d => Math.max(0, d.x1 - d.x0))
+            .attr("height", d => Math.max(0, d.y1 - d.y0))
+            .attr("fill", d => getTileColor(d.data.diffPct))
+            .attr("rx", 3)
+            .attr("ry", 3)
+            .attr("stroke", "rgba(15, 23, 42, 0.8)");
+
+        node.append("text")
+            .attr("x", d => (d.x1 - d.x0) / 2)
+            .attr("y", d => (d.y1 - d.y0) / 2)
+            .attr("text-anchor", "middle")
+            .style("font-family", "var(--font-heading)")
+            .style("font-weight", "800")
+            .style("fill", "#ffffff")
+            .style("font-size", d => `${Math.max(9, Math.min(14, Math.round(Math.min(d.x1 - d.x0, d.y1 - d.y0) * 0.35)))}px`)
+            .style("text-shadow", "0 1px 3px #000000")
+            .text(d => d.data.symbol);
+    }
 }
 
 // -------------------------------------------------------------
