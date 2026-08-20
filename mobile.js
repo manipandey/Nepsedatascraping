@@ -6,6 +6,7 @@ import { state } from './src/state.js';
 import { formatNPR, formatNumber } from './src/utils.js';
 import {
     fetchData as apiFetchData,
+    fetchLiveTick as apiFetchLiveTick,
     fetchBankRates as apiFetchBankRates,
     fetchNrbIndicators as apiFetchNrbIndicators
 } from './src/api.js';
@@ -41,6 +42,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (e) {
         console.warn("Mobile initial fetch warning:", e);
     }
+
+    // Auto-refresh live ticks every 30 seconds
+    setInterval(async () => {
+        try {
+            const liveData = await apiFetchLiveTick();
+            if (liveData && liveData.stocks && liveData.stocks.length) {
+                const tickMap = {};
+                liveData.stocks.forEach(s => { tickMap[s.symbol] = s; });
+                state.stocksData = (state.stocksData || []).map(s => {
+                    const l = tickMap[s.symbol];
+                    return l ? { ...s, ...l } : s;
+                });
+                enrichMobileTechnicalIndicators(state.stocksData);
+            }
+        } catch (e) {}
+    }, 30000);
 
     updateMobileUserUI();
 

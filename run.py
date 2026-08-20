@@ -710,15 +710,17 @@ def compute_all_stock_indicators(symbol, current_ltp, current_vol=None):
         ema50 = compute_ema_series(closes, 50)
         ema100 = compute_ema_series(closes, 100)
 
+        # 1. Buy Bias confirmed when EMA 20 > EMA 50 > EMA 100
         is_ema_aligned = bool(ema20 and ema50 and ema100 and (ema20 > ema50 > ema100))
 
-        # Williams 5-bar Fractal Low calculation
+        # 2. Williams 5-bar Fractal Low calculation
         fractal_low_val = None
         is_fractal_sweep = False
         is_bullish_candle = False
 
         if len(sorted_hist) >= 10:
-            for i in range(len(sorted_hist) - 3, 1, -1):
+            search_start = max(2, len(sorted_hist) - 45)
+            for i in range(len(sorted_hist) - 3, search_start - 1, -1):
                 low_i = sorted_hist[i].get("low")
                 if low_i is not None and i - 2 >= 0 and i + 2 < len(sorted_hist):
                     l_m2 = sorted_hist[i-2].get("low")
@@ -735,12 +737,16 @@ def compute_all_stock_indicators(symbol, current_ltp, current_vol=None):
             curr_low = latest_bar.get("low", ltp_val)
             prev_low = prev_bar.get("low", ltp_val)
 
-            if fractal_low_val is not None:
-                is_fractal_sweep = (curr_low <= fractal_low_val) or (prev_low <= fractal_low_val)
-            
             c_close = latest_bar.get("close", ltp_val)
             c_open = latest_bar.get("open", ltp_val)
-            is_bullish_candle = (c_close >= c_open)
+            # 3. Green Reversal Candle formed after/upon sweep
+            is_bullish_candle = (c_close >= c_open if (c_open and c_open > 0) else True)
+
+            # 4. Fractal Low Swept
+            if fractal_low_val is not None and fractal_low_val > 0:
+                is_sweep_curr = (0.94 * fractal_low_val <= curr_low <= 1.01 * fractal_low_val)
+                is_sweep_prev = (0.94 * fractal_low_val <= prev_low <= 1.01 * fractal_low_val)
+                is_fractal_sweep = bool(is_sweep_curr or is_sweep_prev)
 
         is_ema_fractal_match = bool(is_ema_aligned and is_fractal_sweep and is_bullish_candle)
 

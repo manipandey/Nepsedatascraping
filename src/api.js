@@ -203,8 +203,8 @@ export async function fetchNrbIndicators() {
 export async function fetchFromSupabaseLive() {
     try {
         const config = window.SUPABASE_CONFIG || {};
-        const url = config.url;
-        const key = config.anonKey;
+        const url = config.url || "https://epvlpmizvswjgozpfrfz.supabase.co";
+        const key = config.anonKey || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVwdmxwbWl6dnN3amdvenBmcmZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyNDY2MDIsImV4cCI6MjEwMTgyMjYwMn0.tKpz6cSOejAx-YWngWcwgKrqA6mLveqWD0-Lzpp3WUk";
         if (!url || !key || url.includes('your-project-id')) return null;
 
         const baseUrl = url.replace(/\/$/, '');
@@ -214,7 +214,7 @@ export async function fetchFromSupabaseLive() {
         };
 
         const [pricesRes, summaryRes] = await Promise.allSettled([
-            fetch(`${baseUrl}/rest/v1/daily_prices?select=*&order=date.desc&limit=500`, { headers }),
+            fetch(`${baseUrl}/rest/v1/daily_prices?select=*&order=date.desc&limit=1000`, { headers }),
             fetch(`${baseUrl}/rest/v1/market_history?select=*&order=date.desc&limit=1`, { headers })
         ]);
 
@@ -225,26 +225,33 @@ export async function fetchFromSupabaseLive() {
         const latestDate = prices[0].date;
         const todayPrices = prices.filter(p => p.date === latestDate);
 
-        const stocks = todayPrices.map(p => ({
-            symbol: p.symbol,
-            close: Number(p.close),
-            ltp: Number(p.close),
-            open: Number(p.open),
-            high: Number(p.high),
-            low: Number(p.low),
-            diff: Number(p.change_npr || 0),
-            diff_percent: Number(p.change_pct || 0),
-            volume: Number(p.volume || 0),
-            turnover: Number(p.turnover || 0),
-            transactions: Number(p.transactions || 0)
-        }));
+        const stocks = todayPrices.map(p => {
+            const ltp = Number(p.close || 0);
+            const diff = Number(p.change_npr || 0);
+            return {
+                symbol: p.symbol,
+                close: ltp,
+                ltp: ltp,
+                open: Number(p.open || ltp),
+                high: Number(p.high || ltp),
+                low: Number(p.low || ltp),
+                prev_close: Number((ltp - diff).toFixed(2)),
+                diff: diff,
+                diff_percent: Number(p.change_pct || 0),
+                volume: Number(p.volume || 0),
+                turnover: Number(p.turnover || 0),
+                transactions: Number(p.transactions || 0)
+            };
+        });
 
         let summary = null;
         let indices = [];
+        let scrapedAt = prices[0].created_at || new Date().toISOString();
         if (summaryRes.status === "fulfilled" && summaryRes.value.ok) {
             const sumData = await summaryRes.value.json();
             if (Array.isArray(sumData) && sumData.length) {
                 const m = sumData[0];
+                if (m.created_at) scrapedAt = m.created_at;
                 summary = {
                     total_turnover: Number(m.total_turnover || 0),
                     total_volume: Number(m.total_volume || 0),
@@ -269,7 +276,7 @@ export async function fetchFromSupabaseLive() {
             indices: indices,
             summary: summary,
             date: latestDate,
-            scraped_at: new Date().toISOString()
+            scraped_at: scrapedAt
         };
     } catch (e) {
         console.warn("[Supabase Live Fetch] Error:", e);
@@ -305,14 +312,43 @@ export async function fetchLiveTick() {
     }
 
     if (staticData && staticData.stocks && staticData.stocks.length) {
-        // Only prioritize static JSON over Supabase if static JSON date is strictly newer than Supabase date
-        if (!sbData || !sbData.date || (staticData.date && staticData.date > sbData.date)) {
+        // Merge Supabase live prices into static dataset if available for same or newer date
+        if (sbData && sbData.stocks && sbData.stocks.length && sbData.date >= (staticData.date || "")) {
+            const sbMap = {};
+            sbData.stocks.forEach(s => { sbMap[s.symbol] = s; });
+            staticData.stocks = staticData.stocks.map(st => {
+                const sb = sbMap[st.symbol];
+                if (!sb) return st;
+                return {
+                    ...st,
+                    ltp: sb.ltp ?? st.ltp,
+                    close: sb.close ?? st.close,
+                    open: sb.open ?? st.open,
+                    high: sb.high ?? st.high,
+                    low: sb.low ?? st.low,
+                    diff: sb.diff ?? st.diff,
+                    diff_percent: sb.diff_percent ?? st.diff_percent,
+                    volume: sb.volume || st.volume,
+                    turnover: sb.turnover || st.turnover,
+                    transactions: sb.transactions || st.transactions
+                };
+            });
+            if (sbData.indices && sbData.indices.length) {
+                staticData.indices = sbData.indices;
+            }
+            if (sbData.summary) {
+                staticData.summary = { ...staticData.summary, ...sbData.summary };
+            }
+            if (sbData.date) staticData.date = sbData.date;
+            if (sbData.scraped_at) staticData.scraped_at = sbData.scraped_at;
+        }
+
+        if (!sbData || !sbData.date || (staticData.date && staticData.date >= sbData.date)) {
             return staticData;
         }
     }
 
     if (sbData && sbData.stocks && sbData.stocks.length) {
-        // Merge static metadata (indices, summary, sector, 52w high/low, etc.) into Supabase payload
         if (staticData) {
             if (staticData.indices && (!sbData.indices || !sbData.indices.length)) {
                 sbData.indices = staticData.indices;

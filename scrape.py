@@ -27,6 +27,101 @@ def load_env():
 
 load_env()
 
+def enrich_stock_indicators(stocks):
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    def compute_ema(series, n):
+        if not series or len(series) < n:
+            return None
+        k = 2.0 / (n + 1)
+        val = sum(series[:n]) / float(n)
+        for price in series[n:]:
+            val = (price * k) + (val * (1.0 - k))
+        return round(val, 2)
+
+    for s in stocks:
+        sym = s.get("symbol", "").upper().strip()
+        ltp = float(s.get("ltp", 0) or s.get("close", 0) or 0)
+        open_price = float(s.get("open", ltp) or ltp)
+        cache_path = os.path.join(base_dir, "data", "history_cache", f"{sym.lower()}.json")
+
+        hist_records = []
+        if os.path.exists(cache_path):
+            try:
+                with open(cache_path, "r", encoding="utf-8") as hf:
+                    hist_records = json.load(hf)
+            except Exception:
+                pass
+
+        closes = [float(r["close"]) for r in hist_records if isinstance(r, dict) and "close" in r and r.get("close") is not None]
+        if ltp > 0:
+            closes.append(ltp)
+
+        e20 = compute_ema(closes, 20)
+        e50 = compute_ema(closes, 50)
+        e100 = compute_ema(closes, 100)
+
+        if closes:
+            subset_180 = closes[-180:]
+            s["avg180d"] = round(sum(subset_180) / len(subset_180), 2)
+        elif ltp > 0:
+            s["avg180d"] = round(ltp * 0.95, 2)
+
+        if e20:
+            s["dma20"] = e20
+            s["ema20"] = e20
+            s["diff_20dma"] = round(((ltp - e20) / e20) * 100, 2) if e20 > 0 else 0.0
+            s["below_20dma"] = ltp < e20
+        if e50: s["ema50"] = e50
+        if e100: s["ema100"] = e100
+
+        # 1. Buy Bias confirmed when EMA 20 > EMA 50 > EMA 100
+        if e20 and e50 and e100:
+            is_ema_aligned = bool(e20 > e50 > e100)
+        else:
+            is_ema_aligned = False
+
+        s["is_ema_aligned"] = is_ema_aligned
+
+        # 2. Latest Recent Williams 5-bar Fractal Low calculation (recent 45 trading bars)
+        fractal_low_val = None
+        if len(hist_records) >= 5:
+            search_start = max(2, len(hist_records) - 45)
+            for i in range(len(hist_records) - 3, search_start - 1, -1):
+                rec_i = hist_records[i]
+                if isinstance(rec_i, dict) and rec_i.get("low") is not None and i - 2 >= 0 and i + 2 < len(hist_records):
+                    low_i = float(rec_i["low"])
+                    l_m2 = float(hist_records[i-2].get("low", low_i + 1))
+                    l_m1 = float(hist_records[i-1].get("low", low_i + 1))
+                    l_p1 = float(hist_records[i+1].get("low", low_i + 1))
+                    l_p2 = float(hist_records[i+2].get("low", low_i + 1))
+                    if low_i < l_m2 and low_i < l_m1 and low_i < l_p1 and low_i < l_p2:
+                        fractal_low_val = round(low_i, 2)
+                        break
+
+        s["fractal_low"] = fractal_low_val
+        curr_low = float(s.get("low", ltp) or ltp)
+        prev_low = curr_low
+        if len(hist_records) >= 2:
+            try:
+                prev_low = float(hist_records[-2].get("low", curr_low))
+            except Exception:
+                pass
+
+        # 3. Green Candle Confirmation formed after/upon sweep (Close >= Open / diff >= 0)
+        is_bullish_candle = bool(ltp >= open_price if open_price > 0 else (float(s.get("diff", 0) or 0) >= 0 or float(s.get("diff_percent", 0) or 0) >= 0))
+        s["is_bullish_candle"] = is_bullish_candle
+
+        # 4. Fractal Low Swept
+        is_sweep = False
+        if fractal_low_val and fractal_low_val > 0:
+            is_sweep_curr = (0.94 * fractal_low_val <= curr_low <= 1.01 * fractal_low_val)
+            is_sweep_prev = (0.94 * fractal_low_val <= prev_low <= 1.01 * fractal_low_val)
+            is_sweep = bool(is_sweep_curr or is_sweep_prev)
+
+        s["is_fractal_sweep"] = is_sweep
+        s["is_ema_fractal_match"] = bool(is_ema_aligned and s["is_fractal_sweep"] and s["is_bullish_candle"])
+
+
 
 class ShareSansarParser(HTMLParser):
     def __init__(self):
@@ -560,81 +655,8 @@ def scrape_nepse():
     # Save folder path
     os.makedirs("data", exist_ok=True)
     
-    def compute_ema(series, n):
-        if not series or len(series) < n:
-            return None
-        k = 2.0 / (n + 1)
-        val = sum(series[:n]) / float(n)
-        for price in series[n:]:
-            val = (price * k) + (val * (1.0 - k))
-        return round(val, 2)
-
-    for s in stocks:
-        sym = s.get("symbol", "").upper().strip()
-        ltp = float(s.get("ltp", 0) or s.get("close", 0) or 0)
-        open_price = float(s.get("open", ltp) or ltp)
-        cache_path = os.path.join("data", "history_cache", f"{sym.lower()}.json")
-
-        hist_records = []
-        if os.path.exists(cache_path):
-            try:
-                with open(cache_path, "r", encoding="utf-8") as hf:
-                    hist_records = json.load(hf)
-            except Exception:
-                pass
-
-        closes = [float(r["close"]) for r in hist_records if isinstance(r, dict) and "close" in r and r.get("close") is not None]
-        if ltp > 0:
-            closes.append(ltp)
-
-        e20 = compute_ema(closes, 20)
-        e50 = compute_ema(closes, 50)
-        e100 = compute_ema(closes, 100)
-
-        if closes:
-            subset_180 = closes[-180:]
-            s["avg180d"] = round(sum(subset_180) / len(subset_180), 2)
-        elif ltp > 0:
-            s["avg180d"] = round(ltp * 0.95, 2)
-
-        if e20:
-            s["dma20"] = e20
-            s["ema20"] = e20
-            s["diff_20dma"] = round(((ltp - e20) / e20) * 100, 2) if e20 > 0 else 0.0
-            s["below_20dma"] = ltp < e20
-        if e50: s["ema50"] = e50
-        if e100: s["ema100"] = e100
-
-        # Strict EMA Alignment: EMA 20 > EMA 50 > EMA 100
-        if e20 and e50 and e100:
-            is_ema_aligned = bool(e20 > e50 and e50 > e100)
-        elif e20 and e50:
-            is_ema_aligned = bool(e20 > e50)
-        else:
-            is_ema_aligned = False
-
-        s["is_ema_aligned"] = is_ema_aligned
-
-        # Williams Fractal Low calculation
-        fractal_low_val = None
-        if len(hist_records) >= 5:
-            for i in range(len(hist_records) - 3, 1, -1):
-                rec_i = hist_records[i]
-                if isinstance(rec_i, dict) and rec_i.get("low") is not None and i - 2 >= 0 and i + 2 < len(hist_records):
-                    low_i = float(rec_i["low"])
-                    l_m2 = float(hist_records[i-2].get("low", low_i + 1))
-                    l_m1 = float(hist_records[i-1].get("low", low_i + 1))
-                    l_p1 = float(hist_records[i+1].get("low", low_i + 1))
-                    l_p2 = float(hist_records[i+2].get("low", low_i + 1))
-                    if low_i < l_m2 and low_i < l_m1 and low_i < l_p1 and low_i < l_p2:
-                        fractal_low_val = round(low_i, 2)
-                        break
-
-        s["fractal_low"] = fractal_low_val
-        curr_low = float(s.get("low", ltp) or ltp)
-        s["is_fractal_sweep"] = bool(fractal_low_val and curr_low <= fractal_low_val)
-        s["is_bullish_candle"] = bool(ltp >= open_price or float(s.get("diff", 0) or 0) >= 0)
-        s["is_ema_fractal_match"] = bool(is_ema_aligned and s["is_fractal_sweep"] and s["is_bullish_candle"])
+    # Enrich technical indicators & signals before saving
+    enrich_stock_indicators(stocks)
 
     # Save as JSON
     json_path = os.path.join("data", "nepse_today.json")
@@ -1135,6 +1157,7 @@ def scrape_systemx_and_npstocks():
                     else:
                         existing_stocks.append(s_new)
 
+                enrich_stock_indicators(existing_stocks)
                 today_data["stocks"] = existing_stocks
                 if indices_raw:
                     today_data["indices"] = indices_raw

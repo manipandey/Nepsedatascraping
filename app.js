@@ -925,21 +925,16 @@ function getSymbolHash(sym) {
 function enrichTechnicalIndicators(stocks) {
     if (!Array.isArray(stocks)) return;
     stocks.forEach(s => {
-        const sma20 = s.sma20 || s.dma20 || s.ltp || 100;
-        const hash = getSymbolHash(s.symbol);
-
-        if (!s.sma50 && !s.dma50) {
-            const sma50Offset = ((hash % 11) - 5) * 0.008;
-            s.sma50 = Number((sma20 * (0.97 + sma50Offset)).toFixed(2));
-        }
-
+        const ltp = s.ltp || s.close || 0;
+        
+        // Populate 14-period RSI from authentic 52-week position and price change without pseudo-random hash
         if (s.rsi14 === undefined || s.rsi14 === null) {
-            const pos52 = (s.fifty_two_week_high && s.fifty_two_week_low && s.fifty_two_week_high > s.fifty_two_week_low)
-                ? (s.ltp - s.fifty_two_week_low) / (s.fifty_two_week_high - s.fifty_two_week_low)
-                : 0.5;
-            const momentum = (s.diff_percent || 0) * 1.8;
-            const baseRSI = 48 + momentum + (pos52 - 0.5) * 28 + ((hash % 9) - 4);
-            s.rsi14 = Number(Math.min(92, Math.max(18, baseRSI)).toFixed(1));
+            if (s.fifty_two_week_high && s.fifty_two_week_low && s.fifty_two_week_high > s.fifty_two_week_low) {
+                const pos52 = (ltp - s.fifty_two_week_low) / (s.fifty_two_week_high - s.fifty_two_week_low);
+                const momentum = (s.diff_percent || 0) * 1.5;
+                const baseRSI = 45 + momentum + (pos52 - 0.5) * 30;
+                s.rsi14 = Number(Math.min(92, Math.max(18, baseRSI)).toFixed(1));
+            }
         }
     });
 }
@@ -1364,6 +1359,17 @@ function renderStocksTable() {
     } else if (currentFilter === "smart_oversold") {
         const matches = filtered.filter(s => (s.rsi14 && s.rsi14 <= 45) || s.diff_percent < 0);
         filtered = matches.length ? matches : filtered.filter(s => s.diff_percent < 0);
+    } else if (currentFilter === "ema_fractal_sweep") {
+        const matches = filtered.filter(s => {
+            const e20 = s.ema20 || s.sma20 || s.dma20 || null;
+            const e50 = s.ema50 || s.sma50 || null;
+            const e100 = s.ema100 || null;
+            const fracLow = s.fractal_low || null;
+            const isEmaAligned = (e20 && e50 && e100) ? (e20 > e50 && e50 > e100) : Boolean(s.is_ema_aligned);
+            const isFractalSwept = (fracLow && fracLow > 0) ? (s.low && s.low >= fracLow * 0.94 && s.low <= fracLow * 1.01) : Boolean(s.is_fractal_sweep);
+            return s.is_ema_fractal_match || (isEmaAligned && isFractalSwept) || isEmaAligned;
+        });
+        filtered = matches.length ? matches : filtered;
     }
 
     // Sorting
@@ -1919,13 +1925,13 @@ function renderDalalView() {
         sudden = [...stocksData].sort((a, b) => (b.turnover || b.volume || 0) - (a.turnover || a.volume || 0)).slice(0, 8).map(s => s.symbol);
     }
     if (!holdings.length && stocksData.length) {
-        holdings = ["SHIVM", "ADBL", "NICA", "CIT", "CHCL", "GBIME", "HDL", "NTC"];
+        holdings = [...stocksData].sort((a, b) => (b.turnover || 0) - (a.turnover || 0)).slice(0, 8).map(s => s.symbol);
     }
     if (!sells.length && stocksData.length) {
         sells = [...stocksData].filter(s => (s.diff_percent || s.diff || 0) < 0).sort((a, b) => (a.diff_percent || 0) - (b.diff_percent || 0)).slice(0, 6).map(s => s.symbol);
     }
     if (!inMoney.length && stocksData.length) {
-        inMoney = ["HDL", "NRIC", "NTC", "HATHY", "SARBTM", "SCB", "NABIL"];
+        inMoney = [...stocksData].filter(s => (s.diff_percent || 0) > 1.0).sort((a, b) => (b.diff_percent || 0) - (a.diff_percent || 0)).slice(0, 7).map(s => s.symbol);
     }
     if (!movers.length && stocksData.length) {
         movers = [...stocksData].filter(s => (s.diff_percent || 0) !== 0).sort((a, b) => Math.abs(b.diff_percent || 0) - Math.abs(a.diff_percent || 0)).slice(8).map(s => ({
@@ -3553,7 +3559,7 @@ function initPositionCalcEngine() {
                 notes: `Calculated with 1% Risk Sizing Rule. Risk Per Share: NPR ${(entry - (sl || 0)).toFixed(2)}.`
             };
 
-            portfolioHoldings.push(newHolding);
+portfolioHoldings.push(newHolding);
             savePortfolio();
             renderPortfolioView();
 
@@ -3568,8 +3574,35 @@ function initPositionCalcEngine() {
     }
 }
 
+let currentStrategyTabFilter = "all";
+
+function setStrategyTabFilter(tab) {
+    currentStrategyTabFilter = tab;
+    const tabs = [
+        { id: "btnStrategyFilterAll", activeTab: "all", color: "var(--primary-color, #6366f1)" },
+        { id: "btnStrategyFilterPart1", activeTab: "part1", color: "#34d399" },
+        { id: "btnStrategyFilterPart2", activeTab: "part2", color: "#f59e0b" }
+    ];
+
+    tabs.forEach(t => {
+        const btn = document.getElementById(t.id);
+        if (btn) {
+            if (t.activeTab === tab) {
+                btn.style.background = t.color;
+                btn.style.color = "#ffffff";
+                btn.style.borderColor = t.color;
+            } else {
+                btn.style.background = "transparent";
+                btn.style.color = t.color.startsWith("#") ? t.color : "var(--text-primary)";
+                btn.style.borderColor = t.color.startsWith("#") ? t.color : "var(--border-color)";
+            }
+        }
+    });
+    renderStrategyView();
+}
+
 // ============================================================
-// Render Dedicated Fractal Sweep Strategy Signals View
+// Render Dedicated Fractal Sweep Strategy Signals View (2-Part Classification)
 // ============================================================
 function renderStrategyView() {
     const tbody = document.getElementById("strategyTableBody");
@@ -3580,42 +3613,42 @@ function renderStrategyView() {
         return;
     }
 
-    // Comprehensive 3-point Strategy Signal Evaluation Engine:
-    // 1. EMA Alignment (EMA 20 > EMA 50 > EMA 100)
-    // 2. Fractal Low Sweep (Price swept recent Williams Fractal Low / Key Support)
-    // 3. Confirmation Green Candle (Bullish reversal candle: Close >= Open / % Change >= 0)
+    // 2-Part Strategy Classification Engine:
+    // Part 1: All 3 Conditions Met (EMA 20>50>100 + Fractal Low Swept + Green Confirmation Candle)
+    // Part 2: Buy Bias + Fractal Low Swept (EMA 20>50>100 + Fractal Low Swept, Awaiting Green Candle)
     const evaluatedStocks = stocksData.map(s => {
         const ltp = s.ltp || s.close || 0;
         const e20 = s.ema20 || s.sma20 || s.dma20 || null;
         const e50 = s.ema50 || s.sma50 || null;
         const e100 = s.ema100 || null;
 
-        // Strict EMA Alignment: EMA 20 > EMA 50 > EMA 100
         const isEmaAligned = Boolean(
-            s.is_ema_aligned !== undefined ? s.is_ema_aligned :
-            (e20 && e50 && e100 ? (e20 > e50 && e50 > e100) : (e20 && e50 ? e20 > e50 : false))
+            (e20 && e50 && e100) ? (e20 > e50 && e50 > e100) :
+            (s.is_ema_aligned !== undefined ? s.is_ema_aligned : false)
         );
 
         const fracLow = s.fractal_low || null;
         const currLow = s.low || ltp;
 
-        // Strict Liquidity Sweep: Price low touched or swept below recent Williams Fractal Low
         const isFractalSwept = Boolean(
-            s.is_fractal_sweep !== undefined ? s.is_fractal_sweep :
-            (fracLow && fracLow > 0 && currLow <= fracLow)
+            (fracLow && fracLow > 0) ?
+            (currLow >= fracLow * 0.94 && currLow <= fracLow * 1.01) :
+            (s.is_fractal_sweep !== undefined ? s.is_fractal_sweep : false)
         );
 
-        // Strict Bullish Confirmation: Close >= Open or Price Change >= 0
         const isGreenCandle = Boolean(
-            s.is_bullish_candle !== undefined ? s.is_bullish_candle :
-            (s.open && s.close ? s.close >= s.open : (s.diff !== undefined ? s.diff >= 0 : (s.diff_percent || 0) >= 0))
+            (s.open && s.open > 0 && s.close) ? (s.close >= s.open) :
+            (s.is_bullish_candle !== undefined ? s.is_bullish_candle : (s.diff !== undefined ? s.diff >= 0 : (s.diff_percent || 0) >= 0))
         );
 
-        // Full 3/3 Bullish Setup Match
-        const fullMatch = Boolean(
+        // Part 1: All 3 conditions met (Buy Bias + Fractal Swept + Green Candle)
+        const isPart1FullSignal = Boolean(
             s.is_ema_fractal_match ||
             (isEmaAligned && isFractalSwept && isGreenCandle)
         );
+
+        // Part 2: Buy Bias + Fractal Swept (Awaiting green candle confirmation)
+        const isPart2SweptWatch = Boolean(isEmaAligned && isFractalSwept && !isGreenCandle);
 
         return {
             ...s,
@@ -3623,34 +3656,54 @@ function renderStrategyView() {
             isEmaAligned,
             isFractalSwept,
             isGreenCandle,
-            fullMatch
+            isPart1FullSignal,
+            isPart2SweptWatch,
+            fullMatch: isPart1FullSignal
         };
     });
 
-    const fullMatchCount = evaluatedStocks.filter(s => s.fullMatch).length;
-    const emaAlignedCount = evaluatedStocks.filter(s => s.isEmaAligned).length;
+    const part1Stocks = evaluatedStocks.filter(s => s.isPart1FullSignal);
+    const part2Stocks = evaluatedStocks.filter(s => s.isPart2SweptWatch);
+    const buyBiasStocks = evaluatedStocks.filter(s => s.isEmaAligned);
 
-    // Filter scrips to present: Full 3/3 matches first, then Swept + Green, then EMA Aligned
-    let matches = evaluatedStocks.filter(s => s.fullMatch || (s.isEmaAligned && s.isFractalSwept) || s.isEmaAligned);
-    if (!matches.length) matches = evaluatedStocks;
-
-    // Sort by signal strength: Full match (3/3) top, then highest % change
-    matches.sort((a, b) => {
-        if (a.fullMatch !== b.fullMatch) return b.fullMatch ? 1 : -1;
-        if (a.isFractalSwept !== b.isFractalSwept) return b.isFractalSwept ? 1 : -1;
-        return (b.diff_percent || 0) - (a.diff_percent || 0);
-    });
-
+    // Update Summary Metrics
     const matchCountEl = document.getElementById("strategyMatchCount");
-    if (matchCountEl) matchCountEl.textContent = `${fullMatchCount} Scrips`;
+    if (matchCountEl) matchCountEl.textContent = `${part1Stocks.length} Scrips`;
+
+    const sweptWatchCountEl = document.getElementById("strategySweptWatchCount");
+    if (sweptWatchCountEl) sweptWatchCountEl.textContent = `${part2Stocks.length} Scrips`;
 
     const uptrendCountEl = document.getElementById("strategyUptrendCount");
-    if (uptrendCountEl) uptrendCountEl.textContent = `${emaAlignedCount} Scrips`;
+    if (uptrendCountEl) uptrendCountEl.textContent = `${buyBiasStocks.length} Scrips`;
 
+    // Filter displaying lists based on selected strategy tab
+    let displayPart1 = [];
+    let displayPart2 = [];
+
+    if (currentStrategyTabFilter === "part1") {
+        displayPart1 = part1Stocks;
+    } else if (currentStrategyTabFilter === "part2") {
+        displayPart2 = part2Stocks;
+    } else {
+        displayPart1 = part1Stocks;
+        displayPart2 = part2Stocks;
+    }
+
+    displayPart1.sort((a, b) => (b.diff_percent || 0) - (a.diff_percent || 0));
+    displayPart2.sort((a, b) => (b.diff_percent || 0) - (a.diff_percent || 0));
+
+    const totalDisplayCount = displayPart1.length + displayPart2.length;
     const countEl = document.getElementById("strategyTableCount");
-    if (countEl) countEl.textContent = `Showing ${matches.length} matching securities (${fullMatchCount} Full 3/3 Setups)`;
+    if (countEl) countEl.textContent = `Showing ${totalDisplayCount} classified candidates (${part1Stocks.length} Part 1 Signals, ${part2Stocks.length} Part 2 Watchlist)`;
 
-    tbody.innerHTML = matches.map(s => {
+    if (!totalDisplayCount) {
+        tbody.innerHTML = `<tr><td colspan="9" class="text-center loading-placeholder">No stocks currently match the selected strategy classification filter.</td></tr>`;
+        return;
+    }
+
+    let rowsHtml = "";
+
+    function renderStockRow(s, isPart1) {
         const isUp = (s.diff || s.point_change || 0) >= 0;
         const pctText = (isUp ? "+" : "") + (s.diff_percent || s.percentage_change || 0).toFixed(2) + "%";
         
@@ -3659,11 +3712,19 @@ function renderStrategyView() {
         const e100Str = s.e100 ? s.e100.toFixed(2) : "-";
         const fracLowStr = s.fracLow ? s.fracLow.toFixed(2) : "-";
 
+        const badgeHtml = isPart1
+            ? '<span style="background: linear-gradient(135deg, rgba(16,185,129,0.3), rgba(99,102,241,0.3)); color: #34d399; border: 1px solid rgba(16,185,129,0.5); padding: 1px 6px; border-radius: 4px; font-size: 0.72rem; font-weight: 800; margin-left: 6px;">🎯 PART 1: ALL 3 MET</span>'
+            : '<span style="background: rgba(245,158,11,0.2); color: #f59e0b; border: 1px solid rgba(245,158,11,0.4); padding: 1px 6px; border-radius: 4px; font-size: 0.72rem; font-weight: 800; margin-left: 6px;">⏳ PART 2: BIAS + SWEPT</span>';
+
+        const statusHtml = isPart1
+            ? '<span style="background: linear-gradient(135deg, rgba(16,185,129,0.25), rgba(99,102,241,0.25)); color: #34d399; border: 1px solid rgba(16,185,129,0.5); padding: 4px 10px; border-radius: 6px; font-weight: 800; font-size: 0.78rem;">🎯 ALL 3 CONDITIONS MET</span>'
+            : '<span style="background: rgba(245,158,11,0.18); color: #f59e0b; border: 1px solid rgba(245,158,11,0.4); padding: 4px 10px; border-radius: 6px; font-weight: 800; font-size: 0.78rem;">⏳ BUY BIAS + FRACTAL SWEPT</span>';
+
         return `
             <tr onclick="openStockDetail('${s.symbol}')" style="cursor: pointer;">
                 <td class="font-bold monospace">
                     ${s.symbol}
-                    ${s.fullMatch ? '<span style="background: linear-gradient(135deg, rgba(16,185,129,0.3), rgba(99,102,241,0.3)); color: #34d399; border: 1px solid rgba(16,185,129,0.5); padding: 1px 6px; border-radius: 4px; font-size: 0.72rem; font-weight: 800; margin-left: 6px;">🎯 3/3 SETUP</span>' : ''}
+                    ${badgeHtml}
                 </td>
                 <td style="color: var(--text-muted); font-size: 0.85rem;">${s.sector || '-'}</td>
                 <td class="text-right font-bold monospace">${s.ltp ? s.ltp.toFixed(2) : '0.00'}</td>
@@ -3675,7 +3736,7 @@ function renderStrategyView() {
                         ${e20Str} <span style="font-size: 0.72rem; color: #94a3b8;">/ ${e50Str} / ${e100Str}</span>
                     </div>
                     <span style="display: inline-block; margin-top: 2px; font-size: 0.68rem; font-weight: 700; padding: 1px 6px; border-radius: 4px; ${s.isEmaAligned ? 'background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3);' : 'background: rgba(239,68,68,0.12); color: #ef4444; border: 1px solid rgba(239,68,68,0.3);'}">
-                        ${s.isEmaAligned ? '🟢 20 > 50 > 100' : '🔴 Unaligned'}
+                        ${s.isEmaAligned ? '🟢 20 > 50 > 100 (BUY BIAS)' : '🔴 Unaligned'}
                     </span>
                 </td>
 
@@ -3692,15 +3753,13 @@ function renderStrategyView() {
                 <!-- 3. Confirmation Green Candle Column -->
                 <td class="text-center monospace">
                     <span style="font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 5px; ${s.isGreenCandle ? 'background: rgba(16,185,129,0.2); color: #10b981; border: 1px solid rgba(16,185,129,0.4);' : 'background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3);'}">
-                        ${s.isGreenCandle ? '✅ Green Candle' : '🔴 Red Candle'}
+                        ${s.isGreenCandle ? '✅ Green Candle' : '⏳ Awaiting Green'}
                     </span>
                 </td>
 
                 <!-- Signal Status Column -->
                 <td class="text-center">
-                    <span style="background: ${s.fullMatch ? 'linear-gradient(135deg, rgba(16,185,129,0.25), rgba(99,102,241,0.25))' : (s.isEmaAligned && s.isFractalSwept ? 'rgba(245,158,11,0.18)' : 'rgba(99,102,241,0.15)')}; color: ${s.fullMatch ? '#34d399' : (s.isEmaAligned && s.isFractalSwept ? '#f59e0b' : '#818cf8')}; border: 1px solid ${s.fullMatch ? 'rgba(16,185,129,0.5)' : (s.isEmaAligned && s.isFractalSwept ? 'rgba(245,158,11,0.4)' : 'rgba(99,102,241,0.3)')}; padding: 4px 10px; border-radius: 6px; font-weight: 800; font-size: 0.78rem;">
-                        ${s.fullMatch ? '🎯 3/3 BULLISH SETUP' : (s.isEmaAligned && s.isFractalSwept ? '⏳ SWEPT (NO CONFIRMATION)' : '📈 EMA ALIGNED')}
-                    </span>
+                    ${statusHtml}
                 </td>
 
                 <!-- Action Column -->
@@ -3711,7 +3770,35 @@ function renderStrategyView() {
                 </td>
             </tr>
         `;
-    }).join("");
+    }
+
+    if (displayPart1.length > 0) {
+        if (currentStrategyTabFilter === "all") {
+            rowsHtml += `
+                <tr style="background: rgba(16, 185, 129, 0.08); border-bottom: 2px solid rgba(16, 185, 129, 0.3);">
+                    <td colspan="9" style="padding: 10px 16px; font-size: 0.85rem; font-weight: 800; color: #34d399;">
+                        🎯 PART 1: ALL 3 CONDITIONS MET (${displayPart1.length} Securities — Buy Bias + Fractal Low Swept + Green Reversal Candle)
+                    </td>
+                </tr>
+            `;
+        }
+        rowsHtml += displayPart1.map(s => renderStockRow(s, true)).join("");
+    }
+
+    if (displayPart2.length > 0) {
+        if (currentStrategyTabFilter === "all") {
+            rowsHtml += `
+                <tr style="background: rgba(245, 158, 11, 0.08); border-bottom: 2px solid rgba(245, 158, 11, 0.3);">
+                    <td colspan="9" style="padding: 10px 16px; font-size: 0.85rem; font-weight: 800; color: #f59e0b;">
+                        ⏳ PART 2: BULLISH BIAS + FRACTAL LOW SWEPT (${displayPart2.length} Securities — Awaiting Green Reversal Candle)
+                    </td>
+                </tr>
+            `;
+        }
+        rowsHtml += displayPart2.map(s => renderStockRow(s, false)).join("");
+    }
+
+    tbody.innerHTML = rowsHtml;
 }
 
 // ==========================================

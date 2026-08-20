@@ -37,12 +37,16 @@ def load_env():
 load_env()
 
 # Supabase Config
-SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://your-project-id.supabase.co")
-SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or os.environ.get("SUPABASE_ANON_KEY", "YOUR_SERVICE_ROLE_KEY")
+DEFAULT_SUPABASE_URL = "https://epvlpmizvswjgozpfrfz.supabase.co"
+DEFAULT_SERVICE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVwdmxwbWl6dnN3amdvenBmcmZ6Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4NjI0NjYwMiwiZXhwIjoyMTAxODIyNjAyfQ.VZLod10yMJLRds7rKzREYNwp4LlIsP0FT8-wOdC9lTE"
+DEFAULT_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVwdmxwbWl6dnN3amdvenBmcmZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyNDY2MDIsImV4cCI6MjEwMTgyMjYwMn0.tKpz6cSOejAx-YWngWcwgKrqA6mLveqWD0-Lzpp3WUk"
+
+SUPABASE_URL = os.environ.get("SUPABASE_URL") or DEFAULT_SUPABASE_URL
+SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or os.environ.get("SUPABASE_ANON_KEY") or DEFAULT_SERVICE_KEY
 
 def post_to_supabase(table, data, on_conflict=None):
     """Upsert data into Supabase PostgreSQL table via REST API"""
-    if "your-project-id" in SUPABASE_URL or "YOUR_SERVICE_ROLE_KEY" in SUPABASE_KEY:
+    if not SUPABASE_URL or not SUPABASE_KEY or "your-project-id" in SUPABASE_URL:
         print(f"[Supabase Sync] Warning: Environment variables SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY not configured. Skipping remote sync for '{table}'.")
         return False
 
